@@ -1,11 +1,11 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateTables extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -55,7 +55,6 @@ class CreateTables extends Migration
             $table->string('logo', 50);
             $table->timestamps();
         });
-
 
         /*
          * User's disciplines
@@ -113,35 +112,15 @@ class CreateTables extends Migration
         /*
          * Tags
          */
-        Schema::create('tags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
-        });
-
-        /*
-         * Photo's tag
-         */
-        Schema::create('photo_tags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('photo_id', false, true);
-            $table->integer('tag_id', false, true);
-            $table->foreign('photo_id')->references('id')->on('photos');
-            $table->foreign('tag_id')->references('id')->on('tags');
-            $table->timestamps();
-        });
-
-        /*
-         * User's tag
-         */
-        Schema::create('user_tags', function (Blueprint $table) {
+        Schema::create('photo_user_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id', false, true);
-            $table->integer('tag_id', false, true);
+            $table->integer('photo_id', false, true);
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('photo_id')->references('id')->on('photos');
             $table->timestamps();
         });
+
         /*
          * User's photos
          */
@@ -176,11 +155,9 @@ class CreateTables extends Migration
     public function down()
     {
         Schema::dropIfExists('user_photos');
-        Schema::dropIfExists('user_tags');
         Schema::dropIfExists('user_disciplines');
-        Schema::dropIfExists('photo_tags');
         Schema::dropIfExists('comments');
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('user_photo_tags');
         Schema::dropIfExists('photos');
         Schema::dropIfExists('watermarks');
         Schema::dropIfExists('events');
