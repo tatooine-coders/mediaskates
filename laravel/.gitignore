@@ -1,0 +1,14 @@
+# Laravel
+node_modules
+public/storage
+vendor
+.idea
+.env
+
+# Homestead
+.vagrant
+Homestead.json
+#Homestead.yaml
+
+# Netbeans project
+nbproject/private
