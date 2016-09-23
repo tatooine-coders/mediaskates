@@ -33,7 +33,20 @@ class UserController extends Controller
 
     }
 
-    public function add(){
-        return view('users/add');
+    public function add_form()
+    {
+        $roles = \App\Role::query()->pluck('name', 'id');
+        $user = \App\User::all();
+
+        return view('users/add', [
+            'pageTitle' => 'Ajouter un utilisateur',
+            'roles' => $roles,
+            'user' => $user
+        ]);
+    }
+
+    public function add()
+    {
+        
     }
 }
