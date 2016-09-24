@@ -13,6 +13,6 @@ class Discipline extends Model
 
     public function user()
     {
-        return $this->hasManyThrough('App\UserDiscipline');
+        return $this->hasManyThrough('App\User', 'App\UserDiscipline');
     }
 }
