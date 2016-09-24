@@ -17,9 +17,9 @@ class Photo extends Model
         return $this->belongsTo('App\Event');
     }
 
-    public function tag(){
-        return $this->hasManyThrough('App\User', 'App\PhotoUserTag');
-    }
+//    public function tag(){
+//        return $this->hasManyThrough('App\User', 'App\PhotoUserTag');
+//    }
 
     public function watermark()
     {

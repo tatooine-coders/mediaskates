@@ -38,10 +38,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Photo');
     }
 
-    public function tag()
-    {
-        return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
-    }
+//    public function tag()
+//    {
+//        return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
+//    }
 
     public function role()
     {
