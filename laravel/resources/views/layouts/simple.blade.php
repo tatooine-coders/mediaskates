@@ -29,16 +29,16 @@
         <ul id="menu" style="">
             <li>{{ link_to('/', 'Accueil') }}</li>
             <li>Users</li>
-            <li>{{ link_to('/users/create', 'Add') }}</li>
-            <li>{{ link_to('/users', 'Index') }}</li>
-            <li>{{ link_to('/users/login_register', 'Register') }}</li>
-            <li>{{ link_to('/users/login', 'Login') }}</li>
+            <li>{{ link_to('/user/create', 'Add') }}</li>
+            <li>{{ link_to('/user/index', 'Index') }}</li>
+            <li>{{ link_to('/user/login_register', 'Register') }}</li>
+            <li>{{ link_to('/user/login', 'Login') }}</li>
             <li class="title">Photos</li>
-            <li>{{ link_to('/photos/add', 'Add') }}</li>
-            <li>{{ link_to('/photos/index', 'Index') }}</li>
+            <li>{{ link_to('/photo/add', 'Add') }}</li>
+            <li>{{ link_to('/photo/index', 'Index') }}</li>
             <li class="title">Roles</li>
-            <li>{{ link_to('/roles/add', 'Add') }}</li>
-            <li>{{ link_to('/roles/index', 'Index') }}</li>
+            <li>{{ link_to('/role/add', 'Add') }}</li>
+            <li>{{ link_to('/role/index', 'Index') }}</li>
 
         </ul>
 
