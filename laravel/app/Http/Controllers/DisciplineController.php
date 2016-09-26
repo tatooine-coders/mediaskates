@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Discipline;
 use App\Http\Requests;
 
 class DisciplineController extends Controller
@@ -15,13 +15,12 @@ class DisciplineController extends Controller
      */
     public function index()
     {
-        $discipline=Discipline::query()->get();
+        $disciplines=Discipline::query()->get();
 
         return view('disciplines/index', [
             'pageTitle'=>'Disciplines',
             'disciplines'=>$disciplines,
             ]);
-        }
     }
 
     /**
