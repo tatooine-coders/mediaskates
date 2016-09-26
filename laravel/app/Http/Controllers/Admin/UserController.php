@@ -5,10 +5,10 @@
  * Maintainer: mtancoigne
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Admin\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;https://laravel.com/docs/5.3/html
+use App\Http\Requests;
 use App\User;
 
 class UserController extends Controller
