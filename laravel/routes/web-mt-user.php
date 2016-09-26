@@ -89,6 +89,7 @@ Route::get('me/preferences', 'User\UserController@edit_prefs')->name('user.prefe
 Route::patch('me/update_preferences', 'User\UserController@update_prefs')->name('user.preferences.update');
 Route::patch('me/update_passwd', 'User\UserController@update_passwd')->name('user.update_passwd');
 Route::delete('me/close_account', 'User\UserController@destroy')->name('user.close_account');
+Route::get('me/logout', 'User\UserController@logout')->name('user.logout');
 
 /*
  * UserDisciplines

@@ -46,6 +46,7 @@
             <li>{{ link_to(route('user.preferences'), 'Preferences') }}</li>
             <li>{{ link_to(route('user.personnal_infos'), 'Personnal informations') }}</li>
             <li>{{ link_to(route('user.update_passwd'), 'Update password') }}</li>
+            <li>{{ link_to(route('user.logout'), 'Log out') }}</li>
             <li>{{ link_to(route('user.close_account'), 'Close account') }}</li>
             <li class="title-sub">Photograph</li>
             <li class="title">Disciplines</li>
