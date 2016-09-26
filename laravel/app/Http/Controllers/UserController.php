@@ -1,52 +1,151 @@
 <?php
+/**
+ * User Controller
+ * 
+ * Maintainer: mtancoigne
+ */
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+use App\User;
+
 class UserController extends Controller
 {
 
-    public function index()
-    {
+  /**
+   * Displays the list of users
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function index()
+  {
+	
+  }
 
-    }
+  /**
+   * Displays an user profile.
+   *
+   * @param int $id User id
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function view(int $id)
+  {
+	
+  }
 
-    public function view($id)
-    {
+  /**
+   * Creates a new user in the DB
+   * 
+   * @param Request $request
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function register(Request $request)
+  {
+	
+  }
 
-    }
+  /**
+   * Logs an user in the system
+   *
+   * @param Request $request
+   * 
+   * @return Illuminate\Http\Response
+   */
+  public function login(Request $request)
+  {
+	
+  }
 
-    public function register()
-    {
+  /**
+   * Displays to form to login/register
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function login_register()
+  {
+	
+  }
 
-    }
+  /**
+   * Closes an account.
+   *
+   * @param int $id User id
+   * 
+   * @return Illuminate\Http\Response
+   */
+  public function destroy(int $id)
+  {
+	
+  }
 
-    public function login()
-    {
+  /**
+   * Displays the form to add an user. (Admin mode)
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function create()
+  {
+	// Fetch the roles (for the select element)
+	$roles = \App\Role::query()->pluck('name', 'id');
 
-    }
+	return view('users/create', [
+		'pageTitle' => 'Ajouter un utilisateur',
+		'roles' => $roles,
+	]);
+  }
 
-    public function close_account()
-    {
+  /**
+   * Saves a new user in DB (Admin mode !)
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+	// Data validation (https://laravel.com/docs/5.3/validation)
+	$this->validate($request, [
+		'first_name' => 'required',
+		'last_name' => 'required',
+		'pseudo' => 'bail|required|unique:users',
+		'email' => 'bail|required|email|unique:users',
+		'password' => 'required',
+		'password2' => 'required',
+	]);
+	
+	$data=$request->all();
 
-    }
+	$user=User::create($data);
 
-    public function add_form()
-    {
-        $roles = \App\Role::query()->pluck('name', 'id');
-        $user = \App\User::all();
+	// Redirection et message
+	\Session::flash('message', 'Successfully created nerd!');
+	return Redirect::to('users/index');
+  }
 
-        return view('users/add', [
-            'pageTitle' => 'Ajouter un utilisateur',
-            'roles' => $roles,
-            'user' => $user
-        ]);
-    }
+  /**
+   * Displays the edit form
+   *
+   * @param int $id User id
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function edit(int $id)
+  {
+	
+  }
 
-    public function add()
-    {
-        
-    }
+  /**
+   * Saves the new values in DB
+   *
+   * @param int $id User id
+   *
+   * @return Illuminate\Http\Response
+   */
+  public function update(int $id)
+  {
+	
+  }
 }
