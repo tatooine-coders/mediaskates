@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\User\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Comment;
 
-class CommentController extends Controller
+class CommentController extends \App\Http\Controllers\Controller
 {
 
   /**

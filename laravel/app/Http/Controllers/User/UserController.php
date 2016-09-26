@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\User\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
-class UserController extends Controller
+class UserController extends \App\Http\Controllers\Controller
 {
 
   /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\User\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Tag;
 
-class TagsController extends Controller
+class TagsController extends \App\Http\Controllers\Controller
 {
 
   /**

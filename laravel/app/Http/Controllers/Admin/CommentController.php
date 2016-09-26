@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class CommentController extends Controller
+class CommentController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
