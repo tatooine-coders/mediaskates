@@ -103,4 +103,4 @@ Route::post('/search_results', 'SearchController@search_results')->name('search_
 /*
  * Page
  */
-Route::get('/pages/legal', 'PageController')->name('legal_mentions');
+Route::get('/pages/{file}', 'PageController')->name('pages');

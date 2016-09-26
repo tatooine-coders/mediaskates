@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ isset($pageTitle) ? $pageTitle : 'Une page...' }}</title>
+        <title>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,7 +37,7 @@
             <li>{{ link_to(route('event.index'), 'Events') }}</li>
             <li>{{ link_to(route('user.login_register'), 'Login/Register') }}</li>
             <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
-            <li>{{ link_to(route('legal_mentions'), 'Terms of service') }}</li>
+            <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
         </ul>
         <ul class="menu">
             <li class="title-big">Users</li>
@@ -80,7 +80,7 @@
             <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
         </ul>
 
-        <h1>{{ isset($pageTitle) ? $pageTitle : 'Une page...' }}</h1>
+        <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
 
 		<!-- Errors -->
 		@if (count($errors) > 0)
