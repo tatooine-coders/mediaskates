@@ -11,8 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="{{ url('css/normalize.min.css') }}">
+        <link rel="stylesheet" href="{{ url('css/main.css') }}">
 
         <style>
             #menu{list-style-type: none; border-bottom:1px solid #333; padding: 5px 0; font-size:0.8em}
@@ -26,19 +26,19 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <ul id="menu" style="">
+        <ul id="menu">
             <li>{{ link_to('/', 'Accueil') }}</li>
             <li>Users</li>
-            <li>{{ link_to('/user/create', 'Add') }}</li>
-            <li>{{ link_to('/user/index', 'Index') }}</li>
-            <li>{{ link_to('/user/login_register', 'Register') }}</li>
-            <li>{{ link_to('/user/login', 'Login') }}</li>
+            <li>{{ link_to(route('user.create'), 'Add') }}</li>
+            <li>{{ link_to(route('user.index'), 'Index') }}</li>
+            <li>{{ link_to(route('user.login_register'), 'Register') }}</li>
+            <li>{{ link_to(route('user.login'), 'Login') }}</li>
             <li class="title">Photos</li>
-            <li>{{ link_to('/photo/add', 'Add') }}</li>
-            <li>{{ link_to('/photo/index', 'Index') }}</li>
+            <li>{{ link_to(route('photo.create'), 'Add') }}</li>
+            <li>{{ link_to(route('photo.index'), 'Index') }}</li>
             <li class="title">Roles</li>
-            <li>{{ link_to('/role/add', 'Add') }}</li>
-            <li>{{ link_to('/role/index', 'Index') }}</li>
+            <li>{{ link_to(route('role.create'), 'Add') }}</li>
+            <li>{{ link_to(route('role.index'), 'Index') }}</li>
 
         </ul>
 

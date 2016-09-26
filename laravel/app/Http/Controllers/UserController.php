@@ -9,7 +9,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-
 use App\User;
 
 class UserController extends Controller
@@ -22,7 +21,12 @@ class UserController extends Controller
    */
   public function index()
   {
-	
+	$users = User::query()->get();
+
+	return view('users/index', [
+		'pageTitle' => 'Liste des utilisateurs',
+		'users' => $users
+	]);
   }
 
   /**
@@ -32,9 +36,14 @@ class UserController extends Controller
    *
    * @return Illuminate\Http\Response
    */
-  public function view(int $id)
+  public function show(int $id)
   {
-	
+	$user = User::findOrFail($id);
+
+	return view('users/show', [
+		'pageTitle' => 'Utilisateur : ' . $user->pseudo,
+		'user' => $user
+	]);
   }
 
   /**
@@ -115,13 +124,13 @@ class UserController extends Controller
 		'password' => 'required',
 		'password2' => 'required',
 	]);
-	
-	$data=$request->all();
 
-	$user=User::create($data);
+	$data = $request->all();
+
+	$user = User::create($data);
 
 	// Redirection et message
-	\Session::flash('message', 'Successfully created nerd!');
+	\Session::flash('message', 'Nouvel utilisateur créé');
 	return Redirect::to('users/index');
   }
 
@@ -134,18 +143,39 @@ class UserController extends Controller
    */
   public function edit(int $id)
   {
-	
+	$user = User::findOrFail($id);
+	$roles = \App\Role::pluck('name', 'id');
+
+	return view('users/edit', [
+		'pageTitle' => 'Edition d\'un utilisateur',
+		'user' => $user,
+		'roles' => $roles,
+	]);
   }
 
   /**
    * Saves the new values in DB
    *
-   * @param int $id User id
-   *
+   * @param int $id Id to be modified
+   * @param Request $request Request data
+   * 
    * @return Illuminate\Http\Response
    */
-  public function update(int $id)
+  public function update(int $id, Request $request)
   {
+	$user = User::findOrFail($id);
 	
+	$this->validate($request, [
+		'first_name' => 'required',
+		'last_name' => 'required',
+	]);
+
+	$data = $request->all();
+
+	$user->fill($data)->save();
+
+	// Redirection et message
+	\Session::flash('message', 'Utilisateur mis à jour !');
+	return \Redirect::to('user/' . $id);
   }
 }
