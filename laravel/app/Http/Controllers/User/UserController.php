@@ -12,12 +12,12 @@ class UserController extends \App\Http\Controllers\Controller
   /**
    * Displays an user profile.
    *
-   * @param int $id User id
-   *
    * @return Illuminate\Http\Response
    */
-  public function show(int $id)
+  public function show()
   {
+	// We should fetch id from Auth
+	$id=0;
 	$user = User::findOrFail($id);
 
 	return view('users/show', [
@@ -43,7 +43,7 @@ class UserController extends \App\Http\Controllers\Controller
    * 
    * @return Illuminate\Http\Response
    */
-  public function destroy(int $id)
+  public function destroy()
   {
 	
   }
@@ -51,12 +51,13 @@ class UserController extends \App\Http\Controllers\Controller
   /**
    * Displays the edit form
    *
-   * @param int $id User id
-   *
    * @return Illuminate\Http\Response
    */
-  public function edit(int $id)
+  public function edit()
   {
+	// Must get Id from session
+	$id=0;
+	
 	$user = User::findOrFail($id);
 	$roles = \App\Role::pluck('name', 'id');
 
@@ -70,13 +71,15 @@ class UserController extends \App\Http\Controllers\Controller
   /**
    * Saves the new values in DB
    *
-   * @param int $id Id to be modified
    * @param Request $request Request data
    * 
    * @return Illuminate\Http\Response
    */
-  public function update(int $id, Request $request)
+  public function update(Request $request)
   {
+	//Must find id from session
+	$id=0;
+	
 	$user = User::findOrFail($id);
 
 	$this->validate($request, [
