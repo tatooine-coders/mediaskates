@@ -17,10 +17,10 @@ class UserController extends \App\Http\Controllers\Controller
   public function show()
   {
 	// We should fetch id from Auth
-	$id=0;
+	$id=Auth()->user()->getAuthIdentifier();
 	$user = User::findOrFail($id);
 
-	return view('users/show', [
+	return view('user/users/show', [
 		'pageTitle' => 'Utilisateur : ' . $user->pseudo,
 		'user' => $user
 	]);

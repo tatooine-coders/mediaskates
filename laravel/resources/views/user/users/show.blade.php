@@ -2,7 +2,8 @@
 
 @section('content')
 <h2>
-	[{{ link_to(route('user.index'), '< Liste')}}]
+	[ link_to(route('user.index'), '< Liste')}}]
+	[ link_to(route('user.edit', $user->id), 'Editer')}}]
 	- {{{ $user->pseudo }}}</h2>
 <pre>
 {{{ $user->first_name }}}

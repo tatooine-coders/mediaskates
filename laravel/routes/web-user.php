@@ -82,14 +82,14 @@ Route::delete('/user/tag/{id}/destroy', 'User\TagController@destroy')->name('use
  * Users
  * All interactions should depend on the currently logged in user.
  */
-Route::get('me/', 'User\UserController@show')->name('user.dashboard');
-Route::get('me/edit', 'User\UserController@edit')->name('user.personnal_infos');
-Route::patch('me/update', 'User\UserController@update')->name('user.personnal_infos.update');
-Route::get('me/preferences', 'User\UserController@edit_prefs')->name('user.preferences');
-Route::patch('me/update_preferences', 'User\UserController@update_prefs')->name('user.preferences.update');
-Route::patch('me/update_passwd', 'User\UserController@update_passwd')->name('user.update_passwd');
-Route::delete('me/close_account', 'User\UserController@destroy')->name('user.close_account');
-Route::get('me/logout', 'User\UserController@logout')->name('user.logout');
+Route::get('/me', 'User\UserController@show')->name('user.dashboard');
+Route::get('/me/edit', 'User\UserController@edit')->name('user.personnal_infos');
+Route::patch('/me/update', 'User\UserController@update')->name('user.personnal_infos.update');
+Route::get('/me/preferences', 'User\UserController@edit_prefs')->name('user.preferences');
+Route::patch('/me/update_preferences', 'User\UserController@update_prefs')->name('user.preferences.update');
+Route::patch('/me/update_passwd', 'User\UserController@update_passwd')->name('user.update_passwd');
+Route::delete('/me/close_account', 'User\UserController@destroy')->name('user.close_account');
+Route::get('/me/logout', 'Auth\LoginController@logout')->name('user.logout');
 
 /*
  * UserDisciplines

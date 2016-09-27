@@ -10,11 +10,15 @@
   |
  */
 
+// Home
 Route::get('/', function () {
     return view('home');
 });
 
-// Temp includes to split the work
-include ('web-jc.php');
-include ('web-mt.php');
-Route::get('/home', 'HomeController@index');
+// App routes
+include('web-public.php');
+include('web-user.php');
+include('web-admin.php');
+
+// Base Auth routes
+Auth::routes();

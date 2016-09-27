@@ -55,11 +55,11 @@ Route::get('/tag/{id}', 'TagController@show')->name('tag.show');
 Route::get('/users', 'UserController@index')->name('user.index');
 Route::get('/user/{id}', 'UserController@show')->name('user.show');
 // Login/Register (form)
-Route::get('/login', 'UserController@login_register')->name('user.login_register');
+//Route::get('/login', 'UserController@login_register')->name('user.login_register');
 // Register (DB)
-Route::post('/register', 'UserController@register')->name('user.register');
+//Route::post('/register', 'RegisterController@register')->name('register');
 // Login (DB)
-Route::post('/login', 'UserController@login')->name('user.login');
+//Route::post('/login', 'UserController@login')->name('user.login');
 
 /*
  * UserDisciplines

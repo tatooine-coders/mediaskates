@@ -35,7 +35,8 @@
             <li>{{ link_to(route('user.index'), 'Photographs') }}</li>
             <li>{{ link_to(route('advanced_search'), 'Advanced search') }}</li>
             <li>{{ link_to(route('event.index'), 'Events') }}</li>
-            <li>{{ link_to(route('user.login_register'), 'Login/Register') }}</li>
+            <li>{{ link_to('/register', 'Register') }}</li>
+            <li>{{ link_to('/login', 'Login') }}</li>
             <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
             <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
         </ul>
