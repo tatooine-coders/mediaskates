@@ -17,3 +17,4 @@ Route::get('/', function () {
 // Temp includes to split the work
 include ('web-jc.php');
 include ('web-mt.php');
+Route::get('/home', 'HomeController@index');
