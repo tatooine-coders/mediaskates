@@ -31,17 +31,22 @@
         <ul class="menu">
             <li class="title-big">Public</li>
             <li>{{ link_to('/', 'Home') }}</li>
+            <li>{{ link_to(route('event.index'), 'Events') }}</li>
+            <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
             <li>{{ link_to(route('tag.index'), 'Tags') }}</li>
             <li>{{ link_to(route('user.index'), 'Photographs') }}</li>
             <li>{{ link_to(route('advanced_search'), 'Advanced search') }}</li>
-            <li>{{ link_to(route('event.index'), 'Events') }}</li>
+            <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
             <li>{{ link_to('/register', 'Register') }}</li>
             <li>{{ link_to('/login', 'Login') }}</li>
-            <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
-            <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
         </ul>
         <ul class="menu">
             <li class="title-big">Users</li>
+            <li class="title-sub">Comments</li>
+            <li>{{ link_to(route('user.comment.index'), 'Manage') }}</li>
+            <li class="title">Disciplines</li>
+            <li>{{ link_to(route('user.discipline.index'), 'Manage') }}</li>
+            <li>{{ link_to(route('user.discipline.create'), 'Add') }}</li>
             <li class="title-sub">User</li>
             <li>{{ link_to(route('user.dashboard'), 'Dashboard') }}</li>
             <li>{{ link_to(route('user.preferences'), 'Preferences') }}</li>
@@ -49,10 +54,11 @@
             <li>{{ link_to(route('user.update_passwd'), 'Update password') }}</li>
             <li>{{ link_to(route('user.logout'), 'Log out') }}</li>
             <li>{{ link_to(route('user.close_account'), 'Close account') }}</li>
+            <li class="title">Tags</li>
+            <li>{{ link_to(route('user.tags.index'), 'Manage') }}</li>
+            <li class="title">Votes</li>
+            <li>{{ link_to(route('user.votes.index'), 'Manage') }}</li>
             <li class="title-sub">Photograph</li>
-            <li class="title">Disciplines</li>
-            <li>{{ link_to(route('user.discipline.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('user.discipline.create'), 'Add') }}</li>
             <li class="title">Events</li>
             <li>{{ link_to(route('user.event.index'), 'Manage') }}</li>
             <li>{{ link_to(route('user.event.create'), 'Add') }}</li>
@@ -62,24 +68,34 @@
         </ul>
         <ul class="menu">
             <li class="title-big">Admin</li>
-            <li class="title-sub">Users</li>
-            <li>{{ link_to(route('admin.user.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.user.create'), 'Add') }}</li>
-            <li class="title-sub">Roles</li>
-            <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
+            <li class="title">Comments</li>
+            <li>{{ link_to(route('admin.comments.index'), 'Manage') }}</li>
             <li class="title">Disciplines</li>
             <li>{{ link_to(route('admin.discipline.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.discipline.create'), 'Add') }}</li>
             <li class="title">Events</li>
             <li>{{ link_to(route('admin.event.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.event.create'), 'Add') }}</li>
-            <li class="title">Photos</li>
-            <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
             <li class="title">Licenses</li>
             <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
+            <li class="title">Photos</li>
+            <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
+            <li class="title-sub">Roles</li>
+            <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
+            <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
+            <li class="title-sub">Tags</li>
+            <li>{{ link_to(route('admin.tag.index'), 'Manage') }}</li>
+            <li class="title-sub">Users</li>
+            <li>{{ link_to(route('admin.user.index'), 'Manage') }}</li>
+            <li>{{ link_to(route('admin.user.create'), 'Add') }}</li>
+            <li class="title-sub">Watermarks</li>
+            <li>{{ link_to(route('admin.watermark.index'), 'Manage') }}</li>
+            <li>{{ link_to(route('admin.watermark.create'), 'Add') }}</li>
+
+
+
+
         </ul>
 
         <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
@@ -93,7 +109,7 @@
 		  </ul>
 		@endif
 		<!-- /Errors -->
-		
+
 		<!-- Content -->
         <div id="content">
             @yield('content')

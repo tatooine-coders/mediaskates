@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
 
-    public function comment()
+    public function answers()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment', 'comment_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo('App\Comment', 'comment_id');
     }
 
     public function user()

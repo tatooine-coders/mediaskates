@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class UserPhotoController extends \App\Http\Controllers\Controller
+class PhotoUserTagController extends \App\Http\Controllers\Admin\AdminController
 {
     /**
      * Display a listing of the resource.

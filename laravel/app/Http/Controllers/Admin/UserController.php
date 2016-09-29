@@ -1,9 +1,4 @@
 <?php
-/**
- * User Controller
- * 
- * Maintainer: mtancoigne
- */
 
 namespace App\Http\Controllers\Admin;
 
@@ -11,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
-class UserController extends \App\Http\Controllers\Controller
+class UserController extends \App\Http\Controllers\Admin\AdminController
 {
 
   /**
@@ -48,26 +43,26 @@ class UserController extends \App\Http\Controllers\Controller
 
   /**
    * Creates a new user in the DB
-   * 
+   *
    * @param Request $request
    *
    * @return Illuminate\Http\Response
    */
   public function register(Request $request)
   {
-	
+
   }
 
   /**
    * Logs an user in the system
    *
    * @param Request $request
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function login(Request $request)
   {
-	
+
   }
 
   /**
@@ -77,19 +72,19 @@ class UserController extends \App\Http\Controllers\Controller
    */
   public function login_register()
   {
-	
+
   }
 
   /**
    * Closes an account.
    *
    * @param int $id User id
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function destroy(int $id)
   {
-	
+
   }
 
   /**
@@ -158,13 +153,13 @@ class UserController extends \App\Http\Controllers\Controller
    *
    * @param int $id Id to be modified
    * @param Request $request Request data
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function update(int $id, Request $request)
   {
 	$user = User::findOrFail($id);
-	
+
 	$this->validate($request, [
 		'first_name' => 'required',
 		'last_name' => 'required',

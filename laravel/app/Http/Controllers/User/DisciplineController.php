@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Discipline;
 
-class DisciplineController extends \App\Http\Controllers\Controller
+class DisciplineController extends \App\Http\Controllers\User\UserController
 {
 
   /**

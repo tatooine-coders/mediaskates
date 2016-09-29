@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
-class UserController extends \App\Http\Controllers\Controller
+class UserController extends \App\Http\Controllers\User\UsersController
 {
 
   /**
@@ -33,19 +33,19 @@ class UserController extends \App\Http\Controllers\Controller
    */
   public function logout()
   {
-	
+
   }
 
   /**
    * Closes an account.
    *
    * @param int $id User id
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function destroy()
   {
-	
+
   }
 
   /**
@@ -57,7 +57,7 @@ class UserController extends \App\Http\Controllers\Controller
   {
 	// Must get Id from session
 	$id=0;
-	
+
 	$user = User::findOrFail($id);
 	$roles = \App\Role::pluck('name', 'id');
 
@@ -72,14 +72,14 @@ class UserController extends \App\Http\Controllers\Controller
    * Saves the new values in DB
    *
    * @param Request $request Request data
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function update(Request $request)
   {
 	//Must find id from session
 	$id=0;
-	
+
 	$user = User::findOrFail($id);
 
 	$this->validate($request, [
@@ -99,35 +99,35 @@ class UserController extends \App\Http\Controllers\Controller
   /**
    * Form to edit user preferences
    * @todo Merge with edit ?
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function edit_prefs()
   {
-	
+
   }
 
   /**
    * Saves the preferences in DB
-   * 
+   *
    * @param Request $request
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function update_prefs(Request $request)
   {
-	
+
   }
 
   /**
    * Updates password in db
-   * 
+   *
    * @param Request $request
-   * 
+   *
    * @return Illuminate\Http\Response
    */
   public function update_passwd(Request $request)
   {
-	
+
   }
 }

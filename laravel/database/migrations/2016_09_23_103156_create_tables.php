@@ -23,6 +23,16 @@ class CreateTables extends Migration
         });
 
         /*
+         * Licences
+         */
+        Schema::create('licenses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 25);
+            $table->string('url', 25);
+            $table->timestamps();
+        });
+
+        /*
          * Users
          */
         Schema::create('users', function (Blueprint $table) {
@@ -58,13 +68,17 @@ class CreateTables extends Migration
 
         /*
          * User's disciplines
+         *
+         * @TODO : What do we do with that ?
          */
-        Schema::create('users_disciplines', function (Blueprint $table) {
+        /*Schema::create('user_disciplines', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id', false, true);
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('discipline_id', false, true);
+            $table->foreign('discipline_id')->references('id')->on('disciplines');
             $table->timestamps();
-        });
+        });*/
 
         /*
          * Events
@@ -72,9 +86,10 @@ class CreateTables extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 25);
-            $table->string('adresse', 25);
+            $table->string('address', 25);
             $table->date('date_event');
             $table->string('city', 25);
+            $table->string('zip', 10);
             $table->integer('user_id', false, true);
             $table->integer('discipline_id', false, true);
             $table->foreign('user_id')->references('id')->on('users');
@@ -89,8 +104,7 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name', 25);
             $table->integer('type');
-            $table->integer('top_position');
-            $table->integer('left_position');
+            $table->text('description');
             $table->timestamps();
         });
 
@@ -99,18 +113,21 @@ class CreateTables extends Migration
          */
         Schema::create('photos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50);
+            $table->string('file', 50);
             $table->integer('user_id', false, true);
             $table->integer('event_id', false, true);
             $table->integer('watermark_id', false, true);
+            $table->integer('license_id', false, true);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('watermark_id')->references('id')->on('watermarks');
+            $table->foreign('license_id')->references('id')->on('licenses');
             $table->timestamps();
         });
 
         /*
          * Tags
+         * @TODO : What do we do with that ?
          */
         Schema::create('photo_user_tags', function (Blueprint $table) {
             $table->increments('id');
@@ -122,16 +139,6 @@ class CreateTables extends Migration
         });
 
         /*
-         * User's photos
-         */
-        Schema::create('user_photos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id', false, true);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
-        });
-
-        /*
          * Comments
          */
         Schema::create('comments', function (Blueprint $table) {
@@ -139,10 +146,22 @@ class CreateTables extends Migration
             $table->string('text');
             $table->integer('user_id', false, true);
             $table->integer('photo_id', false, true);
-            $table->integer('comment_id', false, true);
+            $table->integer('comment_id', false, true)->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('photo_id')->references('id')->on('photos');
             $table->foreign('comment_id')->references('id')->on('comments');
+            $table->timestamps();
+        });
+
+        /*
+         * Votes
+         */
+        Schema::create('votes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id', false, true);
+            $table->integer('photo_id', false, true);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('photo_id')->references('id')->on('photos');
             $table->timestamps();
         });
     }
@@ -154,15 +173,16 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_photos');
-        Schema::dropIfExists('user_disciplines');
+        Schema::dropIfExists('votes');
         Schema::dropIfExists('comments');
-        Schema::dropIfExists('user_photo_tags');
+        Schema::dropIfExists('photo_user_tags');
         Schema::dropIfExists('photos');
         Schema::dropIfExists('watermarks');
         Schema::dropIfExists('events');
+        // Schema::dropIfExists('user_disciplines');
         Schema::dropIfExists('disciplines');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('licenses');
         Schema::dropIfExists('roles');
     }
 }

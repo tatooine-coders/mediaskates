@@ -16,7 +16,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'pseudo', 'email', 'password', 'profile_pic', 'site_web', 'facebook', 'google', 'twitter', 'biography', 'role_id',
+        'first_name',
+        'last_name',
+        'pseudo',
+        'email',
+        'password',
+        'profile_pic',
+        'site_web',
+        'facebook',
+        'google',
+        'twitter',
+        'biography',
+        'role_id',
     ];
 
     /**
@@ -28,24 +39,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function discipline()
-    {
-        return $this->hasManyThrough('App\Discipline', 'App\UserDiscipline');
-    }
 
     public function photo()
     {
         return $this->hasMany('App\Photo');
     }
 
-//    public function tag()
-//    {
-//        return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
-//    }
+    public function tag()
+    {
+        return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
+    }
 
     public function role()
     {
         return $this->hasOne('App\Role', 'id', 'role_id');
+    }
+
+    public function vote()
+    {
+        return $this->hasManyThrough('App\Photo', '\App\Vote');
     }
 
     public function event()

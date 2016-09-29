@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Event;
 
-class EventController extends \App\Http\Controllers\Controller
+class EventController extends \App\Http\Controllers\User\UserController
 {
 
   /**

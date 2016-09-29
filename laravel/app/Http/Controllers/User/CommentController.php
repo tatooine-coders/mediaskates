@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Comment;
 
-class CommentController extends \App\Http\Controllers\Controller
+class CommentController extends \App\Http\Controllers\User\UserController
 {
 
   /**

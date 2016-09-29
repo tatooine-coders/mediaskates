@@ -21,8 +21,18 @@ class Photo extends Model
 //        return $this->hasManyThrough('App\User', 'App\PhotoUserTag');
 //    }
 
+    public function voters()
+    {
+        return $this->hasManyThrough('App\Users', 'Ap\Vote');
+    }
+
     public function watermark()
     {
         return $this->hasOne('App\Watermark');
+    }
+
+    public function license()
+    {
+        return $this->hasOne('All\License');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class UserDisciplineController extends \App\Http\Controllers\Controller
+class LicenseController extends \App\Http\Controllers\Admin\AdminController
 {
     /**
      * Display a listing of the resource.

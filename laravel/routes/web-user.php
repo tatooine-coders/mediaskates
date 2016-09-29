@@ -2,20 +2,15 @@
 /*
  * Comments
  */
-// Index (view: comment created)
 Route::get('/user/comments', 'User\CommentController@index')->name('user.comment.index');
-// Store (DB)
 Route::post('/user/comment/store', 'User\CommentController@store')->name('user.comment.store');
-// Edit form will be on the photo display page
-// Update (DB)
 Route::patch('/user/comment/{id}/update', 'User\CommentController@update')->name('user.comment.update');
-// Destroy (DB)
 Route::delete('/user/comment/{id}/destroy', 'User\CommentController@destroy')->name('user.comment.destroy');
 
 /*
  * Disciplines
  */
-// Index (view)
+/*// Index (view)
 Route::get('/user/disciplines', 'User\DisciplineController@index')->name('user.discipline.index');
 Route::get('/user/discipline/create', 'User\DisciplineController@create')->name('user.discipline.create');
 Route::post('/user/discipline/store', 'User\DisciplineController@store')->name('user.discipline.store');
@@ -24,6 +19,7 @@ Route::get('/user/discipline/{id}/edit', 'User\DisciplineController@edit')->name
 Route::patch('/user/discipline/{id}/update', 'User\DisciplineController@update')->name('user.discipline.update');
 // Destroy should be available if no events are in it
 Route::delete('/user/discipline/{id}/destroy', 'User\DisciplineController@destroy')->name('user.discipline.destroy');
+*/
 
 /*
  * Events
@@ -47,20 +43,6 @@ Route::get('/user/photo/{id}', 'User\PhotoController@show')->name('user.photo.sh
 Route::get('/user/photo/{id}/edit', 'User\PhotoController@edit')->name('user.photo.edit');
 Route::patch('/user/photo/{id}/update', 'User\PhotoController@update')->name('user.photo.update');
 Route::delete('/user/photo/{id}/destroy', 'User\PhotoController@destroy')->name('user.photo.destroy');
-
-/*
- * PhotoUser
- */
-/*
- * @TODO: Not sure about this one...
-Route::get('/user/photo_users', 'User\PhotoUserController@index')->name('user.photo_user.index');
-Route::get('/user/photo_user/create', 'User\PhotoUserController@create')->name('user.photo_user.create');
-Route::post('/user/photo_user/store', 'User\PhotoUserController@store')->name('user.photo_user.store');
-Route::get('/user/photo_user/{id}', 'User\PhotoUserController@show')->name('user.photo_user.show');
-Route::get('/user/photo_user/{id}/edit', 'User\PhotoUserController@edit')->name('user.photo_user.edit');
-Route::patch('/user/photo_user/{id}/update', 'User\PhotoUserController@update')->name('user.photo_user.update');
-Route::delete('/user/photo_user/{id}/destroy', 'User\PhotoUserController@destroy')->name('user.photo_user.destroy');
-*/
 
 /*
  * Roles
@@ -92,33 +74,17 @@ Route::delete('/me/close_account', 'User\UserController@destroy')->name('user.cl
 Route::get('/me/logout', 'Auth\LoginController@logout')->name('user.logout');
 
 /*
- * UserDisciplines
- */
-/*
- * @TODO: Debate about this
-Route::get('/user/user_disciplines', 'User\UserDisciplineController@index')->name('user.user_discipline.index');
-Route::get('/user/user_discipline/create', 'User\UserDisciplineController@create')->name('user.user_discipline.create');
-Route::post('/user/user_discipline/store', 'User\UserDisciplineController@store')->name('user.user_discipline.store');
-Route::get('/user/user_discipline/{id}', 'User\UserDisciplineController@show')->name('user.user_discipline.show');
-Route::get('/user/user_discipline/{id}/edit', 'User\UserDisciplineController@edit')->name('user.user_discipline.edit');
-Route::patch('/user/user_discipline/{id}/update', 'User\UserDisciplineController@update')->name('user.user_discipline.update');
-Route::delete('/user/user_discipline/{id}/destroy', 'User\UserDisciplineController@destroy')->name('user.user_discipline.destroy');
-
-/*
- * UserPhotos
- */
-/*
- * @TODO: Not sure if we should have a controller for this
-Route::get('/user/user_photos', 'User\UserPhotoController@index')->name('user.user_photo.index');
-Route::get('/user/user_photo/create', 'User\UserPhotoController@create')->name('user.user_photo.create');
-Route::post('/user/user_photo/store', 'User\UserPhotoController@store')->name('user.user_photo.store');
-Route::get('/user/user_photo/{id}', 'User\UserPhotoController@show')->name('user.user_photo.show');
-Route::get('/user/user_photo/{id}/edit', 'User\UserPhotoController@edit')->name('user.user_photo.edit');
-Route::patch('/user/user_photo/{id}/update', 'User\UserPhotoController@update')->name('user.user_photo.update');
-Route::delete('/user/user_photo/{id}/destroy', 'User\UserPhotoController@destroy')->name('user.user_photo.destroy');
-*/
-
-/*
  * Watermarks
  * http://risovach.ru/upload/2013/06/mem/u_22667895_big_.png
  */
+
+ /*
+  * Votes
+  */
+ Route::get('/user/votes', 'user\VoteController@index')->name('user.vote.index');
+ Route::get('/user/vote/create', 'user\VoteController@create')->name('user.vote.create');
+ Route::post('/user/vote/store', 'user\VoteController@store')->name('user.vote.store');
+ Route::get('/user/vote/{id}', 'user\VoteController@show')->name('user.vote.show');
+ Route::get('/user/vote/{id}/edit', 'user\VoteController@edit')->name('user.vote.edit');
+ Route::patch('/user/vote/{id}/update', 'user\VoteController@update')->name('user.vote.update');
+ Route::delete('/user/vote/{id}/destroy', 'user\VoteController@destroy')->name('user.vote.destroy');

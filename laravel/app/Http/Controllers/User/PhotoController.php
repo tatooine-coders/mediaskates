@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Photo;
 
-class PhotoController extends \App\Http\Controllers\Controller
+class PhotoController extends \App\Http\Controllers\User\UserController
 {
 
   /**

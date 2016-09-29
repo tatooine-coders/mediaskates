@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Tag;
 
-class TagsController extends \App\Http\Controllers\Controller
+class TagsController extends \App\Http\Controllers\User\UserController
 {
 
   /**

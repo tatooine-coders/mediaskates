@@ -4,16 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class License extends Model
 {
-    public function discipline()
-    {
-        return $this->belongsTo('App\Discipline');
-    }
-
     public function photo()
     {
         return $this->hasMany('App\Photo');
     }
-
 }

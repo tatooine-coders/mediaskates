@@ -46,6 +46,17 @@ Route::patch('/admin/event/{id}/update', 'Admin\EventController@update')->name('
 Route::delete('/admin/event/{id}/destroy', 'Admin\EventController@destroy')->name('admin.event.destroy');
 
 /*
+ * Licenses
+ */
+Route::get('/admin/licenses', 'Admin\LicenseController@index')->name('admin.license.index');
+Route::get('/admin/license/create', 'Admin\LicenseController@create')->name('admin.license.create');
+Route::post('/admin/license/store', 'Admin\LicenseController@store')->name('admin.license.store');
+Route::get('/admin/license/{id}', 'Admin\LicenseController@show')->name('admin.license.show');
+Route::get('/admin/license/{id}/edit', 'Admin\LicenseController@edit')->name('admin.license.edit');
+Route::patch('/admin/license/{id}/update', 'Admin\LicenseController@update')->name('admin.license.update');
+Route::delete('/admin/license/{id}/destroy', 'Admin\LicenseController@destroy')->name('admin.license.destroy');
+
+/*
  * Photo
  */
 Route::get('/admin/photos', 'Admin\PhotoController@index')->name('admin.photo.index');
@@ -55,17 +66,6 @@ Route::get('/admin/photo/{id}', 'Admin\PhotoController@show')->name('admin.photo
 Route::get('/admin/photo/{id}/edit', 'Admin\PhotoController@edit')->name('admin.photo.edit');
 Route::patch('/admin/photo/{id}/update', 'Admin\PhotoController@update')->name('admin.photo.update');
 Route::delete('/admin/photo/{id}/destroy', 'Admin\PhotoController@destroy')->name('admin.photo.destroy');
-
-/*
- * PhotoUser
- */
-Route::get('/admin/photo_users', 'Admin\PhotoUserController@index')->name('admin.photo_user.index');
-Route::get('/admin/photo_user/create', 'Admin\PhotoUserController@create')->name('admin.photo_user.create');
-Route::post('/admin/photo_user/store', 'Admin\PhotoUserController@store')->name('admin.photo_user.store');
-Route::get('/admin/photo_user/{id}', 'Admin\PhotoUserController@show')->name('admin.photo_user.show');
-Route::get('/admin/photo_user/{id}/edit', 'Admin\PhotoUserController@edit')->name('admin.photo_user.edit');
-Route::patch('/admin/photo_user/{id}/update', 'Admin\PhotoUserController@update')->name('admin.photo_user.update');
-Route::delete('/admin/photo_user/{id}/destroy', 'Admin\PhotoUserController@destroy')->name('admin.photo_user.destroy');
 
 /*
  * Roles
@@ -81,13 +81,13 @@ Route::delete('/admin/role/{id}/destroy', 'Admin\RoleController@destroy')->name(
 /*
  * Tags
  */
-Route::get('/admin/tags', 'Admin\TagController@index')->name('admin.tag.index');
-Route::get('/admin/tag/create', 'Admin\TagController@create')->name('admin.tag.create');
-Route::post('/admin/tag/store', 'Admin\TagController@store')->name('admin.tag.store');
-Route::get('/admin/tag/{id}', 'Admin\TagController@show')->name('admin.tag.show');
-Route::get('/admin/tag/{id}/edit', 'Admin\TagController@edit')->name('admin.tag.edit');
-Route::patch('/admin/tag/{id}/update', 'Admin\TagController@update')->name('admin.tag.update');
-Route::delete('/admin/tag/{id}/destroy', 'Admin\TagController@destroy')->name('admin.tag.destroy');
+Route::get('/admin/tags', 'Admin\PhotoUserTagController@index')->name('admin.tag.index');
+Route::get('/admin/tag/create', 'Admin\PhotoUserTagController@create')->name('admin.tag.create');
+Route::post('/admin/tag/store', 'Admin\PhotoUserTagController@store')->name('admin.tag.store');
+Route::get('/admin/tag/{id}', 'Admin\PhotoUserTagController@show')->name('admin.tag.show');
+Route::get('/admin/tag/{id}/edit', 'Admin\PhotoUserTagController@edit')->name('admin.tag.edit');
+Route::patch('/admin/tag/{id}/update', 'Admin\PhotoUserTagController@update')->name('admin.tag.update');
+Route::delete('/admin/tag/{id}/destroy', 'Admin\PhotoUserTagController@destroy')->name('admin.tag.destroy');
 
 /*
  * Users
@@ -101,26 +101,15 @@ Route::patch('/admin/user/{id}/update', 'Admin\UserController@update')->name('ad
 Route::delete('/admin/user/{id}/destroy', 'Admin\UserController@destroy')->name('admin.user.destroy');
 
 /*
- * UserDisciplines
+ * Votes
  */
-Route::get('/admin/user_disciplines', 'Admin\UserDisciplineController@index')->name('admin.user_discipline.index');
-Route::get('/admin/user_discipline/create', 'Admin\UserDisciplineController@create')->name('admin.user_discipline.create');
-Route::post('/admin/user_discipline/store', 'Admin\UserDisciplineController@store')->name('admin.user_discipline.store');
-Route::get('/admin/user_discipline/{id}', 'Admin\UserDisciplineController@show')->name('admin.user_discipline.show');
-Route::get('/admin/user_discipline/{id}/edit', 'Admin\UserDisciplineController@edit')->name('admin.user_discipline.edit');
-Route::patch('/admin/user_discipline/{id}/update', 'Admin\UserDisciplineController@update')->name('admin.user_discipline.update');
-Route::delete('/admin/user_discipline/{id}/destroy', 'Admin\UserDisciplineController@destroy')->name('admin.user_discipline.destroy');
-
-/*
- * UserPhotos
- */
-Route::get('/admin/user_photos', 'Admin\UserPhotoController@index')->name('admin.user_photo.index');
-Route::get('/admin/user_photo/create', 'Admin\UserPhotoController@create')->name('admin.user_photo.create');
-Route::post('/admin/user_photo/store', 'Admin\UserPhotoController@store')->name('admin.user_photo.store');
-Route::get('/admin/user_photo/{id}', 'Admin\UserPhotoController@show')->name('admin.user_photo.show');
-Route::get('/admin/user_photo/{id}/edit', 'Admin\UserPhotoController@edit')->name('admin.user_photo.edit');
-Route::patch('/admin/user_photo/{id}/update', 'Admin\UserPhotoController@update')->name('admin.user_photo.update');
-Route::delete('/admin/user_photo/{id}/destroy', 'Admin\UserPhotoController@destroy')->name('admin.user_photo.destroy');
+Route::get('/admin/votes', 'Admin\VoteController@index')->name('admin.vote.index');
+Route::get('/admin/vote/create', 'Admin\VoteController@create')->name('admin.vote.create');
+Route::post('/admin/vote/store', 'Admin\VoteController@store')->name('admin.vote.store');
+Route::get('/admin/vote/{id}', 'Admin\VoteController@show')->name('admin.vote.show');
+Route::get('/admin/vote/{id}/edit', 'Admin\VoteController@edit')->name('admin.vote.edit');
+Route::patch('/admin/vote/{id}/update', 'Admin\VoteController@update')->name('admin.vote.update');
+Route::delete('/admin/vote/{id}/destroy', 'Admin\VoteController@destroy')->name('admin.vote.destroy');
 
 /*
  * Watermarks
