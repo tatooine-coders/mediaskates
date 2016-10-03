@@ -6,28 +6,28 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</title>
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }} :: {{ config('app.name') }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+        <!-- CSS reset and simple style -->
         <link rel="stylesheet" href="{{ url('css/normalize.min.css') }}">
         <link rel="stylesheet" href="{{ url('css/main.css') }}">
 
-        <style>
-            .menu{list-style-type: none; border-bottom:1px solid #333; padding: 5px 0; margin:0; font-size:0.8em}
-            .menu li{display: inline; padding-right: 10px;}
-            .menu li.title{border-left:3px solid #333; padding-left:3px;}
-            .title-big{font-variant: small-caps; font-size:1.2em;}
-            .title-sub{font-weight: bold; font-size:1.1em;}
-        </style>
-
+        <!-- Scripts -->
+        <script>
+            window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+        </script>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
         <ul class="menu">
             <li class="title-big">Public</li>
             <li>{{ link_to('/', 'Home') }}</li>
@@ -37,8 +37,16 @@
             <li>{{ link_to(route('user.index'), 'Photographs') }}</li>
             <li>{{ link_to(route('advanced_search'), 'Advanced search') }}</li>
             <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
-            <li>{{ link_to('/register', 'Register') }}</li>
-            <li>{{ link_to('/login', 'Login') }}</li>
+            @if (Auth::guest())
+            <li><a href="{{ url('/login') }}">Login</a></li>
+            <li><a href="{{ url('/register') }}">Register</a></li>
+            @else
+            <li class="title-sub">User {{ Auth::user()->pseudo }}</li>
+            <li>
+                <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+            </li>
+            @endif
         </ul>
         <ul class="menu">
             <li class="title-big">Users</li>
@@ -93,21 +101,21 @@
 
         <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
 
-		<!-- Errors -->
-		@if (count($errors) > 0)
-		  <ul>
-			  @foreach ($errors->all() as $error)
-			  <li>{{ $error }}</li>
-			  @endforeach
-		  </ul>
-		@endif
-		<!-- /Errors -->
+        <!-- Errors -->
+        @if (count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        @endif
+        <!-- /Errors -->
 
-		<!-- Content -->
+        <!-- Content -->
         <div id="content">
             @yield('content')
         </div>
-		<!-- /Content -->
+        <!-- /Content -->
 
         <script src="js/vendor/jquery.min.js"></script>
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
