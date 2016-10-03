@@ -48,6 +48,7 @@
             </li>
             @endif
         </ul>
+        @role(('user'))
         <ul class="menu">
             <li class="title-big">Users</li>
             <li class="title-sub">Comments</li>
@@ -63,6 +64,7 @@
             <li>{{ link_to(route('user.tag.index'), 'Manage') }}</li>
             <li class="title">Votes</li>
             <li>{{ link_to(route('user.vote.index'), 'Manage') }}</li>
+            @role(('photograph'))
             <li class="title-sub">Photograph</li>
             <li class="title">Events</li>
             <li>{{ link_to(route('user.event.index'), 'Manage') }}</li>
@@ -70,7 +72,10 @@
             <li class="title">Photos</li>
             <li>{{ link_to(route('user.photo.index'), 'Manage') }}</li>
             <li>{{ link_to(route('user.photo.create'), 'Add') }}</li>
+            @endrole
         </ul>
+        @endrole
+        @role(('admin'))
         <ul class="menu">
             <li class="title-big">Admin</li>
             <li class="title">Comments</li>
@@ -98,6 +103,7 @@
             <li>{{ link_to(route('admin.watermark.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.watermark.create'), 'Add') }}</li>
         </ul>
+        @endrole
 
         <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
 

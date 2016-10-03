@@ -14,7 +14,6 @@ class PermissionTableSeeder extends Seeder {
 
         $permission = [
             [
-
                 'name' => 'role-list',
                 'display_name' => 'Display Role Listing',
                 'description' => 'See only Listing Of Role'

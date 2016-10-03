@@ -27,7 +27,7 @@ use RegistersUsers;
    *
    * @var string
    */
-  protected $redirectTo = '/me';
+  protected $redirectTo = '/member/me';
 
   /**
    * Create a new controller instance.

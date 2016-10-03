@@ -25,7 +25,6 @@ Route::group(['middleware'=>['auth']], function(){
     /*
      * Disciplines
      */
-    // Index (view)
     Route::get('/admin/disciplines', 'Admin\DisciplineController@index')->name('admin.discipline.index');
     Route::get('/admin/discipline/create', 'Admin\DisciplineController@create')->name('admin.discipline.create');
     Route::post('/admin/discipline/store', 'Admin\DisciplineController@store')->name('admin.discipline.store');
@@ -55,6 +54,17 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/admin/license/{id}/edit', 'Admin\LicenseController@edit')->name('admin.license.edit');
     Route::patch('/admin/license/{id}/update', 'Admin\LicenseController@update')->name('admin.license.update');
     Route::delete('/admin/license/{id}/destroy', 'Admin\LicenseController@destroy')->name('admin.license.destroy');
+
+    /*
+     * Permissions
+     */
+     Route::get('/admin/permissions', 'Admin\RoleController@index')->name('admin.permission.index');
+     Route::get('/admin/permission/create', 'Admin\RoleController@create')->name('admin.permission.create');
+     Route::post('/admin/permission/store', 'Admin\RoleController@store')->name('admin.permission.store');
+     Route::get('/admin/permission/{id}', 'Admin\RoleController@show')->name('admin.permission.show');
+     Route::get('/admin/permission/{id}/edit', 'Admin\RoleController@edit')->name('admin.permission.edit');
+     Route::patch('/admin/permission/{id}/update', 'Admin\RoleController@update')->name('admin.permission.update');
+     Route::delete('/admin/permission/{id}/destroy', 'Admin\RoleController@destroy')->name('admin.permission.destroy');
 
     /*
      * Photo
