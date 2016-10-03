@@ -1,0 +1,32 @@
+{
+	"mappings": [
+		{
+			"src": "admin/",
+			"dest": "../public/css"
+		},
+		{
+			"src": "member/",
+			"dest": "../public/css"
+		},
+		{
+			"src": "public/",
+			"dest": "../public/css"
+		}
+	],
+	"ignores": [
+		"common/*",
+		"*.css",
+		"*.scss"
+	],
+	"options": {
+		"outputStyle": "compressed",
+		"lineComments": false,
+		"debugInfo": false,
+		"sourceMap": true,
+		"unixNewlines": false,
+		"autoprefix": false
+	},
+	"customOptions": [],
+	"includePaths": [],
+	"requireLibs": []
+}
