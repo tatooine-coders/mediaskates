@@ -14,7 +14,7 @@
 		}
 	],
 	"ignores": [
-		"common/*",
+		"common/",
 		"*.css",
 		"*.scss"
 	],
