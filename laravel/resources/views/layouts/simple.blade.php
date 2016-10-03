@@ -16,8 +16,7 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <!-- CSS reset and simple style -->
-        <link rel="stylesheet" href="{{ url('css/normalize.min.css') }}">
-        <link rel="stylesheet" href="{{ url('css/main.css') }}">
+        <link rel="stylesheet" href="{{ url('css/style.css') }}">
 
         <!-- Scripts -->
         <script>
@@ -123,7 +122,5 @@
         </div>
         <!-- /Content -->
 
-        <script src="js/vendor/jquery.min.js"></script>
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </body>
 </html>
