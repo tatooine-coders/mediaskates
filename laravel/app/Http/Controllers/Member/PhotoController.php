@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Event;
+use App\Photo;
 
-class EventController extends \App\Http\Controllers\User\UserController
+class PhotoController extends \App\Http\Controllers\Member\MemberController
 {
 
   /**

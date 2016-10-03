@@ -1,20 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Comment;
+use App\Event;
 
-class CommentController extends \App\Http\Controllers\User\UserController
+class EventController extends \App\Http\Controllers\Member\MemberController
 {
 
   /**
-   * Display a listing of the comments and the number of answers
+   * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
    */
   public function index()
+  {
+	//
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
   {
 	//
   }
@@ -26,6 +36,17 @@ class CommentController extends \App\Http\Controllers\User\UserController
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
+  {
+	//
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
   {
 	//
   }

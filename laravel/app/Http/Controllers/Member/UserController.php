@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
-class UserController extends \App\Http\Controllers\User\UsersController
+class UserController extends \App\Http\Controllers\Member\MemberController
 {
 
   /**
@@ -20,7 +20,7 @@ class UserController extends \App\Http\Controllers\User\UsersController
 	$id=Auth()->user()->getAuthIdentifier();
 	$user = User::findOrFail($id);
 
-	return view('user/users/show', [
+	return view('member/users/show', [
 		'pageTitle' => 'Utilisateur : ' . $user->pseudo,
 		'user' => $user
 	]);
@@ -61,7 +61,7 @@ class UserController extends \App\Http\Controllers\User\UsersController
 	$user = User::findOrFail($id);
 	$roles = \App\Role::pluck('name', 'id');
 
-	return view('users/edit', [
+	return view('member/edit', [
 		'pageTitle' => 'Edition d\'un utilisateur',
 		'user' => $user,
 		'roles' => $roles,
@@ -93,7 +93,7 @@ class UserController extends \App\Http\Controllers\User\UsersController
 
 	// Redirection et message
 	\Session::flash('message', 'Utilisateur mis à jour !');
-	return \Redirect::to('user/' . $id);
+	return \Redirect::to('member/' . $id);
   }
 
   /**

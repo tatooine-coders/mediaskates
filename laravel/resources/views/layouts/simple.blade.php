@@ -48,7 +48,7 @@
             </li>
             @endif
         </ul>
-        @role(('user'))
+        @role(('member'))
         <ul class="menu">
             <li class="title-big">Users</li>
             <li class="title-sub">Comments</li>
@@ -91,15 +91,15 @@
             <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
             <li class="title">Photos</li>
             <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-            <li class="title-sub">Roles</li>
+            <li class="title">Roles</li>
             <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
-            <li class="title-sub">Tags</li>
+            <li class="title">Tags</li>
             <li>{{ link_to(route('admin.tag.index'), 'Manage') }}</li>
-            <li class="title-sub">Users</li>
+            <li class="title">Users</li>
             <li>{{ link_to(route('admin.user.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.user.create'), 'Add') }}</li>
-            <li class="title-sub">Watermarks</li>
+            <li class="title">Watermarks</li>
             <li>{{ link_to(route('admin.watermark.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.watermark.create'), 'Add') }}</li>
         </ul>

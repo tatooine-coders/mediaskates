@@ -18,6 +18,5 @@
 {{{ $user->google }}}
 {{{ $user->twitter }}}
 {{{ $user->biography }}}
-{{ $user->role_id }} - {{ $user->role->name }}
 </pre>
 @endsection

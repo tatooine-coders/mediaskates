@@ -42,40 +42,6 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
   }
 
   /**
-   * Creates a new user in the DB
-   *
-   * @param Request $request
-   *
-   * @return Illuminate\Http\Response
-   */
-  public function register(Request $request)
-  {
-
-  }
-
-  /**
-   * Logs an user in the system
-   *
-   * @param Request $request
-   *
-   * @return Illuminate\Http\Response
-   */
-  public function login(Request $request)
-  {
-
-  }
-
-  /**
-   * Displays to form to login/register
-   *
-   * @return Illuminate\Http\Response
-   */
-  public function login_register()
-  {
-
-  }
-
-  /**
    * Closes an account.
    *
    * @param int $id User id
