@@ -103,14 +103,14 @@ Route::delete('/admin/user/{id}/destroy', 'Admin\UserController@destroy')->name(
 /*
  * Votes
  */
-Route::get('/admin/votes', 'Admin\VoteController@index')->name('admin.vote.index');
+/*Route::get('/admin/votes', 'Admin\VoteController@index')->name('admin.vote.index');
 Route::get('/admin/vote/create', 'Admin\VoteController@create')->name('admin.vote.create');
 Route::post('/admin/vote/store', 'Admin\VoteController@store')->name('admin.vote.store');
 Route::get('/admin/vote/{id}', 'Admin\VoteController@show')->name('admin.vote.show');
 Route::get('/admin/vote/{id}/edit', 'Admin\VoteController@edit')->name('admin.vote.edit');
 Route::patch('/admin/vote/{id}/update', 'Admin\VoteController@update')->name('admin.vote.update');
 Route::delete('/admin/vote/{id}/destroy', 'Admin\VoteController@destroy')->name('admin.vote.destroy');
-
+*/
 /*
  * Watermarks
  */
