@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Tag;
 
-class TagController extends \App\Http\Controllers\Member\MemberController
+class VoteController extends \App\Http\Controllers\Member\MemberController
 {
 
   /**
