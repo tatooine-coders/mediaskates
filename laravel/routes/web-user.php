@@ -36,11 +36,11 @@ Route::group(['prefix'=>'member', 'middleware'=>['role:member|admin|photograph']
      /*
       * Votes
       */
-     Route::get('/votes', 'user\VoteController@index')->name('user.vote.index');
-     Route::get('/vote/create', 'user\VoteController@create')->name('user.vote.create');
-     Route::post('/vote/store', 'user\VoteController@store')->name('user.vote.store');
-     Route::get('/vote/{id}', 'user\VoteController@show')->name('user.vote.show');
-     Route::get('/vote/{id}/edit', 'user\VoteController@edit')->name('user.vote.edit');
-     Route::patch('/vote/{id}/update', 'user\VoteController@update')->name('user.vote.update');
-     Route::delete('/vote/{id}/destroy', 'user\VoteController@destroy')->name('user.vote.destroy');
+     Route::get('/votes', 'Member\VoteController@index')->name('user.vote.index');
+     Route::get('/vote/create', 'Member\VoteController@create')->name('user.vote.create');
+     Route::post('/vote/store', 'Member\VoteController@store')->name('user.vote.store');
+     Route::get('/vote/{id}', 'Member\VoteController@show')->name('user.vote.show');
+     Route::get('/vote/{id}/edit', 'Member\VoteController@edit')->name('user.vote.edit');
+     Route::patch('/vote/{id}/update', 'Member\VoteController@update')->name('user.vote.update');
+     Route::delete('/vote/{id}/destroy', 'Member\VoteController@destroy')->name('user.vote.destroy');
 });

@@ -124,6 +124,7 @@ class DatabaseSeeder extends Seeder
             'comment' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
             'tag' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
             'user' => ['dashboard', 'personnal_infos', 'personnal_infos.update', 'preferences', 'preferences.update', 'update_passwd', 'close_account'],
+            'vote' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
         ],
         'photograph' => [
             'comment' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
