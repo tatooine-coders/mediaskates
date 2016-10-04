@@ -15,8 +15,7 @@
 	],
 	"ignores": [
 		"common/",
-		"*.css",
-		"*.scss"
+		"*.css"
 	],
 	"options": {
 		"outputStyle": "compressed",

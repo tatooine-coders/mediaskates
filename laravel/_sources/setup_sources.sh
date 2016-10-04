@@ -17,7 +17,7 @@ function remove_admin_sources(){
 		cd "$SASS_LIBS_DIR"
     echo -e "";
     echo "...Removing downloaded sources";
-    rm -rf "uikit-develop";
+    rm -rf "knacss";
 }
 
 echo -e "|                                                                   |${EL_BOX_SHADOW_LIGHT}";
@@ -63,13 +63,22 @@ cd $SASS_LIBS_DIR;
 echo -e "\e[34m Downloading...\e[39m";
 echo -e "\e[34m --------------\e[39m";
 
-# UIKit
-# ====
-echo " > Getting latest UIKit files";
-wget -q "https://github.com/uikit/uikit/archive/v2.27.1.tar.gz"
-tar zxf "v2.27.1.tar.gz"
-mv "uikit-2.27.1" "uikit-develop"
-rm -f "v2.27.1.tar.gz"
+# KNACSS
+# ======
+echo " > Getting latest KNACSS files";
+wget -q "https://github.com/alsacreations/KNACSS/archive/6.0.0.tar.gz"
+tar zxf "6.0.0.tar.gz"
+mv "KNACSS-6.0.0" "knacss"
+rm -f "6.0.0.tar.gz"
+
+# FontAwesome
+# ===========
+echo " > Getting latest FontAwesome files";
+wget -q "https://github.com/FortAwesome/Font-Awesome/archive/master.tar.gz"
+tar zxf master.tar.gz
+rm master.tar.gz -f
+# Needed files
+cp -f Font-Awesome-master/fonts/* "$WEBROOT/fonts/"
 
 # jQuery
 # ======
