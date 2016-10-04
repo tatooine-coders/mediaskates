@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Discipline;
 use App\Event;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $events = Event::query()->get();
         return view('events/index',[
             'pageTitle' => 'Liste des Evenements',
-            'event' => $events
+            'events' => $events
         ]);
     }
 
@@ -35,8 +36,11 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
+        $disciplines=Discipline::query()->get();
+
         return view('events/create', [
             'pageTitle' => 'Evenements',
+            'disciplines' => $disciplines
         ]);
     }
 
@@ -54,17 +58,17 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
             'adresse' => 'required',
             'city' => 'required',
             'date_event' => 'required',
-            //'id_users' => 'required',
-            'id_disciplines' => 'required',
+
         ]);
 
         $data = $request->all();
         $data{'user_id'}=auth()->user()->id;
-        dd($data);
+
+
         Event::create($data);
 
         // Redirection et message
-        \Session::flash('message', 'Nouvelle discipline créé');
+        \Session::flash('message', 'Nouvelle evenement cré');
         return redirect()->route('admin.event.index');
 
 
