@@ -12,3 +12,6 @@
 
 # Netbeans project
 /nbproject/private
+
+# Sources
+/_sources/common/

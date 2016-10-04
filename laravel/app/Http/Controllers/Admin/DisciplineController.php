@@ -14,7 +14,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 
-class DisciplineController extends \App\Http\Controllers\Controller
+class DisciplineController extends \App\Http\Controllers\Admin\AdminController
 {
     /**
      * Display a listing of the resource.

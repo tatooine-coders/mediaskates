@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class WatermarkController extends \App\Http\Controllers\Controller
+class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 {
     /**
      * Display a listing of the resource.

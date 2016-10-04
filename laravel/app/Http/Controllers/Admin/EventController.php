@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
-class EventController extends \App\Http\Controllers\Controller
+class EventController extends \App\Http\Controllers\Admin\AdminController
 {
     /**
      * Display a listing of the resource.
