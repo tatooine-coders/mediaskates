@@ -36,7 +36,7 @@ use RegistersUsers;
    */
   public function __construct()
   {
-	$this->middleware('guest');
+    $this->middleware('guest');
   }
 
   /**
@@ -47,13 +47,13 @@ use RegistersUsers;
    */
   protected function validator(array $data)
   {
-	return Validator::make($data, [
-			'first_name' => 'required',
-			'last_name' => 'required',
-			'pseudo' => 'bail|required|unique:users',
-			'email' => 'bail|required|email|unique:users',
-			'password' => 'required|min:6|confirmed',
-	]);
+      return Validator::make($data, [
+          'first_name' => 'required',
+          'last_name' => 'required',
+          'pseudo' => 'bail|required|unique:users',
+          'email' => 'bail|required|email|unique:users',
+          'password' => 'required|min:6|confirmed',
+      ]);
   }
 
   /**
@@ -64,13 +64,15 @@ use RegistersUsers;
    */
   protected function create(array $data)
   {
-	return User::create([
-			'first_name' => $data['first_name'],
-			'last_name' => $data['last_name'],
-			'pseudo' => $data['pseudo'],
-			'email' => $data['email'],
-			'role_id' => "1",
-			'password' => bcrypt($data['password']),
-	]);
+      $user= new \App\User();
+      $user->first_name = $data['first_name'];
+      $user->last_name = $data['last_name'];
+      $user->pseudo = $data['pseudo'];
+      $user->email = $data['email'];
+      $user->password = bcrypt($data['password']);
+      $user->save();
+      $user->attachRole(ROLE_MEMBER);
+
+      return $user;
   }
 }
