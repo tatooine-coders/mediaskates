@@ -1,4 +1,4 @@
-@extends('layouts/simple')
+@extends('layouts/member')
 
 @section('content')
 <h2>
