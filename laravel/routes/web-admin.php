@@ -3,7 +3,7 @@
  * Basically, full power
  * @TODO: remove useless actions
  */
-Route::group(['middleware'=>['auth']], function(){
+Route::group(['prefix'=>'member', 'middleware'=>['role:admin']], function(){
     /*
      * Comments
      */

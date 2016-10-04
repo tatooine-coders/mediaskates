@@ -18,6 +18,7 @@ Route::get('/', function () {
 // App routes
 include('web-public.php');
 include('web-user.php');
+include('web-photograph.php');
 include('web-admin.php');
 
 // Base Auth routes
