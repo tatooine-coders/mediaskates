@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+
+use App\Event;
 use Illuminate\Http\Request;
 
+
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 class EventController extends \App\Http\Controllers\Controller
 {
@@ -15,8 +19,14 @@ class EventController extends \App\Http\Controllers\Controller
      */
     public function index()
     {
-        //
+        $events = Event::query()->get();
+        return view('events/index',[
+            'pageTitle' => 'Liste des Evenements',
+            'event' => $events
+        ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +35,9 @@ class EventController extends \App\Http\Controllers\Controller
      */
     public function create()
     {
-        //
+        return view('events/create', [
+            'pageTitle' => 'Evenements',
+        ]);
     }
 
     /**
@@ -36,7 +48,26 @@ class EventController extends \App\Http\Controllers\Controller
      */
     public function store(Request $request)
     {
-        //
+        // Data validation (https://laravel.com/docs/5.3/validation)
+        $this->validate($request, [
+            'name' => 'required',
+            'adresse' => 'required',
+            'city' => 'required',
+            'date_event' => 'required',
+            //'id_users' => 'required',
+            'id_disciplines' => 'required',
+        ]);
+
+        $data = $request->all();
+        $data{'user_id'}=auth()->user()->id;
+        dd($data);
+        Event::create($data);
+
+        // Redirection et message
+        \Session::flash('message', 'Nouvelle discipline créé');
+        return redirect()->route('admin.event.index');
+
+
     }
 
     /**

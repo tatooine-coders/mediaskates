@@ -69,7 +69,7 @@ use RegistersUsers;
 			'last_name' => $data['last_name'],
 			'pseudo' => $data['pseudo'],
 			'email' => $data['email'],
-			'role_id' => 1,
+			'role_id' => "1",
 			'password' => bcrypt($data['password']),
 	]);
   }

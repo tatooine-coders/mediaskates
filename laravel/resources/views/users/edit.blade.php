@@ -18,6 +18,6 @@
   {!! Form::label('biography', '') !!} - {!! Form::textarea('biography', null, ['placeholder'=>'']) !!}<br/>
   
   {!! Form::submit('Mettre à jour') !!}
-  <!-- /Form-->
-  {!! Form::close() !!}
+<!-- /Form-->
+{!! Form::close() !!}
 @endsection

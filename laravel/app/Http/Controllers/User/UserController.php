@@ -93,7 +93,7 @@ class UserController extends \App\Http\Controllers\Controller
 
 	// Redirection et message
 	\Session::flash('message', 'Utilisateur mis à jour !');
-	return \Redirect::to('user/' . $id);
+	return \Redirect::to('user/'.$id);
   }
 
   /**
