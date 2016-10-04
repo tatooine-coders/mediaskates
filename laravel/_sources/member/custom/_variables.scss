@@ -1,0 +1,23 @@
+// Colors
+// ------
+$text-color:#333;
+$background-color:#EEE;
+
+$link-color:#88C;
+$link-hover-color:lighten($link-color, 10%);
+$link-visited-color:#88C;
+
+$menu-text-color: $background-color;
+$menu-background-color: #444;
+$menu-link-color:#CCF;
+$menu-link-hover-color:lighten($menu-link-color, 10%);
+$menu-link-visited-color:$menu-link-color;
+
+$border-radius-sm:3px;
+$border-radius-md:5px;
+$border-radius-lg:10px;
+
+// Overriding some styles
+$base-color:$text-color;
+$base-color-link:$link-color;
+$base-color-link-hover:$link-hover-color;
