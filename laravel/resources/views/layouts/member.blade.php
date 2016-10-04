@@ -20,103 +20,81 @@
 
         <!-- Scripts -->
         <script>
-					window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+            window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
         </script>
     </head>
     <body>
-		<nav>
-			{{ link_to('/', config('app.name')) }}
-		  
-				<li>{{ link_to('/', 'Home') }}</li>
-				<li>{{ link_to(route('event.index'), 'Events') }}</li>
-				<li>{{ link_to(route('photo.index'), 'Photos') }}</li>
-				<li>{{ link_to(route('user.index'), 'Photographs') }}</li>
-				<li>{{ link_to(route('advanced_search'), 'Advanced search') }}</li>
-			</ul>
-			
-		</nav>
+        <!-- Main menu -->
+        <nav class="menu">
+            <span>{{ link_to('/', config('app.name')) }}</span>
+            <span><i class="fa fa-fw fa-home"></i> {{ link_to('/', 'Home') }}</span>
+            <span><i class="fa fa-fw fa-calendar"></i> {{ link_to(route('event.index'), 'Events') }}</span>
+            <span><i class="fa fa-fw fa-photo"></i> {{ link_to(route('photo.index'), 'Photos') }}</span>
+            <span><i class="fa fa-fw fa-users"></i> {{ link_to(route('user.index'), 'Photographs') }}</span>
+            <span><i class="fa fa-fw fa-search"></i> {{ link_to(route('advanced_search'), 'Advanced search') }}</span>
+        </nav>
+        <!-- /Main menu -->
 
-		<div class="uk-offcanvas">
-			<div class="uk-offcanvas-bar uk-offcanvas-bar-show" mode="push">
-				<ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
-					<li class="title-big">Public</li>
+        <!-- Container for the page -->
+        <div id="main" role="main" class="flex-container">
+            <!-- Side menu -->
+            <div class="w20 menu">
+                <nav id="navigation" role="navigation">
 
-					@if (Auth::guest())
-					<li><a href="{{ url('/login') }}">Login</a></li>
-					<li><a href="{{ url('/register') }}">Register</a></li>
-					@else
-					<li class="title-sub">User {{ Auth::user()->pseudo }}</li>
-					<li>
-						<a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-						<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-					</li>
-					@endif
-				</ul>
-				@role(('member'))
-				<ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
-					<li class="title-big">Users</li>
-					<li class="title-sub">Comments</li>
-					<li>{{ link_to(route('user.comment.index'), 'Manage') }}</li>
-					<li class="title-sub">User</li>
-					<li>{{ link_to(route('user.dashboard'), 'Dashboard') }}</li>
-					<li>{{ link_to(route('user.preferences'), 'Preferences') }}</li>
-					<li>{{ link_to(route('user.personnal_infos'), 'Personnal informations') }}</li>
-					<li>{{ link_to(route('user.update_passwd'), 'Update password') }}</li>
-					<li>{{ link_to(route('user.logout'), 'Log out') }}</li>
-					<li>{{ link_to(route('user.close_account'), 'Close account') }}</li>
-					<li class="title">Tags</li>
-					<li>{{ link_to(route('user.tag.index'), 'Manage') }}</li>
-					<li class="title">Votes</li>
-					<li>{{ link_to(route('user.vote.index'), 'Manage') }}</li>
-					@role(('photograph'))
-					<li class="title-sub">Photograph</li>
-					<li class="title">Events</li>
-					<li>{{ link_to(route('user.event.index'), 'Manage') }}</li>
-					<li>{{ link_to(route('user.event.create'), 'Add') }}</li>
-					<li class="title">Photos</li>
-					<li>{{ link_to(route('user.photo.index'), 'Manage') }}</li>
-					<li>{{ link_to(route('user.photo.create'), 'Add') }}</li>
-					@endrole
-				</ul>
-				@endrole
-			</div>
-		</div>
-		<div class="uk-grid">
-			<div class="uk-width-1-1">
-				<h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
-			</div>
-		</div>
-		<div class="uk-grid uk-grid-divider">
-			<div class="uk-width-large-1-10 uk-width-medium-2-10 uk-width-small-3-10">
-				<!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-			</div>
-			<div class="uk-width-large-9-10 uk-width-medium-8-10 uk-width-small-7-10">
-				<!-- Errors -->
-				@if (count($errors) > 0)
-				<ul>
-					@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-					@endforeach
-				</ul>
-				@endif
-				<!-- /Errors -->
+                    @include('elements/menus/members');
 
-				<!-- Content -->
-				<div id="content">
-					@yield('content')
-				</div>
-				<!-- /Content -->
-			</div>
-		</div>
-		<footer>
-			<ul>
-				<li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
-			</ul>
-		</footer>
+                </nav>
+            </div>
+            <!-- /Side menu -->
+
+            <!-- Page content -->
+            <div class="flex-item-fluid">
+                <!--[if lt IE 8]>
+                    <p class="warning">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+                <header id="header" role="banner" class="menu">
+                    <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
+                </header>
+                <!-- Content -->
+                <div class="flex-container" id="page-wrapper">
+                    <div id="content" class="flex-item-fluid">
+                        <!-- Errors -->
+                        @if (count($errors) > 0)
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        @endif
+                        <!-- /Errors -->
+
+                        @yield('content')
+
+                    </div>
+                    <!-- Additionnal aside -->
+                    <aside class="w20 menu-second">
+                        <p class="">Hopla vous savez que la mamsell Huguette, la miss Miss Dahlias du messti de Bischheim était au Christkindelsmärik en compagnie de Richard Schirmeck (celui qui a un blottkopf), le mari de Chulia Roberstau, qui lui trempait sa Nüdle dans sa Schneck ! Yo dû, Pfourtz ! Ch'espère qu'ils avaient du Kabinetpapier, Gal !</p>
+                    </aside>
+                    <!-- Additionnal aside -->
+
+                </div>
+                <!-- /Content -->
+
+            </div>
+            <!-- /Page content -->
+
+        </div>
+        <!-- /Container for the page -->
+
+        <!-- Page footer -->
+        <footer id="footer" role="contentinfo" class="menu">
+            <ul>
+                <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
+            </ul>
+        </footer>
+        <!-- /Page footer -->
+
+        <!-- Additionnal scripts -->
         <script src="{{ url('js/vendor/jquery.min.js') }}"></script>
-        <script src="{{ url('js/vendor/uikit.min.js') }}"></script>
-        <script src="{{ url('js/vendor/uikit/dropdown.js') }}"></script>
     </body>
 </html>

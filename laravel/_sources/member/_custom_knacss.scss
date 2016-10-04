@@ -31,6 +31,8 @@
 // WARNING : you should comment the following @import (variables)
 // and move variables file from knacss folder to your own project folder!
 @import "../common/knacss/sass/_config/_variables.scss";
+/*Override*/
+@import "custom/variables";
 
 @import "../common/knacss/sass/_config/_breakpoints.scss";
 @import "../common/knacss/sass/_config/_mixins.scss";
@@ -49,6 +51,7 @@
 
 // Utilities
 @import "../common/knacss/sass/utilities/_layout.scss"; // alignment, modules, positionning
+/* override */ @import "custom/layout";
 @import "../common/knacss/sass/utilities/_helpers.scss"; // width and spacers helpers
 // @import "utilities/_wordpress.scss"; // WordPress reset and basic styles
 @import "../common/knacss/sass/utilities/_responsive.scss"; // Responsive Web Design helpers
