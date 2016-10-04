@@ -43,8 +43,6 @@ class CreateTables extends Migration
             $table->string('google', 40)->nullable();
             $table->string('twitter', 40)->nullable();
             $table->text('biography', 40)->nullable();
-//            $table->integer('role_id', false, true)->default(2);
-//            $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
         });
