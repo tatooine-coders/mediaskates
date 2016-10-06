@@ -121,6 +121,7 @@ class DatabaseSeeder extends Seeder
      */
     $permissions = [
         'admin' => [
+            'dashboard' => ['dashboard'],
             'comment' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
             'discipline' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
             'event' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
