@@ -16,21 +16,11 @@ class UserController extends \App\Http\Controllers\Member\MemberController
    */
   public function show()
   {
-	// We should fetch id from Auth
-	//$user = User::findOrFail(Auth()->user()->getAuthIdentifier());
-	return view('member/users/show', [
-		'pageTitle' => 'Dashboard'
-	]);
-  }
-
-  /**
-   * Logs an user out
-   *
-   * @return Illuminate\Http\Response
-   */
-  public function logout()
-  {
-
+  	// We should fetch id from Auth
+  	//$user = User::findOrFail(Auth()->user()->getAuthIdentifier());
+  	return view('member/users/show', [
+  		'pageTitle' => 'Dashboard'
+  	]);
   }
 
   /**

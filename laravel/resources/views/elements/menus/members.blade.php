@@ -26,4 +26,8 @@
   <li><a href="{{ route('user.photo.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li><a href="{{ route('user.photo.create') }}"><i class="fa fa-fw fa-list"></i> Add</a></li>
   @endrole
+  @role(('admin'))
+  <li class="title">Administration</li>
+  <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Tableau de bord</a></li>
+  @endrole
 </ul>

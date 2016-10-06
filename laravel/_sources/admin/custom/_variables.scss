@@ -15,13 +15,13 @@ $grave-text-color:darken($grave-color, 20%);
 $info-color: rgba(44, 160, 221, 1);
 $info-text-color: darken($info-color, 20%);
 
-$link-color:#88C;
+$link-color:#111;
 $link-hover-color:lighten($link-color, 10%);
-$link-visited-color:#88C;
+$link-visited-color:#111;
 
-$menu-text-color: $background-color;
-$menu-background-color: #311;
-$menu-link-color:#CCF;
+$menu-text-color: #555;
+$menu-background-color: #999;
+$menu-link-color:$link-color;
 $menu-link-hover-color:lighten($menu-link-color, 10%);
 $menu-link-visited-color:$menu-link-color;
 
