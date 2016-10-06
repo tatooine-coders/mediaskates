@@ -70,7 +70,15 @@ use RegistersUsers;
       $user->pseudo = $data['pseudo'];
       $user->email = $data['email'];
       $user->password = bcrypt($data['password']);
+      // Preparing preferences
+      $prefs=[];
+      $site_p=config('site.default_prefs');
+      foreach($site_p as $k=>$v){
+        $prefs[$k]=$v['default'];
+      }
+      $user->preferences=json_encode($prefs);
       $user->save();
+      // Adding User role
       $user->attachRole(ROLE_MEMBER);
 
       return $user;

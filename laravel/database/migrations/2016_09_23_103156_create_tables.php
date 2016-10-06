@@ -37,7 +37,7 @@ class CreateTables extends Migration
             $table->string('password');
             $table->string('profile_pic', 50)->nullable();
             $table->boolean('active')->default(0);
-            $table->text('preferences')->nullable();
+            $table->JSON('preferences')->nullable();
             $table->string('site_web', 40)->nullable();
             $table->string('facebook', 40)->nullable();
             $table->string('google', 40)->nullable();
