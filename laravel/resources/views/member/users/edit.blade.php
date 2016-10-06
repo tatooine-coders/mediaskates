@@ -38,7 +38,7 @@
 					{!! Form::text('twitter', null, ['placeholder'=>'@mon_twitter']) !!}
 
 					{!! Form::label('biography', 'A propos de vous') !!}
-					{!! Form::textarea('biography', Auth::user()) !!}
+					{!! Form::textarea('biography', null) !!}
 				</div>
 			</div>
 			<!-- Additionnal aside -->
