@@ -1,11 +1,11 @@
-#!/bin/bash -   
+#!/bin/bash -
 #title          :setup_sources.sh
 #description    :Downloads all files required to build CSS/JS
 #author         :Manuel Tancoigne
 #date           :20161003
-#version        :0.1    
+#version        :0.1
 #usage          :./setup.sh
-#notes          :       
+#notes          :
 #bash_version   :4.3.46(1)-release
 #============================================================================
 
@@ -13,11 +13,10 @@
 RESSOURCES=$MS_DIR"/public/";
 SASS_LIBS_DIR=$MS_DIR"/_sources/common"
 
-function remove_admin_sources(){
-		cd "$SASS_LIBS_DIR"
-    echo -e "";
-    echo "...Removing downloaded sources";
-    rm -rf "knacss";
+function remove_sources(){
+    echo -e "...Removing downloaded sources\n";
+    rm -rf "$SASS_LIBS_DIR";
+		mkdir "$SASS_LIBS_DIR";
 }
 
 echo -e "|                                                                   |${EL_BOX_SHADOW_LIGHT}";
@@ -75,10 +74,10 @@ rm -f "6.0.0.tar.gz"
 # ===========
 echo " > Getting latest FontAwesome files";
 wget -q "https://github.com/FortAwesome/Font-Awesome/archive/master.tar.gz"
-tar zxf master.tar.gz
-rm master.tar.gz -f
+tar zxf "master.tar.gz"
+rm -f "master.tar.gz"
 # Needed files
-cp -f Font-Awesome-master/fonts/* "$WEBROOT/fonts/"
+cp -f Font-Awesome-master/fonts/ "$RESSOURCES/fonts/"
 
 # jQuery
 # ======
