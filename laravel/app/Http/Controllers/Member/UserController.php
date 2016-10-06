@@ -98,7 +98,22 @@ class UserController extends \App\Http\Controllers\Member\MemberController
    */
   public function edit_prefs()
   {
+    // Merge users's prefs and default ones.
+    $prefs=config('site.default_prefs');
 
+    // Mixing defaults and users
+    $users=json_decode(Auth()->user()->preferences);
+    foreach ($prefs as $key => $conf) {
+      if(!key_exists($key, $users)){
+        $users[$key]=$conf['default'];
+      }
+    }
+
+    return view('member/users/preferences', [
+      'pageTitle'=>'Préférences',
+      'preferences'=>json_decode(Auth()->user()->preferences, true),
+      'defaults'=>$prefs
+    ]);
   }
 
   /**
@@ -110,7 +125,41 @@ class UserController extends \App\Http\Controllers\Member\MemberController
    */
   public function update_prefs(Request $request)
   {
+    // Get user infos
+    $user=User::query()->findOrFail(Auth()->user()->id);
+    $data=$request->preferences;
+    $defaults=config('site.default_prefs');
 
+    // Compare with defaults and remove extra configuration
+    foreach ($data as $k => $v) {
+      if(!key_exists($k, $defaults)){
+        unset($data[$k]);
+      }
+    }
+
+    // Compare defaults and add missing keys
+    foreach($defaults as $k=>$c){
+      if(!key_exists($k, $data)){
+        $data[$k]=$c['default'];
+      }else{
+        // Converting true/false
+        if($c['type']==='checkbox'){
+          if($data[$k]==='1'){
+            $data[$k]=true;
+          }else{
+            $data[$k]=false;
+          }
+        }
+      }
+    }
+
+    // Update password
+    $user->preferences=json_encode($data);
+    $user->save();
+
+    // Redirection et message
+  	\Session::flash('message', 'Vos préférences ont été mises à jour !');
+  	return \Redirect::to(route('user.preferences'));
   }
 
   /**

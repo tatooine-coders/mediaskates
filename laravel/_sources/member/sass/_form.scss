@@ -23,6 +23,7 @@ input[type=radio] {
 input[required], select[required], textarea[required]{
   border-color:transparentize($grave-color, 0.5);
 }
-.content form{
-  margin-bottom: $small-plus-value;
+
+.input{
+  display: block;
 }
