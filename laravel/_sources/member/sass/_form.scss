@@ -1,11 +1,28 @@
 label{
-  display: block;
+  //display: block;
 }
-input, select, textarea{
+input:not([type="checkbox"]), select, textarea{
   display: block;
   width:100%;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 0;
   box-shadow: 0 0 6px 0 darken($background-color, 20%);
   padding:$tiny-value $tiny-plus-value;
+}
+
+input[type=checkbox], input[type=radio] {
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
+}
+
+input[type=radio] {
+  bottom: 2px;
+}
+
+input[required], select[required], textarea[required]{
+  border-color:transparentize($grave-color, 0.5);
+}
+.content form{
+  margin-bottom: $small-plus-value;
 }

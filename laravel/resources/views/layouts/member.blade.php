@@ -55,26 +55,34 @@
                 <header id="header" role="banner" class="menu">
                     <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
                 </header>
-                <!-- Content -->
+
+                <!-- Infos -->
+                @if(Session::has('message'))
+                <div class="page-wrapper alert-info">
+                  <div class="content">
+                    <i class="fa fa-info-circle"></i> {{ session('message') }}
+                  </div>
+                </div>
+                @endif
+                <!-- /Infos -->
 
                 <!-- Errors -->
                 @if (count($errors) > 0)
-                <div class="page-wrapper">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-                </div>
+                  <div class="page-wrapper alert-error">
+                    <div class="content">
+                      <i class="fa fa-exclamation-triangle"></i> Des erreurs on été rencontrées :
+                      <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                          <li>- {{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  </div>
                 @endif
                 <!-- /Errors -->
 
-                    {{-- <div class="content"> --}}
-
-                        @yield('content')
-
-                    {{-- </div> --}}
-                {{-- </div> --}}
+                <!-- Content -->
+                @yield('content')
                 <!-- /Content -->
 
             </div>

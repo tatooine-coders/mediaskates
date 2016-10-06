@@ -18,10 +18,8 @@ class UserController extends \App\Http\Controllers\Member\MemberController
   {
 	// We should fetch id from Auth
 	//$user = User::findOrFail(Auth()->user()->getAuthIdentifier());
-
 	return view('member/users/show', [
 		'pageTitle' => 'Dashboard'
-		//'user' => $user
 	]);
   }
 
@@ -55,12 +53,10 @@ class UserController extends \App\Http\Controllers\Member\MemberController
   public function edit()
   {
 	  $user = User::findOrFail(Auth()->user()->id);
-	  $roles = \App\Role::pluck('name', 'id');
 
 	  return view('member/users/edit', [
 	  	'pageTitle' => 'Informations personnelles',
 	  	'user' => $user,
-	  	'roles' => $roles,
 	  ]);
   }
 
@@ -73,23 +69,25 @@ class UserController extends \App\Http\Controllers\Member\MemberController
    */
   public function update(Request $request)
   {
-	//Must find id from session
-	$id=0;
+  	$user = User::findOrFail(Auth()->user()->id);
 
-	$user = User::findOrFail($id);
+  	$this->validate($request, [
+  		'first_name' => 'required',
+  		'last_name' => 'required',
+  	]);
 
-	$this->validate($request, [
-		'first_name' => 'required',
-		'last_name' => 'required',
-	]);
+  	$data = $request->all();
 
-	$data = $request->all();
+    // Validating email in a second time.
+    if($data['email'] != Auth()->user()->email){
+      $this->validate($request, ['email' => 'required|email|unique:users']);
+    }
 
-	$user->fill($data)->save();
+  	$user->fill($data)->save();
 
-	// Redirection et message
-	\Session::flash('message', 'Utilisateur mis à jour !');
-	return \Redirect::to('member/' . $id);
+  	// Redirection et message
+  	\Session::flash('message', 'Votre profil a été mis à jour !');
+  	return \Redirect::to(route('user.personnal_infos'));
   }
 
   /**
@@ -125,5 +123,25 @@ class UserController extends \App\Http\Controllers\Member\MemberController
   public function update_passwd(Request $request)
   {
 
+    $validatorMessages=[
+        'password_actual.password_hash_check' => 'Votre ancien mot de passe est invalide.',
+    ];
+
+    $this->validate($request, [
+        'password_actual' => sprintf('password_hash_check:%s|required', Auth()->user()->password),
+        'password' => 'required|min:6|confirmed',
+    ], $validatorMessages);
+
+    $data=$request->all();
+
+    // Get user infos
+    $user=User::query()->findOrFail(Auth()->user()->id);
+    // Update password
+    $user->password=bcrypt($data['password']);
+    $user->save();
+
+    // Redirection et message
+  	\Session::flash('message', 'Votre mot de passe a été mis à jour !');
+  	return \Redirect::to(route('user.personnal_infos'));
   }
 }

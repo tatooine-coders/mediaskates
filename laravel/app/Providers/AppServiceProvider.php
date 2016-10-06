@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Validator;
+use Illuminate\Support\Facades\Hash;
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -14,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+      // Validator to compare passwords
+      // Found here : http://stackoverflow.com/questions/30708916/laravel-5-update-user-password
+      Validator::extend('password_hash_check', function($attribute, $value, $parameters, $validator) {
+          return Hash::check($value , $parameters[0]) ;
+      });
     }
 
     /**

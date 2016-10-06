@@ -92,7 +92,7 @@ body>nav.menu{
 }
 
 .content{
-  padding: $tiny-value $small-plus-value;
+  padding: $small-plus-value;
 }
 
 // Adds a min height to the zone
@@ -105,13 +105,6 @@ body>nav.menu{
     color: darken($background-color, 20%);
   }
 }
-
-/*.content-inverse{
-  margin: (-$tiny-value) (-$small-plus-value);
-  >div{
-    @extend .content;
-  }
-}*/
 
 .avatar-area{
   display:flex;
@@ -133,5 +126,26 @@ body>nav.menu{
   }
   a{
     color:$menu-text-color;
+  }
+}
+
+
+.list-unstyled{
+    list-style-type: none;
+    margin:0px;
+    padding:0px;
+    li{
+      margin:0px;
+      padding:0px;
+    }
+}
+
+.disabled{
+  opacity:0.2;
+  *{
+    cursor: not-allowed;
+  }
+  &:hover{
+    opacity: 0.5;
   }
 }
