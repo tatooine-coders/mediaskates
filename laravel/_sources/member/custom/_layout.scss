@@ -86,6 +86,11 @@ body>nav.menu{
           background-color:lighten($menu-background-color, 5%);
         }
       }
+      &.title{
+        text-align:center;
+        font-weight:bold;
+        background-color:darken($menu-background-color, 10%);
+      }
     }
 
   }

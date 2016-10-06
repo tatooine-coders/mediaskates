@@ -107,7 +107,7 @@
 //.#{$fa-css-prefix}-share:before { content: $fa-var-share; }
 //.#{$fa-css-prefix}-expand:before { content: $fa-var-expand; }
 //.#{$fa-css-prefix}-compress:before { content: $fa-var-compress; }
-//.#{$fa-css-prefix}-plus:before { content: $fa-var-plus; }
+.#{$fa-css-prefix}-plus:before { content: $fa-var-plus; }
 //.#{$fa-css-prefix}-minus:before { content: $fa-var-minus; }
 //.#{$fa-css-prefix}-asterisk:before { content: $fa-var-asterisk; }
 //.#{$fa-css-prefix}-exclamation-circle:before { content: $fa-var-exclamation-circle; }
@@ -229,8 +229,8 @@
 //.#{$fa-css-prefix}-undo:before { content: $fa-var-undo; }
 //.#{$fa-css-prefix}-legal:before,
 //.#{$fa-css-prefix}-gavel:before { content: $fa-var-gavel; }
-//.#{$fa-css-prefix}-dashboard:before,
-//.#{$fa-css-prefix}-tachometer:before { content: $fa-var-tachometer; }
+.#{$fa-css-prefix}-dashboard:before,
+.#{$fa-css-prefix}-tachometer:before { content: $fa-var-tachometer; }
 //.#{$fa-css-prefix}-comment-o:before { content: $fa-var-comment-o; }
 //.#{$fa-css-prefix}-comments-o:before { content: $fa-var-comments-o; }
 //.#{$fa-css-prefix}-flash:before,
