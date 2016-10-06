@@ -17,12 +17,11 @@ class UserController extends \App\Http\Controllers\Member\MemberController
   public function show()
   {
 	// We should fetch id from Auth
-	$id=Auth()->user()->getAuthIdentifier();
-	$user = User::findOrFail($id);
+	//$user = User::findOrFail(Auth()->user()->getAuthIdentifier());
 
 	return view('member/users/show', [
-		'pageTitle' => 'Utilisateur : ' . $user->pseudo,
-		'user' => $user
+		'pageTitle' => 'Dashboard'
+		//'user' => $user
 	]);
   }
 
@@ -55,17 +54,14 @@ class UserController extends \App\Http\Controllers\Member\MemberController
    */
   public function edit()
   {
-	// Must get Id from session
-	$id=0;
+	  $user = User::findOrFail(Auth()->user()->id);
+	  $roles = \App\Role::pluck('name', 'id');
 
-	$user = User::findOrFail($id);
-	$roles = \App\Role::pluck('name', 'id');
-
-	return view('member/edit', [
-		'pageTitle' => 'Edition d\'un utilisateur',
-		'user' => $user,
-		'roles' => $roles,
-	]);
+	  return view('member/users/edit', [
+	  	'pageTitle' => 'Informations personnelles',
+	  	'user' => $user,
+	  	'roles' => $roles,
+	  ]);
   }
 
   /**

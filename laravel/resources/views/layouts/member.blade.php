@@ -41,7 +41,7 @@
             <div class="w20 menu">
                 <nav id="navigation" role="navigation">
 
-                    @include('elements/menus/members');
+                    @include('elements/menus/members')
 
                 </nav>
             </div>
@@ -56,28 +56,25 @@
                     <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
                 </header>
                 <!-- Content -->
-                <div class="flex-container" id="page-wrapper">
-                    <div id="content" class="flex-item-fluid">
-                        <!-- Errors -->
-                        @if (count($errors) > 0)
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        @endif
-                        <!-- /Errors -->
+
+                <!-- Errors -->
+                @if (count($errors) > 0)
+                <div class="page-wrapper">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+                </div>
+                @endif
+                <!-- /Errors -->
+
+                    {{-- <div class="content"> --}}
 
                         @yield('content')
 
-                    </div>
-                    <!-- Additionnal aside -->
-                    <aside class="w20 menu-second">
-                        <p class="">Hopla vous savez que la mamsell Huguette, la miss Miss Dahlias du messti de Bischheim était au Christkindelsmärik en compagnie de Richard Schirmeck (celui qui a un blottkopf), le mari de Chulia Roberstau, qui lui trempait sa Nüdle dans sa Schneck ! Yo dû, Pfourtz ! Ch'espère qu'ils avaient du Kabinetpapier, Gal !</p>
-                    </aside>
-                    <!-- Additionnal aside -->
-
-                </div>
+                    {{-- </div> --}}
+                {{-- </div> --}}
                 <!-- /Content -->
 
             </div>
