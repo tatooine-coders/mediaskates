@@ -1,0 +1,29 @@
+.avatar{
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  border-radius:50%;
+  // background-color: $background-color;
+  border:1px solid $text-color;
+  // padding:2px;
+  img{
+    object-fit: cover;
+    -o-object-fit:cover;
+    /*position: absolute;
+    margin: auto;*/
+    min-height: 100%;
+    min-width: 100%;
+
+    /* For the following settings we set 100%, but it can be higher if needed
+    See the answer's update */
+    // left: -100%;
+    // right: -100%;
+    // top: -100%;
+    // bottom: -100%;
+  }
+}
+.avatar-small{
+  width:75px;
+  height:75px;
+}

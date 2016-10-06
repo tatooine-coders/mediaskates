@@ -3,6 +3,15 @@
 $text-color:#333;
 $background-color:#EEE;
 
+$primary-color:#88C;
+$primary-text-color:darken($primary-color, 10%);
+
+$danger-color:orange;
+$danger-text-color:darken($danger-color, 10%);
+
+$grave-color:darken(red, 10%);
+$grave-text-color:darken($grave-color, 20%);
+
 $link-color:#88C;
 $link-hover-color:lighten($link-color, 10%);
 $link-visited-color:#88C;

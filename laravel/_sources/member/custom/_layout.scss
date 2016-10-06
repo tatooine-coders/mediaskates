@@ -2,27 +2,50 @@ body{
   background-color: $menu-background-color;
 }
 
-#page-wrapper{
+#header{
+  padding-left:0;
+}
+
+h1, h2{
+  font-weight:normal;
+}
+
+h1{
+  color:$menu-text-color;
+}
+h2{
+  color:darken($menu-text-color, 15%);
+  margin-bottom:$small-value;
+}
+
+
+.page-wrapper{
   background-color:$background-color;
   color:$text-color;
-  border-top-left-radius: $border-radius-lg;
+  // border-top-left-radius: $border-radius-lg;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.6);
+  margin-right: $medium-value;
+  margin-bottom:$medium-value;
 }
 
 .menu{
   color:$menu-text-color;
-  padding: 0 $small-plus-value;
+  padding: $small-value $small-plus-value;
   a{
     color:$menu-link-color;
     text-decoration:none;
     &:hover{color:$menu-link-hover-color}
     &:visited{color:$menu-link-visited-color}
   }
+  h1{
+    margin:0;
+  }
 }
 
 .menu-second{
   color:lighten($menu-text-color, 5%);
-  background-color: lighten($menu-background-color, 5%);
-  padding: 0 $small-plus-value;
+  background-color: lighten($menu-background-color, 10%);
+  padding: $small-value $small-plus-value;
   a{
     color:$menu-link-color;
     text-decoration:none;
@@ -33,9 +56,9 @@ body{
 
 // Main menu items
 body>nav.menu{
-  background-color:darken($menu-background-color, 5%);
-  //border-bottom:3px solid $menu-text-color;
-  box-shadow: 2px 0 2px 0 $menu-text-color;
+  // background-color:darken($menu-background-color, 5%);
+  border-bottom:1px dashed transparentize(darken($menu-background-color, 15%), .5);
+  // box-shadow: 2px 0 2px 0 darken($menu-background-color, 5%);
   padding: $medium-value;
   span{
     @extend .pam;
@@ -46,11 +69,69 @@ body>nav.menu{
     }
   }
 }
+
 // Side menu
 .menu > nav{
   ul{
     list-style-type:none;
     margin:0;
     padding:0;
+    li{
+      margin:0;
+      background-color:darken($menu-background-color, 5%);
+      a{
+        display:block;
+        padding: $tiny-value $small-value;
+        &:hover{
+          background-color:lighten($menu-background-color, 5%);
+        }
+      }
+    }
+
+  }
+}
+
+.content{
+  padding: $tiny-value $small-plus-value;
+}
+
+// Adds a min height to the zone
+.dashboard-empty{
+  min-height:300px;
+  >div{
+    position: relative;
+    top: 150px;
+    transform: translateY(-50%);
+    color: darken($background-color, 20%);
+  }
+}
+
+/*.content-inverse{
+  margin: (-$tiny-value) (-$small-plus-value);
+  >div{
+    @extend .content;
+  }
+}*/
+
+.avatar-area{
+  display:flex;
+  .avatar{
+    margin-right: $small-plus-value;
+  }
+}
+
+#member-actions{
+  text-align:center;
+  border:1px solid $menu-text-color;
+  border-width: 1px 0;
+  margin: $small-value 0;
+  padding: $small-value 0;
+  i{
+    @extend .fa;
+    @extend .fa-fw;
+    @extend .fa-2x;
+  }
+  a{
+    color:$menu-text-color;
   }
 }

@@ -1,0 +1,47 @@
+button, input[type="submit"], input[type="reset"],.btn{
+  border:0;
+  border-radius: $border-radius-sm;
+  background-color: $menu-background-color;
+  color: $menu-text-color;
+  box-shadow: 0 0 10px 0 transparentize(black, .7);
+  padding: $tiny-plus-value $small-value;
+  margin: $small-value 0;
+  font-weight:bold;
+  font-size:0.8em;
+  text-align:center;
+  &:hover{
+    background-color: lighten($menu-background-color, 5%);
+  }
+  &:active{
+    position: relative;
+    top:3px;
+    box-shadow: none;
+  }
+  &.block{
+    display:block;
+  }
+  &.primary, &.primary:visited{
+    background-color: $primary-color;
+    color: $primary-text-color;
+    &:hover{
+      background-color: lighten($primary-color, 10%);
+      color: lighten($primary-text-color, 10%);
+    }
+  }
+  &.danger, &.danger:visited{
+    background-color: $danger-color;
+    color: $danger-text-color;
+    &:hover{
+      background-color: lighten($danger-color, 10%);
+      color: lighten($danger-text-color, 10%);
+    }
+  }
+  &.grave, &.grave:visited{
+    background-color: $grave-color;
+    color: $grave-text-color;
+    &:hover{
+      background-color: lighten($grave-color, 10%);
+      color: lighten($grave-text-color, 10%);
+    }
+  }
+}
