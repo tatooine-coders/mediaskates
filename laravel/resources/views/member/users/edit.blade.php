@@ -15,12 +15,6 @@
 						{!! Form::text('last_name', null, ['placeholder'=>'Dupond', 'required'=>true]) !!}
 					</div>
 				</div>
-					{{-- {!! Form::label('role_id', 'Role') !!}
-					{!! Form::select('role_id', $roles) !!}<br/> --}}
-
-					{{-- {!! Form::label('profile_pic', 'Profile picture') !!}
-					{!! Form::text('profile_pic') !!}<br/> --}}
-
 				<div>
 					{!! Form::label('email', 'Adresse email') !!}
 					{!! Form::text('email', null, ['placeholder'=>'jdupond@site.com', 'required'=>true]) !!}

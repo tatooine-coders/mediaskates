@@ -89,6 +89,20 @@ class DatabaseSeeder extends Seeder
     // link user/role
     $u_photo->attachRole($r_photo);
     $u_photo->attachRole($r_member);
+    
+    // Users : Ultra admin
+    $u_ultra = new User();
+    $u_ultra->first_name = 'Ultra';
+    $u_ultra->last_name = 'Admin';
+    $u_ultra->pseudo = 'ultra';
+    $u_ultra->email = 'ultra@example.com';
+    $u_ultra->password = bcrypt('password');
+    $u_ultra->preferences=json_encode($prefs);
+    $u_ultra->save();
+    // link user/role
+    $u_ultra->attachRole($r_admin);
+    $u_ultra->attachRole($r_photo);
+    $u_ultra->attachRole($r_member);
 
     /* ---------------------------------------------------------------------
      * Creating base CRUD permissions
