@@ -15,7 +15,9 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      */
     public function index()
     {
-        //
+        return view('not_implemented',[
+          'pageTitle'=>'Commentaires'
+        ]);
     }
 
     /**
@@ -23,7 +25,7 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    /*public function create()
     {
         //
     }
@@ -34,7 +36,7 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         //
     }
@@ -45,7 +47,7 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /*public function show($id)
     {
         //
     }
@@ -56,7 +58,7 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    /*public function edit($id)
     {
         //
     }
@@ -68,7 +70,7 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         //
     }
