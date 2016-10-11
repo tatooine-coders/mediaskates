@@ -11,7 +11,13 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
-    /*
-     * Logique ici pour contrôler les accès
-     */
+  /**
+   * Displays a list of CSS components
+   */
+  public function cssshow(){
+    return view('css_show', [
+      'pageTitle'=>'CSS list',
+      'source'=>'member'
+    ]);
+  }
 }
