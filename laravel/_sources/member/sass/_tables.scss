@@ -1,7 +1,37 @@
 thead{
-  background-color:#888;
+    background-color:#888;
+}
+
+th, td{
+    padding:0 0.3rem;
+}
+
+th.id-col, td.id-col{
+    width:3em;
 }
 
 td a.btn{
-  padding:$tiny-value;
+    padding:$tiny-value;
+}
+th.actions{
+    width:75px;
+}
+td.actions{
+    padding:$tiny-value;
+    .btn{
+        margin: 0;
+    }
+}
+
+tbody.small{
+    .actions{
+        .btn{
+            font-size:1.2em;
+        }
+    }
+}
+
+tr.error{
+    background-color:$grave-color;
+    color: $grave-text-color;
 }
