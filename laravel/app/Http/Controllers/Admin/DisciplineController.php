@@ -12,6 +12,7 @@ use App\Discipline;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
 
@@ -69,7 +70,10 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      */
     public function show($id) {
         $discipline = Discipline::findOrFail($id);
-        return view('admin/disciplines/show')->withDiscipline($discipline);
+        return view('admin/disciplines/show', [
+            'discipline'=>$discipline,
+            'pageTitle'=>$discipline->name
+            ]);
     }
 
     /**
@@ -103,7 +107,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
         $discipline->save();
 
         // Redirection et message
-        \Session::flash('message', 'Nouvelle discipline créée');
+        \Session::flash('message', 'Discipline mise à jour.');
         return redirect()->route('admin.discipline.index');
     }
 

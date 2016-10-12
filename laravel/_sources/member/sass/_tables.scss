@@ -14,9 +14,16 @@ td a.btn{
     padding:$tiny-value;
 }
 th.actions{
-    width:75px;
+    min-width: 75px;
+    max-width: 100px;
+    width: 100px;
+    text-align: center;
 }
 td.actions{
+    min-width: 75px;
+    max-width: 100px;
+    width: 100px;
+    text-align: center;
     padding:$tiny-value;
     .btn{
         margin: 0;

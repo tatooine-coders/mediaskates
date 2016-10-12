@@ -109,6 +109,14 @@ body>nav.menu{
     transform: translateY(-50%);
     color: darken($background-color, 20%);
   }
+  a, a:visited, a:active{
+      color: darken($background-color, 40%);
+      font-weight: bold;
+      text-decoration: none;
+  }
+  a:hover{
+      color: darken($background-color, 60%);
+  }
 }
 
 .avatar-area{
