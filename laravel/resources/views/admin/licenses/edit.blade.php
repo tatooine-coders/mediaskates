@@ -2,17 +2,17 @@
 
 @section('content')
     <!-- Form -->
-    {!! Form::model($discipline, [
+    {!! Form::model($license, [
       'method' => 'PATCH',
-      'route' => ['admin.discipline.update', $discipline->id]
+      'route' => ['admin.license.update', $license->id]
       ]) !!}
     <div class="flex-container page-wrapper">
         <div class="flex-item-fluid content">
             {!! Form::label('name', 'Nom') !!}
-            {!! Form::text('name', null, ['placeholder'=>'Nom']) !!}
+            {!! Form::text('name', null, ['placeholder'=>'Creative Commons BY-NC-SA']) !!}
             
-            {!! Form::label('logo', 'Logo') !!}
-            {!! Form::text('logo', null, ['placeholder'=>'Logo']) !!}
+            {!! Form::label('url', 'Url') !!}
+            {!! Form::text('url', null, ['placeholder'=>'http://tldr.com/cc-by-nc-sa']) !!}
         </div>
         <!-- Additionnal aside -->
         <aside class="w20 menu-second">
@@ -23,10 +23,3 @@
     {!! Form::close() !!}
     <!-- /Form-->
 @endsection
-
-/**
- * Created by PhpStorm.
- * User: Jeremy-work
- * Date: 03/10/2016
- * Time: 11:41
- */

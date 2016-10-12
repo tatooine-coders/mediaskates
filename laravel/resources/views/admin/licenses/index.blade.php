@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ $license->id }}</td>
                     <td>{{ $license->name }}</td>
-                    <td>{{ $license->url }}</td>
+                    <td>{{ link_to($license->url, $license->url, ['target'=>'_blank']) }}</td>
                     <td>{{ $license->created_at }}</td>
                     <td>{{ $license->updated_at }}</td>
                     <td class="actions">
