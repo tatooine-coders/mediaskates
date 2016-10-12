@@ -23,4 +23,6 @@
   <li class="title">Watermarks</li>
   <li><a href="{{ route('admin.watermark.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li><a href="{{ route('admin.watermark.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
+  <li class="title">Permissions</li>
+  <li><a href="{{ route('admin.permission.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
 </ul>

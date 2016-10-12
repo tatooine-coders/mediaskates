@@ -81,6 +81,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>['role:admin']], function(){
     Route::delete('/photo/{id}/destroy', 'Admin\PhotoController@destroy')->name('admin.photo.destroy');
 
     /*
+     * Permissions
+     */
+    Route::get('/permissions', 'Admin\PermissionController@index')->name('admin.permission.index');
+
+    /*
      * Roles
      */
     Route::get('/roles', 'Admin\RoleController@index')->name('admin.role.index');
