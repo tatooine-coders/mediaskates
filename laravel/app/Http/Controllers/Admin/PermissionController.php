@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -7,9 +6,15 @@ use App\Http\Requests;
 use App\Permission;
 use Illuminate\Support\Facades\Route;
 
-class PermissionController extends \App\Http\Controllers\Admin\AdminController {
+class PermissionController extends \App\Http\Controllers\Admin\AdminController
+{
 
-    protected function fetch_missing_routes() {
+    /**
+     * Creates a list of missing routes in permissions, and missing permissions for rotues
+     * @return array
+     */
+    protected function fetchMissingRoutes()
+    {
         // Find all the routes
         $routes = Route::getRoutes();
         // Find all the permissions
@@ -58,8 +63,9 @@ class PermissionController extends \App\Http\Controllers\Admin\AdminController {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $issues = $this->fetch_missing_routes();
+    public function index()
+    {
+        $issues = $this->fetchMissingRoutes();
         $perms = Permission::query()->get();
 
         return view('admin/permissions/index', [
@@ -68,5 +74,4 @@ class PermissionController extends \App\Http\Controllers\Admin\AdminController {
             'issues' => $issues
         ]);
     }
-
 }

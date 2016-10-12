@@ -8,8 +8,8 @@
   <li><a href="{{ route('admin.event.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li><a href="{{ route('admin.event.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
   <li class="title">Licenses</li>
-  <li><a href="{{ route('admin.photo.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
-  <li><a href="{{ route('admin.photo.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
+  <li><a href="{{ route('admin.license.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
+  <li><a href="{{ route('admin.license.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
   <li class="title">Photos</li>
   <li><a href="{{ route('admin.photo.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li class="title">Roles</li>

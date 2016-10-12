@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\License;
 
 class LicenseController extends \App\Http\Controllers\Admin\AdminController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +15,12 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
      */
     public function index()
     {
-        //
+        $licenses = License::query()->get();
+
+        return view('admin/licenses/index', [
+            'pageTitle' => 'Licenses',
+            'licenses' => $licenses
+        ]);
     }
 
     /**
@@ -25,7 +30,9 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
-        //
+        return view('admin/licenses/create', [
+            'pageTitle' => 'Nouvelle license',
+        ]);
     }
 
     /**
@@ -36,7 +43,19 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
      */
     public function store(Request $request)
     {
-        //
+        // Data validation (https://laravel.com/docs/5.3/validation)
+        $this->validate($request, [
+            'name' => 'required|string',
+            'url' => 'required|string',
+        ]);
+
+        $data = $request->all();
+
+        License::create($data);
+
+        // Redirection et message
+        \Session::flash('message', 'Nouvelle license créée');
+        return redirect()->route('admin.licenses.index');
     }
 
     /**

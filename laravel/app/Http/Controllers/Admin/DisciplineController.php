@@ -1,11 +1,4 @@
 <?php
-
-/**
- * User Controller
- *
- * Maintainer: corbiezorq
- */
-
 namespace App\Http\Controllers\Admin;
 
 use App\Discipline;
@@ -14,14 +7,16 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
-class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
+class DisciplineController extends \App\Http\Controllers\Admin\AdminController
+{
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $disciplines = Discipline::query()->get();
         return view('admin/disciplines/index', [
             'pageTitle' => 'Liste des disciplines',
@@ -34,7 +29,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view('admin/disciplines/create', [
             'pageTitle' => 'Nouvelle discipline',
         ]);
@@ -46,7 +42,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // Data validation (https://laravel.com/docs/5.3/validation)
         $this->validate($request, [
             'name' => 'required',
@@ -68,12 +65,13 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $discipline = Discipline::findOrFail($id);
         return view('admin/disciplines/show', [
-            'discipline'=>$discipline,
-            'pageTitle'=>$discipline->name
-            ]);
+            'discipline' => $discipline,
+            'pageTitle' => $discipline->name
+        ]);
     }
 
     /**
@@ -82,7 +80,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         $discipline = Discipline::findOrFail($id);
         return view('admin/disciplines/edit')->withDiscipline($discipline);
     }
@@ -94,7 +93,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $this->validate($request, [
             'name' => 'required',
             'logo' => 'required',
@@ -117,12 +117,12 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $discipline = Discipline::findOrFail($id);
         $discipline->delete();
-        Session::flash('message','Discipline supprimée..');
-        
+        Session::flash('message', 'Discipline supprimée..');
+
         return redirect()->route('admin.discipline.index');
     }
-
 }

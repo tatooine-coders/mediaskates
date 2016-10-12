@@ -1,18 +1,15 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 
 use App\Discipline;
 use App\Event;
 use Illuminate\Http\Request;
-
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 class EventController extends \App\Http\Controllers\Admin\AdminController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -21,13 +18,11 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $events = Event::query()->get();
-        return view('events/index',[
+        return view('events/index', [
             'pageTitle' => 'Liste des Evenements',
             'events' => $events
         ]);
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +31,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
-        $disciplines=Discipline::query()->get();
+        $disciplines = Discipline::query()->get();
 
         return view('events/create', [
             'pageTitle' => 'Evenements',
@@ -58,11 +53,10 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
             'adresse' => 'required',
             'city' => 'required',
             'date_event' => 'required',
-
         ]);
 
         $data = $request->all();
-        $data{'user_id'}=auth()->user()->id;
+        $data{'user_id'} = auth()->user()->id;
 
 
         Event::create($data);
@@ -70,8 +64,6 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         // Redirection et message
         \Session::flash('message', 'Nouvelle evenement cré');
         return redirect()->route('admin.event.index');
-
-
     }
 
     /**
