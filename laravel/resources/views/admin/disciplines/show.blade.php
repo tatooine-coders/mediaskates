@@ -1,5 +1,9 @@
 @extends('layouts/admin')
 
+@section('sectionLinks')
+    @include('admin/disciplines/section_links')
+@endsection
+
 @section('content')
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">

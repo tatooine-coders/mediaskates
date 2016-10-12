@@ -1,5 +1,9 @@
 @extends('layouts/admin')
 
+@section('sectionLinks')
+    @include('admin/disciplines/section_links')
+@endsection
+
 @section('content')
     <!-- Form -->
     {!! Form::model($discipline, [
@@ -10,7 +14,7 @@
         <div class="flex-item-fluid content">
             {!! Form::label('name', 'Nom') !!}
             {!! Form::text('name', null, ['placeholder'=>'Nom']) !!}
-            
+
             {!! Form::label('logo', 'Logo') !!}
             {!! Form::text('logo', null, ['placeholder'=>'Logo']) !!}
         </div>

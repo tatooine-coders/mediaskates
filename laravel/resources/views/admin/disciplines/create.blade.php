@@ -1,5 +1,9 @@
 @extends('layouts/admin')
 
+@section('sectionLinks')
+    @include('admin/disciplines/section_links')
+@endsection
+
 @section('content')
     {!! Form::open([
     'method' => 'POST',
@@ -9,7 +13,7 @@
         <div class="flex-item-fluid content">
             {!! Form::label('name', 'Nom') !!}
             {!! Form::text('name', null, ['placeholder'=>'Roller']) !!}
-            
+
             {!! Form::label('logo', 'Logo') !!}
             {!! Form::text('logo', null, ['placeholder'=>'Image...']) !!}
         </div>

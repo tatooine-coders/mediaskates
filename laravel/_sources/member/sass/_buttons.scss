@@ -45,3 +45,10 @@ button, input[type="submit"], input[type="reset"],.btn{
     }
   }
 }
+
+// Buttons in page titles
+h1 > small .btn{
+	font-size:0.8em;
+	padding:$tiny-value;
+	box-shadow: none;
+}
