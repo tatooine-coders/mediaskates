@@ -27,10 +27,3 @@
     {!! Form::close() !!}
     <!-- /Form-->
 @endsection
-
-/**
- * Created by PhpStorm.
- * User: Jeremy-work
- * Date: 03/10/2016
- * Time: 11:41
- */

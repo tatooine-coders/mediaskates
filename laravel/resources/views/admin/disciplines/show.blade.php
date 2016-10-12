@@ -7,6 +7,12 @@
 @section('content')
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
+        <small>
+            <i class="fa fa-fw fa-calendar"></i> Créée le {{ $discipline->created_at }}
+            @if($discipline->created_at != $discipline->updated_at)
+            - <i class="fa fa-fw fa-refresh"></i> modifiée le {{ $discipline->created_at }}
+            @endif
+        </small>
         <dl>
             <dt>Nom:</dt>
             <dd>{{ $discipline->name }}</dd>
@@ -25,5 +31,4 @@
         </a>
     </aside>
 </div>
-</pre>
 @endsection

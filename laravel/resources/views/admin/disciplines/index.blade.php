@@ -14,6 +14,8 @@
                     <th class="id-col">Id</th>
                     <th>Nom</th>
                     <th>Logo</th>
+                    <th>Date créa.</th>
+                    <th>Date modif.</th>
                     <th class="actions">Actions</th>
                 </tr>
             </thead>
@@ -23,6 +25,8 @@
                     <td>{{{ $discipline->id }}}</td>
                     <td>{{{ $discipline->name }}}</td>
                     <td>{{{ $discipline->logo }}}</td>
+                    <td>{{{ $discipline->created_at }}}</td>
+                    <td>{{{ $discipline->updated_at }}}</td>
                     <td class="actions">
                         <a href="{{ route('admin.discipline.show', $discipline->id) }}" class="btn btn-info primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
                         <a href="{{ route('admin.discipline.edit', $discipline->id) }}" class="btn btn-info primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
