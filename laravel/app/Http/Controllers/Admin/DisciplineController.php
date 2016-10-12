@@ -7,6 +7,9 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * @todo See alternatives and take a decision about destroy behaviour.
+ */
 class DisciplineController extends \App\Http\Controllers\Admin\AdminController
 {
 
@@ -45,18 +48,16 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
      */
     public function store(Request $request)
     {
-        // Data validation (https://laravel.com/docs/5.3/validation)
         $this->validate($request, [
-            'name' => 'required',
-            'logo' => 'required',
+            'name' => 'required|string',
+            'logo' => 'required|string',
         ]);
 
         $data = $request->all();
-
         Discipline::create($data);
 
-        // Redirection et message
-        \Session::flash('message', 'Nouvelle discipline créé');
+        \Session::flash('message', 'Nouvelle discipline créée avec succès.');
+
         return redirect()->route('admin.discipline.index');
     }
 
@@ -69,6 +70,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function show($id)
     {
         $discipline = Discipline::findOrFail($id);
+
         return view('admin/disciplines/show', [
             'discipline' => $discipline,
             'pageTitle' => $discipline->name
@@ -84,7 +86,11 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function edit($id)
     {
         $discipline = Discipline::findOrFail($id);
-        return view('admin/disciplines/edit')->withDiscipline($discipline);
+
+        return view('admin/disciplines/edit', [
+            'pageTitle' => 'Edition d\'une discipline',
+            'discipline' => $discipline
+        ]);
     }
 
     /**
@@ -97,8 +103,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'logo' => 'required',
+            'name' => 'required|string',
+            'logo' => 'required|string',
         ]);
 
         $discipline = Discipline::findOrFail($id);
@@ -106,8 +112,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
         $discipline->logo = Input::get('logo');
         $discipline->save();
 
-        // Redirection et message
         \Session::flash('message', 'Discipline mise à jour.');
+
         return redirect()->route('admin.discipline.index');
     }
 
@@ -121,6 +127,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     {
         $discipline = Discipline::findOrFail($id);
         $discipline->delete();
+
         Session::flash('message', 'Discipline supprimée.');
 
         return redirect()->route('admin.discipline.index');
