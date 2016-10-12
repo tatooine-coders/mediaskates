@@ -69,6 +69,7 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
     public function show($id)
     {
         $license = License::findOrFail($id);
+
         return view('admin/licenses/show', [
             'license' => $license,
             'pageTitle' => $license->name
@@ -84,6 +85,7 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
     public function edit($id)
     {
         $license = License::findOrFail($id);
+
         return view('admin/licenses/edit', [
             'license' => $license,
             'pageTitle' => $license->name
@@ -104,10 +106,11 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
             'url' => 'required|url',
         ]);
 
-        $license = $request->all();
         $license = License::findOrFail($id);
+
         $license->name = Input::get('name');
         $license->url = Input::get('url');
+
         $license->save();
 
         // Redirection et message

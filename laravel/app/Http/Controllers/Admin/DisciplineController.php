@@ -18,6 +18,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $disciplines = Discipline::query()->get();
+
         return view('admin/disciplines/index', [
             'pageTitle' => 'Liste des disciplines',
             'disciplines' => $disciplines
@@ -100,7 +101,6 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
             'logo' => 'required',
         ]);
 
-        $discipline = $request->all();
         $discipline = Discipline::findOrFail($id);
         $discipline->name = Input::get('name');
         $discipline->logo = Input::get('logo');
@@ -121,7 +121,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     {
         $discipline = Discipline::findOrFail($id);
         $discipline->delete();
-        Session::flash('message', 'Discipline supprimée..');
+        Session::flash('message', 'Discipline supprimée.');
 
         return redirect()->route('admin.discipline.index');
     }

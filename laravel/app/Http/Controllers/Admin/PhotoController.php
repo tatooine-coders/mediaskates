@@ -61,14 +61,9 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'license_id' => 'required',
         ]);
 
-        $photo = new Photo;
-        $photo->file = Input::get('file');
-        $photo->event_id = Input::get('event_id');
-        $photo->watermark_id = Input::get('watermark_id');
-        $photo->license_id = Input::get('license_id');
-        $photo->user_id = auth()->user()->id;
-        $photo->save();
-
+        $data=$request->all();
+        $data['user_id'] = Auth()->user()->id;
+        Photo::create($data);
 
         // Redirection et message
         \Session::flash('message', 'Nouvelle photo enregistrée');
@@ -115,19 +110,20 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'discipline_id' => 'required',
         ]);
 
-        $photo = new Photo;
-        $photo->file = Input::get('name');
+        $photo = Photo::findOrFail($id);
+//        $photo->file = Input::get('name');
         $photo->address = Input::get('address');
         $photo->city = Input::get('city');
         $photo->zip = Input::get('zip');
         $photo->date_event = Input::get('date_event');
         $photo->discipline_id = Input::get('discipline_id');
-        $photo->user_id = auth()->user()->id;
+//        $photo->user_id = auth()->user()->id;
+
         $photo->save();
 
 
         // Redirection et message
-        \Session::flash('message', 'Nouvelle evenement cré');
+        \Session::flash('message', 'Evènement mis à jour');
         return redirect()->route('admin.event.index');
     }
 

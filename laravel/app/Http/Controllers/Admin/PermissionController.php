@@ -54,7 +54,7 @@ class PermissionController extends \App\Http\Controllers\Admin\AdminController
                 }
             }
         }
-//        var_dump($issues);die;
+
         return $issues;
     }
 
