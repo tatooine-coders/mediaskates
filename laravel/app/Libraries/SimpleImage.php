@@ -11,7 +11,7 @@
  * Original Author: Simon Jarvis
  * Copyright: 2006 Simon Jarvis
  * Original Date: 08/11/06
- * Original Link: 
+ * Original Link:
  *   http://www.white-hat-web-design.co.uk/articles/php-image-resizing.php
  *
  * This program is free software; you can redistribute it and/or
@@ -24,13 +24,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details:
  * http://www.gnu.org/licenses/gpl.html
- * 
+ *
  * @category Image_Manipulation
  * @package  App\Libraries
  * @author   Simon Jarvis, Manuel Tancoigne <m.tancoigne@gmail.com>
  * @license  GPL v2
  * @link     https://github.com/mtancoigne/PHP-SimpleImage
- * 
+ *
  */
 namespace App\Libraries;
 
@@ -61,7 +61,7 @@ class SimpleImage
      * Loads an image
      *
      * @param string $filename Image to load
-     * 
+     *
      * @return boolean True in case of success, false on failure.
      */
     public function load($filename)
@@ -93,7 +93,7 @@ class SimpleImage
      * Saves an image
      *
      * @param string $filename     Image file name
-     * @param boolean $original    Save the original image if true, modified 
+     * @param boolean $original    Save the original image if true, modified
      *                             if false.
      * @param string $image_type   Image format
      * @param integer $compression Compression rate (mainly for Jpgs)
@@ -283,7 +283,7 @@ class SimpleImage
      * Adds a message to the modification log
      *
      * @param string $message Message to add
-     * 
+     *
      * @return void
      */
     protected function log($message)
@@ -309,7 +309,7 @@ class SimpleImage
      *
      * @param string $source Watermark image path
      * @param string $position Position on image (can be top-left, top right, bottom-right, bottom-left)
-     * 
+     *
      * @return void
      */
     public function waterMark($source, $position = 'bottom-left')
@@ -360,10 +360,10 @@ class SimpleImage
 
     /**
      * Crops the image, using image center as final center
-     * 
+     *
      * @param int $width  Final width
      * @param int $height Final height
-     * 
+     *
      * @return void
      */
     public function centerCropFull($width, $height)
@@ -375,10 +375,10 @@ class SimpleImage
 
     /**
      * Crops the image to given sizes after a resize
-     * 
+     *
      * @param int $width  Final width
      * @param int $height Final height
-     * 
+     *
      * @return void
      */
     public function cropFull($width, $height)
@@ -420,7 +420,7 @@ class SimpleImage
      * Resize the image, based on th biggest side.
      *
      * @param integer $size Desired size for the biggest side
-     * 
+     *
      * @return void
      */
     public function resizeBiggestTo($size)
@@ -438,7 +438,7 @@ class SimpleImage
      * Rotates an image
      *
      * @param integer $angle Desired angle to rotate (clockwise)
-     * 
+     *
      * @return void
      */
     public function rotate($angle = 90)
@@ -450,7 +450,7 @@ class SimpleImage
      * Rotates an image horizontally or vertically
      *
      * @param string $direction 'x' for horizontal (default), 'y' for vertical
-     * 
+     *
      * @return void
      */
     public function rotateTo($direction = 'x')

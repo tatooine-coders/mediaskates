@@ -6,8 +6,6 @@ use App\Photo;
 use App\Discipline;
 use App\Event;
 use App\Watermark;
-
-
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
@@ -23,7 +21,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $photos = Photo::query()->get();
-        return view('photos/index',[
+        return view('photos/index', [
             'pageTitle' => 'Liste des Photos',
             'photos' => $photos
         ]);
@@ -36,18 +34,17 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
-        $events=Event::query()->pluck('name', 'id');
-        $watermarks=Watermark::query()->pluck('name', 'id');
-        $licenses=License::query()->pluck('name', 'id');
+        $events = Event::query()->pluck('name', 'id');
+        $watermarks = Watermark::query()->pluck('name', 'id');
+        $licenses = License::query()->pluck('name', 'id');
 
         return view('photos/create', [
             'pageTitle' => 'Photos',
             'events' => $events,
-            'watermarks'=> $watermarks,
+            'watermarks' => $watermarks,
             'licenses' => $licenses
         ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -62,11 +59,10 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'event_id' => 'required',
             'watermark_id' => 'required',
             'license_id' => 'required',
-
         ]);
 
         $photo = new Photo;
-        $photo->file       = Input::get('file');
+        $photo->file = Input::get('file');
         $photo->event_id = Input::get('event_id');
         $photo->watermark_id = Input::get('watermark_id');
         $photo->license_id = Input::get('license_id');
@@ -117,12 +113,11 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'zip' => 'required',
             'date_event' => 'required',
             'discipline_id' => 'required',
-
         ]);
 
         $photo = new Photo;
-        $photo->file       = Input::get('name');
-        $photo->address      = Input::get('address');
+        $photo->file = Input::get('name');
+        $photo->address = Input::get('address');
         $photo->city = Input::get('city');
         $photo->zip = Input::get('zip');
         $photo->date_event = Input::get('date_event');
