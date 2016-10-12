@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-
     public $fillable = ['name', 'address', 'date_event', 'city', 'zip', 'user_id', 'discipline_id'];
 
     public function discipline()

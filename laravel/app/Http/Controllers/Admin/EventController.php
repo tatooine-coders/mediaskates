@@ -144,7 +144,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     {
         $event = Event::findOrFail($id);
         $event->delete();
-        Session::flash('flash_message_delete','Evènement supprimé.');
+        Session::flash('flash_message_delete', 'Evènement supprimé.');
         return redirect()->route('admin.event.index');
     }
 }

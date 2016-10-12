@@ -49,7 +49,6 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy(int $id)
     {
-        
     }
 
     /**

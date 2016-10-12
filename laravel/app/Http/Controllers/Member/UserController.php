@@ -31,7 +31,6 @@ class UserController extends \App\Http\Controllers\Member\MemberController
      */
     public function destroy()
     {
-        
     }
 
     /**
@@ -160,7 +159,6 @@ class UserController extends \App\Http\Controllers\Member\MemberController
      */
     public function updatePasswd(Request $request)
     {
-
         $validatorMessages = [
             'password_actual.password_hash_check' => 'Votre ancien mot de passe est invalide.',
         ];

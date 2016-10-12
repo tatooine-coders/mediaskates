@@ -7,7 +7,6 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-
     use Notifiable;
 
     use EntrustUserTrait;
@@ -51,7 +50,7 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
     }
     /*
-     * Link with the Role table managed by Entrust 
+     * Link with the Role table managed by Entrust
       public function role()
       {
       return $this->hasManyThrough('App\Role', 'App\RoleUser');
