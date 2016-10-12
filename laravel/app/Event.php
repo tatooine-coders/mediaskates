@@ -16,4 +16,5 @@ class Event extends Model
         return $this->hasMany('App\Photo');
     }
 
+
 }

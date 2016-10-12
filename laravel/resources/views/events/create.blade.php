@@ -12,11 +12,12 @@
         ]) !!}
 
         {!! Form::label('name', 'Nom') !!} - {!! Form::text('name', null, ['placeholder'=>'nom de l event']) !!}<br/>
-        {!! Form::label('adresse', 'Adresse') !!} - {!! Form::text('adresse', null, ['placeholder'=>'adresse de l event']) !!}<br/>
+        {!! Form::label('address', 'Adresse') !!} - {!! Form::text('address', null, ['placeholder'=>'adresse de l event']) !!}<br/>
         {!! Form::label('city', 'Ville') !!} - {!! Form::text('city', null, ['placeholder'=>'Ville de l event']) !!}<br/>
-        {!! Form::label('date_event', 'Date') !!} - {!! Form::text('date_event', null, ['placeholder'=>'date de l event']) !!}<br/>
+        {!! Form::label('zip', 'Code Postal') !!} - {!! Form::text('zip', null, ['placeholder'=>'CP de l event']) !!}<br/>
+        {!! Form::label('date_event', 'Date') !!} - {!! Form::date('date_event', null, ['placeholder'=>'date de l event']) !!}<br/>
 
-        {!! Form::label('id_discipline', 'Discipline') !!} - {!! Form::select('discipline', array_pluck($disciplines, 'name')) !!}<br/>
+        {!! Form::label('id_discipline', 'Discipline') !!} - {!! Form::select('discipline_id', $disciplines) !!}<br/>
 
         {!! Form::submit('Ajouter un event') !!}
         {!! Form::close() !!}

@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>
-         {{{ $discipline->name }}}</h2>
+        {{{ $discipline->name }}}</h2>
     <pre>
         {{{ $discipline->name }}}
         {{{ $discipline->logo }}}
