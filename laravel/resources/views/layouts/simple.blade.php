@@ -20,7 +20,7 @@
 
         <!-- Scripts -->
         <script>
-            window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+            window.Laravel= <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
         </script>
     </head>
     <body>
@@ -90,6 +90,7 @@
             <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
             <li class="title">Photos</li>
             <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
+            <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li> <!--for test-->
             <li class="title">Roles</li>
             <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
