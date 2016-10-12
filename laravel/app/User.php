@@ -6,10 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
 
     use Notifiable;
+
     use EntrustUserTrait;
 
     /**
@@ -41,32 +41,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-    public function photo()
-    {
+    public function photo() {
         return $this->hasMany('App\Photo');
     }
 
-    public function tag()
-    {
+    public function tag() {
         return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
     }
 
-	/*
-	 * Link with the Role table managed by Entrust 
-    public function role()
-    {
-        return $this->hasManyThrough('App\Role', 'App\RoleUser');
-    }
-	*/
-	
-    public function vote()
-    {
+    /*
+     * Link with the Role table managed by Entrust 
+      public function role()
+      {
+      return $this->hasManyThrough('App\Role', 'App\RoleUser');
+      }
+     */
+
+    public function vote() {
         return $this->hasManyThrough('App\Photo', '\App\Vote');
     }
 
-    public function event()
-    {
+    public function event() {
         return $this->hasMany('App\Event');
     }
+
 }

@@ -1,11 +1,13 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+
+    public $fillable = ['name', 'address', 'date_event', 'city', 'zip', 'user_id', 'discipline_id'];
+
     public function discipline()
     {
         return $this->belongsTo('App\Discipline');
@@ -15,5 +17,4 @@ class Event extends Model
     {
         return $this->hasMany('App\Photo');
     }
-
 }
