@@ -1,6 +1,6 @@
 <div class="avatar-area">
   <div class="avatar avatar-small">
-    <img src="{{ asset('images/profils/'.(!Auth::user()->profile_pic ? DEFAULT_PROFILE_PIC : Auth::user()->profile_pic)) }}" alt="Image de profil" />
+    <img src="{{ asset(DEFAULT_PROFILE_PICS_FOLDER . (!Auth::user()->profile_pic ? DEFAULT_PROFILE_PIC : Auth::user()->profile_pic)) }}" alt="Image de profil" />
   </div>
   <div>
     <div>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
