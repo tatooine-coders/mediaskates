@@ -1,8 +1,18 @@
 @extends('layouts/admin')
 
+@section('sectionLinks')
+    @include('admin/licenses/section_links')
+@endsection
+
 @section('content')
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
+        <small>
+            <i class="fa fa-fw fa-calendar"></i> Créée le {{ $license->created_at }}
+            @if($license->created_at != $license->updated_at)
+            - <i class="fa fa-fw fa-refresh"></i> modifiée le {{ $license->updated_at }}
+            @endif
+        </small>
         <dl>
             <dt>Nom:</dt>
             <dd>{{ $license->name }}</dd>

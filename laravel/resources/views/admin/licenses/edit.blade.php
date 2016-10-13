@@ -1,5 +1,9 @@
 @extends('layouts/admin')
 
+@section('sectionLinks')
+    @include('admin/licenses/section_links')
+@endsection
+
 @section('content')
     <!-- Form -->
     {!! Form::model($license, [
