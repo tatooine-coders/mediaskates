@@ -10,7 +10,7 @@
         <small>
             <i class="fa fa-fw fa-calendar"></i> Créée le {{ $discipline->created_at }}
             @if($discipline->created_at != $discipline->updated_at)
-            - <i class="fa fa-fw fa-refresh"></i> modifiée le {{ $discipline->created_at }}
+            - <i class="fa fa-fw fa-refresh"></i> modifiée le {{ $discipline->updated_at }}
             @endif
         </small>
         <dl>

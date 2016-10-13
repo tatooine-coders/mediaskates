@@ -10,7 +10,7 @@
         <small>
             <i class="fa fa-fw fa-calendar"></i> Créé le {{ $event->created_at }}
             @if($event->created_at != $event->updated_at)
-            - <i class="fa fa-fw fa-refresh"></i> modifié le {{ $event->created_at }}
+            - <i class="fa fa-fw fa-refresh"></i> modifié le {{ $event->updated_at }}
             @endif
         </small>
         <dl>
