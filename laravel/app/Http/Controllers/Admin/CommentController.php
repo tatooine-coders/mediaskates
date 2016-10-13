@@ -27,6 +27,8 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-        //
+        return view('not_implemented', [
+            'pageTitle' => 'Commentaires'
+        ]);
     }
 }
