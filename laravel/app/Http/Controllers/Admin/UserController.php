@@ -15,7 +15,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      */
     public function index()
     {
-        $users = User::query()->with('roles')->get();
+        $users = User::query()->get();
 
         return view('admin/users/index', [
             'pageTitle' => 'Liste des utilisateurs',
@@ -34,7 +34,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
     {
         $user = User::findOrFail($id);
 
-        return view('users/show', [
+        return view('admin/users/show', [
             'pageTitle' => 'Utilisateur : ' . $user->pseudo,
             'user' => $user
         ]);
@@ -49,6 +49,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
+        
     }
 
     /**
@@ -61,7 +62,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
         // Fetch the roles (for the select element)
         $roles = \App\Role::query()->pluck('name', 'id');
 
-        return view('users/create', [
+        return view('admin/users/create', [
             'pageTitle' => 'Ajouter un utilisateur',
             'roles' => $roles,
         ]);
@@ -80,17 +81,28 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
             'last_name' => 'required',
             'pseudo' => 'bail|required|unique:users',
             'email' => 'bail|required|email|unique:users',
-            'password' => 'required',
-            'password2' => 'required',
+            'password' => 'required|min:6|confirmed',
         ]);
-
         $data = $request->all();
+        
+        $user = new User($data);
+        $user->password = bcrypt($data['password']);
+        
+        // Preparing preferences
+        $prefs = [];
+        $site_p = config('site.default_prefs');
+        foreach ($site_p as $k => $v) {
+            $prefs[$k] = $v['default'];
+        }
 
-        $user = User::create($data);
+        $user->preferences = json_encode($prefs);
+        $user->save();
+        // Adding User role
+        $user->roles()->sync($data['roles']);
 
         // Redirection et message
         \Session::flash('message', 'Nouvel utilisateur créé');
-        return Redirect::to('users/index');
+        return redirect()->to(route('admin.user.index'));
     }
 
     /**
@@ -104,11 +116,12 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
     {
         $user = User::findOrFail($id);
         $roles = \App\Role::pluck('name', 'id');
-
-        return view('users/edit', [
+        
+        return view('admin/users/edit', [
             'pageTitle' => 'Edition d\'un utilisateur',
             'user' => $user,
             'roles' => $roles,
+            'user_roles'=>$user->roles->pluck('id')->toArray(),
         ]);
     }
 
@@ -123,18 +136,20 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
     public function update($id, Request $request)
     {
         $user = User::findOrFail($id);
-
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
         ]);
 
         $data = $request->all();
+//        dd($data);
 
         $user->fill($data)->save();
+        
+        $user->roles()->sync($data['roles']);
 
         // Redirection et message
         \Session::flash('message', 'Utilisateur mis à jour !');
-        return \Redirect::to('user/' . $id);
+        return redirect()->to(route('admin.user.show', $id));
     }
 }

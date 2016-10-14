@@ -10,7 +10,7 @@
     <div class="content">
 
         @if(count($users)>0)
-        <table>
+        <table class="small">
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
@@ -29,30 +29,36 @@
                 @foreach($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td><img class="avatar" href="{{ DEFAULT_PROFILE_PICS_FOLDER . $user->profile_pic }}"/> {{ $user->pseudo }}</td>
+                    <td><img class="avatar avatar-tiny" src="{{ asset(DEFAULT_PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/> {{ $user->pseudo }}</td>
                     <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->active }}</td>
                     <td>
                         @if(!empty($user->site_web))
-                        {{ $user->site_web }}
+                        <a href="{{ $user->site_web }}" target="_blank"><i class="fa fa-fw fa-2x fa-home"></i></a>
+                        @else
+                        <i class="fa fa-fw fa-2x fa-fw"></i>
                         @endif
                         @if(!empty($user->facebook))
-                        {{ $user->facebook }}
+                        <a href="{{ $user->facebook }}" target="_blank"><i class="fa fa-fw fa-2x fa-facebook-square"></i></a>
+                        @else
+                        <i class="fa fa-fw fa-2x fa-fw"></i>
                         @endif
                         @if(!empty($user->google))
-                        {{ $user->google }}
+                        <a href="{{ $user->google }}" target="_blank"><i class="fa fa-fw fa-2x fa-google-plus-square"></i></a>
+                        @else
+                        <i class="fa fa-fw fa-2x fa-fw"></i>
                         @endif
                         @if(!empty($user->twitter))
-                        {{ $user->twitter }}
+                        <a href="{{ $user->twitter }}" target="_blank"><i class="fa fa-fw fa-2x fa-twitter-square"></i></a>
+                        @else
+                        <i class="fa fa-fw fa-2x fa-fw"></i>
                         @endif
                     </td>
                     <td>
-                        <ul>
-                            @foreach($user->roles as $u_role)
-                            <li>{{ $u_role->id }} - {{ $u_role->name }}</li>
-                            @endforeach
-                        </ul>
+                        @foreach($user->roles as $u_role)
+                        {{ link_to(route('admin.role.show', $u_role->id), $u_role->name) }},
+                        @endforeach
                     </td>
                     <td>{{ $user->created_at }}</td>
                     <td>{{ $user->updated_at }}</td>
