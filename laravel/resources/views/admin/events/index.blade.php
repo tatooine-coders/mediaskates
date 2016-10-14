@@ -34,7 +34,7 @@
                         <a href="{{ route('admin.event.edit', $event->id) }}" class="btn primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
                         <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
                             <i class="fa fa-fw fa-trash"></i>
-                            {!! Form::open(['route'=>['user.event.destroy', 'id'=> $event->id], 'method'=>'DELETE']) !!}
+                            {!! Form::open(['route'=>['admin.event.destroy', 'id'=> $event->id], 'method'=>'DELETE']) !!}
                             {!! Form::close() !!}
                         </a>
                     </td>
@@ -46,7 +46,7 @@
         @else
         <div class="dashboard-empty">
             <div class="w50 center">
-                Il n'y a aucun évènement pour le moment. <a href="{{ route('user.event.create') }}"><i class="fa fa-plus"></i> En créer un</a>.
+                Il n'y a aucun évènement pour le moment. <a href="{{ route('admin.event.create') }}"><i class="fa fa-plus"></i> En créer un</a>.
             </div>
         </div>
         @endif

@@ -15,9 +15,9 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      */
     public function index()
     {
-        $users = User::query()->get();
+        $users = User::query()->with('roles')->get();
 
-        return view('users/index', [
+        return view('admin/users/index', [
             'pageTitle' => 'Liste des utilisateurs',
             'users' => $users
         ]);
@@ -30,7 +30,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
         $user = User::findOrFail($id);
 
@@ -47,7 +47,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
     }
 
@@ -100,7 +100,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit($id)
     {
         $user = User::findOrFail($id);
         $roles = \App\Role::pluck('name', 'id');
@@ -120,7 +120,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return Illuminate\Http\Response
      */
-    public function update(int $id, Request $request)
+    public function update($id, Request $request)
     {
         $user = User::findOrFail($id);
 

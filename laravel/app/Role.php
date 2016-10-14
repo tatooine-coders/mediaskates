@@ -8,8 +8,8 @@ class Role extends EntrustRole
 {
     public $fillable = ['name', 'display_name', 'description'];
 
-    public function user()
-    {
-        return $this->hasMany('App\User');
-    }
+//    public function user()
+//    {
+//        return $this->hasManyThrough('App\User', 'App\RoleUser');
+//    }
 }
