@@ -55,3 +55,9 @@ Route::post('/search_results', 'SearchController@search_results')->name('search_
  * Page
  */
 Route::get('/pages/{file}', 'PageController')->name('pages');
+
+/*
+ * CSS show
+ */
+Route::get('member/cssshow', 'Member\MemberController@cssshow')->name('members.cssshow');
+Route::get('admin/cssshow', 'Admin\AdminController@cssshow')->name('admin.cssshow');

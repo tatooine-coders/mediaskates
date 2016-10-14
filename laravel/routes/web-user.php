@@ -27,9 +27,9 @@ Route::group(['prefix'=>'member', 'middleware'=>['role:member|admin|photograph']
     Route::get('/me', 'Member\UserController@show')->name('user.dashboard');
     Route::get('/me/edit', 'Member\UserController@edit')->name('user.personnal_infos');
     Route::patch('/me/update', 'Member\UserController@update')->name('user.personnal_infos.update');
-    Route::get('/me/preferences', 'Member\UserController@edit_prefs')->name('user.preferences');
-    Route::patch('/me/update_preferences', 'Member\UserController@update_prefs')->name('user.preferences.update');
-    Route::patch('/me/update_passwd', 'Member\UserController@update_passwd')->name('user.update_passwd');
+    Route::get('/me/preferences', 'Member\UserController@editPrefs')->name('user.preferences');
+    Route::patch('/me/update_preferences', 'Member\UserController@updatePrefs')->name('user.preferences.update');
+    Route::patch('/me/update_passwd', 'Member\UserController@updatePasswd')->name('user.update_passwd');
     Route::delete('/me/close_account', 'Member\UserController@destroy')->name('user.close_account');
     Route::get('/me/logout', 'Auth\LoginController@logout')->name('user.logout');
 

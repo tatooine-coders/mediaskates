@@ -24,105 +24,86 @@
         </script>
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <ul class="menu">
-            <li class="title-big">Public</li>
-            <li>{{ link_to('/', 'Home') }}</li>
-            <li>{{ link_to(route('event.index'), 'Events') }}</li>
-            <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
-            <li>{{ link_to(route('tag.index'), 'Tags') }}</li>
-            <li>{{ link_to(route('user.index'), 'Photographs') }}</li>
-            <li>{{ link_to(route('advanced_search'), 'Advanced search') }}</li>
-            <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
-            @if (Auth::guest())
-            <li><a href="{{ url('/login') }}">Login</a></li>
-            <li><a href="{{ url('/register') }}">Register</a></li>
-            @else
-            <li class="title-sub">User {{ Auth::user()->pseudo }}</li>
-            <li>
-                <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-            </li>
-            @endif
-        </ul>
-        @role(('member'))
-        <ul class="menu">
-            <li class="title-big">Users</li>
-            <li class="title-sub">Comments</li>
-            <li>{{ link_to(route('user.comment.index'), 'Manage') }}</li>
-            <li class="title-sub">User</li>
-            <li>{{ link_to(route('user.dashboard'), 'Dashboard') }}</li>
-            <li>{{ link_to(route('user.preferences'), 'Preferences') }}</li>
-            <li>{{ link_to(route('user.personnal_infos'), 'Personnal informations') }}</li>
-            <li>{{ link_to(route('user.update_passwd'), 'Update password') }}</li>
-            <li>{{ link_to(route('user.logout'), 'Log out') }}</li>
-            <li>{{ link_to(route('user.close_account'), 'Close account') }}</li>
-            <li class="title">Tags</li>
-            <li>{{ link_to(route('user.tag.index'), 'Manage') }}</li>
-            <li class="title">Votes</li>
-            <li>{{ link_to(route('user.vote.index'), 'Manage') }}</li>
-            @role(('photograph'))
-            <li class="title-sub">Photograph</li>
-            <li class="title">Events</li>
-            <li>{{ link_to(route('user.event.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('user.event.create'), 'Add') }}</li>
-            <li class="title">Photos</li>
-            <li>{{ link_to(route('user.photo.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('user.photo.create'), 'Add') }}</li>
-            @endrole
-        </ul>
-        @endrole
-        @role(('admin'))
-        <ul class="menu">
-            <li class="title-big">Admin</li>
-            <li class="title">Comments</li>
-            <li>{{ link_to(route('admin.comment.index'), 'Manage') }}</li>
-            <li class="title">Disciplines</li>
-            <li>{{ link_to(route('admin.discipline.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.discipline.create'), 'Add') }}</li>
-            <li class="title">Events</li>
-            <li>{{ link_to(route('admin.event.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.event.create'), 'Add') }}</li>
-            <li class="title">Licenses</li>
-            <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
-            <li class="title">Photos</li>
-            <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-            <li class="title">Roles</li>
-            <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
-            <li class="title">Tags</li>
-            <li>{{ link_to(route('admin.tag.index'), 'Manage') }}</li>
-            <li class="title">Users</li>
-            <li>{{ link_to(route('admin.user.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.user.create'), 'Add') }}</li>
-            <li class="title">Watermarks</li>
-            <li>{{ link_to(route('admin.watermark.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.watermark.create'), 'Add') }}</li>
-        </ul>
-        @endrole
+        <!-- Main menu -->
+        <nav class="menu">
+            <span>{{ link_to('/', config('app.name')) }}</span>
+            <span><i class="fa fa-fw fa-home"></i> {{ link_to('/', 'Home') }}</span>
+            <span><i class="fa fa-fw fa-calendar"></i> {{ link_to(route('event.index'), 'Events') }}</span>
+            <span><i class="fa fa-fw fa-photo"></i> {{ link_to(route('photo.index'), 'Photos') }}</span>
+            <span><i class="fa fa-fw fa-users"></i> {{ link_to(route('user.index'), 'Photographs') }}</span>
+            <span><i class="fa fa-fw fa-search"></i> {{ link_to(route('advanced_search'), 'Advanced search') }}</span>
+            <span><i class="fa fa-fw fa-chevron-right"></i></span>
+            <span><i class="fa fa-fw fa-sign-out"></i> <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></span>
+            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+            <span><i class="fa fa-fw fa-dashboard"></i> <a href="{{ route('user.dashboard') }}">Personnal dashboard</a></span>
+        </nav>
+        <!-- /Main menu -->
 
-        <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
+        <!-- Container for the page -->
+        <div id="main" role="main" class="flex-container">
+            <!-- Side menu -->
+            <div class="w20 menu">
+                <nav id="navigation" role="navigation">
 
-        <!-- Errors -->
-        @if (count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        @endif
-        <!-- /Errors -->
+                    @include('elements/menus/admin')
 
-        <!-- Content -->
-        <div id="content">
-            @yield('content')
+                </nav>
+            </div>
+            <!-- /Side menu -->
+
+            <!-- Page content -->
+            <div class="flex-item-fluid">
+                <!--[if lt IE 8]>
+                    <p class="warning">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+                <header id="header" role="banner" class="menu">
+                    <h1><small>@yield('sectionLinks')</small>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
+                </header>
+
+                <!-- Infos -->
+                @if(Session::has('message'))
+                <div class="page-wrapper alert-info">
+                  <div class="content">
+                    <i class="fa fa-info-circle"></i> {{ session('message') }}
+                  </div>
+                </div>
+                @endif
+                <!-- /Infos -->
+
+                <!-- Errors -->
+                @if (count($errors) > 0)
+                  <div class="page-wrapper alert-error">
+                    <div class="content">
+                      <i class="fa fa-exclamation-triangle"></i> Des erreurs on été rencontrées :
+                      <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                          <li>- {{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  </div>
+                @endif
+                <!-- /Errors -->
+
+                <!-- Content -->
+                @yield('content')
+                <!-- /Content -->
+
+            </div>
+            <!-- /Page content -->
+
         </div>
-        <!-- /Content -->
+        <!-- /Container for the page -->
 
-        <script src="js/vendor/jquery.min.js"></script>
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <!-- Page footer -->
+        <footer id="footer" role="contentinfo" class="menu">
+            <ul>
+                <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
+            </ul>
+        </footer>
+        <!-- /Page footer -->
+
+        <!-- Additionnal scripts -->
+        <script src="{{ url('js/vendor/jquery.min.js') }}"></script>
     </body>
 </html>

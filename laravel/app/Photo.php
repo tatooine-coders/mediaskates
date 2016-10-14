@@ -1,11 +1,11 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
+    public $fillable = ['file', 'user_id', 'event_id', 'watermark_id', 'license_id'];
 
     public function user()
     {

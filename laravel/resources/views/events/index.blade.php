@@ -18,6 +18,6 @@
             <br/>
         @endforeach
     @else
-        Pas d evenements.
+        Pas d'evenements.
     @endif
 @endsection

@@ -1,21 +1,18 @@
 <?php
-/**
- * User Controller
- *
- * Maintainer: corbiezorq
- */
-
 namespace App\Http\Controllers\Admin;
 
 use App\Discipline;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
-
+/**
+ * @todo See alternatives and take a decision about destroy behaviour.
+ */
 class DisciplineController extends \App\Http\Controllers\Admin\AdminController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -24,11 +21,11 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $disciplines = Discipline::query()->get();
-        return view('disciplines/index',[
+
+        return view('admin/disciplines/index', [
             'pageTitle' => 'Liste des disciplines',
             'disciplines' => $disciplines
         ]);
-
     }
 
     /**
@@ -38,9 +35,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
-        return view('disciplines/create', [
-            'pageTitle' => 'Disciplines',
-
+        return view('admin/disciplines/create', [
+            'pageTitle' => 'Nouvelle discipline',
         ]);
     }
 
@@ -52,21 +48,17 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
      */
     public function store(Request $request)
     {
-        // Data validation (https://laravel.com/docs/5.3/validation)
         $this->validate($request, [
-            'name' => 'required',
-            'logo' => 'required',
+            'name' => 'required|string',
+            'logo' => 'required|string',
         ]);
 
         $data = $request->all();
-
         Discipline::create($data);
 
-        // Redirection et message
-        \Session::flash('message', 'Nouvelle discipline créé');
+        \Session::flash('message', 'Nouvelle discipline créée avec succès.');
+
         return redirect()->route('admin.discipline.index');
-
-
     }
 
     /**
@@ -78,8 +70,11 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function show($id)
     {
         $discipline = Discipline::findOrFail($id);
-        return view('disciplines/show')->withDiscipline($discipline);
 
+        return view('admin/disciplines/show', [
+            'discipline' => $discipline,
+            'pageTitle' => $discipline->name
+        ]);
     }
 
     /**
@@ -91,7 +86,11 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function edit($id)
     {
         $discipline = Discipline::findOrFail($id);
-        return view('disciplines/edit')->withDiscipline($discipline);
+
+        return view('admin/disciplines/edit', [
+            'pageTitle' => 'Edition d\'une discipline',
+            'discipline' => $discipline
+        ]);
     }
 
     /**
@@ -104,21 +103,17 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-
-            'name' => 'required',
-            'logo' => 'required',
+            'name' => 'required|string',
+            'logo' => 'required|string',
         ]);
 
-        $discipline = $request->all();
-
-
-        $discipline = Discipline::find($id);
-        $discipline->name       = Input::get('name');
-        $discipline->logo     = Input::get('logo');
+        $discipline = Discipline::findOrFail($id);
+        $discipline->name = Input::get('name');
+        $discipline->logo = Input::get('logo');
         $discipline->save();
 
-        // Redirection et message
-        \Session::flash('message', 'Nouvelle discipline créé');
+        \Session::flash('message', 'Discipline mise à jour.');
+
         return redirect()->route('admin.discipline.index');
     }
 
@@ -130,13 +125,11 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-
         $discipline = Discipline::findOrFail($id);
         $discipline->delete();
-       /** Session::flash('flash_message_delete','Discipline successfully delete.'); */
+
+        Session::flash('message', 'Discipline supprimée.');
+
         return redirect()->route('admin.discipline.index');
-
-
-
     }
 }

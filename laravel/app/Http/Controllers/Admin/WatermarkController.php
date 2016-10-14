@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Watermark;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +17,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $watermarks = Watermark::query()->get();
-        return view('watermarks/index',[
+        return view('watermarks/index', [
             'pageTitle' => 'Liste des watermarks',
             'watermarks' => $watermarks
         ]);
@@ -33,7 +32,6 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         return view('watermarks/create', [
             'pageTitle' => 'Watermarks',
-
         ]);
     }
 
@@ -53,8 +51,8 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 
 
         $watermark = new Watermark;
-        $watermark->name       = Input::get('name');
-        $watermark->type      = Input::get('type');
+        $watermark->name = Input::get('name');
+        $watermark->type = Input::get('type');
         $watermark->description = Input::get('description');
         $watermark->save();
 
@@ -73,7 +71,6 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $watermark = Watermark::findOrFail($id);
         return view('watermarks/show')->withWatermark($watermark);
-
     }
 
     /**
@@ -98,16 +95,15 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-
             'name' => 'required',
             'type' => 'required|numeric',
             'description' => 'required'
         ]);
 
         $watermark = Watermark::find($id);
-        $watermark->name       = Input::get('name');
-        $watermark->type     = Input::get('type');
-        $watermark->description     = Input::get('description');
+        $watermark->name = Input::get('name');
+        $watermark->type = Input::get('type');
+        $watermark->description = Input::get('description');
         $watermark->save();
 
         // Redirection et message

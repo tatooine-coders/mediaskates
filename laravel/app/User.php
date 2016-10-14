@@ -1,16 +1,17 @@
 <?php
-
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+//use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Laratrust\Traits\LaratrustUserTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
 
-    use Notifiable;
-    use EntrustUserTrait;
+    //use Notifiable;
+
+    use LaratrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -41,7 +42,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function photo()
     {
         return $this->hasMany('App\Photo');
@@ -52,14 +52,11 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
     }
 
-	/*
-	 * Link with the Role table managed by Entrust 
-    public function role()
-    {
-        return $this->hasManyThrough('App\Role', 'App\RoleUser');
-    }
-	*/
-	
+//    public function role()
+//    {
+//        return $this->hasManyThrough('App\Role', 'App\RoleUser');
+//    }
+
     public function vote()
     {
         return $this->hasManyThrough('App\Photo', '\App\Vote');

@@ -1,18 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 
 use App\Discipline;
 use App\Event;
 use Illuminate\Http\Request;
-
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class EventController extends \App\Http\Controllers\Admin\AdminController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -21,13 +19,11 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $events = Event::query()->get();
-        return view('events/index',[
-            'pageTitle' => 'Liste des Evenements',
+        return view('admin/events/index', [
+            'pageTitle' => 'Liste des évènements',
             'events' => $events
         ]);
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -36,11 +32,13 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
-        $disciplines=Discipline::query()->pluck('name', 'id');
+        $disciplines = Discipline::query()->pluck('name', 'id');
+        $event = Event::query()->pluck('name', 'id');
 
-        return view('events/create', [
-            'pageTitle' => 'Evenements',
-            'disciplines' => $disciplines
+        return view('admin/events/create', [
+            'pageTitle' => 'Nouvel évènement',
+            'event' => $event,
+            'disciplines' => $disciplines,
         ]);
     }
 
@@ -54,33 +52,20 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     {
         // Data validation (https://laravel.com/docs/5.3/validation)
         $this->validate($request, [
-            'name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'date_event' => 'required',
-
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'zip' => 'required|string',
+            'date_event' => 'required|date',
         ]);
 
-        //$data = $request->all();
-        //$data{'user_id'}=auth()->user()->id;
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        Event::create($data);
 
-        $event = new Event;
-        $event->name       = Input::get('name');
-        $event->address      = Input::get('address');
-        $event->city = Input::get('city');
-        $event->zip = Input::get('zip');
-        $event->date_event = Input::get('date_event');
-        $event->discipline_id = Input::get('discipline_id');
-        $event->user_id = auth()->user()->id;
-        $event->save();
+        \Session::flash('message', 'Nouvel évènement créé avec succès.');
 
-
-        // Redirection et message
-        \Session::flash('message', 'Nouvelle evenement cré');
         return redirect()->route('admin.event.index');
-
-
     }
 
     /**
@@ -92,8 +77,11 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     public function show($id)
     {
         $event = Event::findOrFail($id);
-        //ajouter la discipline coresspondante à envoyer à la vue
-        return view('events/show')->withEvent($event);
+
+        return view('admin/events/show', [
+            'pageTitle' => $event->name,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -104,13 +92,15 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
      */
     public function edit($id)
     {
-        $disciplines=Discipline::query()->pluck('name', 'id');
+        $disciplines = Discipline::query()->pluck('name', 'id');
 
         $event = Event::findOrFail($id);
-        return view('events/edit', [
+
+        return view('admin/events/edit', [
             'pageTitle' => 'Evenements',
-            'disciplines' => $disciplines
-        ])->withEvent($event);
+            'disciplines' => $disciplines,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -123,16 +113,15 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-
             'name' => 'required',
             'address' => 'required',
             'city' => 'required',
             'zip' => 'required',
             'date_event' => 'required',
         ]);
-        $event = Event::find($id);
-        $event->name       = Input::get('name');
-        $event->address      = Input::get('address');
+        $event = Event::findOrFail($id);
+        $event->name = Input::get('name');
+        $event->address = Input::get('address');
         $event->city = Input::get('city');
         $event->zip = Input::get('zip');
         $event->date_event = Input::get('date_event');
@@ -141,7 +130,8 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $event->save();
 
         // Redirection et message
-        \Session::flash('message', 'New event created');
+        \Session::flash('message', 'Evènement mis à jour.');
+
         return redirect()->route('admin.event.index');
     }
 
@@ -155,7 +145,9 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     {
         $event = Event::findOrFail($id);
         $event->delete();
-        /** Session::flash('flash_message_delete','Discipline successfully delete.'); */
+
+        Session::flash('flash_message_delete', 'Evènement supprimé.');
+
         return redirect()->route('admin.event.index');
     }
 }

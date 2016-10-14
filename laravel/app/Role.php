@@ -1,15 +1,12 @@
 <?php
-
 namespace App;
 
 //use Illuminate\Database\Eloquent\Model;
-use Zizaco\Entrust\EntrustRole;
+use Laratrust\LaratrustRole;
 
-class Role extends EntrustRole
+class Role extends LaratrustRole
 {
 
-    public function user()
-    {
-        return $this->hasMany('App\User');
-    }
+    public $fillable = ['name', 'display_name', 'description'];
+
 }

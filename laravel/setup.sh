@@ -1,6 +1,6 @@
-#!/bin/bash -   
+#!/bin/bash -
 #title          :setup.sh
-#description    :Downloads extra plugins not available with Composer 
+#description    :Downloads extra plugins not available with Composer
 #                (Forked from Elabs installer)
 #author         :Manuel Tancoigne
 #date           :20160808
@@ -41,7 +41,7 @@ echo -e "|                                                                   |${
 echo -e "| \e[34mNow, the installer will download some js and css files.\e[39m           |${EL_BOX_SHADOW_LIGHT}"
 echo -e "| -------------------------------------------------------           |${EL_BOX_SHADOW_LIGHT}"
 # Css/JS sources
-_sources/setup_sources.sh;
+_sources/setup_sources.sh $1;
 
 echo "";
 echo -e "${EL_BOX_TOP_LINE}";

@@ -22,6 +22,14 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
+
+    // Preparing preferences
+    $prefs=[];
+    $site_p=config('site.default_prefs');
+    foreach($site_p as $k=>$v){
+      $prefs[$k]=$v['default'];
+    }
+
     // Roles
     $r_admin = new Role();
     $r_admin->name = 'admin';
@@ -51,6 +59,7 @@ class DatabaseSeeder extends Seeder
     $u_admin->pseudo = 'admin';
     $u_admin->email = 'admin@example.com';
     $u_admin->password = bcrypt('password');
+    $u_admin->preferences=json_encode($prefs);
     $u_admin->save();
     // link user/role
     $u_admin->attachRole($r_admin);
@@ -63,6 +72,7 @@ class DatabaseSeeder extends Seeder
     $u_member->pseudo = 'member';
     $u_member->email = 'member@example.com';
     $u_member->password = bcrypt('password');
+    $u_member->preferences=json_encode($prefs);
     $u_member->save();
     // link user/role
     $u_member->attachRole($r_member);
@@ -74,10 +84,25 @@ class DatabaseSeeder extends Seeder
     $u_photo->pseudo = 'photograph';
     $u_photo->email = 'photo@example.com';
     $u_photo->password = bcrypt('password');
+    $u_photo->preferences=json_encode($prefs);
     $u_photo->save();
     // link user/role
     $u_photo->attachRole($r_photo);
     $u_photo->attachRole($r_member);
+    
+    // Users : Ultra admin
+    $u_ultra = new User();
+    $u_ultra->first_name = 'Ultra';
+    $u_ultra->last_name = 'Admin';
+    $u_ultra->pseudo = 'ultra';
+    $u_ultra->email = 'ultra@example.com';
+    $u_ultra->password = bcrypt('password');
+    $u_ultra->preferences=json_encode($prefs);
+    $u_ultra->save();
+    // link user/role
+    $u_ultra->attachRole($r_admin);
+    $u_ultra->attachRole($r_photo);
+    $u_ultra->attachRole($r_member);
 
     /* ---------------------------------------------------------------------
      * Creating base CRUD permissions
@@ -110,6 +135,7 @@ class DatabaseSeeder extends Seeder
      */
     $permissions = [
         'admin' => [
+            'dashboard' => ['dashboard'],
             'comment' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
             'discipline' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
             'event' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'],
