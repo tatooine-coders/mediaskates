@@ -39,7 +39,7 @@
 			<aside class="w20 menu-second">
 					{!! Form::submit('Enregistrer', ['class'=>'primary']) !!}
 
-					@if(!Entrust::hasRole('photograph'))
+					@if(!Laratrust::hasRole('photograph'))
 					<a href="#" class="btn danger block">Demander à être photographe</a>
 					@endif
 
