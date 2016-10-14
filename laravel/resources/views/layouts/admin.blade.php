@@ -10,7 +10,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }} :: MEMBER :: {{ config('app.name') }}</title>
+        <title>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }} :: ADMIN :: {{ config('app.name') }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">

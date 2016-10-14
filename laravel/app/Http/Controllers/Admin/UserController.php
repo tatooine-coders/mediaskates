@@ -42,14 +42,14 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
 
     /**
      * Closes an account.
-     *
+     * @todo Implement admin.user.destroy
      * @param int $id User id
      *
      * @return Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        
+
     }
 
     /**
@@ -84,10 +84,10 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
             'password' => 'required|min:6|confirmed',
         ]);
         $data = $request->all();
-        
+
         $user = new User($data);
         $user->password = bcrypt($data['password']);
-        
+
         // Preparing preferences
         $prefs = [];
         $site_p = config('site.default_prefs');
@@ -116,7 +116,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
     {
         $user = User::findOrFail($id);
         $roles = \App\Role::pluck('name', 'id');
-        
+
         return view('admin/users/edit', [
             'pageTitle' => 'Edition d\'un utilisateur',
             'user' => $user,
@@ -145,7 +145,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
 //        dd($data);
 
         $user->fill($data)->save();
-        
+
         $user->roles()->sync($data['roles']);
 
         // Redirection et message

@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 
 @section('sectionLinks')
-@include('admin/events/section_links')
+@include('admin/users/section_links')
 @endsection
 
 @section('content')
