@@ -31,5 +31,4 @@
         </a>
     </aside>
 </div>
-</pre>
 @endsection
