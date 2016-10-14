@@ -443,7 +443,7 @@ class SimpleImage
      */
     public function rotate($angle = 90)
     {
-        $this->image = imagerotate($this->image, $angle, 0);
+        $this->currentImage= imagerotate($this->currentImage, $angle, 0);
     }
 
     /**

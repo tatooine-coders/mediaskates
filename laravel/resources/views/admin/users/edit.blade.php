@@ -9,7 +9,8 @@
 <!-- Form -->
 {!! Form::model($user, [
 'method' => 'PATCH',
-'route' => ['admin.user.update', $user->id]
+'route' => ['admin.user.update', $user->id],
+'files'=>true,
 ]) !!}
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
@@ -24,7 +25,7 @@
             </div>
             <div class="one-third">
                 {!! Form::label('profile_pic', 'Profile picture') !!}
-                {!! Form::text('profile_pic') !!}
+                {!! Form::file('profile_pic') !!}
             </div>
         </div>
         <div class="grid has-gutter">
