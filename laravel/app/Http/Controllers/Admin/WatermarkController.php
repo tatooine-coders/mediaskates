@@ -17,7 +17,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $watermarks = Watermark::query()->get();
-        return view('watermarks/index', [
+        return view('admin/watermarks/index', [
             'pageTitle' => 'Liste des watermarks',
             'watermarks' => $watermarks
         ]);
@@ -30,8 +30,8 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
      */
     public function create()
     {
-        return view('watermarks/create', [
-            'pageTitle' => 'Watermarks',
+        return view('admin/watermarks/create', [
+            'pageTitle' => 'Ajouter un watermark',
         ]);
     }
 
@@ -70,7 +70,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function show($id)
     {
         $watermark = Watermark::findOrFail($id);
-        return view('watermarks/show')->withWatermark($watermark);
+        return view('admin/watermarks/show')->withWatermark($watermark);
     }
 
     /**
@@ -82,7 +82,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function edit($id)
     {
         $watermark = Watermark::findOrFail($id);
-        return view('watermarks/edit')->withWatermark($watermark);
+        return view('admin/watermarks/edit')->withWatermark($watermark);
     }
 
     /**
@@ -121,7 +121,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $watermark = Watermark::findOrFail($id);
         $watermark->delete();
-        /** Session::flash('flash_message_delete','Discipline successfully delete.'); */
+        /** Session::flash('flash_message_delete','Watermark successfully delete.'); */
         return redirect()->route('admin.watermark.index');
     }
 }

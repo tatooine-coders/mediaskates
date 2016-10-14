@@ -119,17 +119,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['role:admin']], function(){
     Route::delete('/user/{id}/destroy', 'Admin\UserController@destroy')->name('admin.user.destroy');
 
     /*
-     * Votes
-     */
-    /*Route::get('/votes', 'Admin\VoteController@index')->name('admin.vote.index');
-    Route::get('/vote/create', 'Admin\VoteController@create')->name('admin.vote.create');
-    Route::post('/vote/store', 'Admin\VoteController@store')->name('admin.vote.store');
-    Route::get('/vote/{id}', 'Admin\VoteController@show')->name('admin.vote.show');
-    Route::get('/vote/{id}/edit', 'Admin\VoteController@edit')->name('admin.vote.edit');
-    Route::patch('/vote/{id}/update', 'Admin\VoteController@update')->name('admin.vote.update');
-    Route::delete('/vote/{id}/destroy', 'Admin\VoteController@destroy')->name('admin.vote.destroy');
-    */
-    /*
+
      * Watermarks
      */
     Route::get('/watermarks', 'Admin\WatermarkController@index')->name('admin.watermark.index');

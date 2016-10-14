@@ -21,7 +21,8 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     public function index()
     {
         $photos = Photo::query()->get();
-        return view('photos/index', [
+
+        return view('admin/photos/index', [
             'pageTitle' => 'Liste des Photos',
             'photos' => $photos
         ]);
@@ -38,8 +39,8 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
         $watermarks = Watermark::query()->pluck('name', 'id');
         $licenses = License::query()->pluck('name', 'id');
 
-        return view('photos/create', [
-            'pageTitle' => 'Photos',
+        return view('admin/photos/create', [
+            'pageTitle' => 'Ajouter une photo',
             'events' => $events,
             'watermarks' => $watermarks,
             'licenses' => $licenses
@@ -78,7 +79,13 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function show($id)
     {
-        //
+        $photo = Photo::findOrFail($id);
+
+        return view('admin/photos/show', [
+            'pageTitle' => 'Photo',
+            'photo' => $photo,
+        ]);
+
     }
 
     /**
@@ -89,7 +96,20 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function edit($id)
     {
-        //
+        $events = Event::query()->pluck('name', 'id');
+        $watermarks = Watermark::query()->pluck('name', 'id');
+        $licenses = License::query()->pluck('name', 'id');
+
+        $photo = Photo::findOrFail($id);
+
+        return view('admin/photos/edit', [
+            'pageTitle' => 'Photo',
+            'events' => $events,
+            'photo' => $photo,
+            'watermarks' => $watermarks,
+            'licenses' => $licenses
+
+        ]);
     }
 
     /**
@@ -103,28 +123,24 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     {
         $this->validate($request, [
             'file' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'date_event' => 'required',
-            'discipline_id' => 'required',
+            'event_id' => 'required',
+            'watermark_id' => 'required',
+            'license_id' => 'required',
         ]);
 
         $photo = Photo::findOrFail($id);
-//        $photo->file = Input::get('name');
-        $photo->address = Input::get('address');
-        $photo->city = Input::get('city');
-        $photo->zip = Input::get('zip');
-        $photo->date_event = Input::get('date_event');
-        $photo->discipline_id = Input::get('discipline_id');
-//        $photo->user_id = auth()->user()->id;
+        $photo->file = Input::get('file');
+        $photo->license_id = Input::get('license_id');
+        $photo->watermark_id = Input::get('watermark_id');
+        $photo->event_id = Input::get('event_id');
+        $photo->user_id = auth()->user()->id;
 
         $photo->save();
 
 
         // Redirection et message
-        \Session::flash('message', 'Evènement mis à jour');
-        return redirect()->route('admin.event.index');
+        \Session::flash('message', 'Photo mise à jour');
+        return redirect()->route('admin.photo.index');
     }
 
     /**
@@ -137,7 +153,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     {
         $photo = Event::findOrFail($id);
         $photo->delete();
-        /** Session::flash('flash_message_delete','Discipline successfully delete.'); */
+        \Session::flash('message', 'Discipline successfully delete.');
         return redirect()->route('admin.photo.index');
     }
 }
