@@ -1,17 +1,14 @@
 <?php
 namespace App;
 
-//use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
-use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends Authenticatable
 {
-
-    //use Notifiable;
-
     use LaratrustUserTrait;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
