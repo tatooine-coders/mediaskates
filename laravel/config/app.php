@@ -168,7 +168,7 @@ return [
          */
 
         Collective\Html\HtmlServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
+        Laratrust\LaratrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +230,7 @@ return [
 
         // Additional aliases
         'Html' => Collective\Html\HtmlFacade::class,
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class
+        'Laratrust'   => Laratrust\LaratrustFacade::class,
 
     ],
 
