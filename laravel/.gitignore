@@ -18,7 +18,7 @@
 
 # Uploads
 /public/images/profils/*
-!/public/images/profils/.gitkeep
+!/public/images/profils/default.jpg
 /public/images/profils/originals/*
 !/public/images/profils/originals/.gitkeep
 /public/images/profils/uploads/*
