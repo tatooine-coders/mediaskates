@@ -8,8 +8,7 @@ define('ROLE_PHOTOGRAPH', 3);
 define('DEFAULT_PROFILE_PIC', 'default.jpg');
 define('DEFAULT_PROFILE_PICS_FOLDER', 'images/profils/');
 define('DEFAULT_ORIGINAL_PIC_FOLDER', 'images/originals/');
-define('DEFAULT_SAVED_PIC_FOLDER', 'images/originals');
-define('DEFAULT_TEMP_PIC_FOLDER', public_path().'/images/temp/');
+define('DEFAULT_SAVED_PIC_FOLDER', 'images/uploads');
 
 return[
   'default_prefs'=>[

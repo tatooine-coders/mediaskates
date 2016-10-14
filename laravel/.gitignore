@@ -15,3 +15,11 @@
 
 # Sources
 /_sources/common/
+
+# Uploads
+/public/images/profils/*
+!/public/images/profils/.gitkeep
+/public/images/profils/originals/*
+!/public/images/profils/originals/.gitkeep
+/public/images/profils/uploads/*
+!/public/images/profils/uploads/.gitkeep
