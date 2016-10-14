@@ -1,9 +1,9 @@
 <?php
 namespace App;
 
-use Laratrust\LaratrustPermission;
+use \Laratrust\LaratrustPermission;
 
-class Permission extends Laratrust\LaratrustPermission
+class Permission extends LaratrustPermission
 {
 
 }

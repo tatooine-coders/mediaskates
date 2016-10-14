@@ -8,7 +8,7 @@
 @section('content')
 <!-- Form -->
 {!! Form::model($user, [
-'method' => 'PATCH', 
+'method' => 'PATCH',
 'route' => ['admin.user.update', $user->id]
 ]) !!}
 <div class="flex-container page-wrapper">
@@ -52,7 +52,7 @@
             </div>
             <div class="one-third">
                 {!! Form::label('role_id', 'Role') !!}
-                <select name="roles[]" multiple="multiple">
+                <select name="roles[]" multiple="multiple" size="8">
                     @foreach($roles as $k=>$role)
                     <option value="{{ $k }}" {{ in_array($k, $user_roles) ? 'selected=selected' : '' }}>{{ $role }}</option>
                     @endforeach

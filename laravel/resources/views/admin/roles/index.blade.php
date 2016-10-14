@@ -14,7 +14,10 @@
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
-                    <th>Nom</th>
+                    <th>Nom interne</th>
+                    <th>Nom public</th>
+                    <th>Description</th>
+                    <th>Nb membres</th>
                     <th>Date créa.</th>
                     <th>Date modif.</th>
                     <th class="actions">Actions</th>
@@ -25,6 +28,9 @@
                 <tr>
                     <td>{{ $role->id }}</td>
                     <td>{{ $role->name }}</td>
+                    <td>{{ $role->display_name }}</td>
+                    <td>{{ $role->description }}</td>
+                    <td>{{ count($role->users) }}</td>
                     <td>{{ $role->created_at }}</td>
                     <td>{{ $role->updated_at }}</td>
                     <td class="actions">
