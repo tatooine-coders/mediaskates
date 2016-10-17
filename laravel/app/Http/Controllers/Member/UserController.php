@@ -75,7 +75,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
             $image = new \App\Libraries\SimpleImage();
             $image->load($upImage->getPathname());
             $image->centerCropFull(150, 150);
-            if (!$image->save(DEFAULT_PROFILE_PICS_FOLDER . $filename)) {
+            if (!$image->save(PROFILE_PICS_FOLDER . $filename)) {
                 \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
                 unset($data['profile_pic']);
             } else {

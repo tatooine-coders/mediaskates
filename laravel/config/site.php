@@ -6,9 +6,10 @@ define('ROLE_ADMIN', 1);
 define('ROLE_MEMBER', 2);
 define('ROLE_PHOTOGRAPH', 3);
 define('DEFAULT_PROFILE_PIC', 'default.jpg');
-define('DEFAULT_PROFILE_PICS_FOLDER', 'images/profils/');
-define('DEFAULT_ORIGINAL_PIC_FOLDER', 'images/originals/');
-define('DEFAULT_SAVED_PIC_FOLDER', 'images/uploads');
+define('PROFILE_PICS_FOLDER', 'images/profils/');
+define('ORIGINAL_PICS_FOLDER', 'images/originals/');
+define('UPLOADS_PIC_FOLDER', 'images/uploads/');
+define('DISCIPLINES_PIC_FOLDER', 'images/disciplines/');
 
 return[
   'default_prefs'=>[
