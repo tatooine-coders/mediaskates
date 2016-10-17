@@ -49,7 +49,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-
+        
     }
 
     /**
@@ -147,16 +147,18 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
          * @todo Delete the old pic if it exists
          */
         // Try to create the thumb and save it
-        $upImage = $request->file('profile_pic');
-        $filename = time() . '.' . $upImage->getClientOriginalExtension();
-        $image = new \App\Libraries\SimpleImage();
-        $image->load($upImage->getPathname());
-        $image->centerCropFull(150, 150);
-        if(!$image->save(DEFAULT_PROFILE_PICS_FOLDER . $filename)){
-            \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
-            unset($data['profile_pic']);
-        }else{
-            $data['profile_pic']=$filename;
+        if (!empty($request->file())) {
+            $upImage = $request->file('profile_pic');
+            $filename = time() . '.' . $upImage->getClientOriginalExtension();
+            $image = new \App\Libraries\SimpleImage();
+            $image->load($upImage->getPathname());
+            $image->centerCropFull(150, 150);
+            if (!$image->save(DEFAULT_PROFILE_PICS_FOLDER . $filename)) {
+                \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                unset($data['profile_pic']);
+            } else {
+                $data['profile_pic'] = $filename;
+            }
         }
 
         $user->fill($data)->save();
