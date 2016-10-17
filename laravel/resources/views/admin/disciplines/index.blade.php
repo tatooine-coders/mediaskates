@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 
 @section('sectionLinks')
-    @include('admin/disciplines/section_links')
+@include('admin/disciplines/section_links')
 @endsection
 
 @section('content')
@@ -22,11 +22,11 @@
             <tbody>
                 @foreach($disciplines as $discipline)
                 <tr>
-                    <td>{{{ $discipline->id }}}</td>
-                    <td>{{{ $discipline->name }}}</td>
-                    <td>{{{ $discipline->logo }}}</td>
-                    <td>{{{ $discipline->created_at }}}</td>
-                    <td>{{{ $discipline->updated_at }}}</td>
+                    <td>{{ $discipline->id }}</td>
+                    <td>{{ $discipline->name }}</td>
+                    <td><img class="img-responsive" src="{{ asset(DISCIPLINES_PIC_FOLDER.'thumbs/'.$discipline->logo) }}" /></td>
+                    <td>{{ $discipline->created_at }}</td>
+                    <td>{{ $discipline->updated_at }}</td>
                     <td class="actions">
                         <a href="{{ route('admin.discipline.show', $discipline->id) }}" class="btn btn-info primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
                         <a href="{{ route('admin.discipline.edit', $discipline->id) }}" class="btn btn-info primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>

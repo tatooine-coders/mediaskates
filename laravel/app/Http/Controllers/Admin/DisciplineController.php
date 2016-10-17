@@ -50,13 +50,21 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'logo' => 'required|string',
+            'logo' => 'required|mimes:jpeg,png,gif',
         ]);
 
-        $data = $request->all();
-        Discipline::create($data);
+        $filename = $this->prepareFile($request);
 
-        \Session::flash('message', 'Nouvelle discipline créée avec succès.');
+        if (filename === false) {
+            \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+        } else {
+
+            $data = $request->all();
+            $data->logo = $filename;
+            Discipline::create($data);
+
+            \Session::flash('message', 'Nouvelle discipline créée avec succès.');
+        }
 
         return redirect()->route('admin.discipline.index');
     }
@@ -104,15 +112,32 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'logo' => 'required|string',
         ]);
 
         $discipline = Discipline::findOrFail($id);
-        $discipline->name = Input::get('name');
-        $discipline->logo = Input::get('logo');
-        $discipline->save();
 
-        \Session::flash('message', 'Discipline mise à jour.');
+        $filename = null;
+        $doSave = true;
+        if (!empty($request->file('logo'))) {
+            $filename = $this->prepareFile($request);
+        }
+        $data = $request->all();
+        switch ($filename) {
+            case null: // No new pic
+                unset($data['logo']);
+                die('Nothing');
+                break;
+            case false: // Error
+                $doSave = false;
+                \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                break;
+            default: // New pic
+                $data['logo'] = $filename;
+        }
+        if ($doSave) {
+            $discipline->update($data);
+            \Session::flash('message', 'Discipline mise à jour.');
+        }
 
         return redirect()->route('admin.discipline.index');
     }
@@ -131,5 +156,45 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
         Session::flash('message', 'Discipline supprimée.');
 
         return redirect()->route('admin.discipline.index');
+    }
+
+    /**
+     * Saves the image(s)
+     * 
+     * @param type $request
+     * 
+     * @return mixed false on fail, new file name on success.
+     */
+    protected function prepareFile($request)
+    {
+        // Try to create the thumb and save it
+        $upImage = $request->file('logo');
+        // File name
+        $filename = time() . '.' . $upImage->getClientOriginalExtension();
+        // Image manipulation
+        $image = new \App\Libraries\SimpleImage();
+        $image->load($upImage->getPathname());
+
+        /*
+         *  Image for cover
+         */
+
+        // Resize/crop
+        $image->centerCropFull(960, 540);
+
+        // Save
+        if (!$image->save(DISCIPLINES_PIC_FOLDER . $filename)) {
+            return false;
+        }
+
+        /*
+         * Thumb for admin
+         */
+        $image->resizeToWidth(150);
+        if (!$image->save(DISCIPLINES_PIC_FOLDER . 'thumbs/' . $filename)) {
+            return false;
+        }
+
+        return $filename;
     }
 }
