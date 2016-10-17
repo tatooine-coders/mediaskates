@@ -31,6 +31,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
      */
     public function destroy()
     {
+        
     }
 
     /**
@@ -58,17 +59,28 @@ class UserController extends \App\Http\Controllers\Member\MemberController
     public function update(Request $request)
     {
         $user = User::findOrFail(Auth()->user()->id);
-
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
+            'profile_pic' => 'mimes:png,jpeg,gif',
         ]);
-
         $data = $request->all();
-
-        // Validating email in a second time.
-        if ($data['email'] != Auth()->user()->email) {
-            $this->validate($request, ['email' => 'required|email|unique:users']);
+        /**
+         * @todo Delete the old pic if it exists
+         */
+        // Try to create the thumb and save it
+        if (!empty($request->file())) {
+            $upImage = $request->file('profile_pic');
+            $filename = time() . '.' . $upImage->getClientOriginalExtension();
+            $image = new \App\Libraries\SimpleImage();
+            $image->load($upImage->getPathname());
+            $image->centerCropFull(150, 150);
+            if (!$image->save(DEFAULT_PROFILE_PICS_FOLDER . $filename)) {
+                \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                unset($data['profile_pic']);
+            } else {
+                $data['profile_pic'] = $filename;
+            }
         }
 
         $user->fill($data)->save();
