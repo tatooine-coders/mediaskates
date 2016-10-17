@@ -16,10 +16,20 @@
 # Sources
 /_sources/common/
 
-# Uploads
+# Images
+# ------
+# Profils
 /public/images/profils/*
 !/public/images/profils/default.jpg
-/public/images/profils/originals/*
-!/public/images/profils/originals/.gitkeep
-/public/images/profils/uploads/*
-!/public/images/profils/uploads/.gitkeep
+# Originals
+/public/images/originals/*
+!/public/images/originals/.gitkeep
+# Images
+/public/images/uploads/*
+!/public/images/uploads/.gitkeep
+#Disciplines
+/public/images/disciplines/*
+!/public/images/disciplines/.gitkeep
+!/public/images/disciplines/thumbs/
+/public/images/disciplines/thumbs/*
+!/public/images/disciplines/thumbs/.gitkeep
