@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Discipline;
+use App\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Event;
 
 class EventController extends \App\Http\Controllers\Member\MemberController
 {
@@ -75,7 +76,12 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function show($id)
     {
-        //
+        $event = Event::findOrFail($id);
+
+        return view('member/events/show', [
+            'pageTitle' => $event->name,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -86,7 +92,15 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function edit($id)
     {
-        //
+        $event = Event::where('user_id', '=', Auth()->user()->id)
+            ->findOrFail($id);
+        $disciplines = Discipline::query()->pluck('name', 'id');
+        
+        return view('member/events/edit', [
+            'pageTitle' => 'Evenements',
+            'disciplines' => $disciplines,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -98,17 +112,20 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+         $this->validate($request, [
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'date_event' => 'required',
+        ]);
+        $event = Event::findOrFail($id);
+        
+        $event->update($request->all());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // Redirection et message
+        \Session::flash('message', 'Evènement mis à jour.');
+
+        return redirect()->route('user.event.index');
     }
 }

@@ -1,8 +1,12 @@
 @extends('layouts/member')
 
+@section('sectionLinks')
+@include('member/events/section_links')
+@endsection
+
 @section('content')
 
-{{ Form::open(['route'=>'user.event.store', 'method'=>'POST']) }}
+{{ Form::model($event, ['route'=>['user.event.update', $event->id], 'method'=>'POST']) }}
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
         <div class="grid has-gutter">

@@ -1,5 +1,9 @@
 @extends('layouts/member')
 
+@section('sectionLinks')
+@include('member/events/section_links')
+@endsection
+
 @section('content')
 
 {{ Form::open(['route'=>'user.event.store', 'method'=>'POST']) }}

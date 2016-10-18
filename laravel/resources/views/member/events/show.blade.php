@@ -1,34 +1,41 @@
-@extends('layouts/simple')
+@extends('layouts/member')
+
+@section('sectionLinks')
+@include('member/events/section_links')
+@endsection
 
 @section('content')
-    <h2>
-        {{{ $event->name }}}</h2>
-    <pre>
-        {{{ $event->name }}}
-        {{{ $event->address }}}
-        {{{ $event->city }}}
-        {{{ $event->zip }}}
-        {{{ $event->date_event }}}
-        {{{ $event->discipline_id }}}
-
-        <!-- lien pour edit -->
-
-        <a href="{{ route('admin.event.edit', $event->id) }}" class="btn btn-primary">Edit Event</a>
-
-        <!-- form invisble pour delete -->
-
-        {!! Form::model($event, [
-        'method' => 'DELETE',
-        'route' => ['admin.event.destroy', $event->id]
-        ]) !!}
-        {!! Form::submit('Delete') !!}
-        {!! Form::close() !!}
-
-    </pre>
+<div class="flex-container page-wrapper">
+    <div class="flex-item-fluid content">
+        <small>
+            <i class="fa fa-fw fa-calendar"></i> Créé le {{ $event->created_at }}
+            @if($event->created_at != $event->updated_at)
+            - <i class="fa fa-fw fa-refresh"></i> modifié le {{ $event->updated_at }}
+            @endif
+        </small>
+        <dl>
+            <dt>Nom :</dt>
+            <dd>{{ $event->name }}</dd>
+            <dt>Discipline :</dt>
+            <dd>{{ $event->discipline->name }}</dd>
+            <dt>Adresse :</dt>
+            <dd>{{ $event->address }}, {{ $event->zip }} {{ $event->city }}</dd>
+            <dt>Date :</dt>
+            <dd>{{ $event->date_event }}</dd>
+            <dt>Ajouté par :</dt>
+            <dd>{{ $event->user->pseudo }}</dd>
+        </dl>
+    </div>
+    <aside class="w20 menu-second">
+        @if($event->user_id === Auth()->user()->id)
+        <a href="{{ route('admin.event.edit', $event->id) }}" class="btn primary block">
+            <i class="fa fa-fw fa-pencil"></i> Editer
+        </a>
+        @else
+        <a class="btn disabled block">
+            <i class="fa fa-fw fa-pencil"></i> Editer
+        </a>
+        @endif
+    </aside>
+</div>
 @endsection
-/**
- * Created by PhpStorm.
- * User: Jeremy-work
- * Date: 06/10/2016
- * Time: 10:47
- */
