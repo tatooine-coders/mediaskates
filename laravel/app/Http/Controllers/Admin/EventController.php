@@ -33,11 +33,9 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
     public function create()
     {
         $disciplines = Discipline::query()->pluck('name', 'id');
-        $event = Event::query()->pluck('name', 'id');
 
         return view('admin/events/create', [
             'pageTitle' => 'Nouvel évènement',
-            'event' => $event,
             'disciplines' => $disciplines,
         ]);
     }
