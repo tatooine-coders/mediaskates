@@ -5,8 +5,7 @@ use App\Discipline;
 use App\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
+
 
 class EventController extends \App\Http\Controllers\Admin\AdminController
 {
@@ -55,6 +54,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
             'city' => 'required|string',
             'zip' => 'required|string',
             'date_event' => 'required|date',
+            'discipline_id' => 'required',
         ]);
 
         $data = $request->all();
@@ -118,14 +118,8 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
             'date_event' => 'required',
         ]);
         $event = Event::findOrFail($id);
-        $event->name = Input::get('name');
-        $event->address = Input::get('address');
-        $event->city = Input::get('city');
-        $event->zip = Input::get('zip');
-        $event->date_event = Input::get('date_event');
-        $event->discipline_id = Input::get('discipline_id');
-        $event->user_id = auth()->user()->id;
-        $event->save();
+        
+        $event->update($request->all());
 
         // Redirection et message
         \Session::flash('message', 'Evènement mis à jour.');
