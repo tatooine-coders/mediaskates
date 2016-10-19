@@ -47,7 +47,7 @@
             @else
                 <div class="dashboard-empty">
                     <div class="w50 center">
-                        Il n'y a aucun évènement pour le moment. <a href="{{ route('user.photo.create') }}"><i class="fa fa-plus"></i> En créer un</a>.
+                        Il n'y a aucune photo pour le moment. <a href="{{ route('user.photo.create') }}"><i class="fa fa-plus"></i> En ajouter une</a>.
                     </div>
                 </div>
             @endif

@@ -104,6 +104,79 @@ class DatabaseSeeder extends Seeder
     $u_ultra->attachRole($r_photo);
     $u_ultra->attachRole($r_member);
 
+
+      /* ---------------------------------------------------------------------
+     * Creating SAMPLES
+     * ---------------------------------------------------------------------
+     *
+     */
+
+     //samples discimplines
+      $u_discipline = new Discipline();
+      $u_discipline->name ='Roller';
+      $u_discipline->logo ='sample1.jpg';
+      $u_discipline->save();
+
+      $u_discipline2 = new Discipline();
+      $u_discipline2->name ='Skateboard';
+      $u_discipline2->logo ='sample2.jpg';
+      $u_discipline2->save();
+
+      //samples events
+      $u_event = new Event();
+      $u_event->name = '24h roller en slip';
+      $u_event->address = 'place de la republique';
+      $u_event->city = 'Le Mans';
+      $u_event->zip = '72000';
+      $u_event->date_event = '2018-12-12';
+      $u_event->discipline_id = '1';
+      $u_event->user_id = '1';
+      $u_event->save();
+
+      $u_event2 = new Event();
+      $u_event2->name = 'suce ma roue';
+      $u_event2->address = 'parc de la villette';
+      $u_event2->city = 'Paris';
+      $u_event2->zip = '75000';
+      $u_event2->date_event = '2018-10-10';
+      $u_event2->discipline_id = '1';
+      $u_event2->user_id = '1';
+      $u_event2->save();
+
+      //samples watermarks
+      $u_watermark = new Watermark();
+      $u_watermark->name='test1';
+      $u_watermark->type='1';
+      $u_watermark->description='ceci est un watermark';
+      $u_watermark->save();
+
+      $u_watermark2 = new Watermark();
+      $u_watermark2->name='test2';
+      $u_watermark2->type='1';
+      $u_watermark2->description='ceci est aussi un watermark';
+      $u_watermark2->save();
+
+      //samples licenses
+      $u_license = new License();
+      $u_license->name = 'LicenseTest1';
+      $u_license->url = 'http://www.google.fr';
+      $u_license->save();
+
+      $u_license2 = new License();
+      $u_license2->name = 'LicenseTest2';
+      $u_license2->url = 'http://www.materiel.net';
+      $u_license2->save();
+
+
+
+
+
+
+
+
+
+
+
     /* ---------------------------------------------------------------------
      * Creating base CRUD permissions
      * ---------------------------------------------------------------------

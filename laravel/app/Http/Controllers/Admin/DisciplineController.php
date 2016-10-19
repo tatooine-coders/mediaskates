@@ -67,7 +67,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
         } else {
 
             $data = $request->all();
-            $data->logo = $filename;
+            $data['logo'] = $filename;
             Discipline::create($data);
 
             \Session::flash('message', 'Nouvelle discipline créée avec succès.');
