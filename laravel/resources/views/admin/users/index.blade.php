@@ -62,7 +62,7 @@
                         @endforeach
                     </td>
                     <td>
-                        @if(Laratrust::hasRole('photograph')) <!--condition ne marche pas?? -->
+                        @if($u_role->id===ROLE_PHOTOGRAPH)
                             {{'déjà photographe'}}
                         @elseif ($user->ask_photograph=='1')
                             {{'yes'}}
