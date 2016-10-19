@@ -5,11 +5,17 @@
 define('ROLE_ADMIN', 1);
 define('ROLE_MEMBER', 2);
 define('ROLE_PHOTOGRAPH', 3);
+// Profile pics
 define('DEFAULT_PROFILE_PIC', 'default.jpg');
 define('PROFILE_PICS_FOLDER', 'images/profils/');
+// Uploaded files
 define('ORIGINAL_PICS_FOLDER', 'images/originals/');
 define('UPLOADS_PIC_FOLDER', 'images/uploads/');
+define('UPLOADS_THUMB_FOLDER', 'images/uploads/thumbs/');
+// Disciplines covers
 define('DISCIPLINES_PIC_FOLDER', 'images/disciplines/');
+// Watermarks
+define('WATERMARKS_FOLDER', 'images/watermarks/');
 
 return[
   'default_prefs'=>[
