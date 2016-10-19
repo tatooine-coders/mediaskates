@@ -192,4 +192,23 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         \Session::flash('message', 'Votre mot de passe a été mis à jour !');
         return \Redirect::to(route('user.personnal_infos'));
     }
+
+    public function ask_photograph(){
+
+        $user = User::query()->findOrFail(Auth()->user()->id);
+        if($user->ask_photograph == 1){
+            // Redirection et message
+            \Session::flash('message', 'Votre demamnde a déjà été prise en compte!');
+            return \Redirect::to(route('user.personnal_infos'));
+        }
+        else {
+
+            $user->ask_photograph = 1;
+            $user->save();
+
+            // Redirection et message
+            \Session::flash('message', 'Votre demamnde a bien été prise en compte!');
+            return \Redirect::to(route('user.personnal_infos'));
+        }
+    }
 }

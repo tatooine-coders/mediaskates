@@ -13,7 +13,7 @@
             - <i class="fa fa-fw fa-refresh"></i> modifiée le {{ $user->updated_at }}
             @endif
         </small>
-        <p><img src="{{ asset(DEFAULT_PROFILE_PICS_FOLDER . (!empty($user->profile_pic) ? $user->profile_pic : DEFAULT_PROFILE_PIC)) }}" class="avatar avatar-small" alt="avatar"/> {{ $user->pseudo }}</p>
+        <p><img src="{{ asset(PROFILE_PICS_FOLDER . (!empty($user->profile_pic) ? $user->profile_pic : DEFAULT_PROFILE_PIC)) }}" class="avatar avatar-small" alt="avatar"/> {{ $user->pseudo }}</p>
         <dl>
             <dt>Roles</dt>
             <dd>

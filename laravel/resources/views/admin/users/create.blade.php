@@ -24,7 +24,7 @@
             </div>
             <div class="one-third">
                 {!! Form::label('profile_pic', 'Profile picture') !!}
-                {!! Form::text('profile_pic') !!}
+                {!! Form::file('profile_pic') !!}
             </div>
         </div>
         <div class="grid has-gutter">

@@ -51,7 +51,7 @@
         {!! Form::submit('Enregistrer', ['class'=>'primary']) !!}
 
         @if(!Laratrust::hasRole('photograph'))
-        <a href="#" class="btn danger block">Demander à être photographe</a>
+        <a href="update_role" class="btn danger block">Demander à être photographe</a>
         @endif
 
     </aside>
