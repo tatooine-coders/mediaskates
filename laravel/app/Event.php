@@ -12,11 +12,11 @@ class Event extends Model
         return $this->belongsTo('App\Discipline');
     }
 
-    public function photo()
+    public function photos()
     {
         return $this->hasMany('App\Photo');
     }
-    
+
     public function user(){
         return $this->belongsTo('App\User');
     }
