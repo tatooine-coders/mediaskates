@@ -6,7 +6,6 @@ use App\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-
 class EventController extends \App\Http\Controllers\Admin\AdminController
 {
 
@@ -15,12 +14,20 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::query()->get();
+        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'city', 'address', 'zip', 'date_event', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
+        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $events = Event::query()
+            ->orderBy($order, $direction)
+            ->get();
+
+
         return view('admin/events/index', [
             'pageTitle' => 'Liste des évènements',
-            'events' => $events
+            'events' => $events,
+            'direction' => $direction,
+            'order' => $order,
         ]);
     }
 
