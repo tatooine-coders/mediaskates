@@ -14,6 +14,7 @@ define('UPLOADS_PIC_FOLDER', 'images/uploads/');
 define('UPLOADS_THUMB_FOLDER', 'images/uploads/thumbs/');
 // Disciplines covers
 define('DISCIPLINES_PIC_FOLDER', 'images/disciplines/');
+define('DISCIPLINES_THUMB_FOLDER', 'images/disciplines/thumbs/');
 // Watermarks
 define('WATERMARKS_FOLDER', 'images/watermarks/');
 

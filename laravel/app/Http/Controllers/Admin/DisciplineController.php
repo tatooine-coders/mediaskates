@@ -21,8 +21,8 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function index(Request $request)
     {
         // Filters
-        $order=($request->has('order') && in_array($request->get('order'), ['name', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
-        $direction=($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
+        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
         $disciplines = Discipline::query()
             ->orderBy($order, $direction)
             ->get();
@@ -197,7 +197,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
          * Thumb for admin
          */
         $image->resizeToWidth(150);
-        if (!$image->save(DISCIPLINES_PIC_FOLDER . 'thumbs/' . $filename)) {
+        if (!$image->save(DISCIPLINES_THUMB_FOLDER . $filename)) {
             return false;
         }
 
