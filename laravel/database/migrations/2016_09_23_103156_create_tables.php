@@ -131,7 +131,7 @@ class CreateTables extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 25);
-            $table->string('address', 25);
+            $table->string('address', 50);
             $table->date('date_event');
             $table->string('city', 25);
             $table->string('zip', 10);
