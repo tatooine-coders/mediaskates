@@ -19,7 +19,7 @@
             </div>
             <div class="one-half">
                 {!! Form::label('logo', 'Logo') !!}
-                {!! Form::file('logo') !!}
+                {!! Form::file('logo', ['required'=>true]) !!}
             </div>
         </div>
     </div>
