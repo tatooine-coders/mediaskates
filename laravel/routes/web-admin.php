@@ -72,9 +72,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>['role:admin']], function(){
     /*
      * Photo
      */
-    Route::get('/photos', 'Admin\PhotoController@index')->name('admin.photo.index');
-    Route::get('/photo/create', 'Admin\PhotoController@create')->name('admin.photo.create');
-    Route::post('/photo/store', 'Admin\PhotoController@store')->name('admin.photo.store');
+//    Route::get('/photos', 'Admin\PhotoController@index')->name('admin.photo.index');
+//    Route::get('/photo/create', 'Admin\PhotoController@create')->name('admin.photo.create');
+//    Route::post('/photo/store', 'Admin\PhotoController@store')->name('admin.photo.store');
     Route::get('/photo/{id}', 'Admin\PhotoController@show')->name('admin.photo.show');
     Route::get('/photo/{id}/edit', 'Admin\PhotoController@edit')->name('admin.photo.edit');
     Route::patch('/photo/{id}/update', 'Admin\PhotoController@update')->name('admin.photo.update');

@@ -11,7 +11,7 @@
   <li><a href="{{ route('admin.license.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li><a href="{{ route('admin.license.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
   <li class="title">Photos</li>
-  <li><a href="{{ route('admin.photo.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
+  <small>Pour accéder aux photos, choisissez un évènement ou un utilisateur</small>
   <li class="title">Roles</li>
   <li><a href="{{ route('admin.role.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li><a href="{{ route('admin.role.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>

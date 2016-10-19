@@ -18,34 +18,34 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $photos = Photo::query()->get();
-
-        return view('admin/photos/index', [
-            'pageTitle' => 'Liste des Photos',
-            'photos' => $photos
-        ]);
-    }
+//    public function index()
+//    {
+//        $photos = Photo::query()->get();
+//
+//        return view('admin/photos/index', [
+//            'pageTitle' => 'Liste des Photos',
+//            'photos' => $photos
+//        ]);
+//    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $events = Event::query()->pluck('name', 'id');
-        $watermarks = Watermark::query()->pluck('name', 'id');
-        $licenses = License::query()->pluck('name', 'id');
-
-        return view('admin/photos/create', [
-            'pageTitle' => 'Ajouter une photo',
-            'events' => $events,
-            'watermarks' => $watermarks,
-            'licenses' => $licenses
-        ]);
-    }
+//    public function create()
+//    {
+//        $events = Event::query()->pluck('name', 'id');
+//        $watermarks = Watermark::query()->pluck('name', 'id');
+//        $licenses = License::query()->pluck('name', 'id');
+//
+//        return view('admin/photos/create', [
+//            'pageTitle' => 'Ajouter une photo',
+//            'events' => $events,
+//            'watermarks' => $watermarks,
+//            'licenses' => $licenses
+//        ]);
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -53,23 +53,23 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'mimes:png,jpeg,gif',
-            'event_id' => 'required',
-            'watermark_id' => 'required',
-            'license_id' => 'required',
-        ]);
-
-        $data=$request->all();
-        $data['user_id'] = Auth()->user()->id;
-        Photo::create($data);
-
-        // Redirection et message
-        \Session::flash('message', 'Nouvelle photo enregistrée');
-        return redirect()->route('admin.photo.index');
-    }
+//    public function store(Request $request)
+//    {
+//        $this->validate($request, [
+//            'file' => 'mimes:png,jpeg,gif',
+//            'event_id' => 'required',
+//            'watermark_id' => 'required',
+//            'license_id' => 'required',
+//        ]);
+//
+//        $data=$request->all();
+//        $data['user_id'] = Auth()->user()->id;
+//        Photo::create($data);
+//
+//        // Redirection et message
+//        \Session::flash('message', 'Nouvelle photo enregistrée');
+//        return redirect()->route('admin.photo.index');
+//    }
 
     /**
      * Display the specified resource.
