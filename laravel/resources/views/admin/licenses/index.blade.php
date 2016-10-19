@@ -12,10 +12,11 @@
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
-                    <th>Nom</th>
-                    <th>Url</th>
-                    <th>Date créa.</th>
-                    <th>Date modif.</th>
+                    <th>Nb photos</th>
+                    <th><a href="{{ route('admin.license.index', ['order'=>'name', 'direction'=>($order==='name'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='name'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Nom</a></th>
+                    <th><a href="{{ route('admin.license.index', ['order'=>'url', 'direction'=>($order==='url'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='url'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> URL</a></th>
+                    <th><a href="{{ route('admin.license.index', ['order'=>'created_at', 'direction'=>($order==='created_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='created_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date Créa.</a></th>
+                    <th><a href="{{ route('admin.license.index', ['order'=>'updated_at', 'direction'=>($order==='updated_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='updated_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date Modif.</a></th>
                     <th class="actions">Actions</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                 @foreach($licenses as $license)
                 <tr>
                     <td>{{ $license->id }}</td>
+                    <td>{{ count($license->photos) }}</td>
                     <td>{{ $license->name }}</td>
                     <td>{{ link_to($license->url, $license->url, ['target'=>'_blank']) }}</td>
                     <td>{{ $license->created_at }}</td>

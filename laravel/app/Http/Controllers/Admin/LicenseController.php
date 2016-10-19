@@ -15,13 +15,19 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $licenses = License::query()->get();
+        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'url', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
+        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $licenses = License::query()
+            ->orderBy($order, $direction)
+            ->get();
 
         return view('admin/licenses/index', [
             'pageTitle' => 'Licenses',
-            'licenses' => $licenses
+            'licenses' => $licenses,
+            'direction' => $direction,
+            'order' => $order,
         ]);
     }
 
