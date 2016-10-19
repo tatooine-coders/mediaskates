@@ -43,6 +43,7 @@ class CreateTables extends Migration
             $table->string('google', 40)->nullable();
             $table->string('twitter', 40)->nullable();
             $table->text('biography', 40)->nullable();
+            $table->integer('ask_photograph')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

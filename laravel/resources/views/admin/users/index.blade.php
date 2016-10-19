@@ -20,6 +20,7 @@
                     <th>Active</th>
                     <th>Liens</th>
                     <th>Role</th>
+                    <th>Ask Photograph</th>
                     <th>Date créa.</th>
                     <th>Date modif.</th>
                     <th class="actions">Actions</th>
@@ -29,7 +30,7 @@
                 @foreach($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td><img class="avatar avatar-tiny" src="{{ asset(DEFAULT_PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/> {{ $user->pseudo }}</td>
+                    <td><img class="avatar avatar-tiny" src="{{ asset(PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/> {{ $user->pseudo }}</td>
                     <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->active }}</td>
@@ -60,6 +61,15 @@
                         {{ link_to(route('admin.role.show', $u_role->id), $u_role->name) }},
                         @endforeach
                     </td>
+                    <td>
+                        @if(Laratrust::hasRole('photograph')) <!--condition ne marche pas?? -->
+                            {{'déjà photographe'}}
+                        @elseif ($user->ask_photograph=='1')
+                            {{'yes'}}
+                        @else
+                            {{'no'}}
+                        @endif
+                    </td>
                     <td>{{ $user->created_at }}</td>
                     <td>{{ $user->updated_at }}</td>
                     <td class="actions">
@@ -79,7 +89,7 @@
         @else
         <div class="dashboard-empty">
             <div class="w50 center">
-                Bizarrement, vous n'avez aucun utilisateur... Mis à part le fait que vous ne devriez pas être là, vous vouvez toujours <a href="{{ route('admin.user.create') }}">en créer un</a>.
+                Bizarrement, vous n'avez aucun utilisateur... Mis à part le fait que vous ne devriez pas être là, vous pouvez toujours <a href="{{ route('admin.user.create') }}">en créer un</a>.
             </div>
         </div>
         @endif

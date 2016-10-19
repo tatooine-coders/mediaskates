@@ -19,7 +19,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
 
         return view('admin/users/index', [
             'pageTitle' => 'Liste des utilisateurs',
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -82,8 +82,26 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
             'pseudo' => 'bail|required|unique:users',
             'email' => 'bail|required|email|unique:users',
             'password' => 'required|min:6|confirmed',
+            'profile_pic' => 'mimes:png,jpeg,gif',
+
         ]);
         $data = $request->all();
+
+
+        if (!empty($request->file())) {
+            $upImage = $request->file('profile_pic');
+            $filename = time() . '.' . $upImage->getClientOriginalExtension();
+            $image = new \App\Libraries\SimpleImage();
+            $image->load($upImage->getPathname());
+            $image->centerCropFull(150, 150);
+            if (!$image->save(PROFILE_PICS_FOLDER . $filename)) {
+                \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                unset($data['profile_pic']);
+            } else {
+                $data['profile_pic'] = $filename;
+            }
+        }
+
 
         $user = new User($data);
         $user->password = bcrypt($data['password']);
