@@ -12,10 +12,10 @@
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
-                    <th>Nom</th>
+                    <th><a href="{{ route('admin.discipline.index', ['order'=>'name', 'direction'=>($order==='name'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='name'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Nom</a></th>
                     <th>Logo</th>
-                    <th>Date créa.</th>
-                    <th>Date modif.</th>
+                    <th><a href="{{ route('admin.discipline.index', ['order'=>'created_at', 'direction'=>($order==='created_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='created_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date créa.</a></th>
+                    <th><a href="{{ route('admin.discipline.index', ['order'=>'updated_at', 'direction'=>($order==='updated_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='updated_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date modif.</a></th>
                     <th class="actions">Actions</th>
                 </tr>
             </thead>

@@ -18,13 +18,20 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $disciplines = Discipline::query()->get();
+        // Filters
+        $order=($request->has('order') && in_array($request->get('order'), ['name', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
+        $direction=($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $disciplines = Discipline::query()
+            ->orderBy($order, $direction)
+            ->get();
 
         return view('admin/disciplines/index', [
             'pageTitle' => 'Liste des disciplines',
-            'disciplines' => $disciplines
+            'disciplines' => $disciplines,
+            'direction' => $direction,
+            'order' => $order,
         ]);
     }
 
@@ -55,7 +62,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
 
         $filename = $this->prepareFile($request);
 
-        if (filename === false) {
+        if ($filename === false) {
             \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
         } else {
 
@@ -125,7 +132,6 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
         switch ($filename) {
             case null: // No new pic
                 unset($data['logo']);
-                die('Nothing');
                 break;
             case false: // Error
                 $doSave = false;
@@ -160,9 +166,9 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
 
     /**
      * Saves the image(s)
-     * 
+     *
      * @param type $request
-     * 
+     *
      * @return mixed false on fail, new file name on success.
      */
     protected function prepareFile($request)
