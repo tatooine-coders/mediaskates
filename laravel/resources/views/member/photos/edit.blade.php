@@ -6,33 +6,29 @@
 
 @section('content')
 
-{{ Form::open(['route'=>'user.photo.store', 'method'=>'POST', 'files'=>true]) }}
+{{ Form::open(['route'=>['user.photo.update', $photo->id], 'method'=>'PATCH']) }}
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
         <div class="grid has-gutter">
             <div class="one-half">
-                {!! Form::label('event_id', 'Evènement')                     !!}
+                <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}" alt="" />
+
+            </div>
+            <div class="one-half">
+                {!! Form::label('event_id', 'Evènement') !!}
                 <select name="event_id">
                     @foreach($disciplines as $d)
                     <optgroup label="{{ $d['name'] }}">
                         @foreach($d['events'] as $k=>$e)
-                        <option value="{{ $e['id'] }}">{{ $e['date_event'] }} - {{ $e['name'] }}</option>
+                        <option value="{{ $e['id'] }}" {{ $photo->event_id === $e['id'] ? 'selected="selected"' : '' }}>{{ $e['date_event'] }} - {{ $e['name'] }}</option>
                         @endforeach
                     </optgroup>
                     @endforeach
                 </select>
-            </div>
-            <div class="one-half">
-                {!! Form::label('file', 'Fichier') !!}
-                {!! Form::file('file') !!}
-            </div>
-        </div>
-        <div class="grid has-gutter">
-            <div class="one-half">
+
                 {!! Form::label('watermark_id', 'Type de watermark') !!}
                 {!! Form::select('watermark_id', $watermarks, null) !!}
-            </div>
-            <div class="one-half">
+
                 {!! Form::label('license_id', 'License') !!}
                 {!! Form::select('license_id', $licenses, null) !!}
             </div>

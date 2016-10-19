@@ -1,12 +1,11 @@
 @extends('layouts/member')
 
+@section('sectionLinks')
+@include('member/photos/section_links')
+@endsection
+
 @section('content')
 
-<div class="page-wrapper">
-    <div class="content">
-        Filtres : 
-    </div>
-</div>
 <div class="page-wrapper">
     <div class="content">
 
@@ -14,26 +13,26 @@
         <table>
             <thead>
                 <tr>
-                    <th class="id-col">Id</th>
-                    <th>Nom</th>
-                    <th>Adresse</th>
-                    <th>Date</th>
+                    <th>Evènement</th>
+                    <th>Image</th>
+                    <th>Date Créa.</th>
+                    <th>Date Modif.</th>
                     <th class="actions">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($photos as $photo)
                 <tr>
-                    <td>{{ $event->id }}</td>
-                    <td>{{ $event->name }}</td>
-                    <td>{{ $event->address }}, {{ $event->zip }} {{ $event->city }}</td>
-                    <td>{{ $event->date_event }}</td>
+                    <td>{{ $photo->event->name }}</td>
+                    <td><img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}" alt=""/></td>
+                    <td>{{ $photo->created_at }}</td>
+                    <td>{{ $photo->modified_at }}</td>
                     <td class="actions">
-                        <a href="{{ route('admin.event.show', $event->id) }}" class="btn primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
-                        <a href="{{ route('admin.event.edit', $event->id) }}" class="btn primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
+                        <a href="{{ route('user.photo.show', $photo->id) }}" class="btn primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
+                        <a href="{{ route('user.photo.edit', $photo->id) }}" class="btn primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
                         <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
                             <i class="fa fa-fw fa-trash"></i>
-                            {!! Form::open(['route'=>['user.event.destroy', 'id'=> $event->id], 'method'=>'DELETE']) !!}
+                            {!! Form::open(['route'=>['user.photo.destroy', 'id'=> $photo->id], 'method'=>'DELETE']) !!}
                             {!! Form::close() !!}
                         </a>
                     </td>
