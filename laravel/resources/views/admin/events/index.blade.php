@@ -14,9 +14,15 @@
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
-                    <th>Nom</th>
-                    <th>Adresse</th>
-                    <th>Date</th>
+                    <th>Nb photos</th>
+                    <th><a href="{{ route('admin.event.index', ['order'=>'name', 'direction'=>($order==='name'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='name'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Nom</a></th>
+                    <th>
+                        Adresse
+                        (<a href="{{ route('admin.event.index', ['order'=>'address', 'direction'=>($order==='address'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='address'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Adresse</a>,
+                        <a href="{{ route('admin.event.index', ['order'=>'zip', 'direction'=>($order==='zip'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='zip'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Code postal</a>,
+                        <a href="{{ route('admin.event.index', ['order'=>'city', 'direction'=>($order==='city'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='city'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Ville</a>)
+                    </th>
+                    <th><a href="{{ route('admin.event.index', ['order'=>'date_event', 'direction'=>($order==='date_event'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='date_event'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date</a></th>
                     <th>Discipline</th>
                     <th class="actions">Actions</th>
                 </tr>
@@ -25,6 +31,7 @@
                 @foreach($events as $event)
                 <tr>
                     <td>{{ $event->id }}</td>
+                    <td>{{ count($event->photos) }}</td>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->address }}, {{ $event->zip }} {{ $event->city }}</td>
                     <td>{{ $event->date_event }}</td>
