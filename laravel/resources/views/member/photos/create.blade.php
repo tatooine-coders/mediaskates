@@ -1,5 +1,9 @@
 @extends('layouts/member')
 
+@section('sectionLinks')
+@include('member/photos/section_links')
+@endsection
+
 @section('content')
 
 {{ Form::open(['route'=>'user.photo.store', 'method'=>'POST']) }}
@@ -7,8 +11,8 @@
     <div class="flex-item-fluid content">
         <div class="grid has-gutter">
             <div class="one-half">
-                {!! Form::label('name', 'Nom de l\'évènement') !!}
-                {!! Form::text('name', null, ['required'=>true, 'placeholder'=>'24h de la brindillette']) !!}
+                {!! Form::label('event_id', 'Nom de l\'évènement') !!}
+                {!! Form::select('event_id', null, ['required'=>true, 'placeholder'=>'24h de la brindillette']) !!}
             </div>
             <div class="one-quarter">
                 {!! Form::label('date_event', 'Date') !!}

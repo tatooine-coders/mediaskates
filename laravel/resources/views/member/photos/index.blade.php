@@ -1,12 +1,11 @@
 @extends('layouts/member')
 
+@section('sectionLinks')
+@include('member/photos/section_links')
+@endsection
+
 @section('content')
 
-<div class="page-wrapper">
-    <div class="content">
-        Filtres : 
-    </div>
-</div>
 <div class="page-wrapper">
     <div class="content">
 

@@ -32,9 +32,13 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
     public function create()
     {
         $disciplines = \App\Discipline::query()
-            ->select('id', 'name')
-            ->with('event')
-            ->get();
+//            ->select('id', 'name')
+            ->with(['event' => function($query) {
+                    $query->select('name', 'id')->get();
+                }])
+            ->get()
+            ->toArray();
+        dd($disciplines);
         return view('member/photos/create', [
             'pageTitle' => 'Nouvelle photo',
             'disciplines' => $disciplines,
