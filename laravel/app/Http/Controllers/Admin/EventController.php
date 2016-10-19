@@ -118,7 +118,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
             'date_event' => 'required',
         ]);
         $event = Event::findOrFail($id);
-        
+
         $event->update($request->all());
 
         // Redirection et message
@@ -138,7 +138,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $event = Event::findOrFail($id);
         $event->delete();
 
-        Session::flash('flash_message_delete', 'Evènement supprimé.');
+        \Session::flash('flash_message_delete', 'Evènement supprimé.');
 
         return redirect()->route('admin.event.index');
     }
