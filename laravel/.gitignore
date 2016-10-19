@@ -27,7 +27,10 @@
 # Images
 /public/images/uploads/*
 !/public/images/uploads/.gitkeep
-#Disciplines
+!/public/images/uploads/thumbs/
+/public/images/uploads/thumbs/*
+!/public/images/uploads/thumbs/.gitkeep
+# Disciplines
 /public/images/disciplines/*
 !/public/images/disciplines/.gitkeep
 !/public/images/disciplines/thumbs/
