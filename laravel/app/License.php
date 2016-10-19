@@ -7,7 +7,7 @@ class License extends Model
 {
     public $fillable = ['name', 'url'];
 
-    public function photo()
+    public function photos()
     {
         return $this->hasMany('App\Photo');
     }

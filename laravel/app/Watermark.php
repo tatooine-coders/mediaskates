@@ -7,7 +7,7 @@ class Watermark extends Model
 {
     public $fillable = ['name', 'type', 'description'];
 
-    public function photo()
+    public function photos()
     {
         return $this->hasMany('App\Photo');
     }

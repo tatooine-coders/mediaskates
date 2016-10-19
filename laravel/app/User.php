@@ -39,12 +39,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function photo()
+    public function photos()
     {
         return $this->hasMany('App\Photo');
     }
 
-    public function tag()
+    public function tags()
     {
         return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
     }
@@ -54,12 +54,12 @@ class User extends Authenticatable
 //        return $this->hasManyThrough('App\Role', 'App\RoleUser');
 //    }
 
-    public function vote()
+    public function votes()
     {
         return $this->hasManyThrough('App\Photo', '\App\Vote');
     }
 
-    public function event()
+    public function events()
     {
         return $this->hasMany('App\Event');
     }

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discipline extends Model
 {
+
     protected $fillable = [
         'name', 'logo',
     ];
@@ -15,10 +16,5 @@ class Discipline extends Model
     public function events()
     {
         return $this->hasMany('App\Event');
-    }
-
-    public function user()
-    {
-        return $this->hasManyThrough('App\User', 'App\UserDiscipline');
     }
 }
