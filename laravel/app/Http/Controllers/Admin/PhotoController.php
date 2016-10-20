@@ -137,7 +137,6 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
 
         $photo->save();
 
-
         // Redirection et message
         \Session::flash('message', 'Photo mise à jour');
         return redirect()->route('admin.photo.index');
@@ -151,9 +150,10 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-        $photo = Event::findOrFail($id);
+        $photo = Photo::findOrFail($id);
         $photo->delete();
-        \Session::flash('message', 'Discipline successfully delete.');
-        return redirect()->route('admin.photo.index');
+        \Session::flash('message', 'Photo successfully delete.');
+
+        return redirect()->route('admin.event.show', $photo->event_id);
     }
 }
