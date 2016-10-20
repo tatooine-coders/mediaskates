@@ -8,22 +8,21 @@
   </div>
 </div>
 <div id="member-actions">
-  <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-sign-out" title="Logout"></i></a>
+  <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa-sign-out" title="Déconnexion"></i></a>
   <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-  <a href="{{ route('user.dashboard') }}"><i class="fa-home" title="Dashboard"></i></a>
-  <a href="{{ route('user.preferences') }}"><i class="fa-sliders" title="Preferences"></i></a>
-  <a href="{{ route('user.personnal_infos') }}"><i class="fa-pencil" title="Personnal informations"></i></a>
+  <a href="{{ route('user.dashboard') }}"><i class="fa-home" title="Tableau de bord"></i></a>
+  <a href="{{ route('user.preferences') }}"><i class="fa-sliders" title="Préférences"></i></a>
+  <a href="{{ route('user.personnal_infos') }}"><i class="fa-pencil" title="Informations personnelles"></i></a>
 </div>
 <ul >
-  <li><a href="{{ route('user.comment.index') }}"><i class="fa fa-fw fa-list"></i> Manage comments</a></li>
-  <li><a href="{{ route('user.tag.index') }}"><i class="fa fa-fw fa-list"></i> Manage my tags</a></li>
-  <li><a href="{{ route('user.vote.index') }}"><i class="fa fa-fw fa-list"></i> Manage my votes</a></li>
+  <li><a href="{{ route('user.comment.index') }}"><i class="fa fa-fw fa-list"></i> Commentaires</a></li>
+  <li><a href="{{ route('user.tag.index') }}"><i class="fa fa-fw fa-list"></i> Mes tags</a></li>
+  <li><a href="{{ route('user.vote.index') }}"><i class="fa fa-fw fa-list"></i> Mes votes</a></li>
   @role(('photograph'))
-  <li class="title">Events</li>
-  <li><a href="{{ route('user.event.index') }}"><i class="fa fa-fw fa-list"></i> Manage the events</a></li>
+  <li class="title">Evènements</li>
+  <li><a href="{{ route('user.event.index') }}"><i class="fa fa-fw fa-list"></i> Liste des évènements</a></li>
   <li><a href="{{ route('user.event.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
   <li class="title">Photos</li>
-  <li><a href="{{ route('user.photo.index') }}"><i class="fa fa-fw fa-list"></i> Manage</a></li>
   <li><a href="{{ route('user.photo.create') }}"><i class="fa fa-fw fa-list"></i> Add</a></li>
   @endrole
   @role(('admin'))
