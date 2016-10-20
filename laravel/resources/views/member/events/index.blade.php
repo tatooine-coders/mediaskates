@@ -35,6 +35,7 @@
                         @else
                         <a class="disabled btn"><i class="fa fa-pencil fa-fw"></i></a>
                         @endif
+                        <a href="{{ route('user.photo.create', ['event'=>$event->id]) }}" class="btn primary" title="Ajouter une photo"><i class="fa fa-fw fa-plus"></i></a>
                     </td>
                 </tr>
                 @endforeach

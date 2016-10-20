@@ -11,12 +11,12 @@
     <div class="flex-item-fluid content">
         <div class="grid has-gutter">
             <div class="one-half">
-                {!! Form::label('event_id', 'Evènement')                     !!}
-                <select name="event_id">
+                {!! Form::label('event_id', 'Evènement') !!}
+                <select name="event_id"{{!empty($event)?' disabled':''}}>
                     @foreach($disciplines as $d)
                     <optgroup label="{{ $d['name'] }}">
                         @foreach($d['events'] as $k=>$e)
-                        <option value="{{ $e['id'] }}">{{ $e['date_event'] }} - {{ $e['name'] }}</option>
+                        <option value="{{ $e['id'] }}"{{$event==$e['id']?'selected="selected"':''}}>{{ $e['date_event'] }} - {{ $e['name'] }}</option>
                         @endforeach
                     </optgroup>
                     @endforeach

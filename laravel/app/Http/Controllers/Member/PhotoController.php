@@ -9,27 +9,11 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $photos = Photo::query()
-            ->where('user_id', Auth()->user()->id)
-            ->get();
-        return view('member/photos/index', [
-            'pageTitle' => 'Mes photos',
-            'photos' => $photos,
-        ]);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $disciplines = \App\Discipline::query()
             ->select('id', 'name')
@@ -43,6 +27,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             'disciplines' => $disciplines,
             'watermarks' => $watermarks,
             'licenses' => $licenses,
+            'event'=>$request->get('event'),
         ]);
     }
 
@@ -75,16 +60,16 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         return redirect()->route('user.photo.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  int  $id
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show($id)
+//    {
+//        //
+//    }
 
     /**
      * Show the form for editing the specified resource.
