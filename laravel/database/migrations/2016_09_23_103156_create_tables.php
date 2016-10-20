@@ -97,7 +97,7 @@ class CreateTables extends Migration
          */
         Schema::create('licenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 25);
+            $table->string('name', 40);
             $table->string('url', 255);
             $table->timestamps();
         });
