@@ -107,7 +107,7 @@ class CreateTables extends Migration
          */
         Schema::create('disciplines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 25);
+            $table->string('name', 50);
             $table->string('logo', 50);
             $table->timestamps();
         });
