@@ -38,4 +38,34 @@
         @endif
     </aside>
 </div>
+
+<h2>Vos photos pour cet évènement</h2>
+<div class="page-wrapper">
+    <div class="content">
+        @if(count($event->photos)>0)
+            <div class="thumbnails">
+                @foreach($event->photos as $photo)
+                <div class="thumbnail">
+                    <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}" alt="" />
+                    <div class="actions">
+                        <a href="{{ route('user.photo.show', $photo->id) }}" class="btn primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
+                        <a href="{{ route('user.photo.edit', $photo->id) }}" class="btn primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
+                        <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
+                            <i class="fa fa-fw fa-trash"></i>
+                            {!! Form::open(['route'=>['user.photo.destroy', 'id'=> $photo->id], 'method'=>'DELETE']) !!}
+                            {!! Form::close() !!}
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        @else
+        <div class="dashboard-empty">
+            <div class="w50 center">
+                Vous n'avez aucune photo pour cet évènement. <a href="{{ route('user.photo.create', ['event'=>$event->id]) }}"><i class="fa fa-fw fa-plus"></i> En ajouter...</a>
+            </div>
+        </div>
+        @endif
+    </div>
+</div>
 @endsection
