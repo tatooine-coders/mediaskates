@@ -14,64 +14,6 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function index()
-//    {
-//        $photos = Photo::query()->get();
-//
-//        return view('admin/photos/index', [
-//            'pageTitle' => 'Liste des Photos',
-//            'photos' => $photos
-//        ]);
-//    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function create()
-//    {
-//        $events = Event::query()->pluck('name', 'id');
-//        $watermarks = Watermark::query()->pluck('name', 'id');
-//        $licenses = License::query()->pluck('name', 'id');
-//
-//        return view('admin/photos/create', [
-//            'pageTitle' => 'Ajouter une photo',
-//            'events' => $events,
-//            'watermarks' => $watermarks,
-//            'licenses' => $licenses
-//        ]);
-//    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-//    public function store(Request $request)
-//    {
-//        $this->validate($request, [
-//            'file' => 'mimes:png,jpeg,gif',
-//            'event_id' => 'required',
-//            'watermark_id' => 'required',
-//            'license_id' => 'required',
-//        ]);
-//
-//        $data=$request->all();
-//        $data['user_id'] = Auth()->user()->id;
-//        Photo::create($data);
-//
-//        // Redirection et message
-//        \Session::flash('message', 'Nouvelle photo enregistrée');
-//        return redirect()->route('admin.photo.index');
-//    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -79,13 +21,12 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function show($id)
     {
-        $photo = Photo::findOrFail($id);
+        $photo = Photo::where('user_id', '=', Auth()->user()->id)->findOrFail($id);
 
         return view('admin/photos/show', [
             'pageTitle' => 'Photo',
             'photo' => $photo,
         ]);
-
     }
 
     /**
@@ -108,7 +49,6 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'photo' => $photo,
             'watermarks' => $watermarks,
             'licenses' => $licenses
-
         ]);
     }
 
@@ -139,7 +79,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
 
         // Redirection et message
         \Session::flash('message', 'Photo mise à jour');
-        return redirect()->route('admin.photo.index');
+        return redirect()->route('admin.event.show', $photo->event_id);
     }
 
     /**

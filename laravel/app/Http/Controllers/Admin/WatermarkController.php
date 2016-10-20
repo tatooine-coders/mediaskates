@@ -129,7 +129,8 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $watermark = Watermark::findOrFail($id);
         $watermark->delete();
-        /** Session::flash('flash_message_delete','Watermark successfully delete.'); */
+        \Session::flash('message','Watermark successfully delete.');
+        
         return redirect()->route('admin.watermark.index');
     }
 }

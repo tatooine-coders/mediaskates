@@ -31,7 +31,7 @@
                 @foreach($events as $event)
                 <tr>
                     <td>{{ $event->id }}</td>
-                    <td>{{ count($event->photos) }}</td>
+                    <td>{{ $event->photos_count }}</td>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->address }}, {{ $event->zip }} {{ $event->city }}</td>
                     <td>{{ $event->date_event }}</td>
