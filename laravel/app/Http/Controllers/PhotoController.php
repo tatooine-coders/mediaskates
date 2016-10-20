@@ -15,7 +15,12 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $photos=Photo::query()->get();
+
+        return view('photos/index',[
+            'pageTitle' => 'Liste des photos',
+            'photos'=>$photos
+        ]);
     }
 
     /**
