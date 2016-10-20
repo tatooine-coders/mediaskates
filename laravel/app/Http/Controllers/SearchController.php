@@ -17,15 +17,15 @@ class SearchController extends Controller
      */
     public function advanced_Search()
     {
-        $events = Event::query()->pluck('name', 'id');
-        $disciplines = Discipline::query()->pluck('name', 'id');
-        $users = User::query()->pluck('pseudo', 'id');
+//        $events = Event::query()->pluck('name', 'id');
+//        $disciplines = Discipline::query()->pluck('name', 'id');
+//        $users = User::query()->pluck('pseudo', 'id');
 
         return view('search/advancedSearch', [
             'pageTitle' => 'Recherche avancée',
-            'events' => $events,
-            'disciplines' => $disciplines,
-            'users' => $users,
+//            'events' => $events,
+//            'disciplines' => $disciplines,
+//            'users' => $users,
 
         ]);
 
@@ -39,51 +39,45 @@ class SearchController extends Controller
      */
     public function search_Results(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'choice' => 'required|int',
-        ]);
 
+        switch ($request->choice){
 
+            //recherche dans discipline
+            case '1':
+                $results = Discipline::query()->where('name', 'like', '%'.$request->name.'%')->get();
+                $url = 'discipline';
+                break;
 
-        //recherche dans discipline
-        if($request->choice==='1'){
+            //recherche dans event
+            case '2' :
+                $results = Event::query()->where('name', 'like', '%'.$request->name.'%')->get();
+                $url = 'event';
+                break;
 
-            $results = Discipline::query()->where('name', $request->name)->pluck('name');
+            //recherche dans user->pseudo
+            case '3' :
+                $results = User::query()->where('pseudo', 'like', '%'.$request->name.'%')->orWhere('last_name', 'like', '%'.$request->name.'%')->orWhere('first_name', 'like', '%'.$request->name.'%')->get();
+                $url = 'user';
+                break;
         }
-        //recherche dans event
-        if($request->choice==='2'){
-
-            $results = Event::query()->where('name', $request->name)->pluck('name');
-        }
-        //recherche dans user->pseudo
-        if($request->choice==='3'){
-
-            $results = User::query()->where('pseudo', $request->name)->pluck('pseudo');
-        }
-
-
-        //Quand pas de resultats
-        if($results->isEmpty()){
-            $results[0] = 'Pas de résultats';
-        }
-
 
 
         //
         //preparation de la vue à renvoyer
         //
 
-        $events = Event::query()->pluck('name', 'id');
-        $disciplines = Discipline::query()->pluck('name', 'id');
-        $users = User::query()->pluck('pseudo', 'id');
+//        $events = Event::query()->pluck('name', 'id');
+//        $disciplines = Discipline::query()->pluck('name', 'id');
+//        $users = User::query()->pluck('pseudo', 'id');
 
         return view('search/advancedSearch', [
             'pageTitle' => 'Recherche avancée',
             'results' => $results,
-            'events' => $events,
-            'disciplines' => $disciplines,
-            'users' => $users,
+            'url' => $url,
+
+//            'events' => $events,
+//            'disciplines' => $disciplines,
+//            'users' => $users,
         ]);
     }
 }
