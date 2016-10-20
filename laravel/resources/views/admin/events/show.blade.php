@@ -35,4 +35,32 @@
         </a>
     </aside>
 </div>
+
+<h2>Photos</h2>
+<div class="page-wrapper">
+    <div class="content flex-container">
+        @if(count($event->photos)>0)
+        @foreach($event->photos as $photo)
+        <div class="image-item flex-item-fluid">
+            <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}" alt=""/>
+            <div class="actions">
+                <a href="{{ route('admin.photo.show', $photo->id) }}" class="btn primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
+                <a href="{{ route('admin.photo.edit', $photo->id) }}" class="btn primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
+                <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
+                    <i class="fa fa-fw fa-trash"></i>
+                    {!! Form::open(['route'=>['user.photo.destroy', 'id'=> $photo->id], 'method'=>'DELETE']) !!}
+                    {!! Form::close() !!}
+                </a>
+            </div>
+        </div>
+        @endforeach
+        @else
+        <div class="dashboard-empty">
+            <div class="w50 center">
+                Il n'y a aucun évènement pour le moment. <a href="{{ route('user.photo.create') }}"><i class="fa fa-plus"></i> En créer un</a>.
+            </div>
+        </div>
+        @endif
+    </div>
+</div>
 @endsection
