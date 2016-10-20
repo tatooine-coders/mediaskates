@@ -57,7 +57,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             \Session::flash('message', 'Nouvelle photo ajoutée avec succès.');
         }
 
-        return redirect()->route('user.photo.index');
+        return redirect()->route('user.event.show', $data['event_id']);
     }
 
 //    /**

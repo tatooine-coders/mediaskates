@@ -12,7 +12,7 @@
         <div class="grid has-gutter">
             <div class="one-half">
                 {!! Form::label('event_id', 'Evènement') !!}
-                <select name="event_id"{{!empty($event)?' disabled':''}}>
+                <select name="event_id" required="required">
                     @foreach($disciplines as $d)
                     <optgroup label="{{ $d['name'] }}">
                         @foreach($d['events'] as $k=>$e)
@@ -24,17 +24,17 @@
             </div>
             <div class="one-half">
                 {!! Form::label('file', 'Fichier') !!}
-                {!! Form::file('file') !!}
+                {!! Form::file('file', ['required'=>true]) !!}
             </div>
         </div>
         <div class="grid has-gutter">
             <div class="one-half">
                 {!! Form::label('watermark_id', 'Type de watermark') !!}
-                {!! Form::select('watermark_id', $watermarks, null) !!}
+                {!! Form::select('watermark_id', $watermarks, null, ['required'=>true]) !!}
             </div>
             <div class="one-half">
                 {!! Form::label('license_id', 'License') !!}
-                {!! Form::select('license_id', $licenses, null) !!}
+                {!! Form::select('license_id', $licenses, null, ['required'=>true]) !!}
             </div>
         </div>
     </div>
