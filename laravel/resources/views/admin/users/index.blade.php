@@ -6,23 +6,23 @@
 
 @section('content')
 
-<div class="page-wrapper">
-    <div class="content">
+<div class="flex-container page-wrapper">
+    <div class="flex-item-fluid content">
 
         @if(count($users)>0)
         <table class="small">
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
-                    <th>Pseudo</th>
-                    <th>Nom</th>
+                    <th><a href="{{ route('admin.user.index', ['order'=>'pseudo', 'direction'=>($order==='pseudo'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='pseudo'?($direction=='asc'?'desc':'asc'):'asc') }}"></i>Pseudo</a></th>
+                    <th><a href="{{ route('admin.user.index', ['order'=>'last_name', 'direction'=>($order==='last_name'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='last_name'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Nom</a></th>
                     <th>Email</th>
                     <th>Active</th>
                     <th>Liens</th>
                     <th>Role</th>
-                    <th>Ask Photograph</th>
-                    <th>Date créa.</th>
-                    <th>Date modif.</th>
+                    <th><a href="{{ route('admin.user.index', ['order'=>'ask_photograph', 'direction'=>($order==='ask_photograph'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='ask_photograph'?($direction=='asc'?'desc':'asc'):'asc') }}"></i>Ask Photograph</a></th>
+                    <th><a href="{{ route('admin.user.index', ['order'=>'created_at', 'direction'=>($order==='created_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='created_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date créa.</a></th>
+                    <th><a href="{{ route('admin.user.index', ['order'=>'updated_at', 'direction'=>($order==='updated_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='updated_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date modif.</a></th>
                     <th class="actions">Actions</th>
                 </tr>
             </thead>
@@ -62,7 +62,7 @@
                         @endforeach
                     </td>
                     <td>
-                        @if(Laratrust::hasRole('photograph')) <!--condition ne marche pas?? -->
+                        @if($u_role->id===ROLE_PHOTOGRAPH)
                             {{'déjà photographe'}}
                         @elseif ($user->ask_photograph=='1')
                             {{'yes'}}

@@ -14,12 +14,20 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $watermarks = Watermark::query()->get();
+        // Filters
+        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
+        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $watermarks = Watermark::query()
+            ->orderBy($order, $direction)
+            ->get();
+
         return view('admin/watermarks/index', [
             'pageTitle' => 'Liste des watermarks',
-            'watermarks' => $watermarks
+            'watermarks' => $watermarks,
+            'order' => $order,
+            'direction' => $direction,
         ]);
     }
 

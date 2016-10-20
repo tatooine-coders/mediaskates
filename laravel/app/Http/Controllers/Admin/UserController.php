@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends \App\Http\Controllers\Admin\AdminController
 {
@@ -13,13 +14,20 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::query()->get();
+        // Filters
+        $order = ($request->has('order') && in_array($request->get('order'), ['pseudo', 'last_name', 'ask_photograph', 'created_at','updated_at'])) ? $request->get('order') : 'created_at';
+        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $users = User::query()
+            ->orderBy($order, $direction)
+            ->get();
 
         return view('admin/users/index', [
             'pageTitle' => 'Liste des utilisateurs',
             'users' => $users,
+            'direction' => $direction,
+            'order' => $order,
         ]);
     }
 

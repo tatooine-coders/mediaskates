@@ -15,7 +15,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::query()->get();
+        return view('events/index', [
+            'pageTitle' => 'Liste des évènements',
+            'events' => $events
+        ]);
     }
 
     /**
@@ -26,6 +30,11 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::findOrFail($id);
+
+        return view('events/show', [
+            'pageTitle' => $event->name,
+            'event' => $event,
+        ]);
     }
 }

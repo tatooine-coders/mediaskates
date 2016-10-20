@@ -31,6 +31,11 @@ class DisciplineController extends Controller
      */
     public function show($id)
     {
-        //
+        $discipline = Discipline::findOrFail($id);
+
+        return view('disciplines/show', [
+            'discipline' => $discipline,
+            'pageTitle' => $discipline->name
+        ]);
     }
 }
