@@ -29,6 +29,27 @@
 }
 
 .avatar-tiny{
-    width:30px;
-    height:30px;
+	width:30px;
+	height:30px;
+}
+
+.thumbnails{
+	display:flex;
+}
+.thumbnail{
+	padding: $tiny-value;
+	box-shadow: 0 0 2px 0 rgba(77,77,77,.5);
+	margin: 2px;
+	text-align: center;
+	display: inline-table;
+	background-color:lighten($background-color, 20%);
+	border-radius:$border-radius-sm;
+	.actions{
+		border-top: 1px solid darken($background-color, 20%);;
+		padding: 0;
+		margin-top: 5px;
+		a{
+			margin: 5px 0 0 0;
+		}
+	}
 }
