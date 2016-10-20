@@ -33,7 +33,7 @@ class DisciplineController extends Controller
     {
         $discipline = Discipline::findOrFail($id);
 
-        return view('admin/disciplines/show', [
+        return view('disciplines/show', [
             'discipline' => $discipline,
             'pageTitle' => $discipline->name
         ]);
