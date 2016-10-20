@@ -93,11 +93,8 @@
                     <li>{{ link_to(route('admin.event.index'), 'Manage') }}</li>
                     <li>{{ link_to(route('admin.event.create'), 'Add') }}</li>
                     <li class="title">Licenses</li>
-                    <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
-                    <li class="title">Photos</li>
-                    <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li> <!--for test-->
+                    <li>{{ link_to(route('admin.license.index'), 'Manage') }}</li>
+                    <li>{{ link_to(route('admin.license.create'), 'Add') }}</li>
                     <li class="title">Roles</li>
                     <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
                     <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
@@ -121,20 +118,8 @@
         </section>
         <div class="bordure"></div>
 
-        <section id="slide">
-            <div id='mask'>
-                <div id="bandoRec"></div>
-                <div id="bandoTri"></div>
-            </div>
+        @yield('header')
 
-            <div id='diapo'>
-                <div class='slide1'></div>
-                <div class='slide2'></div>
-                <div class='slide3'></div>
-                <div class='slide4'></div>
-                <div class='slide5'></div>
-            </div>
-        </section>
         <h1>@yield('pageTitle'){{ isset($pageTitle) ? $pageTitle : '' }}</h1>
 
         <!-- Errors -->
