@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Discipline;
 use App\Event;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class EventController extends \App\Http\Controllers\Admin\AdminController
 {
@@ -68,7 +68,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $data['user_id'] = auth()->user()->id;
         Event::create($data);
 
-        \Session::flash('message', 'Nouvel évènement créé avec succès.');
+        Session::flash('message', 'Nouvel évènement créé avec succès.');
 
         return redirect()->route('admin.event.index');
     }
@@ -129,7 +129,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $event->update($request->all());
 
         // Redirection et message
-        \Session::flash('message', 'Evènement mis à jour.');
+        Session::flash('message', 'Evènement mis à jour.');
 
         return redirect()->route('admin.event.index');
     }
@@ -145,7 +145,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $event = Event::findOrFail($id);
         $event->delete();
 
-        \Session::flash('flash_message_delete', 'Evènement supprimé.');
+        Session::flash('flash_message_delete', 'Evènement supprimé.');
 
         return redirect()->route('admin.event.index');
     }

@@ -3,8 +3,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Discipline;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -63,14 +61,14 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
         $filename = $this->prepareFile($request);
 
         if ($filename === false) {
-            \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+            Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
         } else {
 
             $data = $request->all();
             $data['logo'] = $filename;
             Discipline::create($data);
 
-            \Session::flash('message', 'Nouvelle discipline créée avec succès.');
+            Session::flash('message', 'Nouvelle discipline créée avec succès.');
         }
 
         return redirect()->route('admin.discipline.index');
@@ -135,14 +133,14 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
                 break;
             case false: // Error
                 $doSave = false;
-                \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
                 break;
             default: // New pic
                 $data['logo'] = $filename;
         }
         if ($doSave) {
             $discipline->update($data);
-            \Session::flash('message', 'Discipline mise à jour.');
+            Session::flash('message', 'Discipline mise à jour.');
         }
 
         return redirect()->route('admin.discipline.index');

@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Comment;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class CommentController extends \App\Http\Controllers\Admin\AdminController
 {

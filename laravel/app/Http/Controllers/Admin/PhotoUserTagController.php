@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class PhotoUserTagController extends \App\Http\Controllers\Admin\AdminController
 {

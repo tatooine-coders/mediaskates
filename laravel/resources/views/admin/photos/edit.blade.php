@@ -11,25 +11,19 @@
         <div class="flex-item-fluid content">
             <div class="grid has-gutter">
                 <div class="one-half">
-                    {!! Form::label('file', 'url') !!}
-                    {!! Form::text('file', null, ['required'=>true, 'placeholder'=>'file']) !!}
+                    <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}" alt="{{ $photo->file }}" />
                 </div>
-                <div class="one-quarter">
+                <div class="one-half">
                     {!! Form::label('id_event', 'Event') !!}
-                    {!! Form::select('event_id', $events) !!}<br/>
-                </div>
-                <div class="one-quarter">
-                    {!! Form::label('id_watermark', 'Watermark') !!}
-                    {!! Form::select('watermark_id', $watermarks) !!}<br/>
-                </div>
-            </div>
-            <div class="grid has-gutter">
-                <div class="one-quarter">
-                    {!! Form::label('id_license', 'License') !!}
-                    {!! Form::select('license_id', $licenses) !!}<br/>
-                </div>
-            </div>
+                    {!! Form::select('event_id', $events) !!}
 
+                    {!! Form::label('id_watermark', 'Watermark') !!}
+                    {!! Form::select('watermark_id', $watermarks) !!}
+
+                    {!! Form::label('id_license', 'License') !!}
+                    {!! Form::select('license_id', $licenses) !!}
+                </div>
+            </div>
         </div>
         <!-- Additionnal aside -->
         <aside class="w20 menu-second">
