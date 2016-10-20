@@ -13,6 +13,7 @@
             <thead>
                 <tr>
                     <th class="id-col">Id</th>
+                    <th>Nb photos</th>
                     <th>Nom</th>
                     <th>Adresse</th>
                     <th>Date</th>
@@ -24,6 +25,7 @@
                 @foreach($events as $event)
                 <tr>
                     <td>{{ $event->id }}</td>
+                    <td>{{ $event->photos_count }}</td>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->address }}, {{ $event->zip }} {{ $event->city }}</td>
                     <td>{{ $event->date_event }}</td>

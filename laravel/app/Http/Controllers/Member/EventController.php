@@ -16,7 +16,9 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function index()
     {
-        $events = Event::query()->get();
+        $events = Event::withCount(['photos' => function($query) {
+                    $query->where('user_id', '=', Auth()->user()->id);
+                }])->get();
 
         return view('member/events/index', [
             'pageTitle' => 'Evènements',
@@ -76,7 +78,9 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function show($id)
     {
-        $event = Event::findOrFail($id);
+        $event = Event::with(['photos' => function($query) {
+                    $query->where('user_id', '=', Auth()->user()->id);
+                }])->findOrFail($id);
 
         return view('member/events/show', [
             'pageTitle' => $event->name,
@@ -95,7 +99,7 @@ class EventController extends \App\Http\Controllers\Member\MemberController
         $event = Event::where('user_id', '=', Auth()->user()->id)
             ->findOrFail($id);
         $disciplines = Discipline::query()->pluck('name', 'id');
-        
+
         return view('member/events/edit', [
             'pageTitle' => 'Evenements',
             'disciplines' => $disciplines,
@@ -112,7 +116,7 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function update(Request $request, $id)
     {
-         $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required',
             'address' => 'required',
             'city' => 'required',
@@ -120,7 +124,7 @@ class EventController extends \App\Http\Controllers\Member\MemberController
             'date_event' => 'required',
         ]);
         $event = Event::findOrFail($id);
-        
+
         $event->update($request->all());
 
         // Redirection et message
