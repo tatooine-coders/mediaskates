@@ -93,9 +93,7 @@
 
         <!-- Page footer -->
         <footer id="footer" role="contentinfo" class="menu">
-            <ul>
-                <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
-            </ul>
+            &copy; 2016 - Vincent Lecourt, Jeremy Cormier & Manuel Tancoigne.
         </footer>
         <!-- /Page footer -->
 

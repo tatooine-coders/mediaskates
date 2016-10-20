@@ -21,9 +21,9 @@
   @role(('photograph'))
   <li class="title">Evènements</li>
   <li><a href="{{ route('user.event.index') }}"><i class="fa fa-fw fa-list"></i> Liste des évènements</a></li>
-  <li><a href="{{ route('user.event.create') }}"><i class="fa fa-fw fa-plus"></i> Add</a></li>
+  <li><a href="{{ route('user.event.create') }}"><i class="fa fa-fw fa-plus"></i> Nouvel évènement</a></li>
   <li class="title">Photos</li>
-  <li><a href="{{ route('user.photo.create') }}"><i class="fa fa-fw fa-list"></i> Add</a></li>
+  <li><a href="{{ route('user.photo.create') }}"><i class="fa fa-fw fa-plus"></i> Nouvelle photo</a></li>
   @endrole
   @role(('admin'))
   <li class="title">Administration</li>
