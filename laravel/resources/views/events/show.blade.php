@@ -26,9 +26,3 @@
 
     </pre>
 @endsection
-/**
- * Created by PhpStorm.
- * User: Jeremy-work
- * Date: 06/10/2016
- * Time: 10:47
- */
