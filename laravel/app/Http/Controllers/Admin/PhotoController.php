@@ -3,13 +3,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\License;
 use App\Photo;
-use App\Discipline;
 use App\Event;
 use App\Watermark;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
-
+use Illuminate\Support\Facades\Session;
 class PhotoController extends \App\Http\Controllers\Admin\AdminController
 {
 
@@ -69,16 +66,10 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
         ]);
 
         $photo = Photo::findOrFail($id);
-        $photo->file = Input::get('file');
-        $photo->license_id = Input::get('license_id');
-        $photo->watermark_id = Input::get('watermark_id');
-        $photo->event_id = Input::get('event_id');
-        $photo->user_id = auth()->user()->id;
-
-        $photo->save();
+        $photo->update($request->all());
 
         // Redirection et message
-        \Session::flash('message', 'Photo mise à jour');
+        Session::flash('message', 'Photo mise à jour');
         return redirect()->route('admin.event.show', $photo->event_id);
     }
 
@@ -92,7 +83,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     {
         $photo = Photo::findOrFail($id);
         $photo->delete();
-        \Session::flash('message', 'Photo successfully delete.');
+        Session::flash('message', 'Photo supprimée avec succès.');
 
         return redirect()->route('admin.event.show', $photo->event_id);
     }

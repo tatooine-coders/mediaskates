@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 use App\Role;
 
 class RoleController extends \App\Http\Controllers\Admin\AdminController
@@ -60,7 +60,7 @@ class RoleController extends \App\Http\Controllers\Admin\AdminController
         $role->permissions()->sync($data['permissions']);
 
         // Redirection et message
-        \Session::flash('message', 'Nouveau rôle créé');
+        Session::flash('message', 'Nouveau rôle créé');
         return redirect()->to(route('admin.role.index'));
     }
 
@@ -125,7 +125,7 @@ class RoleController extends \App\Http\Controllers\Admin\AdminController
         $role->permissions()->sync($data['permissions']);
 
         // Redirection et message
-        \Session::flash('message', 'Rôle mis à jour !');
+        Session::flash('message', 'Rôle mis à jour !');
         return redirect()->to(route('admin.role.show', $id));
     }
 

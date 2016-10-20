@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\License;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -62,7 +61,7 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
         License::create($data);
 
         // Redirection et message
-        \Session::flash('message', 'Nouvelle license créée');
+        Session::flash('message', 'Nouvelle license créée');
         return redirect()->route('admin.license.index');
     }
 
@@ -114,13 +113,12 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
 
         $license = License::findOrFail($id);
 
-        $license->name = Input::get('name');
-        $license->url = Input::get('url');
+        $license->update($request->all());
 
-        $license->save();
+//        $license->save();
 
         // Redirection et message
-        \Session::flash('message', 'License mise à jour.');
+        Session::flash('message', 'License mise à jour.');
         return redirect()->route('admin.license.index');
     }
 

@@ -3,8 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Watermark;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 {
@@ -58,14 +57,11 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
         ]);
 
 
-        $watermark = new Watermark;
-        $watermark->name = Input::get('name');
-        $watermark->type = Input::get('type');
-        $watermark->description = Input::get('description');
+        $watermark = new Watermark($request->all());
         $watermark->save();
 
         // Redirection et message
-        \Session::flash('message', 'Nouveau watermark crée');
+        Session::flash('message', 'Nouveau watermark crée');
         return redirect()->route('admin.watermark.index');
     }
 
@@ -115,7 +111,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
         $watermark->save();
 
         // Redirection et message
-        \Session::flash('message', 'Watermark mis à jour!');
+        Session::flash('message', 'Watermark mis à jour!');
         return redirect()->route('admin.watermark.index');
     }
 
@@ -129,8 +125,8 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $watermark = Watermark::findOrFail($id);
         $watermark->delete();
-        \Session::flash('message','Watermark successfully delete.');
-        
+        Session::flash('message','Watermark successfully delete.');
+
         return redirect()->route('admin.watermark.index');
     }
 }
