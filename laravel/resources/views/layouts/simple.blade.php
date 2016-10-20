@@ -86,11 +86,8 @@
             <li>{{ link_to(route('admin.event.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.event.create'), 'Add') }}</li>
             <li class="title">Licenses</li>
-            <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li>
-            <li class="title">Photos</li>
-            <li>{{ link_to(route('admin.photo.index'), 'Manage') }}</li>
-            <li>{{ link_to(route('admin.photo.create'), 'Add') }}</li> <!--for test-->
+            <li>{{ link_to(route('admin.license.index'), 'Manage') }}</li>
+            <li>{{ link_to(route('admin.license.create'), 'Add') }}</li>
             <li class="title">Roles</li>
             <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
             <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
