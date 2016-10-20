@@ -134,7 +134,7 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
     {
         $license = License::findOrFail($id);
         $license->delete();
-        Session::flash('message', 'License supprimée..');
+        Session::flash('message', 'License supprimée.');
 
         return redirect()->route('admin.license.index');
     }

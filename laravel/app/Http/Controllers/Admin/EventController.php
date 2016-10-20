@@ -20,8 +20,8 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
         $events = Event::query()
             ->orderBy($order, $direction)
+            ->withCount('photos')
             ->get();
-
 
         return view('admin/events/index', [
             'pageTitle' => 'Liste des évènements',
@@ -102,7 +102,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         $event = Event::findOrFail($id);
 
         return view('admin/events/edit', [
-            'pageTitle' => 'Evenements',
+            'pageTitle' => 'Evènements',
             'disciplines' => $disciplines,
             'event' => $event,
         ]);
