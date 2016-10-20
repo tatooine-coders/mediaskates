@@ -1,11 +1,11 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 body {
-margin: 0;
+    margin: 0;
     line-height: 1;
     margin: 0px;
     padding: 0px;
@@ -26,186 +26,186 @@ menu,
 nav,
 section,
 summary {
-  display: block;
+    display: block;
 }
 audio,
 canvas,
 progress,
 video {
-  display: inline-block;
-  vertical-align: baseline;
+    display: inline-block;
+    vertical-align: baseline;
 }
 audio:not([controls]) {
-  display: none;
-  height: 0;
+    display: none;
+    height: 0;
 }
 [hidden],
 template {
-  display: none;
+    display: none;
 }
 a {
-  background-color: transparent;
+    background-color: transparent;
 }
 a:active,
 a:hover {
-  outline: 0;
+    outline: 0;
 }
 abbr[title] {
-  border-bottom: 1px dotted;
+    border-bottom: 1px dotted;
 }
 b,
 strong {
-  font-weight: 700;
+    font-weight: 700;
 }
 dfn {
-  font-style: italic;
+    font-style: italic;
 }
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+    font-size: 2em;
+    margin: 0.67em 0;
 }
 mark {
-  background: #ff0;
-  color: #000000;
+    background: #ff0;
+    color: #000000;
 }
 small {
-  font-size: 80%;
+    font-size: 80%;
 }
 sub,
 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
 sup {
-  top: -0.5em;
+    top: -0.5em;
 }
 sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
 img {
-  border: 0;
+    border: 0;
 }
 svg:not(:root) {
-  overflow: hidden;
+    overflow: hidden;
 }
 figure {
-  margin: 1em 40px;
+    margin: 1em 40px;
 }
 hr {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
 }
 pre {
-  overflow: auto;
+    overflow: auto;
 }
 code,
 kbd,
 pre,
 samp {
-  font-family: monospace,monospace;
-  font-size: 1em;
+    font-family: monospace,monospace;
+    font-size: 1em;
 }
 button,
 input,
 optgroup,
 select,
 textarea {
-  color: inherit;
-  font: inherit;
-  margin: 0;
+    color: inherit;
+    font: inherit;
+    margin: 0;
 }
 button {
-  overflow: visible;
+    overflow: visible;
 }
 button,
 select {
-  text-transform: none;
+    text-transform: none;
 }
 button,
 html input[type=button],
 input[type=reset],
 input[type=submit] {
-  -webkit-appearance: button;
-  cursor: pointer;
+    -webkit-appearance: button;
+    cursor: pointer;
 }
 button[disabled],
 html input[disabled] {
-  cursor: default;
+    cursor: default;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 }
 input {
-  line-height: normal;
+    line-height: normal;
 }
 input[type=checkbox],
 input[type=radio] {
-  box-sizing: border-box;
-  padding: 0;
+    box-sizing: border-box;
+    padding: 0;
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  height: auto;
+    height: auto;
 }
 input[type=search] {
-  -webkit-appearance: textfield;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
 }
 input[type=search]::-webkit-search-cancel-button,
 input[type=search]::-webkit-search-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 fieldset {
-  border: 1px solid silver;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
+    border: 1px solid silver;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
 }
 legend {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 }
 textarea {
-  overflow: auto;
+    overflow: auto;
 }
 optgroup {
-  font-weight: 700;
+    font-weight: 700;
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 td,
 th {
-  padding: 0;
+    padding: 0;
 }
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
 }
 ::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
+    background: #b3d4fc;
+    text-shadow: none;
 }
 ::selection {
-  background: #b3d4fc;
-  text-shadow: none;
+    background: #b3d4fc;
+    text-shadow: none;
 }
 hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
 }
 audio,
 canvas,
@@ -213,46 +213,44 @@ iframe,
 img,
 svg,
 video {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
 textarea {
-  resize: vertical;
+    resize: vertical;
 }
 .browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 .menu {
-  list-style-type: none;
- 
-  padding: 5px 0;
-  margin: 0;
-  font-size: 0.8em;
+    list-style-type: none;
+    padding-top: 40px;
+    margin: 0;
+    font-size: 1.4em;
 }
 .menu li {
-  display: inline;
-  padding-right: 10px;
+    display: inline;
+    padding-right: 10px;
 }
 
 .menu a:link, .menu a:hover, .menu a:focus, .menu a:visited { 
- 	text-decoration:none;
- 	color: white;
- 	font-size: 1em;
-} 
- 
+    text-decoration: none;
+    color: white;
+   } 
+
 .menu a:active, .menu a:hover
 {
-	color: red;
+    color: red;
 }
 /* ==========================================================================
    Media Queries
@@ -261,93 +259,93 @@ textarea {
    Helper classes
    ========================================================================== */
 .hidden {
-  display: none !important;
-  visibility: hidden;
+    display: none !important;
+    visibility: hidden;
 }
 .visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
 }
 .invisible {
-  visibility: hidden;
+    visibility: hidden;
 }
 .clearfix:before,
 .clearfix:after {
-  content: " ";
-  display: table;
+    content: " ";
+    display: table;
 }
 .clearfix:after {
-  clear: both;
+    clear: both;
 }
 .clearfix {
-  *zoom: 1;
+    *zoom: 1;
 }
 /* ==========================================================================
    Print styles
    ========================================================================== */
 @media print {
-  *,
-  *:before,
-  *:after {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-  a[href^="#"]:after,
-  a[href^="javascript:"]:after {
-    content: "";
-  }
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-  thead {
-    display: table-header-group;
-  }
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-  img {
-    max-width: 100% !important;
-  }
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+    thead {
+        display: table-header-group;
+    }
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+    img {
+        max-width: 100% !important;
+    }
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
 }
 /*# sourceMappingURL=style.css.map */
 
@@ -356,112 +354,111 @@ textarea {
 =============================================================================*/
 
 h2 {
-	font-size: 1.2em;
-		color: red;
+    font-size: 1.2em;
+    color: red;
 }
 
 /*-----------*/
 /*           */
 /*-----------*/
 
-.menu {
-    padding-bottom: 3px;
-    font-size: 1.5em;
-        color: white;
-}    
-    
 #enteteBarre {
     height: 70px;
-  
+
     display: flex;
     flex-flow: row wrap;
     align-items: center;
 }
 
 #logo, #nav, #reseauxSociaux {
-	display: inline-flex;
-    }
+    display: inline-flex;
+}
 
 #logo {
-	padding-left: 60px;
-	width: 380px;
+    
+    padding: 15px 0 0 20px;
+    width: 380px;
+}
+
+#logo img {
+    width: 90%;
 }
 
 #nav {
-	width: 65%;
+    width: 65%;
 }
 
 nav a:link, nav a:hover, nav a:focus, nav a:visited { 
- 	text-decoration:none;
- 	color: whiteihte;
- 	font-size: 1.2em;
+    text-decoration:none;
+    color: white;
+    font-size: 1.2em;
 } 
- 
+
 nav a:active, nav a:hover
 {
-	color: red;
+    color: red;
 }
 
 #reseauxSociaux img{
-    width: 50px;
-    padding-right: 5px;
+    width: 38px;
+    padding: 10px ;
 }
 
 #reseauxSociaux {
- 	margin-top: 6px;
-	text-align: right;
+    margin-top: 6px;
+    text-align: auto;
 }
 
 div.bordure {
-	vertical-align: top;	
-	border: 2px solid red;
+    vertical-align: top;	
+    border: 2px solid red;
 }
 
 #utilisation, #mediaskates, #information {
-	display: inline-block;
-	vertical-align: top;
-	font-size: 13px;
-	padding-bottom: 20px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 13px;
+    padding-bottom: 20px;
 }
 
 #utilisation {
-	padding-left: 115px;
-	width: 400px;
+    padding-left: 115px;
+    width: 400px;
 }
 
 #mediaskates {
-	width: 250px;
+    width: 250px;
 }
 
 #information {
-	width: 250px;
+    width: 250px;
 }
 
 #slide {
-	display: block;
+    display: block;
 }
 
 #baniereFooter {
-	display: flex;
+    display: flex;
 }
 
 
 #liens {
-	margin-top: 15px;
-	display: inline-flex;
-	justify-content: space-around;
-	width: 100%;
+    margin-top: 15px;
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%;
 }
 
 footer a:link, footer a:hover, footer a:focus, footer a:visited { 
- 	text-decoration:none;
- 	color: gray;
- 	font-size: 0.8em;
+    text-decoration:none;
+    color: gray;
+    font-size: 0.8em;
 } 
- 
+
 footer a:active, footer a:hover
 {
-	color: white;
+    color: white;
 }
 
 
@@ -469,116 +466,116 @@ footer a:active, footer a:hover
 /*   Cache   */
 /*-----------*/
 #mask {
-	position: absolute;
-	z-index: 2;
+    position: absolute;
+    z-index: 2;
 }
 
 #bandoRec {
-	position: absolute;
-	z-index: 2;
-	width:400px;
-	height:705px;
-	background: rgba(0,0,0,0.6);
+    position: absolute;
+    z-index: 2;
+    width:400px;
+    height:705px;
+    background: rgba(0,0,0,0.6);
 }
 
 #bandoTri{
-	position: absolute;
-	z-index: 2;
-	margin-left:  400px;
-	border-style: solid;
-	border-width: 705px 200px 0 0;
-	border-color: rgba(0,0,0,0.6) transparent transparent transparent;
+    position: absolute;
+    z-index: 2;
+    margin-left:  400px;
+    border-style: solid;
+    border-width: 705px 200px 0 0;
+    border-color: rgba(0,0,0,0.6) transparent transparent transparent;
 }
 
 /*-----------*/
 /* SlideShow */
 /*-----------*/
 #diapo {
-  max-width: 100%;
-  height: 700px;
-  margin: 5px;
+    max-width: 100%;
+    height: 700px;
+    margin: 5px;
 }
 
 .slide1,.slide2,.slide3,.slide4,.slide5 {
-  position: absolute;
-  width: 100%;
-  height: 700px;
+    position: absolute;
+    width: 100%;
+    height: 700px;
 }
 
 .slide1 {
-  background: url("../img/test.jpg")no-repeat center;
-  background-size: cover;
-  animation:fade 15s infinite;
-  -webkit-animation:fade 15s infinite;
+    background: url("../images/sources/test.jpg") no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade 15s infinite;
 }
 .slide2 {
-  background: url("../img/test2.jpg")no-repeat center;
-  background-size: cover;
-  animation:fade 15s infinite;
-  -webkit-animation:fade2 15s infinite;
+    background: url("../images/sources/test2.jpg") no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade2 15s infinite;
 }
 .slide3 {
-  background: url("../img/test3.jpg")no-repeat center;
-  background-size: cover;
-  animation:fade 15s infinite;
-  -webkit-animation:fade3 15s infinite;
+    background: url("../images/sources/test3.jpg")no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade3 15s infinite;
 }
 .slide4 {
-  background: url("../img/test4.jpg")no-repeat center;
-  background-size: cover;
-  animation:fade 15s infinite;
-  -webkit-animation:fade4 15s infinite;
+    background: url("../images/sources/test4.jpg")no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade4 15s infinite;
 }
 .slide5 {
-  background: url("../img/test5.jpg")no-repeat center;
-  background-size: cover;
-  animation:fade 15s infinite;
-  -webkit-animation:fade5 15s infinite;
+    background: url("../images/sources/test5.jpg")no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade5 15s infinite;
 }
 
 @keyframes fade
 {
-  0%   {opacity:1}
-  20% { opacity: 0}
-  40% { opacity: 0}
-  60% { opacity: 0}
-  80% { opacity: 0}
-  100% { opacity: 1}
-   
+    0%   {opacity:1}
+    20% { opacity: 0}
+    40% { opacity: 0}
+    60% { opacity: 0}
+    80% { opacity: 0}
+    100% { opacity: 1}
+
 }
 @keyframes fade2
 {
-  0%   {opacity:0}
-  20% { opacity: 1}
-  40% { opacity: 0}
-  60% { opacity: 0}
-  80% { opacity: 0}
-  100% { opacity: 0}
+    0%   {opacity:0}
+    20% { opacity: 1}
+    40% { opacity: 0}
+    60% { opacity: 0}
+    80% { opacity: 0}
+    100% { opacity: 0}
 }
 @keyframes fade3
 {
-  0%   {opacity:0}
-  20% { opacity: 0}
-  40% { opacity: 1}
-  60% { opacity: 0}
-  80% { opacity: 0}
-  100% { opacity: 0}
+    0%   {opacity:0}
+    20% { opacity: 0}
+    40% { opacity: 1}
+    60% { opacity: 0}
+    80% { opacity: 0}
+    100% { opacity: 0}
 }
 @keyframes fade4
 {
-  0%   {opacity:0}
-  20% { opacity: 0}
-  40% { opacity: 0}
-  60% { opacity: 1}
-  80% { opacity: 0}
-  100% { opacity: 0}
+    0%   {opacity:0}
+    20% { opacity: 0}
+    40% { opacity: 0}
+    60% { opacity: 1}
+    80% { opacity: 0}
+    100% { opacity: 0}
 }
 @keyframes fade5
 {
-  0%   {opacity:0}
-  20%  {opacity: 0}
-  40%  { opacity: 0}
-  60%  { opacity: 0}
-  80%  { opacity: 1}
-  100% { opacity: 0}
+    0%   {opacity:0}
+    20%  {opacity: 0}
+    40%  { opacity: 0}
+    60%  { opacity: 0}
+    80%  { opacity: 1}
+    100% { opacity: 0}
 }

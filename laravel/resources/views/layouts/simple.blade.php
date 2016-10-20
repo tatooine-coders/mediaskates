@@ -165,8 +165,8 @@
                 <a href="http://www.online-skating.com/"><img src="{{ asset('images/sources/logo_rel2000.png') }}" alt="Logo fr" width="90%" title="www.online-skating.com"/></a>
                 <a href="http://www.rollerenlinea.com/"><img src="{{ asset('images/sources/logo_es-2000.png') }}" alt="logo es" width="90%" title="www.rollerenlinea.com"/></a>
                 <a href="http://www.onlineskaten.de/"><img src="{{ asset('images/sources/logo_de-2000.png') }}" alt="logo de" width="90%" title="www.onlineskaten.de"/></a>
-                <a href="http://www.spotland.fr"><img src="{{ asset('images/sources/logo_spotland 2000.png') }}" alt="d" width="70%" title="www.spotland.fr"/></a>
-                <a href="http://www.occasionroller.com"><img src="{{ asset('images/sources/logo_or2000.png') }}"alt="" width="75%" title="www.occasionroller.com"/></a>
+                <a href="http://www.spotland.fr"><img src="{{ asset('images/sources/logo_spotland 2000.png') }}" alt="d" width="75%" title="www.spotland.fr"/></a>
+                <a href="http://www.occasionroller.com"><img src="{{ asset('images/sources/logo_or2000.png') }}"alt="" width="93%" title="www.occasionroller.com"/></a>
             </div>
 
         </section>
