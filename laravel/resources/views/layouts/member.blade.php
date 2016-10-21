@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="{{ url('css/member.css') }}">
 
         <!-- Scripts -->
+        <script src="{{ asset('js/vendor/jquery.min.js')}}"></script>
+        <script src="{{ asset('js/vendor/masonry.pkgd.min.js')}}"></script>
+        <script src="{{ asset('js/vendor/jquery.fancybox.js')}}"></script>
+        <script src="{{ asset('js/vendor/jquery.fancybox-thumbs.js')}}"></script>
         <script>
             window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
         </script>
