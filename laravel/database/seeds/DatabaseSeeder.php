@@ -113,12 +113,12 @@ class DatabaseSeeder extends Seeder
         // Sample disciplines
         $discipline1 = new Discipline();
         $discipline1->name = 'Roller';
-        $discipline1->logo = 'default.jpg';
+        $discipline1->logo = 'default.gif';
         $discipline1->save();
 
         $discipline2 = new Discipline();
         $discipline2->name = 'Skateboard';
-        $discipline2->logo = 'default.jpg';
+        $discipline2->logo = 'default.gif';
         $discipline2->save();
 
         // Samples events
@@ -127,17 +127,17 @@ class DatabaseSeeder extends Seeder
         $event->address = 'Place de la République';
         $event->city = 'Le Mans';
         $event->zip = '72000';
-        $event->date_event = '2018-12-12';
+        $event->date_event = '2016-12-12';
         $event->discipline_id = '1';
         $event->user_id = '2';
         $event->save();
 
         $event2 = new Event();
-        $event2->name = 'Suce ma roue';
-        $event2->address = 'Parc de la Villette';
-        $event2->city = 'Paris';
-        $event2->zip = '75000';
-        $event2->date_event = '2018-10-10';
+        $event2->name = 'Parcours de la brindillette';
+        $event2->address = 'ZA de la Paysannerie';
+        $event2->city = 'Mufflins';
+        $event2->zip = 'GRD-001';
+        $event2->date_event = '2015-10-10';
         $event2->discipline_id = '1';
         $event2->user_id = '1';
         $event2->save();

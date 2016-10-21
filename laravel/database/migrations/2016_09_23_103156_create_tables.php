@@ -131,7 +131,7 @@ class CreateTables extends Migration
          */
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 25);
+            $table->string('name', 50);
             $table->string('address', 50);
             $table->date('date_event');
             $table->string('city', 25);
@@ -151,7 +151,7 @@ class CreateTables extends Migration
             $table->string('name', 25);
             $table->text('description');
             $table->string('position', 25);
-            $table->int('margin')->default(0);
+            $table->integer('margin')->default(0);
             $table->string('file', 25);
             $table->timestamps();
         });
