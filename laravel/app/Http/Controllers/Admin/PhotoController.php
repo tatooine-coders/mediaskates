@@ -66,41 +66,28 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'license_id' => 'required',
         ]);
 
-        $error = 0;
         $photo = Photo::findOrFail($id);
+
+        $doSave = true;
+        $filename = null;
+        $data = $request->all();
         if ($request->get('watermark_id') != $photo->watermark_id) {
-            switch ($request->get('watermark_id')) {
-                case 2:
-                    $config = ['position' => 'center', 'opacity' => 0.5];
-                    $file = 'center.png';
-                    break;
-                default:
-                    $config = ['position' => 'bottom-right', 'opacity' => 0.5];
-                    $file = 'default.gif';
-            }
-
-            // Delete the thumbnail, picture and original
-            \Illuminate\Support\Facades\Storage::delete(UPLOADS_PIC_FOLDER . $photo->file);
-            \Illuminate\Support\Facades\Storage::delete(UPLOADS_THUMB_FOLDER . $photo->file);
-
-            $image = new \App\Libraries\SimpleImage();
-            $image->load(ORIGINAL_PICS_FOLDER . $photo->file);
-            $image->resizeToWidth(THUMB_WIDTH);
-            if (!$image->save(UPLOADS_THUMB_FOLDER . $photo->file)) {
-                $error = 1;
-            }
-            $image->load(ORIGINAL_PICS_FOLDER . $photo->file);
-            $image->resizeToWidth(PIC_WIDTH);
-            $image->waterMark('images/watermarks/' . $file, $config['position']);
-            if (!$image->save(UPLOADS_PIC_FOLDER . $photo->file)) {
-                $error = 1;
-            }
+            // Fetch new watermark in DB
+            $watermark = Watermark::findOrFail($request->get('watermark_id'));
+            // Re-create the thumbnail
+            $filename = $this->prepareFile($request, $watermark, $photo->file);
         }
-        if ($error === 0) {
-            $photo->update($request->all());
-            Session::flash('message', 'Photo mise à jour');
-        } else {
+
+        if ($filename === null) {
+            unset($data['file']);
+        } elseif ($filename === false) {
             Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+            $doSave = false;
+        }
+
+        if ($doSave) {
+            $photo->update($data);
+            Session::flash('message', 'Photo mise à jour');
         }
 
         return redirect()->route('admin.event.show', $photo->event_id);
@@ -119,5 +106,39 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
         Session::flash('message', 'Photo supprimée avec succès.');
 
         return redirect()->route('admin.event.show', $photo->event_id);
+    }
+
+    protected function prepareFile(Request $request, $watermark, $original = null)
+    {
+        // Load the lib
+        $image = new \App\Libraries\SimpleImage();
+
+        // Define file name: original name or new one.
+        $filename = ($original === null ? time() . '.' . $request->file('file')->getClientOriginalExtension() : $original);
+        // Define original file: already existing or from form.
+        $original = ($original === null ? $request->file('file')->getPath() : ORIGINAL_PICS_FOLDER . $original);
+        // Loading the file
+        $image->load($original);
+
+        $error = 0;
+
+        // Creating thumbnail
+        $image->resizeToWidth(THUMB_WIDTH);
+        if (!$image->save(UPLOADS_THUMB_FOLDER . $filename)) {
+            $error = 1;
+        }
+
+        // Reload and create the watermarked image
+        $image->load($original);
+        $image->resizeToWidth(PIC_WIDTH);
+        $image->waterMark('images/watermarks/' . $watermark->file, $watermark->position, $watermark->margin);
+        if (!$image->save(UPLOADS_PIC_FOLDER . $filename)) {
+            $error = 1;
+        }
+        if ($error == 1) {
+            return false;
+        } else {
+            return $filename;
+        }
     }
 }
