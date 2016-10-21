@@ -1,4 +1,4 @@
-@extends('layouts/admin')
+@extends('layouts/member')
 
 @section('sectionLinks')
 @include('admin/events/section_links')
@@ -32,6 +32,9 @@
             <i class="fa fa-fw fa-trash"></i> Supprimer
             {!! Form::open(['route'=>['admin.event.destroy', 'id'=> $event->id], 'method'=>'DELETE']) !!}
             {!! Form::close() !!}
+        </a>
+        <a href="{{ route('user.photo.create', ['event'=>$event->id]) }}" class="btn primary block">
+            <i class="fa fa-plus"></i> Ajouter une photo
         </a>
     </aside>
 </div>
@@ -84,7 +87,7 @@
 <div class="page-wrapper">
     <div class="dashboard-empty">
         <div class="w50 center">
-            Il n'y a aucune photo pour cet évènement pour le moment.
+            Il n'y a aucune photo pour cet évènement pour le moment. <a href="{{ route('user.photo.create', ['event'=>$event->id]) }}"><i class="fa fa-plus"></i> En ajouter...</a>.
         </div>
     </div>
 </div>
