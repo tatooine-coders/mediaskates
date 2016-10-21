@@ -66,11 +66,43 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             'license_id' => 'required',
         ]);
 
+        $error = 0;
         $photo = Photo::findOrFail($id);
-        $photo->update($request->all());
+        if ($request->get('watermark_id') != $photo->watermark_id) {
+            switch ($request->get('watermark_id')) {
+                case 2:
+                    $config = ['position' => 'center', 'opacity' => 0.5];
+                    $file = 'center.png';
+                    break;
+                default:
+                    $config = ['position' => 'bottom-right', 'opacity' => 0.5];
+                    $file = 'default.gif';
+            }
 
-        // Redirection et message
-        Session::flash('message', 'Photo mise à jour');
+            // Delete the thumbnail, picture and original
+            \Illuminate\Support\Facades\Storage::delete(UPLOADS_PIC_FOLDER . $photo->file);
+            \Illuminate\Support\Facades\Storage::delete(UPLOADS_THUMB_FOLDER . $photo->file);
+
+            $image = new \App\Libraries\SimpleImage();
+            $image->load(ORIGINAL_PICS_FOLDER . $photo->file);
+            $image->resizeToWidth(THUMB_WIDTH);
+            if (!$image->save(UPLOADS_THUMB_FOLDER . $photo->file)) {
+                $error = 1;
+            }
+            $image->load(ORIGINAL_PICS_FOLDER . $photo->file);
+            $image->resizeToWidth(PIC_WIDTH);
+            $image->waterMark('images/watermarks/' . $file, $config['position']);
+            if (!$image->save(UPLOADS_PIC_FOLDER . $photo->file)) {
+                $error = 1;
+            }
+        }
+        if ($error === 0) {
+            $photo->update($request->all());
+            Session::flash('message', 'Photo mise à jour');
+        } else {
+            Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+        }
+
         return redirect()->route('admin.event.show', $photo->event_id);
     }
 
