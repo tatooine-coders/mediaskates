@@ -323,6 +323,10 @@ class SimpleImage
 
         // Getting the watermark position:
         switch ($position) {
+            case 'center':
+                $startX=($this->getWidth()-$w->getWidth())/2;
+                $startY=($this->getHeight()-$w->getHeight())/2;
+                break;
             case 'top-left':
                 $startX = $margins;
                 $startY = $margins;
