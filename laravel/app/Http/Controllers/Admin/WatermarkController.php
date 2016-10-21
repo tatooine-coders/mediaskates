@@ -121,10 +121,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
         ]);
 
         $watermark = Watermark::find($id);
-        $watermark->name = Input::get('name');
-        $watermark->type = Input::get('type');
-        $watermark->description = Input::get('description');
-        $watermark->save();
+        $watermark->update($request->all());
 
         // Redirection et message
         Session::flash('message', 'Watermark mis à jour!');

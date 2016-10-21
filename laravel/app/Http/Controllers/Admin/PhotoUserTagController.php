@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\PhotoUserTag;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class PhotoUserTagController extends \App\Http\Controllers\Admin\AdminController
 {

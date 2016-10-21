@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\License;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class LicenseController extends \App\Http\Controllers\Admin\AdminController
 {

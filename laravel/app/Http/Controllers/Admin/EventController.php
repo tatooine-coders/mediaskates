@@ -32,7 +32,7 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
         )) {
             $request->get('direction');
         }
-        
+
         $events = Event::query()
             ->orderBy($order, $direction)
             ->withCount('photos')

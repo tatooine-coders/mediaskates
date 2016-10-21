@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Photo;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class PhotoController extends \App\Http\Controllers\Member\MemberController
 {
@@ -46,14 +46,14 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         $filename = $this->prepareFile($request);
 
         if ($filename === false) {
-            \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+            Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
         } else {
             $data = $request->all();
             $data['file'] = $filename;
             $data['user_id'] = Auth()->user()->id;
             Photo::create($data);
 
-            \Session::flash('message', 'Nouvelle photo ajoutée avec succès.');
+            Session::flash('message', 'Nouvelle photo ajoutée avec succès.');
         }
 
         return redirect()->route('user.event.show', $data['event_id']);
@@ -124,7 +124,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         \Illuminate\Support\Facades\Storage::delete(UPLOADS_THUMB_FOLDER.$photo->file);
         $photo->delete();
 
-        \Session::flash('message', 'Photo supprimée avec succès.');
+        Session::flash('message', 'Photo supprimée avec succès.');
 
         return redirect()->route('user.photo.index');
     }

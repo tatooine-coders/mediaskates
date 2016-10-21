@@ -3,8 +3,8 @@ namespace App\Http\Controllers\Member;
 
 use App\Discipline;
 use App\Event;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 
 class EventController extends \App\Http\Controllers\Member\MemberController
 {
@@ -66,7 +66,7 @@ class EventController extends \App\Http\Controllers\Member\MemberController
         Event::create($data);
 
         // Redirection et message
-        \Session::flash('message', 'Nouvel évènement créé');
+        Session::flash('message', 'Nouvel évènement créé');
         return redirect()->route('user.event.index');
     }
 
@@ -128,7 +128,7 @@ class EventController extends \App\Http\Controllers\Member\MemberController
         $event->update($request->all());
 
         // Redirection et message
-        \Session::flash('message', 'Evènement mis à jour.');
+        Session::flash('message', 'Evènement mis à jour.');
 
         return redirect()->route('user.event.index');
     }

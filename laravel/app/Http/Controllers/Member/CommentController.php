@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Comment;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class CommentController extends \App\Http\Controllers\Member\MemberController
 {

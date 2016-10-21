@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Photo;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class PhotoController extends Controller
 {

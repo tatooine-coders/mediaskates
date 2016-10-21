@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\User;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class UserController extends \App\Http\Controllers\Member\MemberController
 {
@@ -75,7 +75,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
             $image->load($upImage->getPathname());
             $image->centerCropFull(150, 150);
             if (!$image->save(PROFILE_PICS_FOLDER . $filename)) {
-                \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
                 unset($data['profile_pic']);
             } else {
                 $data['profile_pic'] = $filename;
@@ -85,7 +85,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         $user->fill($data)->save();
 
         // Redirection et message
-        \Session::flash('message', 'Votre profil a été mis à jour !');
+        Session::flash('message', 'Votre profil a été mis à jour !');
         return \Redirect::to(route('user.personnal_infos'));
     }
 
@@ -157,7 +157,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         $user->save();
 
         // Redirection et message
-        \Session::flash('message', 'Vos préférences ont été mises à jour !');
+        Session::flash('message', 'Vos préférences ont été mises à jour !');
         return \Redirect::to(route('user.preferences'));
     }
 
@@ -188,7 +188,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         $user->save();
 
         // Redirection et message
-        \Session::flash('message', 'Votre mot de passe a été mis à jour !');
+        Session::flash('message', 'Votre mot de passe a été mis à jour !');
         return \Redirect::to(route('user.personnal_infos'));
     }
 
@@ -197,14 +197,14 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         $user = User::query()->findOrFail(Auth()->user()->id);
         if ($user->ask_photograph == 1) {
             // Redirection et message
-            \Session::flash('message', 'Votre demamnde a déjà été prise en compte!');
+            Session::flash('message', 'Votre demamnde a déjà été prise en compte!');
             return \Redirect::to(route('user.personnal_infos'));
         } else {
             $user->ask_photograph = 1;
             $user->save();
 
             // Redirection et message
-            \Session::flash('message', 'Votre demamnde a bien été prise en compte!');
+            Session::flash('message', 'Votre demamnde a bien été prise en compte!');
             return \Redirect::to(route('user.personnal_infos'));
         }
     }
