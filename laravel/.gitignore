@@ -32,7 +32,7 @@
 !/public/images/uploads/thumbs/.gitkeep
 # Disciplines
 /public/images/disciplines/*
-!/public/images/disciplines/.gitkeep
+!/public/images/disciplines/default.gif
 !/public/images/disciplines/thumbs/
 /public/images/disciplines/thumbs/*
-!/public/images/disciplines/thumbs/.gitkeep
+!/public/images/disciplines/thumbs/default.gif
