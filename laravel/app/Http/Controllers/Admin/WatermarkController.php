@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Watermark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Libraries\SimpleImage;
 
 class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 {
@@ -21,16 +22,14 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 
         if ($request->has('order') &&
             in_array(
-                $request->get('order'),
-                ['name', 'created_at', 'updated_at']
+                $request->get('order'), ['name', 'margin', 'position', 'file', 'created_at', 'updated_at']
             )) {
             $order = $request->get('order');
         }
 
         if ($request->has('direction') &&
             in_array(
-                $request->get('direction'),
-                ['asc', 'desc']
+                $request->get('direction'), ['asc', 'desc']
             )) {
             $direction = $request->get('direction');
         }
@@ -68,16 +67,24 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $this->validate($request, [
             'name' => 'required',
-            'type' => 'required|numeric',
             'description' => 'required',
+            'position' => 'required',
+            'file' => 'mimes:gif,png,jpg'
         ]);
 
+        $filename = $this->prepareFile($request);
 
-        $watermark = new Watermark($request->all());
-        $watermark->save();
+        if ($filename === false) {
+            Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+        } else {
+            $data = $request->all();
+            $data['file'] = $filename;
+            Watermark::create($data);
 
-        // Redirection et message
-        Session::flash('message', 'Nouveau watermark crée');
+            Session::flash('message', 'Nouveau watermark créé avec succès.');
+        }
+
+        // Redirection
         return redirect()->route('admin.watermark.index');
     }
 
@@ -116,15 +123,35 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $this->validate($request, [
             'name' => 'required',
-            'type' => 'required|numeric',
-            'description' => 'required'
+            'description' => 'required',
+            'position' => 'required',
+            'file' => 'mimes:gif,png,jpg'
         ]);
 
-        $watermark = Watermark::find($id);
-        $watermark->update($request->all());
+        $watermark = Watermark::findOrFail($id);
+        $filename = null;
+        $doSave = true;
+        if (!empty($request->file('file'))) {
+            $filename = $this->prepareFile($request);
+        }
+        $data = $request->all();
+        switch ($filename) {
+            case null: // No new pic
+                unset($data['file']);
+                break;
+            case false: // Error
+                $doSave = false;
+                Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+                break;
+            default: // New pic
+                $data['file'] = $filename;
+        }
+        if ($doSave) {
+            // Save
+            $watermark->update($data);
+            Session::flash('message', 'Watermark mis à jour.');
+        }
 
-        // Redirection et message
-        Session::flash('message', 'Watermark mis à jour!');
         return redirect()->route('admin.watermark.index');
     }
 
@@ -137,9 +164,27 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function destroy($id)
     {
         $watermark = Watermark::findOrFail($id);
+        \Illuminate\Support\Facades\Storage::delete(WATERMARKS_FOLDER . $watermark->file);
         $watermark->delete();
         Session::flash('message', 'Watermark successfully delete.');
 
         return redirect()->route('admin.watermark.index');
+    }
+
+    protected function prepareFile(Request $request, $original = null)
+    {
+        // Define file name: original name or new one.
+        $filename = ($original === null ? time() . '.' . $request->file('file')->getClientOriginalExtension() : $original);
+        // Define original file: already existing or from form.
+        $original = ($original === null ? $request->file('file')->getPath() : WATERMARKS_FOLDER . $original);
+
+        $upImage = $request->file('file');
+        $upImage->move(public_path(WATERMARKS_FOLDER), $filename);
+
+        if (!file_exists(public_path(WATERMARKS_FOLDER . $filename))) {
+            return false;
+        }
+
+        return $filename;
     }
 }

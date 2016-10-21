@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Watermark extends Model
 {
-    public $fillable = ['name', 'type', 'description'];
+    public $fillable = ['name', 'description', 'position', 'margin', 'file'];
 
     public function photos()
     {

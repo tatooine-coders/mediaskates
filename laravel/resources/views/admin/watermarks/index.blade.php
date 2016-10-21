@@ -12,9 +12,11 @@
                 <thead>
                     <tr>
                         <th class="id-col">Id</th>
-                        <th><a href="{{ route('admin.watermark.index', ['order'=>'name', 'direction'=>($order==='name'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='name'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Nom</a></th>
-                        <th>Type</th>
                         <th>Description</th>
+                        <th><a href="{{ route('admin.watermark.index', ['order'=>'name', 'direction'=>($order==='name'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='name'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Nom</a></th>
+                        <th><a href="{{ route('admin.watermark.index', ['order'=>'position', 'direction'=>($order==='position'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='position'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Position</a></th>
+                        <th><a href="{{ route('admin.watermark.index', ['order'=>'margin', 'direction'=>($order==='margin'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='margin'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Marges</a></th>
+                        <th><a href="{{ route('admin.watermark.index', ['order'=>'file', 'direction'=>($order==='file'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='file'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Fichier</a></th>
                         <th><a href="{{ route('admin.watermark.index', ['order'=>'created_at', 'direction'=>($order==='created_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='created_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date créa.</a></th>
                         <th><a href="{{ route('admin.watermark.index', ['order'=>'updated_at', 'direction'=>($order==='updated_at'?($direction==='asc'?'desc':'asc'):'asc')]) }}"><i class="fa fa-fw fa-sort-{{ ($order=='updated_at'?($direction=='asc'?'desc':'asc'):'asc') }}"></i> Date modif.</a></th>
                         <th class="actions">Actions</th>
@@ -25,8 +27,10 @@
                         <tr>
                             <td>{{{ $watermark->id }}}</td>
                             <td>{{{ $watermark->name }}}</td>
-                            <td>{{{ $watermark->type }}}</td>
                             <td>{{{ $watermark->description }}}</td>
+                            <td>{{{ $watermark->position }}}</td>
+                            <td>{{{ $watermark->margin }}}</td>
+                            <td>{{{ $watermark->file }}}</td>
                             <td>{{{ $watermark->created_at }}}</td>
                             <td>{{{ $watermark->updated_at }}}</td>
                             <td class="actions">
