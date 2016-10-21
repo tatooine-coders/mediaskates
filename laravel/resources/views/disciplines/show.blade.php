@@ -2,10 +2,8 @@
 
 @section('content')
     <h2>{{ $discipline->name }}</h2>
-    <pre>
         {{ $discipline->name }}
-        <img src="{{ asset(DISCIPLINES_THUMB_FOLDER.$discipline->logo) }}" alt="{{ $discipline->name}}" />
-    </pre>
+        <img src="{{ asset(DISCIPLINES_PIC_FOLDER.$discipline->logo) }}" alt="{{ $discipline->name}}" />
 
 <hr>
 <h2>Evenements pour cette discipline</h2>

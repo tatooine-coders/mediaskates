@@ -13,36 +13,7 @@ body {
     font-family: Verdana, Arial, sans-serif;
     background-color: black;
 }
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-    display: block;
-}
-audio,
-canvas,
-progress,
-video {
-    display: inline-block;
-    vertical-align: baseline;
-}
-audio:not([controls]) {
-    display: none;
-    height: 0;
-}
-[hidden],
-template {
-    display: none;
-}
+
 a {
     background-color: transparent;
 }
@@ -50,40 +21,14 @@ a:active,
 a:hover {
     outline: 0;
 }
-abbr[title] {
-    border-bottom: 1px dotted;
-}
-b,
-strong {
-    font-weight: 700;
-}
-dfn {
-    font-style: italic;
-}
+
 h1 {
+    padding-left: 30px;
     font-size: 2em;
     margin: 0.67em 0;
+    color: #e0e0e0; 
 }
-mark {
-    background: #ff0;
-    color: #000000;
-}
-small {
-    font-size: 80%;
-}
-sub,
-sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-}
-sup {
-    top: -0.5em;
-}
-sub {
-    bottom: -0.25em;
-}
+
 img {
     border: 0;
 }
@@ -187,7 +132,7 @@ th {
 }
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 html {
-    color: #222;
+    color: #868686;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -246,7 +191,7 @@ textarea {
 .menu a:link, .menu a:hover, .menu a:focus, .menu a:visited { 
     text-decoration: none;
     color: white;
-   } 
+} 
 
 .menu a:active, .menu a:hover
 {
@@ -363,8 +308,7 @@ h2 {
 /*-----------*/
 
 #enteteBarre {
-    height: 70px;
-
+    line-height: auto;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -375,7 +319,7 @@ h2 {
 }
 
 #logo {
-    
+
     padding: 15px 0 0 20px;
     width: 380px;
 }
@@ -406,7 +350,7 @@ nav a:active, nav a:hover
 
 #reseauxSociaux {
     margin-top: 6px;
-    text-align: auto;
+    text-align: justify;
 }
 
 div.bordure {
@@ -414,6 +358,10 @@ div.bordure {
     border: 2px solid red;
 }
 
+div.bordureB {
+    vertical-align: top;	
+    border: 1px solid #868686;
+}
 #utilisation, #mediaskates, #information {
     display: inline-block;
     vertical-align: top;
@@ -486,6 +434,34 @@ footer a:active, footer a:hover
     border-width: 705px 200px 0 0;
     border-color: rgba(0,0,0,0.6) transparent transparent transparent;
 }
+
+#banierePhotos{
+}
+
+#photos{
+    text-align: center;
+    padding-right: 10px;
+}
+
+#photos a{
+    display:inline-block;
+}
+
+#photos a img {
+    display:block;
+}
+#content{   
+    margin: 0;
+    justify-content: center;
+    padding-bottom: 8px;
+    list-style-type: none;
+    font-size: 0.8em;
+}
+
+#content a:link, #content a:hover, #content a:focus, #content a:visited { 
+    text-decoration: none;
+    color: white;
+} 
 
 /*-----------*/
 /* SlideShow */
