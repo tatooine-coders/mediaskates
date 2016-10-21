@@ -12,6 +12,10 @@ define('PROFILE_PICS_FOLDER', 'images/profils/');
 define('ORIGINAL_PICS_FOLDER', 'images/originals/');
 define('UPLOADS_PIC_FOLDER', 'images/uploads/');
 define('UPLOADS_THUMB_FOLDER', 'images/uploads/thumbs/');
+// Pic sizes
+define('PIC_WIDTH', 960);
+define('THUMB_WIDTH', 200);
+
 // Disciplines covers
 define('DISCIPLINES_PIC_FOLDER', 'images/disciplines/');
 define('DISCIPLINES_THUMB_FOLDER', 'images/disciplines/thumbs/');
@@ -19,18 +23,18 @@ define('DISCIPLINES_THUMB_FOLDER', 'images/disciplines/thumbs/');
 define('WATERMARKS_FOLDER', 'images/watermarks/');
 
 return[
-  'default_prefs'=>[
-    'is_taggable'=>[
-      'default'=>false,
-      'type' => 'checkbox',
-      'label' => 'Autoriser à me tagger sur des photos',
-      'photograph_only'=>false,
-    ],
-    'email_notifications' =>[
-      'default'=>false,
-      'type' => 'checkbox',
-      'label' => 'M\'envoyer des notifications par email',
-      'photograph_only'=>false,
+    'default_prefs' => [
+        'is_taggable' => [
+            'default' => false,
+            'type' => 'checkbox',
+            'label' => 'Autoriser à me tagger sur des photos',
+            'photograph_only' => false,
+        ],
+        'email_notifications' => [
+            'default' => false,
+            'type' => 'checkbox',
+            'label' => 'M\'envoyer des notifications par email',
+            'photograph_only' => false,
+        ]
     ]
-  ]
 ];
