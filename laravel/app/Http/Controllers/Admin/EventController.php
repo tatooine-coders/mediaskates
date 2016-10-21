@@ -16,8 +16,23 @@ class EventController extends \App\Http\Controllers\Admin\AdminController
      */
     public function index(Request $request)
     {
-        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'city', 'address', 'zip', 'date_event', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
-        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $order = 'name';
+        $direction = 'asc';
+
+        if ($request->has('order') && in_array(
+            $request->get('order'),
+            ['name', 'city', 'address', 'zip', 'date_event', 'created_at', 'updated_at']
+        )) {
+            $order = $request->get('order');
+        }
+
+        if ($request->has('direction') && in_array(
+            $request->get('direction'),
+            ['asc', 'desc']
+        )) {
+            $request->get('direction');
+        }
+        
         $events = Event::query()
             ->orderBy($order, $direction)
             ->withCount('photos')

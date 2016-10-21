@@ -31,7 +31,6 @@ class UserController extends \App\Http\Controllers\Member\MemberController
      */
     public function destroy()
     {
-        
     }
 
     /**
@@ -193,16 +192,14 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         return \Redirect::to(route('user.personnal_infos'));
     }
 
-    public function ask_photograph(){
-
+    public function ask_photograph()
+    {
         $user = User::query()->findOrFail(Auth()->user()->id);
-        if($user->ask_photograph == 1){
+        if ($user->ask_photograph == 1) {
             // Redirection et message
             \Session::flash('message', 'Votre demamnde a déjà été prise en compte!');
             return \Redirect::to(route('user.personnal_infos'));
-        }
-        else {
-
+        } else {
             $user->ask_photograph = 1;
             $user->save();
 

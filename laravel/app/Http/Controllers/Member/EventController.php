@@ -16,9 +16,9 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function index()
     {
-        $events = Event::withCount(['photos' => function($query) {
-                    $query->where('user_id', '=', Auth()->user()->id);
-                }])->get();
+        $events = Event::withCount(['photos' => function ($query) {
+            $query->where('user_id', '=', Auth()->user()->id);
+        }])->get();
 
         return view('member/events/index', [
             'pageTitle' => 'Evènements',
@@ -78,9 +78,9 @@ class EventController extends \App\Http\Controllers\Member\MemberController
      */
     public function show($id)
     {
-        $event = Event::with(['photos' => function($query) {
-                    $query->where('user_id', '=', Auth()->user()->id);
-                }])->findOrFail($id);
+        $event = Event::with(['photos' => function ($query) {
+            $query->where('user_id', '=', Auth()->user()->id);
+        }])->findOrFail($id);
 
         return view('member/events/show', [
             'pageTitle' => $event->name,

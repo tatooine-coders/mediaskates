@@ -19,8 +19,20 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     public function index(Request $request)
     {
         // Filters
-        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
-        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $order = 'name';
+        $direction = 'asc';
+        if ($request->has('order') &&
+            in_array($request->get('order'), ['name', 'created_at', 'updated_at'])
+        ) {
+            $order = $request->get('order');
+        }
+
+        if ($request->has('direction') &&
+            in_array($request->get('direction'), ['asc', 'desc'])
+        ) {
+            $direction = $request->get('direction');
+        }
+
         $disciplines = Discipline::query()
             ->orderBy($order, $direction)
             ->get();
@@ -63,7 +75,6 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
         if ($filename === false) {
             Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
         } else {
-
             $data = $request->all();
             $data['logo'] = $filename;
             Discipline::create($data);

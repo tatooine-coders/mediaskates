@@ -16,8 +16,24 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     public function index(Request $request)
     {
         // Filters
-        $order = ($request->has('order') && in_array($request->get('order'), ['name', 'created_at', 'updated_at'])) ? $request->get('order') : 'name';
-        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $order = 'name';
+        $direction = 'asc';
+
+        if ($request->has('order') &&
+            in_array(
+                $request->get('order'),
+                ['name', 'created_at', 'updated_at']
+            )) {
+            $order = $request->get('order');
+        }
+
+        if ($request->has('direction') &&
+            in_array(
+                $request->get('direction'),
+                ['asc', 'desc']
+            )) {
+            $direction = $request->get('direction');
+        }
         $watermarks = Watermark::query()
             ->orderBy($order, $direction)
             ->get();
@@ -125,7 +141,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
     {
         $watermark = Watermark::findOrFail($id);
         $watermark->delete();
-        Session::flash('message','Watermark successfully delete.');
+        Session::flash('message', 'Watermark successfully delete.');
 
         return redirect()->route('admin.watermark.index');
     }

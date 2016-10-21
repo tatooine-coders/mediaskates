@@ -7,6 +7,7 @@ use App\Event;
 use App\Watermark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
 class PhotoController extends \App\Http\Controllers\Admin\AdminController
 {
 

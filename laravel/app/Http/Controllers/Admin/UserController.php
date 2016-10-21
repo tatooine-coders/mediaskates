@@ -16,8 +16,19 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
     public function index(Request $request)
     {
         // Filters
-        $order = ($request->has('order') && in_array($request->get('order'), ['pseudo', 'last_name', 'ask_photograph', 'created_at','updated_at'])) ? $request->get('order') : 'created_at';
-        $direction = ($request->has('direction') && in_array($request->get('direction'), ['asc', 'desc'])) ? $request->get('direction') : 'asc';
+        $order = 'pseudo';
+        $direction = 'asc';
+        if ($request->has('order') &&
+            in_array($request->get('order'), ['pseudo', 'last_name', 'ask_photograph', 'created_at', 'updated_at'])
+        ) {
+            $order = $request->get('order');
+        }
+        if ($request->has('direction') &&
+            in_array($request->get('direction'), ['asc', 'desc'])
+        ) {
+            $direction = $request->get('direction');
+        }
+
         $users = User::query()
             ->orderBy($order, $direction)
             ->get();
@@ -56,7 +67,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-
+        //
     }
 
     /**
@@ -90,7 +101,6 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
             'email' => 'bail|required|email|unique:users',
             'password' => 'required|min:6|confirmed',
             'profile_pic' => 'mimes:png,jpeg,gif',
-
         ]);
         $data = $request->all();
 

@@ -48,7 +48,6 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         if ($filename === false) {
             \Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
         } else {
-
             $data = $request->all();
             $data['file'] = $filename;
             $data['user_id'] = Auth()->user()->id;
