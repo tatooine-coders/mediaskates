@@ -78,9 +78,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
             $filename = $this->prepareFile($request, $watermark, $photo->file);
         }
 
-        if ($filename === null) {
-            unset($data['file']);
-        } elseif ($filename === false) {
+        if ($filename === false) {
             Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
             $doSave = false;
         }
@@ -102,6 +100,11 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     public function destroy($id)
     {
         $photo = Photo::findOrFail($id);
+
+        \Illuminate\Support\Facades\File::delete(public_path(UPLOADS_PIC_FOLDER.$photo->file));
+        \Illuminate\Support\Facades\File::delete(public_path(ORIGINAL_PICS_FOLDER.$photo->file));
+        \Illuminate\Support\Facades\File::delete(public_path(UPLOADS_THUMB_FOLDER.$photo->file));
+
         $photo->delete();
         Session::flash('message', 'Photo supprimée avec succès.');
 
