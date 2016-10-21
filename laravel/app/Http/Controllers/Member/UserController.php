@@ -193,7 +193,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         return \Redirect::to(route('user.personnal_infos'));
     }
 
-    public function ask_photograph(){
+    public function askPhotograph(){
 
         $user = User::query()->findOrFail(Auth()->user()->id);
         if($user->ask_photograph == 1){

@@ -1,7 +1,7 @@
 @extends('layouts/simple')
 
 @section('content')
-
+    <div style="text-align: center; color: lavenderblush">
     {!! Form::open([
     'method' => 'POST',
     'route' => ['search_results']
@@ -33,10 +33,11 @@
         <div class="flex-container page-wrapper">
             <div class="flex-item-fluid content">
                 RESULTATS :<br/>
+                </br>
                 @if($results->isEmpty())
                     Pas de resultas
                 @else
-                    <table>
+                    <table class="small">
                         <thead>
                             <tr>
                                 <th class="id-col">Id</th>
@@ -80,12 +81,13 @@
                                         @endif
                                     </td>
                                 </tr>
-
                              @endforeach
                         </tbody>
                     </table>
+                    </br>
                 @endif
             </div>
         </div>
     @endif
+    </div>
 @endsection
