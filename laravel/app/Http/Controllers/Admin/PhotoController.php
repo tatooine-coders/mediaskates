@@ -19,7 +19,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function show($id)
     {
-        $photo = Photo::where('user_id', '=', Auth()->user()->id)->findOrFail($id);
+        $photo = Photo::findOrFail($id);
 
         return view('admin/photos/show', [
             'pageTitle' => 'Photo',
