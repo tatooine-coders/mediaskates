@@ -66,3 +66,12 @@
 .img-item{
 	border-radius: $border-radius-sm;
 }
+
+.transparent-zone{
+	background-image: $transparent-bg;
+	text-align:center;
+}
+
+.transparent-zone-large{
+	padding:2em;
+}
