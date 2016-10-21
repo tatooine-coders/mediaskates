@@ -34,12 +34,12 @@
 }
 
 .thumbnails{
-	display:flex;
+	margin-right: $medium-value;
 }
 .thumbnail{
 	padding: $tiny-value;
 	box-shadow: 0 0 2px 0 rgba(77,77,77,.5);
-	margin: 2px;
+	margin-bottom:$grid-gutter;
 	text-align: center;
 	display: inline-table;
 	background-color:lighten($background-color, 20%);
@@ -52,4 +52,17 @@
 			margin: 5px 0 0 0;
 		}
 	}
+	img{
+		width:100%;
+		min-width:100px;
+	}
+}
+
+.img-responsive{
+	max-width:100%
+
+}
+
+.img-item{
+	border-radius: $border-radius-sm;
 }
