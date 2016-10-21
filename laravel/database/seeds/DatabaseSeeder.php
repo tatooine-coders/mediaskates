@@ -169,7 +169,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Image simple, centrée',
             'position' => 'center',
             'margin' => 5,
-            'file' => 'center.gif',
+            'file' => 'center.png',
         ]);
         $watermark2->save();
 
