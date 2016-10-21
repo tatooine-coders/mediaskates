@@ -149,8 +149,10 @@ class CreateTables extends Migration
         Schema::create('watermarks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 25);
-            $table->integer('type');
             $table->text('description');
+            $table->string('position', 25);
+            $table->int('margin')->default(0);
+            $table->string('file', 25);
             $table->timestamps();
         });
 
