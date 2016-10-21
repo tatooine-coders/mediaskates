@@ -60,7 +60,7 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'file' => 'required',
+            'file' => 'mimes:png,jpg,gif',
             'event_id' => 'required',
             'watermark_id' => 'required',
             'license_id' => 'required',
