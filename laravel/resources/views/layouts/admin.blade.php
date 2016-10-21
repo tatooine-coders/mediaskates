@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="{{ url('css/admin.css') }}">
 
         <!-- Scripts -->
+        <script src="{{ asset('js/vendor/jquery.min.js')}}"></script>
+        <script src="{{ asset('js/vendor/masonry.pkgd.min.js')}}"></script>
+        <script src="{{ asset('js/vendor/jquery.fancybox.js')}}"></script>
+        <script src="{{ asset('js/vendor/jquery.fancybox-thumbs.js')}}"></script>
         <script>
             window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
         </script>
@@ -63,25 +67,25 @@
                 <!-- Infos -->
                 @if(Session::has('message'))
                 <div class="page-wrapper alert-info">
-                  <div class="content">
-                    <i class="fa fa-info-circle"></i> {{ session('message') }}
-                  </div>
+                    <div class="content">
+                        <i class="fa fa-info-circle"></i> {{ session('message') }}
+                    </div>
                 </div>
                 @endif
                 <!-- /Infos -->
 
                 <!-- Errors -->
                 @if (count($errors) > 0)
-                  <div class="page-wrapper alert-error">
+                <div class="page-wrapper alert-error">
                     <div class="content">
-                      <i class="fa fa-exclamation-triangle"></i> Des erreurs on été rencontrées :
-                      <ul class="list-unstyled">
-                        @foreach ($errors->all() as $error)
-                          <li>- {{ $error }}</li>
-                        @endforeach
-                      </ul>
+                        <i class="fa fa-exclamation-triangle"></i> Des erreurs on été rencontrées :
+                        <ul class="list-unstyled">
+                            @foreach ($errors->all() as $error)
+                            <li>- {{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                  </div>
+                </div>
                 @endif
                 <!-- /Errors -->
 
