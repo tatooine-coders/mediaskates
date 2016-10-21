@@ -17,8 +17,11 @@
 
         <!-- CSS reset and simple style -->
         <link rel="stylesheet" href="{{ url('css/style.css') }}">
+        <link rel="stylesheet" href="{{ url('css/style2.css') }}">
 
         <!-- Scripts -->
+        <script src="{{ asset('js/vendor/jquery.min.js')}}"></script>
+         <script src="{{ asset('js/vendor/freewall.js')}}"></script>
         <script>
             window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
         </script>
