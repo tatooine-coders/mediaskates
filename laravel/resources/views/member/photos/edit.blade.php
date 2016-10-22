@@ -6,7 +6,7 @@
 
 @section('content')
 
-{{ Form::open(['route'=>['user.photo.update', $photo->id], 'method'=>'PATCH']) }}
+{{ Form::model($photo, ['route'=>['user.photo.update', $photo->id], 'method'=>'PATCH']) }}
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
         <div class="grid has-gutter">

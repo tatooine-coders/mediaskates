@@ -27,7 +27,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             'disciplines' => $disciplines,
             'watermarks' => $watermarks,
             'licenses' => $licenses,
-            'event'=>$request->get('event'),
+            'event' => $request->get('event'),
         ]);
     }
 
@@ -43,7 +43,8 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             'file' => 'required|mimes:jpeg,png,gif',
         ]);
 
-        $filename = $this->prepareFile($request);
+        $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
+        $filename = $this->prepareFile($request, $watermark);
 
         if ($filename === false) {
             Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
@@ -51,6 +52,8 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             $data = $request->all();
             $data['file'] = $filename;
             $data['user_id'] = Auth()->user()->id;
+            $request->file('file')->move(public_path(ORIGINAL_PICS_FOLDER), $data['file']);
+
             Photo::create($data);
 
             Session::flash('message', 'Nouvelle photo ajoutée avec succès.');
@@ -58,17 +61,6 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
 
         return redirect()->route('user.event.show', $data['event_id']);
     }
-
-//    /**
-//     * Display the specified resource.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function show($id)
-//    {
-//        //
-//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -78,7 +70,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function edit($id)
     {
-        $photo=Photo::where('user_id', '=', Auth()->user()->id)->with([])->findOrFail($id);
+        $photo = Photo::where('user_id', '=', Auth()->user()->id)->with([])->findOrFail($id);
 
         $disciplines = \App\Discipline::query()
             ->select('id', 'name')
@@ -105,7 +97,36 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'file' => 'mimes:png,jpg,gif',
+            'event_id' => 'required',
+            'watermark_id' => 'required',
+            'license_id' => 'required',
+        ]);
+
+        $photo = Photo::where('user_id', '=', Auth()->user()->id)->findOrFail($id);
+
+        $doSave = true;
+        $filename = null;
+        $data = $request->all();
+        if ($request->get('watermark_id') != $photo->watermark_id) {
+            // Fetch new watermark in DB
+            $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
+            // Re-create the thumbnail
+            $filename = $this->prepareFile($request, $watermark, $photo->file);
+        }
+
+        if ($filename === false) {
+            Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+            $doSave = false;
+        }
+
+        if ($doSave) {
+            $photo->update($data);
+            Session::flash('message', 'Photo mise à jour');
+        }
+
+        return redirect()->route('user.event.show', $photo->event_id);
     }
 
     /**
@@ -116,14 +137,13 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function destroy($id)
     {
-        $photo=Photo::where('user_id', '=', Auth()->user()->id)->findOrFail($id);
+        $photo = Photo::where('user_id', '=', Auth()->user()->id)->findOrFail($id);
 
-        // Delete the thumbnail, picture and original
-        \Illuminate\Support\Facades\Storage::delete(UPLOADS_PIC_FOLDER.$photo->file);
-        \Illuminate\Support\Facades\Storage::delete(ORIGINAL_PICS_FOLDER.$photo->file);
-        \Illuminate\Support\Facades\Storage::delete(UPLOADS_THUMB_FOLDER.$photo->file);
+        \Illuminate\Support\Facades\File::delete(public_path(UPLOADS_PIC_FOLDER . $photo->file));
+        \Illuminate\Support\Facades\File::delete(public_path(ORIGINAL_PICS_FOLDER . $photo->file));
+        \Illuminate\Support\Facades\File::delete(public_path(UPLOADS_THUMB_FOLDER . $photo->file));
+
         $photo->delete();
-
         Session::flash('message', 'Photo supprimée avec succès.');
 
         return redirect()->route('user.event.show', $photo->event_id);
@@ -136,35 +156,38 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      *
      * @return mixed false on fail, new file name on success.
      */
-    protected function prepareFile($request)
+    protected function prepareFile(Request $request, $watermark, $original = null)
     {
-        $upImage = $request->file('file');
-        // File name
-        $filename = time() . '.' . $upImage->getClientOriginalExtension();
-
-        // Image manipulation
+//        dd([$request->all(), $watermark->toArray, $original]);
+        // Load the lib
         $image = new \App\Libraries\SimpleImage();
-        $image->load($upImage->getPathname());
 
-        // Try to save the original image
-        if (!$image->save(ORIGINAL_PICS_FOLDER . $filename)) {
-            return false;
-        }
+        // Define file name: original name or new one.
+        $filename = ($original === null ? time() . '.' . $request->file('file')->getClientOriginalExtension() : $original);
+        // Define original file: already existing or from form.
+        $original = ($original === null ? $request->file('file')->getPathName() : ORIGINAL_PICS_FOLDER . $original);
+        // Loading the file
+        $image->load($original);
 
-        // Create a thumb
-        $image->resizeToWidth(200);
+        $error = 0;
+
+        // Creating thumbnail
+        $image->resizeToWidth(THUMB_WIDTH);
         if (!$image->save(UPLOADS_THUMB_FOLDER . $filename)) {
-            return false;
+            $error = 1;
         }
 
-        $image->reset();
-        // Create a watermarked image
-        $image->resizeToWidth(960);
-        $image->watermark(WATERMARKS_FOLDER . 'default.gif');
+        // Reload and create the watermarked image
+        $image->load($original);
+        $image->resizeToWidth(PIC_WIDTH);
+        $image->waterMark('images/watermarks/' . $watermark->file, $watermark->position, $watermark->margin);
         if (!$image->save(UPLOADS_PIC_FOLDER . $filename)) {
-            return false;
+            $error = 1;
         }
-
-        return $filename;
+        if ($error == 1) {
+            return false;
+        } else {
+            return $filename;
+        }
     }
 }
