@@ -15,7 +15,7 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function advanced_Search()
+    public function advancedSearch()
     {
 //        $events = Event::query()->pluck('name', 'id');
 //        $disciplines = Discipline::query()->pluck('name', 'id');
@@ -37,7 +37,7 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search_Results(Request $request)
+    public function searchResults(Request $request)
     {
 
         switch ($request->choice){
