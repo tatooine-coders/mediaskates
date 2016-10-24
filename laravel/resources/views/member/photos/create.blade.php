@@ -10,7 +10,7 @@
 <div class="flex-container page-wrapper">
     <div class="flex-item-fluid content">
         <div class="grid has-gutter">
-            <div class="one-half">
+            <div class="one-third">
                 {!! Form::label('event_id', 'Evènement') !!}
                 <select name="event_id" required="required">
                     @foreach($disciplines as $d)
@@ -22,19 +22,53 @@
                     @endforeach
                 </select>
             </div>
-            <div class="one-half">
-                {!! Form::label('file', 'Fichier') !!}
-                {!! Form::file('file', ['required'=>true]) !!}
+            <div class="one-third">
+                {!! Form::label('watermark_id', 'Type de watermark') !!}
+                {!! Form::select('watermark_id', $watermarks, null, ['required'=>true]) !!}
+            </div>
+            <div class="one-third">
+                {!! Form::label('license_id', 'License') !!}
+                {!! Form::select('license_id', $licenses, null, ['required'=>true]) !!}
             </div>
         </div>
         <div class="grid has-gutter">
             <div class="one-half">
-                {!! Form::label('watermark_id', 'Type de watermark') !!}
-                {!! Form::select('watermark_id', $watermarks, null, ['required'=>true]) !!}
+                <section id="dropzone" class="flex-container-v">
+                    <div class="center">
+                        Déplacez vos fichiers ici
+                    </div>
+                    <div class="dropzone-thumbs grid-3 has-gutter">
+                    </div>
+                </section>
             </div>
             <div class="one-half">
-                {!! Form::label('license_id', 'License') !!}
-                {!! Form::select('license_id', $licenses, null, ['required'=>true]) !!}
+                <p>
+                    Si vous ne pouvez pas utiliser le multi upload, veuillez utiliser le formulaire suivant:
+                </p>
+                <div id="fileZone">
+                    {!! Form::file('files[]', ['required'=>true]) !!}
+                    {!! Form::file('files[]') !!}
+                    {!! Form::file('files[]') !!}
+                    {!! Form::file('files[]') !!}
+                    {!! Form::file('files[]') !!}
+                </div>
+                <a class="btn btn-primary" id="addBtn"><i class="fa fa-fw fa-plus"></i> Ajouter un fichier</a>
+                <script src="{{ asset('js/jquery.ajax-upload.js') }}"></script>
+                <script>
+var fileList = new Array();
+$('#addBtn').click(function (e) {
+	var field = "{!! addslashes(Form::file('files[]')) !!}";
+	$('#fileZone').append(field);
+});
+// Attach listeners
+setDropListener({
+	listenTo: '#dropzone',
+	writeTo: '#dropzone .dropzone-thumbs',
+	sendTo: '{{ route('user.photo.ajax_upload') }}',
+	formSession: '{{ $formSession }}',
+	imageURL: '{{ asset(UPLOAD_TEMP_FOLDER) }}'
+});
+                </script>
             </div>
         </div>
     </div>
