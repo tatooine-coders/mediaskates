@@ -19,9 +19,3 @@
     <!-- /Form-->
     {!! Form::close() !!}
 @endsection
-/**
- * Created by PhpStorm.
- * User: Jeremy-work
- * Date: 06/10/2016
- * Time: 11:11
- */

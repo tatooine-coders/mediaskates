@@ -1,16 +1,10 @@
 @extends('layouts/simple')
 
 @section('content')
-    <h2>
-        {{{ $event->name }}}</h2>
-    <pre>
+<div id="date-lieux">{{{ $event->city }}} - {{{ $event->date_event }}}</div>
+      <!--{{{ $event->zip }}}
         {{{ $event->name }}}
         {{{ $event->address }}}
-        {{{ $event->city }}}
-        {{{ $event->zip }}}
-        {{{ $event->date_event }}}
-        {{{ $event->discipline_id }}}
+        {{{ $event->discipline_id }}}-->
 
-
-    </pre>
 @endsection
