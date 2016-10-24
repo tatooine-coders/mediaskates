@@ -15,6 +15,8 @@ define('UPLOADS_THUMB_FOLDER', 'images/uploads/thumbs/');
 // Pic sizes
 define('PIC_WIDTH', 960);
 define('THUMB_WIDTH', 200);
+// Temp folder
+define('UPLOAD_TEMP_FOLDER', 'images/temp/');
 
 // Disciplines covers
 define('DISCIPLINES_PIC_FOLDER', 'images/disciplines/');
