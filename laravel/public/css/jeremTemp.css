@@ -1,0 +1,24 @@
+.advancedSearch{
+    text-align: center;
+    background-color: white;
+    margin: auto;
+    width: 60%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+
+
+}
+
+.resultSearch{
+    margin: auto;
+    border: double;
+}
+
+.resultSearch th{
+    border: double;
+}
+.resultSearch td{
+    border: double;
+}

@@ -4,7 +4,7 @@
     @if(count($photos)>0)
         @foreach($photos as $photo)
             <div>
-                <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/>
+                <a href="{{ route('photo.show', $photo->id) }}"><img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/></a>
             </div>
         @endforeach
     @else

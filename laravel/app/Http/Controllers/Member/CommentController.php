@@ -26,7 +26,20 @@ class CommentController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required|string',
+        ]);
+
+        $data = $request->all();
+        // Adding current user
+        $data['user_id'] = Auth()->user()->id;
+
+        Comment::create($data);
+
+        // Redirection et message
+        \Session::flash('message', 'Commentaire ajouté');
+        return redirect()->route('photo.index');
+
     }
 
     /**
