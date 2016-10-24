@@ -25,6 +25,7 @@
 /public/images/originals/*
 !/public/images/originals/.gitkeep
 # Images
+/public/images/temp/*
 /public/images/uploads/*
 !/public/images/uploads/.gitkeep
 !/public/images/uploads/thumbs/
