@@ -198,7 +198,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         $user = User::query()->findOrFail(Auth()->user()->id);
         if($user->ask_photograph == 1){
             // Redirection et message
-            \Session::flash('message', 'Votre demamnde a déjà été prise en compte!');
+            \Session::flash('message', 'Votre demande a déjà été prise en compte!');
             return \Redirect::to(route('user.personnal_infos'));
         }
         else {
@@ -207,7 +207,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
             $user->save();
 
             // Redirection et message
-            \Session::flash('message', 'Votre demamnde a bien été prise en compte!');
+            \Session::flash('message', 'Votre demande a bien été prise en compte!');
             return \Redirect::to(route('user.personnal_infos'));
         }
     }

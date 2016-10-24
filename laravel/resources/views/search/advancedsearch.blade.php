@@ -1,7 +1,7 @@
 @extends('layouts/simple')
 
 @section('content')
-    <div style="text-align: center; color: lavenderblush">
+    <div>
     {!! Form::open([
     'method' => 'POST',
     'route' => ['search_results']
