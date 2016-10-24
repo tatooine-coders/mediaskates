@@ -8,6 +8,7 @@
                     <tr>
                         <th class="id-col">Id</th>
                         <th>Text</th>
+                        <th>Id photo</th>
                         <th>Date créa</th>
                         <th class="actions">Actions</th>
                     </tr>
@@ -17,9 +18,10 @@
                         <tr>
                             <td>{{ $comment->id }}</td>
                             <td>{{ $comment->text }}</td>
+                            <td>{{ $comment->photo_id }}</td>
                             <td>{{ $comment->created_at }}</td>
                             <td class="actions">
-                                <a href="{{ route('admin.comment.show', $comment->id) }}" class="btn btn-info primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
+                                <a href="{{ route('photo.show', $comment->photo_id) }}" class="btn btn-info primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
                                 <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
                                     <i class="fa fa-fw fa-trash"></i>
                                     {!! Form::open(['route'=>['admin.comment.destroy', 'id'=> $comment->id], 'method'=>'DELETE']) !!}
