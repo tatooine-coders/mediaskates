@@ -3,8 +3,9 @@
 
 
 @section('content')
-    <div class="flex-container page-wrapper">
-        <div class="flex-item-fluid content">
+<div class="flex">
+    <div id="photo">
+
             <small>
                 <i class="fa fa-fw fa-calendar"></i> Créé le {{ $photo->created_at }}
                 @if($photo->created_at != $photo->updated_at)
@@ -12,16 +13,16 @@
                 @endif
             </small>
             <dl>
-                <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/>>
+                <img src="{{ asset(UPLOADS_PIC_FOLDER.$photo->file) }}"/>>
                 <dt>Event :</dt>
                 <dd>{{ $photo->event->name }}</dd>
             </dl>
-        </div>
+
 
     </div>
 
     {{--affichage des commentaires--}}
-
+    <div id="comments">
     @if(count($comments)>0)
         <h2>Commentaire(s)</h2>
         @foreach($comments as $comment)
@@ -38,7 +39,7 @@
     {{--affichage ajout commentaire--}}
     @if(Laratrust::hasRole('member'))
 
-        <div>
+
 
             <h2>Ajouter un Commentaire</h2>
 
@@ -57,5 +58,5 @@
         </div>
 
     @endif
-
+</div>
 @endsection

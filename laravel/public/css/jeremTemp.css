@@ -1,3 +1,4 @@
+/*View recherche avancée*/
 .advancedSearch{
     text-align: center;
     background-color: white;
@@ -7,8 +8,6 @@
     padding-bottom: 50px;
     margin-bottom: 50px;
     margin-top: 50px;
-
-
 }
 
 .resultSearch{
@@ -21,4 +20,23 @@
 }
 .resultSearch td{
     border: double;
+}
+
+
+
+/*view photo show*/
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#comments{
+
+    width: 20%;
+    padding: 10px;
+}
+
+#photo{
+    min-width: 70%;
+    text-align: center;
 }
