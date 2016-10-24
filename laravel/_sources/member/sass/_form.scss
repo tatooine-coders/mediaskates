@@ -31,3 +31,64 @@ input[required], select[required], textarea[required]{
 .input{
   display: block;
 }
+
+// Drag'n'drop zone
+#dropzone{
+	border: 3px dashed $menu-link-color;
+	height: 100%;
+	text-align: center;
+	border-radius: $border-radius-lg;
+
+	.dropzone-thumbs{
+		margin:$small-value $small-value 0 $small-value;
+	}
+
+	.dropzone-thumb{
+		border-radius: $border-radius-sm;
+		background-color: lighten($background-color, 20%);
+		box-shadow: 0 0 10px -2px rgba(77, 77, 77, 0.8);
+		margin-bottom:$small-value;
+		.controls{
+			float: left;
+			position: relative;
+			display: block;
+			width: 100%;
+			margin-top: 50%;
+			transform: translateY(-50%);
+		}
+		.fake-img{
+			border-top-left-radius: $border-radius-sm;
+			border-top-right-radius: $border-radius-sm;
+			background-image: $transparent-bg;
+			width:100%;
+			padding:0 1em 100% 1em;
+		}
+		img{
+			margin:0;
+			border-top-radius: $border-radius-sm;
+			border-bottom-radius: $border-radius-sm;
+		}
+		.infos-zone{
+			padding:$tiny-value;
+			font-size:0.8em;
+		}
+		.filename{
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+}
+.progress-bar{
+	border-radius: 0.5em;
+	min-height:1em;
+	background-color: lighten($background-color, 20%);
+	box-shadow: 0 0 5px -1px rgba(0,0,0,.5);
+	padding:1px;
+	div{
+		width: 50%;
+		min-height: 1em;
+		background-color: #888;
+		border-radius: 0.5em;
+	}
+}

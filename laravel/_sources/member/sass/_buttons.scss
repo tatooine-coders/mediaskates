@@ -9,6 +9,7 @@ button, input[type="submit"], input[type="reset"],.btn{
   font-weight:bold;
   font-size:0.8em;
   text-align:center;
+	cursor:pointer;
   &:hover{
     background-color: lighten($menu-background-color, 5%);
   }
