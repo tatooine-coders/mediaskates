@@ -22,12 +22,18 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             ->toArray();
         $watermarks = \App\Watermark::query()->pluck('name', 'id');
         $licenses = \App\License::query()->pluck('name', 'id');
+
+        // Creates a random form session number
+        $formSession=md5(time().microtime());
+        Session::set('f_'.$formSession, []);
+
         return view('member/photos/create', [
             'pageTitle' => 'Nouvelle photo',
             'disciplines' => $disciplines,
             'watermarks' => $watermarks,
             'licenses' => $licenses,
             'event' => $request->get('event'),
+            'formSession'=> $formSession,
         ]);
     }
 
@@ -39,6 +45,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'file' => 'required|mimes:jpeg,png,gif',
         ]);
@@ -60,6 +67,42 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         }
 
         return redirect()->route('user.event.show', $data['event_id']);
+    }
+
+    public function ajaxUpload(Request $request){
+        $this->validate($request, [
+            'file' => 'required|mimes:png,jpg,jpeg,gif',
+            'formSession' => 'required',
+        ]);
+
+        $formSession=Session::get('f_'.$request->get('formSession'));
+        if(!is_array($formSession)){
+            return ['error'=>'Invalid form session'];
+        }
+
+        // Create a thumb
+        $image = new \App\Libraries\SimpleImage();
+
+        // Define file name: original name or new one.
+        $filename = md5(microtime()) . '.' . $request->file('file')->getClientOriginalExtension();
+        // Define original file
+        $original = $request->file('file')->getPathName();
+        // Loading the file
+        $image->load($original);
+
+        // Creating thumbnail
+        $image->centerCropFull(THUMB_WIDTH, THUMB_WIDTH);
+        if (!$image->save(UPLOAD_TEMP_FOLDER . $filename)) {
+            return ['error'=>'An error occured'];
+        }else{
+            $formSession[$filename]=$original;
+            Session::set('f_'.$request->get('formSession'), $formSession);
+            return [
+                'error'=>false,
+                'filename'=>$filename,
+                ];
+        }
+
     }
 
     /**
@@ -158,7 +201,6 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     protected function prepareFile(Request $request, $watermark, $original = null)
     {
-//        dd([$request->all(), $watermark->toArray, $original]);
         // Load the lib
         $image = new \App\Libraries\SimpleImage();
 
