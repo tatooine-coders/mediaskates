@@ -21,9 +21,9 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/vendor/jquery.min.js')}}"></script>
-         <script src="{{ asset('js/vendor/freewall.js')}}"></script>
+        <script src="{{ asset('js/vendor/freewall.js')}}"></script>
         <script>
-            window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
         </script>
     </head>
     <body>
@@ -35,82 +35,133 @@
             <div id="logo">
                 <img src="{{ asset('images/sources/ms_horizontal_300.png') }}" alt>
             </div >
-
+            <!-- Menu -->
             <div id="nav">
-
-                <ul class="menu">
-                    <li>{{ link_to('/', 'Home') }}</li>
-                    <li>{{ link_to(route('event.index'), 'Events') }}</li>
+                <ul id="nav2">
+                    <li>{{ link_to('/', 'Accueil') }}</li>
+                    <li>{{ link_to(route('event.index'), 'Manifestations') }}</li>
                     <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
                     <li>{{ link_to(route('tag.index'), 'Tags') }}</li>
-                    <li>{{ link_to(route('user.index'), 'Photographs') }}</li>
-                    <li>{{ link_to(route('advanced_search'), 'Advanced search') }}</li>
-                    <li>{{ link_to(route('pages', 'legal'), 'Terms of service') }}</li>
+                    <li>{{ link_to(route('user.index'), 'Photographes') }}</li>
+                    <li>{{ link_to(route('advanced_search'), 'Recherche Avancée') }}</li>
+                    <li>{{ link_to(route('pages', 'legal'), 'Mentions Légales') }}</li>
+                </ul>
+                <div class="login">       
                     @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="{{ url('/login') }}">Connexion</a></li>
+                    <li><a href="{{ url('/register') }}">Inscription</a></li>
+
                     @else
-                    <li class="title-sub">User {{ Auth::user()->pseudo }}</li>
-                    <li>
-                        <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                    <li>User {{ Auth::user()->pseudo }}</li>
+                    <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            Logout</a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                     @endif
-                </ul>
-                @role(('member'))
-                <ul class="menu">
-                    <li class="title-big">Users</li>
-                    <li class="title-sub">Comments</li>
-                    <li>{{ link_to(route('user.comment.index'), 'Manage') }}</li>
-                    <li class="title-sub">User</li>
-                    <li>{{ link_to(route('user.dashboard'), 'Dashboard') }}</li>
-                    <li>{{ link_to(route('user.preferences'), 'Preferences') }}</li>
-                    <li>{{ link_to(route('user.personnal_infos'), 'Personnal informations') }}</li>
-                    <li>{{ link_to(route('user.update_passwd'), 'Update password') }}</li>
-                    <li>{{ link_to(route('user.logout'), 'Log out') }}</li>
-                    <li>{{ link_to(route('user.close_account'), 'Close account') }}</li>
-                    <li class="title">Tags</li>
-                    <li>{{ link_to(route('user.tag.index'), 'Manage') }}</li>
-                    <li class="title">Votes</li>
-                    <li>{{ link_to(route('user.vote.index'), 'Manage') }}</li>
-                    @role(('photograph'))
-                    <li class="title-sub">Photograph</li>
-                    <li class="title">Events</li>
-                    <li>{{ link_to(route('user.event.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('user.event.create'), 'Add') }}</li>
-                    <li class="title">Photos</li>
-                    <li>{{ link_to(route('user.photo.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('user.photo.create'), 'Add') }}</li>
+                </div>
+
+                <div class="user">
+                    <!-- Membre -->
+                    @role(('member'))
+                    <ul class="menu">
+                        <li>Utilisateurs
+                            <ul>
+                                <li>Commentaires
+                                    <ul>
+                                        <li>{{ link_to(route('user.comment.index'), 'Gérer') }}</li>
+                                    </ul>
+                                </li>
+                                <li>utilisateur
+                                    <ul>
+                                        <li>{{ link_to(route('user.dashboard'), 'Tableau de Bord') }}</li>
+                                        <li>{{ link_to(route('user.preferences'), 'Préférences') }}</li>
+                                        <li>{{ link_to(route('user.personnal_infos'), 'Profil') }}</li>
+                                        <li>{{ link_to(route('user.update_passwd'), 'Changer le mot de passe') }}</li>
+                                        <li>{{ link_to(route('user.logout'), 'Déconnexion') }}</li>
+                                        <li>{{ link_to(route('user.close_account'), 'Fremer mon Compte') }}</li>
+                                    </ul>
+                                </li>
+                                <li>Tags
+                                    <ul>
+                                        <li>{{ link_to(route('user.tag.index'), 'Gérer') }}</li>
+                                    </ul>
+                                </li>
+                                <li>Votes
+                                    <ul>
+                                        <li>{{ link_to(route('user.vote.index'), 'Gérer') }}</li>
+                                    </ul>
+                                </li>
+                                @role(('photograph'))
+                                <li>Photograph</li>
+                                <li>Manifestations
+                                    <ul>
+                                        <li>{{ link_to(route('user.event.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('user.event.create'), 'Ajouter') }}</li>
+                                    </ul>
+                                </li>
+                                <li>Photos
+                                    <ul>
+                                        <li>{{ link_to(route('user.photo.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('user.photo.create'), 'Ajouter') }}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>    
+                        @endrole
+                        @endrole    
+                    </ul>
+                </div>
+                <!-- Admin -->
+                <div class="admin"> @role(('admin'))
+                    <ul class="menu">
+                        <li>Administrateur
+                            <ul>
+                                <li>Commentaires
+                                    <ul>
+                                        <li>{{ link_to(route('admin.comment.index'), 'Gérer') }}</li>
+                                    </ul>
+                                </li>
+                                <li>Disciplines
+                                    <ul>
+                                        <li>{{ link_to(route('admin.discipline.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('admin.discipline.create'), 'Ajouter') }}</li>
+                                    </ul></li>
+                                <li>Manifestations
+                                    <ul>
+                                        <li>{{ link_to(route('admin.event.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('admin.event.create'), 'Ajouter') }}</li>
+                                    </ul></li>
+                                <li>Licenses
+                                    <ul>       
+                                        <li>{{ link_to(route('admin.license.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('admin.license.create'), 'Ajouter') }}</li>
+                                    </ul></li>       
+                                <li>Roles
+                                    <ul>
+                                        <li>{{ link_to(route('admin.role.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('admin.role.create'), 'Ajourter') }}</li>
+                                    </ul></li>       
+                                <li>Tags
+                                    <ul>        
+                                        <li>{{ link_to(route('admin.tag.index'), 'Gérer') }}</li>
+                                    </ul></li>        
+                                <li>Utilisateurs
+                                    <ul>
+                                        <li>{{ link_to(route('admin.user.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('admin.user.create'), 'Ajouter') }}</li>
+                                    </ul></li>           
+                                <li>Watermarks
+                                    <ul>
+                                        <li>{{ link_to(route('admin.watermark.index'), 'Gérer') }}</li>
+                                        <li>{{ link_to(route('admin.watermark.create'), 'Ajouter') }}</li>
+                                    </ul></li>        
+                            </ul>   
+                        </li>    
+                    </ul>
                     @endrole
-                </ul>
-                @endrole
-                @role(('admin'))
-                <ul class="menu">
-                    <li class="title-big">Admin</li>
-                    <li class="title">Comments</li>
-                    <li>{{ link_to(route('admin.comment.index'), 'Manage') }}</li>
-                    <li class="title">Disciplines</li>
-                    <li>{{ link_to(route('admin.discipline.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.discipline.create'), 'Add') }}</li>
-                    <li class="title">Events</li>
-                    <li>{{ link_to(route('admin.event.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.event.create'), 'Add') }}</li>
-                    <li class="title">Licenses</li>
-                    <li>{{ link_to(route('admin.license.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.license.create'), 'Add') }}</li>
-                    <li class="title">Roles</li>
-                    <li>{{ link_to(route('admin.role.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.role.create'), 'Add') }}</li>
-                    <li class="title">Tags</li>
-                    <li>{{ link_to(route('admin.tag.index'), 'Manage') }}</li>
-                    <li class="title">Users</li>
-                    <li>{{ link_to(route('admin.user.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.user.create'), 'Add') }}</li>
-                    <li class="title">Watermarks</li>
-                    <li>{{ link_to(route('admin.watermark.index'), 'Manage') }}</li>
-                    <li>{{ link_to(route('admin.watermark.create'), 'Add') }}</li>
-                </ul>
-                @endrole
+                </div>
             </div>
             <div id="reseauxSociaux">
                 <a href="https://www.facebook.com/mediaskates/"><img src="{{ asset('images/sources/facebook.svg') }}" alt="facebook" title="facebook"/></a>
