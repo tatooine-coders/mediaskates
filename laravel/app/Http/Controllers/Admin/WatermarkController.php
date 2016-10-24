@@ -80,7 +80,6 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
             $data = $request->all();
             $data['file'] = $filename;
             Watermark::create($data);
-
             Session::flash('message', 'Nouveau watermark créé avec succès.');
         }
 

@@ -30,7 +30,7 @@ Route::group(['prefix'=>'member', 'middleware'=>['role:member|admin|photograph']
     Route::get('/me/preferences', 'Member\UserController@editPrefs')->name('user.preferences');
     Route::patch('/me/update_preferences', 'Member\UserController@updatePrefs')->name('user.preferences.update');
     Route::patch('/me/update_passwd', 'Member\UserController@updatePasswd')->name('user.update_passwd');
-    Route::get('me/update_role', 'Member\UserController@ask_photograph')->name('user.ask_photograph');
+    Route::get('me/update_role', 'Member\UserController@askPhotograph')->name('user.ask_photograph');
     Route::delete('/me/close_account', 'Member\UserController@destroy')->name('user.close_account');
     Route::get('/me/logout', 'Auth\LoginController@logout')->name('user.logout');
 

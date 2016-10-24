@@ -35,7 +35,7 @@
 
     </script>-->
     <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/>
-    
+
 @endforeach
 </div>
 <script>

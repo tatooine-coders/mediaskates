@@ -45,7 +45,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $this->validate($request, [
             'file' => 'required|mimes:jpeg,png,gif',
         ]);

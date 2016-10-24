@@ -11,7 +11,7 @@
                 <td>Ville : {{{ $event->city }}}</td><br/>
                 <td>CP : {{{ $event->zip }}}</td><br/>
                 <td>Date : {{{ $event->date_event }}}</td><br/>
-                <a href="{{ route('admin.event.show', $event->id) }}" class="btn btn-info">View Event</a>
+                <a href="{{ route('event.show', $event->id) }}" class="btn btn-info">View Event</a>
 
             </tr>
             <br/>

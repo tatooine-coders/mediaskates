@@ -126,7 +126,6 @@ class LicenseController extends \App\Http\Controllers\Admin\AdminController
 
         $license->update($request->all());
 
-//        $license->save();
         // Redirection et message
         Session::flash('message', 'License mise à jour.');
         return redirect()->route('admin.license.index');

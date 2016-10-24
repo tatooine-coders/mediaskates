@@ -18,6 +18,7 @@
         <!-- CSS reset and simple style -->
         <link rel="stylesheet" href="{{ url('css/style.css') }}">
         <link rel="stylesheet" href="{{ url('css/style2.css') }}">
+        <!--<link rel="stylesheet" href="{{ url('css/jeremTemp.css') }}">-->
 
         <!-- Scripts -->
         <script src="{{ asset('js/vendor/jquery.min.js')}}"></script>
@@ -111,7 +112,11 @@
                     <li>{{ link_to(route('admin.watermark.create'), 'Add') }}</li>
                 </ul>
                 @endrole
+<<<<<<< HEAD
             </div>
+=======
+            </div>
+>>>>>>> back-jc
             <div id="reseauxSociaux">
                 <a href="https://www.facebook.com/mediaskates/"><img src="{{ asset('images/sources/facebook.svg') }}" alt="facebook" title="facebook"/></a>
                 <a href="https://twitter.com/mediaskates"><img src="{{ asset('images/sources/twitter.svg') }}" alt="twitter" title="twitter"/></a>
@@ -178,7 +183,11 @@
             </div>
 
             <div id="information">
+<<<<<<< HEAD
                 <h2>Information légales</h2>
+=======
+                <h2>Information légales</h2>
+>>>>>>> back-jc
                 <a href="">Mentions légales<br /></a>
                 <a href="">Conditions générales</a>
             </div>

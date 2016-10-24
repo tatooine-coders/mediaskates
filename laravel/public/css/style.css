@@ -26,7 +26,7 @@ h1 {
     padding-left: 30px;
     font-size: 2em;
     margin: 0.67em 0;
-    color: #e0e0e0; 
+    color: #e0e0e0;
 }
 
 img {
@@ -188,10 +188,10 @@ textarea {
     padding-right: 10px;
 }
 
-.menu a:link, .menu a:hover, .menu a:focus, .menu a:visited { 
+.menu a:link, .menu a:hover, .menu a:focus, .menu a:visited {
     text-decoration: none;
     color: white;
-} 
+}
 
 .menu a:active, .menu a:hover
 {
@@ -319,7 +319,6 @@ h2 {
 }
 
 #logo {
-
     padding: 15px 0 0 20px;
     width: 380px;
 }
@@ -332,11 +331,11 @@ h2 {
     width: 65%;
 }
 
-nav a:link, nav a:hover, nav a:focus, nav a:visited { 
+nav a:link, nav a:hover, nav a:focus, nav a:visited {
     text-decoration:none;
     color: white;
     font-size: 1.2em;
-} 
+}
 
 nav a:active, nav a:hover
 {
@@ -354,12 +353,12 @@ nav a:active, nav a:hover
 }
 
 div.bordure {
-    vertical-align: top;	
+    vertical-align: top;
     border: 2px solid red;
 }
 
 div.bordureB {
-    vertical-align: top;	
+    vertical-align: top;
     border: 1px solid #868686;
 }
 #utilisation, #mediaskates, #information {
@@ -398,11 +397,11 @@ div.bordureB {
     width: 100%;
 }
 
-footer a:link, footer a:hover, footer a:focus, footer a:visited { 
+footer a:link, footer a:hover, footer a:focus, footer a:visited {
     text-decoration:none;
     color: gray;
     font-size: 0.8em;
-} 
+}
 
 footer a:active, footer a:hover
 {
@@ -450,7 +449,7 @@ footer a:active, footer a:hover
 #photos a img {
     display:block;
 }
-#content{   
+#content{
     margin: 0;
     justify-content: center;
     padding-bottom: 8px;
@@ -458,10 +457,10 @@ footer a:active, footer a:hover
     font-size: 0.8em;
 }
 
-#content a:link, #content a:hover, #content a:focus, #content a:visited { 
+#content a:link, #content a:hover, #content a:focus, #content a:visited {
     text-decoration: none;
     color: white;
-} 
+}
 
 /*-----------*/
 /* SlideShow */

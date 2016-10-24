@@ -48,8 +48,8 @@ Route::get('/user/{id}', 'UserController@show')->name('user.show');
 /*
  * Search
  */
-Route::get('/advanced_search', 'SearchController@advanced_search')->name('advanced_search');
-Route::post('/search_results', 'SearchController@search_results')->name('search_results');
+Route::get('/advanced_search', 'SearchController@advancedSearch')->name('advanced_search');
+Route::post('/search_results', 'SearchController@searchResults')->name('search_results');
 
 /*
  * Page

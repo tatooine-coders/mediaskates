@@ -13,10 +13,15 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('not_implemented', [
-            'pageTitle' => 'Commentaires'
+        $comments = Comment::query()
+            ->get();
+
+        return view('admin/comments/index', [
+            'pageTitle' => 'Commentaires',
+            'comments' => $comments,
+
         ]);
     }
 
@@ -28,8 +33,11 @@ class CommentController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-        return view('not_implemented', [
-            'pageTitle' => 'Commentaires'
-        ]);
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+        Session::flash('message', 'Commentaire supprimé.');
+
+        return redirect()->route('admin.comment.index');
     }
 }

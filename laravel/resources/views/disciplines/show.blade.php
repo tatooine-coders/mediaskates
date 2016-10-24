@@ -17,5 +17,4 @@
 @else
     Pas d'évènements
 @endif
-
 @endsection
