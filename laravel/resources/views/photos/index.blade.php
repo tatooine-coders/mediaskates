@@ -5,7 +5,7 @@
 <div id="wall">
 @foreach($photos as $photo)
 
-<!--    <script type="text/javascript">
+ <script type="text/javascript">
 
         var temp = "<div class='brick' style='width:{width}px;'>\n\
                     <img src='{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}' width='100%'>\n\
@@ -33,7 +33,7 @@
             wall.fitWidth();
         });
 
-    </script>-->
+    </script>
     <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/>
 
 @endforeach

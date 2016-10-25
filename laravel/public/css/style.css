@@ -1,365 +1,413 @@
+/* ============================================================================
+                                  menu login
+=============================================================================*/
+.login {
+    display: inline-block;
+    list-style: none;
+    line-height: 1em;
+    width: 25%;
+    min-width: 150px;
+    margin: 0;
+    font-size: 1.5em;
+    background: #000;
+    text-align: center;
+    color: white
+}
+
+.login a:link, .login a:hover, .login a:focus, .login a:visited {
+    text-decoration: none;
+    color: red
+}
+
+#nav .login a:active, #nav .login a:hover {
+    color: white
+}
+
+/* ============================================================================
+                                  menu nav
+=============================================================================*/
 #nav {
-	z-index: 1;
-	width: 65%;
-	margin-top: 45px;
+    z-index: 1;
+    width: 65%
 }
-#nav2 {
-	z-index: 1;
-	width:100%;
-	margin-top: 45px;
-}
-#nav a:active, #nav a:hover
-{
-	color: black;
+
+#nav a:active, #nav a:hover {
+    color: black;
 }
 
 #nav ul
 {
-	list-style:none;
-	position:relative;
-	float:left;
-	margin:0;
-	padding:0
+    list-style:none;
+    position: relative;
+    float: left
 }
 
 #nav ul a
 {
-	display:block;
-	color:#ccc;
-	text-decoration:none;
-	font-size:1.3em;
-	line-height:17px;
-	padding:0 5px;
-	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1.3em;
+    line-height: 17px;
+    padding: 0 5px;
+    font-family: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
 }
 
-#nav ul li
-{
-	position: relative;
-	float: left;
-	margin:0;
-	padding:0;
+#nav ul li {
+    float: left;
+    border-left: 1px solid red
 }
 
 #nav ul li.menu
 {
-	background: #000
+    background: #000
 }
 
 #nav ul li:hover
 {
-	background:#fff
+    background:#fff
 }
 
 #nav ul ul
 {
-	display: none;
-	position: absolute;
-	top:100%;
-	font-size: 1.0em;
-	left: 0;
-	background:#fff;
-	padding:0
+    display: none;
+    position: absolute;
+    background: #fff
 }
+
 #nav ul ul:hover
 {
-	background:#f00
+    background: #000
 }
 
-
-#nav ul li ul li
-{
-	float:none;
-	width:120px;
-}
-#nav ul ul
-{
-	line-height:120%;
-	padding:10px 15px
+#nav ul ul ul {
+    z-index: 5;
+    margin-left: 110px;
+    background: red;
+    color: red
 }
 
-#nav ul ul ul
-{
-	z-index: 5;
-	top:0;
-	margin-left: 110px;
-	background: red;
-	color: red
+#nav ul ul ul li:hover {
+    background: #fff
 }
 
-#nav ul ul ul li:hover
-{
-	background:#fff
+#nav ul li:hover > ul {
+    display: block;
+    color: black
 }
 
-#nav ul li:hover > ul
-{
-	display:block;
-	color: black
+#nav2 {
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    padding-top: 35px
+}
+/* ============================================================================
+                                  menu User et Admin
+=============================================================================*/
+
+#nav .user a:active, #nav .user a:hover {
+    color: gray
+}
+
+.user ul li, .admin ul li {
+    background-color: #000;
+    font-size: 1.2em;
+    float: left;
+    padding: 8px;
+    border-right: 2px solid gray;
+    color: white;
+    margin:0;
+    line-height: 1.2em;
+    width: 120px;
+    left:105px
+}
+
+#nav .user ul li:hover,#nav .admin ul li:hover {
+    background: gray
+}
+
+.user ul li ul li, .admin ul li ul li {
+      font-size: 1em
+}
+
+.user ul li ul , .admin ul li ul  {
+    padding: 0;
+    margin-left: -9px;
+    margin-top: 8px
+}
+
+.user ul li ul li ul, .admin ul li ul li ul {
+    font-size: 0.7em;
+    padding: 0;
+    line-height: 1.2em;
+    margin-left: -5px;
+    margin-top: -25px
+}
+
+#nav .user a:hover, #nav .admin a:hover {
+    color: white
 }
 
 /* ============================================================================
-                                  css
+                                  menu
 =============================================================================*/
-h1 {
-	padding-left: 30px;
-	font-size: 2em;
-	margin: 0.67em 0;
-	color: #e0e0e0
-}
 
-h2 {
-	font-size: 1.2em;
-	color: red
-}
-
-#enteteBarre {
-	line-height: 10px;
-	display: flex;
-	flex-flow: row wrap;
-	align-items: center
+#enteteBarre
+{
+    line-height: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center
 }
 
 #logo, #nav, #reseauxSociaux {
-	display: inline-flex
+    display: inline-flex
 }
 
 .user{
-	width: 12%
+    display: inline-block;
+    width: 25%
 }
 
 .admin{
-	width: 12%
+    display: inline-block;
+    width: 25%
 }
 
-.login{
-	margin-bottom: 16px;
-	width: 20%;
+h1 {
+    padding-left: 30px;
+    font-size: 2em;
+    margin: 0.67em 0;
+    color: #e0e0e0
+}
 
+h2 {
+    font-size: 1.2em;
+    color: red
 }
 
 #logo {
-	padding: 15px 0 0 20px;
-	width: 380px
+    padding: 15px 0 0 20px;
+    width: 380px
 }
 
 #logo img {
-	width: 90%
+    width: 90%
 }
 
 
 #reseauxSociaux img{
-	width: 38px;
-	padding: 10px
+    width: 38px;
+    padding: 10px
 }
 
 #reseauxSociaux {
-	margin-top: 6px;
-	text-align: justify
+    margin-top: 6px;
+    text-align: justify
 }
 
 div.bordure {
-	vertical-align: top;
-	border: 2px solid red
+    vertical-align: top;
+    border: 2px solid red
 }
 
 div.bordureB {
-	vertical-align: top;
-	border: 1px solid #868686
+    vertical-align: top;
+    border: 1px solid #868686
 }
 
 #utilisation, #mediaskates, #information {
-	display: inline-block;
-	vertical-align: top;
-	font-size: 13px;
-	padding-bottom: 20px
-}
+    display: inline-block;
+    vertical-align: top;
+    font-size: 13px;
+    padding: 20px 0 0 20px
+    }
 
 #utilisation {
-	padding-left: 115px;
-	width: 400px
+   width: 400px
 }
 
 #mediaskates {
-	width: 250px
+    width: 250px
 }
 
 #information {
-	width: 250px
+    width: 250px
 }
 
 #slide {
-	display: block
+    display: block
 }
 
 #baniereFooter {
-	display: flex
+    display: flex
 }
 
 #liens {
-	margin-top: 15px;
-	display: inline-flex;
-	justify-content: space-around;
-	width: 100%
+    margin-top: 15px;
+    display: inline-flex;
+    justify-content: space-around;
+    width: 100%
 }
 
 footer a:link, footer a:hover, footer a:focus, footer a:visited {
-	text-decoration: none;
-	color: gray;
-	font-size: 0.8em
+    text-decoration: none;
+    color: gray;
+    font-size: 0.8em
 }
 
 footer a:active, footer a:hover
 {
-	color: white
+    color: white
 }
 /*-----------*/
 /*   Cache   */
 /*-----------*/
 #mask {
-	position: absolute;
-	z-index: 2;
+    position: absolute;
+    z-index: 2;
 }
 
 #bandoRec {
-	position: absolute;
-	z-index: 2;
-	width:400px;
-	height:705px;
-	background: rgba(0,0,0,0.6);
+    position: absolute;
+    z-index: 2;
+    width:400px;
+    height:705px;
+    background: rgba(0,0,0,0.6);
 }
 
 #bandoTri{
-	position: absolute;
-	z-index: 2;
-	margin-left:  400px;
-	border-style: solid;
-	border-width: 705px 200px 0 0;
-	border-color: rgba(0,0,0,0.6) transparent transparent transparent;
+    position: absolute;
+    z-index: 2;
+    margin-left:  400px;
+    border-style: solid;
+    border-width: 705px 200px 0 0;
+    border-color: rgba(0,0,0,0.6) transparent transparent transparent;
 }
 
 #banierePhotos{
 }
 
 #photos{
-	text-align: center;
-	padding-right: 10px;
+    text-align: center;
+    padding-right: 10px;
 }
 
 #photos a{
-	display:inline-block;
+    display:inline-block;
 }
 
 #photos a img {
-	display:block;
+    display:block;
 }
 #content{
-	margin: 0;
-	justify-content: center;
-	padding-bottom: 8px;
-	list-style-type: none;
-	font-size: 0.8em;
+    margin: 0;
+    justify-content: center;
+    padding-bottom: 8px;
+    list-style-type: none;
+    font-size: 0.8em;
 }
 
 #content a:link, #content a:hover, #content a:focus, #content a:visited {
-	text-decoration: none;
-	color: white;
+    text-decoration: none;
+    color: white;
 }
 
 #date-lieux{
-	padding-right: 40px;
-	text-align: center;
-	color: #ff0000;
+    padding-right: 40px;
+    text-align: center;
+    color: #ff0000;
 }
 /*-----------*/
 /* SlideShow */
 /*-----------*/
 #diapo {
-	max-width: 100%;
-	height: 700px;
-	margin: 5px;
+    max-width: 100%;
+    height: 700px;
+    margin: 5px;
 }
 
 .slide1,.slide2,.slide3,.slide4,.slide5 {
-	position: absolute;
-	width: 100%;
-	height: 700px;
+    position: absolute;
+    width: 100%;
+    height: 700px;
 }
 
 .slide1 {
-	background: url("../images/sources/test.jpg") no-repeat center;
-	background-size: cover;
-	animation:fade 15s infinite;
-	-webkit-animation:fade 15s infinite;
+    background: url("../images/sources/test.jpg") no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade 15s infinite;
 }
 .slide2 {
-	background: url("../images/sources/test2.jpg") no-repeat center;
-	background-size: cover;
-	animation:fade 15s infinite;
-	-webkit-animation:fade2 15s infinite;
+    background: url("../images/sources/test2.jpg") no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade2 15s infinite;
 }
 .slide3 {
-	background: url("../images/sources/test3.jpg")no-repeat center;
-	background-size: cover;
-	animation:fade 15s infinite;
-	-webkit-animation:fade3 15s infinite;
+    background: url("../images/sources/test3.jpg")no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade3 15s infinite;
 }
 .slide4 {
-	background: url("../images/sources/test4.jpg")no-repeat center;
-	background-size: cover;
-	animation:fade 15s infinite;
-	-webkit-animation:fade4 15s infinite;
+    background: url("../images/sources/test4.jpg")no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade4 15s infinite;
 }
 .slide5 {
-	background: url("../images/sources/test5.jpg")no-repeat center;
-	background-size: cover;
-	animation:fade 15s infinite;
-	-webkit-animation:fade5 15s infinite;
+    background: url("../images/sources/test5.jpg")no-repeat center;
+    background-size: cover;
+    animation:fade 15s infinite;
+    -webkit-animation:fade5 15s infinite;
 }
 
 @keyframes fade
 {
-	0%   {opacity:1}
-	20% { opacity: 0}
-	40% { opacity: 0}
-	60% { opacity: 0}
-	80% { opacity: 0}
-	100% { opacity: 1}
+    0%   {opacity:1}
+    20% { opacity: 0}
+    40% { opacity: 0}
+    60% { opacity: 0}
+    80% { opacity: 0}
+    100% { opacity: 1}
 
 }
 @keyframes fade2
 {
-	0%   {opacity:0}
-	20% { opacity: 1}
-	40% { opacity: 0}
-	60% { opacity: 0}
-	80% { opacity: 0}
-	100% { opacity: 0}
+    0%   {opacity:0}
+    20% { opacity: 1}
+    40% { opacity: 0}
+    60% { opacity: 0}
+    80% { opacity: 0}
+    100% { opacity: 0}
 }
 @keyframes fade3
 {
-	0%   {opacity:0}
-	20% { opacity: 0}
-	40% { opacity: 1}
-	60% { opacity: 0}
-	80% { opacity: 0}
-	100% { opacity: 0}
+    0%   {opacity:0}
+    20% { opacity: 0}
+    40% { opacity: 1}
+    60% { opacity: 0}
+    80% { opacity: 0}
+    100% { opacity: 0}
 }
 @keyframes fade4
 {
-	0%   {opacity:0}
-	20% { opacity: 0}
-	40% { opacity: 0}
-	60% { opacity: 1}
-	80% { opacity: 0}
-	100% { opacity: 0}
+    0%   {opacity:0}
+    20% { opacity: 0}
+    40% { opacity: 0}
+    60% { opacity: 1}
+    80% { opacity: 0}
+    100% { opacity: 0}
 }
 @keyframes fade5
 {
-	0%   {opacity:0}
-	20%  {opacity: 0}
-	40%  { opacity: 0}
-	60%  { opacity: 0}
-	80%  { opacity: 1}
-	100% { opacity: 0}
+    0%   {opacity:0}
+    20%  {opacity: 0}
+    40%  { opacity: 0}
+    60%  { opacity: 0}
+    80%  { opacity: 1}
+    100% { opacity: 0}
 }
