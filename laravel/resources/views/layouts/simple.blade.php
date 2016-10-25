@@ -44,7 +44,7 @@ window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
                 <ul id="nav2">
                     <li>{{ link_to('/', 'Accueil') }}</li>
                     <li>{{ link_to(route('event.index'), 'Manifestations') }}</li>
-                    <li>{{ link_to(route('photo.index'), 'Photos') }}</li>
+                    {{--<li>{{ link_to(route('photo.index'), 'Photos') }}</li>--}}
                     <li>{{ link_to(route('tag.index'), 'Tags') }}</li>
                     <li>{{ link_to(route('user.index'), 'Photographes') }}</li>
                     <li>{{ link_to(route('advanced_search'), 'Recherche Avancée') }}</li>
