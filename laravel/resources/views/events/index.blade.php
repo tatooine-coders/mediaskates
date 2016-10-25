@@ -2,8 +2,7 @@
 
 @section('content')
     @if(count($events)>0)
-        <div style="text-align: center">
-        <table style="margin: auto">
+        <table class="centerTab">
             <thead>
                 <tr>
                     <th>Nom</th>
@@ -19,7 +18,6 @@
                 @endforeach
             </tbody>
         </table>
-        </div>
     @else
         Pas d'evenements.
     @endif

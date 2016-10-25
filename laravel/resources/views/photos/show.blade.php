@@ -1,24 +1,17 @@
 @extends('layouts/simple')
-
-
-
 @section('content')
 <div class="flex">
     <div id="photo">
-
-            <small>
+        <small>
                 <i class="fa fa-fw fa-calendar"></i> Créé le {{ $photo->created_at }}
                 @if($photo->created_at != $photo->updated_at)
                     - <i class="fa fa-fw fa-refresh"></i> modifié le {{ $photo->created_at }}
                 @endif
-            </small>
+        </small>
             <dl>
                 <img src="{{ asset(UPLOADS_PIC_FOLDER.$photo->file) }}"/>
-                <dt>Event :</dt>
-                <dd>{{ $photo->event->name }}</dd>
+                <dt>Event : {{ $photo->event->name }}</dt>
             </dl>
-
-
     </div>
 
     {{--affichage des commentaires--}}
@@ -39,8 +32,6 @@
     {{--affichage ajout commentaire--}}
     @if(Laratrust::hasRole('member'))
 
-
-
             <h2>Ajouter un Commentaire</h2>
 
             {!! Form::open([
@@ -53,10 +44,7 @@
 
             {!! Form::submit('Ajouter un commentaire') !!}
             {!! Form::close() !!}
-
-
-        </div>
-
+    </div>
     @endif
 </div>
 @endsection
