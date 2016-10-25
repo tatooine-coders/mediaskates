@@ -24,6 +24,9 @@ define('DISCIPLINES_THUMB_FOLDER', 'images/disciplines/thumbs/');
 // Watermarks
 define('WATERMARKS_FOLDER', 'images/watermarks/');
 
+// Allowed mime types
+define('ALLOWED_MIMES', 'mimes:jpg,jpeg,png,gif');
+
 return[
     'default_prefs' => [
         'is_taggable' => [

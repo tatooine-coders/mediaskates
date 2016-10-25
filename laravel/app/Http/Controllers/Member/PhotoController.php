@@ -45,9 +45,8 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         $this->validate($request, [
-            'file' => 'required|mimes:jpeg,png,gif',
+            'files' => 'required|'.ALLOWED_MIMES,
         ]);
 
         $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
@@ -71,7 +70,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
 
     public function ajaxUpload(Request $request){
         $this->validate($request, [
-            'file' => 'required|mimes:png,jpg,jpeg,gif',
+            'file' => 'required|'.ALLOWED_MIMES,
             'formSession' => 'required',
         ]);
 
@@ -141,7 +140,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'file' => 'mimes:png,jpg,gif',
+            'file' => ALLOWED_MIMES,
             'event_id' => 'required',
             'watermark_id' => 'required',
             'license_id' => 'required',

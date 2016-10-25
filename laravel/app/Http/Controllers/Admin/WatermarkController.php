@@ -69,7 +69,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
             'name' => 'required',
             'description' => 'required',
             'position' => 'required',
-            'file' => 'mimes:gif,png,jpg'
+            'file' => ALLOWED_MIMES
         ]);
 
         $filename = $this->prepareFile($request);
@@ -124,7 +124,7 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
             'name' => 'required',
             'description' => 'required',
             'position' => 'required',
-            'file' => 'mimes:gif,png,jpg'
+            'file' => ALLOWED_MIMES
         ]);
 
         $watermark = Watermark::findOrFail($id);

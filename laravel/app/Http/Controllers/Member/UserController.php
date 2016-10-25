@@ -61,7 +61,7 @@ class UserController extends \App\Http\Controllers\Member\MemberController
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'profile_pic' => 'mimes:png,jpeg,gif',
+            'profile_pic' => ALLOWED_MIMES,
         ]);
         $data = $request->all();
         /**
