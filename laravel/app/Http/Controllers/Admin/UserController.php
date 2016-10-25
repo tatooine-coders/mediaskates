@@ -100,7 +100,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
             'pseudo' => 'bail|required|unique:users',
             'email' => 'bail|required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-            'profile_pic' => 'mimes:png,jpeg,gif',
+            'profile_pic' => ALLOWED_MIMES,
         ]);
         $data = $request->all();
 
@@ -174,7 +174,7 @@ class UserController extends \App\Http\Controllers\Admin\AdminController
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'profile_pic' => 'mimes:png,jpeg,gif',
+            'profile_pic' => ALLOWED_MIMES,
         ]);
         $data = $request->all();
 

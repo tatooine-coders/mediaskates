@@ -67,7 +67,7 @@ class DisciplineController extends \App\Http\Controllers\Admin\AdminController
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'logo' => 'required|mimes:jpeg,png,gif',
+            'logo' => 'required|'.ALLOWED_MIMES,
         ]);
 
         $filename = $this->prepareFile($request);
