@@ -2,12 +2,14 @@
  *
  * Based on this tutorial:
  * http://hayageek.com/drag-and-drop-file-upload-jquery/
+ *
+ * @author Manuel Tancoigne <m.tancoigne@gmail.com>
  */
 
 /**
  * Creates a status bar
  *
- * @param {Object} targetObj jQuery object where the thumbnail should be created
+ * @param {Object} config Configuration object, passed from caller
  */
 function createThumbnail(config) {
 
@@ -27,9 +29,22 @@ function createThumbnail(config) {
 	this.progressBar = $('<div class="progress-bar"><div></div></div>').appendTo(this.controls);
 	this.abort = $('<div class="btn danger block abort"><i class="fa fa-fw fa-times"></i></div>').appendTo(this.controls);
 	this.statusbar = $('<div class="infos-zone"></div>').appendTo(this.thumbnail);
+	this.delete = $('<a class="danger"><i class="fa fa-fw fa-times"></i> Supprimer</a>'); // Is appended in setDeleteLink
+	this.realimg = $('<img src="" alt="" />'); // Defined in setRealImage();
 	this.filename = $('<div class="filename"></div>').appendTo(this.statusbar);
 	this.size = $('<div class="filesize"></div>').appendTo(this.statusbar);
+	// Creates the thumb
 	$(config.writeTo).append(this.thumbnail);
+
+	// Other vars
+	// File name on server
+	this.serverFileName = null;
+	// URL to remove an img
+	this.abortURL = config.abortURL;
+	// Form session id
+	this.formSession = config.formSession;
+	// Server base url to temp image
+	this.imageTmpURL = config.imageURL;
 
 	/**
 	 * Sets the filename and size in thumbnail
@@ -61,10 +76,39 @@ function createThumbnail(config) {
 	{
 		var progressBarWidth = progress * this.progressBar.width() / 100;
 		this.progressBar.find('div').animate({width: progressBarWidth}, 10).html(progress + "% ");
-		if (parseInt(progress) >= 100)
-		{
-			this.abort.hide();
-		}
+//		if (parseInt(progress) >= 100) {
+//			this.abort.hide();
+//			this.delete.show();
+//		}
+	};
+
+	this.abortOnServer = function () {
+		var sb = this.thumbnail;
+		var thumb=this;
+		this.realimg.hide();
+		this.controls.html('<i class="fa fa-spinner fa-pulse fa-fw fa-3x" style="color:#CCC"></i>');
+		this.fakeimg.show();
+
+		fd = new FormData();
+		fd.append('formSession', this.formSession);
+		fd.append('imageName', this.serverFileName);
+
+		$.ajax({
+			url: this.abortURL,
+			type: 'POST',
+			contentType: false,
+			processData: false,
+			cache: false,
+			data: fd,
+			success: function (data) {
+				console.log('DELETE :', data);
+				sb.hide();
+			},
+			error: function(data){
+				thumb.setError(data)
+			}
+		});
+		console.log('Deleting image from server....');
 	};
 
 	/**
@@ -72,24 +116,42 @@ function createThumbnail(config) {
 	 * @param {type} jqxhr jQuery XHR request
 	 * @returns {void}
 	 */
-	this.setAbort = function (jqxhr)
-	{
-		var sb = this.statusbar;
+	this.setAbortButton = function (jqxhr) {
 		this.abort.click(function ()
 		{
 			jqxhr.abort();
-			sb.hide();
 		});
-	}
+	};
+
+	/**
+	 * Displays the delete link and attach click listener
+	 * @param {createThumbnail} thumb
+	 * @returns {void}
+	 */
+	this.setDeleteLink = function (thumb) {
+		this.delete.prependTo(this.statusbar);
+		this.delete.click(function (e) {
+			thumb.abortOnServer();
+//			thumb.thumbnail.hide();
+		});
+	};
+
+	this.setError = function (data) {
+		this.controls.html('<div class="grave">ERREUR</div>');
+		console.log(data);
+	};
 
 	/**
 	 * Replaces loading control by image
 	 *
-	 * @param {string} imageURL
+	 * @param {Object} data
 	 * @returns {void}
 	 */
-	this.setImage = function (imageURL) {
-		$('<img src="' + config.imageURL + '/' + imageURL + '" alt="" />').appendTo(this.imgzone);
+	this.setRealImageData = function (data) {
+		this.serverFileName = data.filename;
+		this.realimg.attr('src', this.imageTmpURL + '/' + data.filename);
+		this.realimg.appendTo(this.imgzone);
+		this.setDeleteLink(this);
 		this.fakeimg.hide();
 	};
 }
@@ -98,10 +160,10 @@ function createThumbnail(config) {
  * Sends the file to server and updates the progress bar
  *
  * @param {FormData} formData Data to send
- * @param {type} status
+ * @param {type} thumbnail
  * @param {string} uploadURL
  */
-function sendFileToServer(formData, status, uploadURL) {
+function sendFileToServer(formData, thumbnail, uploadURL) {
 	var jqXHR = $.ajax({
 		xhr: function () {
 			var xhrObj = $.ajaxSettings.xhr();
@@ -114,7 +176,7 @@ function sendFileToServer(formData, status, uploadURL) {
 						percent = Math.ceil(position / total * 100);
 					}
 					// Set progress
-					status.setProgress(percent);
+					thumbnail.setProgress(percent);
 				}, false);
 			}
 			return xhrObj;
@@ -126,12 +188,16 @@ function sendFileToServer(formData, status, uploadURL) {
 		cache: false,
 		data: formData,
 		success: function (data) {
-			status.setProgress(100);
-			status.setImage(data.filename);
 			console.log(data);
+			if (data.hasOwnProperty('filename')) {
+				thumbnail.setProgress(100);
+				thumbnail.setRealImageData(data);
+			} else {
+				thumbnail.setError(data);
+			}
 		}
 	});
-	status.setAbort(jqXHR);
+	thumbnail.setAbortButton(jqXHR);
 }
 
 /**
@@ -146,24 +212,26 @@ function droppedFilesHandler(files, config) {
 	var targetURL = config.sendTo;
 
 	for (let file of files) {
-		var fd = new FormData();
-		fd.append('file', file);
-		fd.append('formSession', formSession);
-		// Create a status bar in the drop zone
-		var status = new createThumbnail(config);
-		console.log(file);
-		status.setFileNameSize(file.name, file.size);
-		// Send file
-		sendFileToServer(fd, status, targetURL);
+		let ext = file.name.split('.').pop();
+		if (['jpg', 'jpeg', 'png', 'gif'].indexOf(ext) !== -1) {
+			var fd = new FormData();
+			fd.append('file', file);
+			fd.append('formSession', formSession);
+
+			// Create a status bar in the drop zone
+			var status = new createThumbnail(config);
+			status.setFileNameSize(file.name, file.size);
+			// Send file
+			sendFileToServer(fd, status, targetURL);
+		} else {
+			console.log(file.name + 'is not of an acceptable format.');
+		}
 	}
 }
 
 /***
  * Creates a drop listener to a given zone and defines the target URL;
- * @param {string} zoneToListen    Drop zone (class, id)
- * @param {string} zoneToSend      Thumbnail parent selector
- * @param {string} targetUrl       Url to send the files to
- * @param {string} formSession     Form session id for the Laravel controller
+ * @param {Object} config    Configuration object, passed from callers to callers
  * @returns {void}
  */
 function setDropListener(config) {
