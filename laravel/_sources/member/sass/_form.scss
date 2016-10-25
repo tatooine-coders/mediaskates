@@ -77,6 +77,11 @@ input[required], select[required], textarea[required]{
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+		.grave{
+			font-weight:bold;
+			background-color:transparentize(lighten($grave-text-color, 20%), .2);
+			padding:5px;
+		}
 	}
 }
 .progress-bar{

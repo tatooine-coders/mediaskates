@@ -18,6 +18,10 @@ h2{
   margin-bottom:$small-value;
 }
 
+a{
+	cursor:pointer;
+}
+
 
 .page-wrapper{
   background-color:$background-color;
@@ -164,6 +168,29 @@ a{
   &:hover{
     opacity: 0.5;
   }
+}
+
+/**
+Colors
+*/
+
+.info{
+	color:$info-text-color;
+	&:hover{
+		color:darken($info-text-color, 50%);
+	}
+}
+.danger{
+	color:$danger-text-color;
+	&:hover{
+		color:darken($danger-text-color, 50%);
+	}
+}
+.grave{
+	color:$grave-text-color;
+	&:hover{
+		color:darken($grave-text-color, 50%);
+	}
 }
 
 /*.small{
