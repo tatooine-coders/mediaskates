@@ -1,8 +1,11 @@
 @extends('layouts/simple')
 
+<!--CDN bootstrap - Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 @section('content')
 @if(count($photos)>0)
-<div id="wall">
+<div style="text-align: center">
 @foreach($photos as $photo)
 
 <!--    <script type="text/javascript">
@@ -34,8 +37,9 @@
         });
 
     </script>-->
-    <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/>
-
+    <div style="width: 20%; text-align: center">
+        <a href="{{ route('photo.show', $photo->id) }}"><img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}"/></a>
+    </div>
 @endforeach
 </div>
 <script>
@@ -54,4 +58,12 @@ var wall = new Freewall("#wall");
 @else
 Pasde photos.
 @endif
+
+{{--Pagination--}}
+<div style="text-align: center">
+    {{ $photos->links() }}
+</div>
+
+
+
 @endsection
