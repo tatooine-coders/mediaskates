@@ -19,7 +19,7 @@
         <!-- CSS reset and simple style -->
         <link rel="stylesheet" href="{{ url('css/style.css') }}">
         <link rel="stylesheet" href="{{ url('css/style2.css') }}">
-        <!--<link rel="stylesheet" href="{{ url('css/jeremTemp.css') }}">-->
+        <link rel="stylesheet" href="{{ url('css/jeremTemp.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/vendor/jquery.min.js')}}"></script>

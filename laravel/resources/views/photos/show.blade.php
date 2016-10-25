@@ -13,7 +13,7 @@
                 @endif
             </small>
             <dl>
-                <img src="{{ asset(UPLOADS_PIC_FOLDER.$photo->file) }}"/>>
+                <img src="{{ asset(UPLOADS_PIC_FOLDER.$photo->file) }}"/>
                 <dt>Event :</dt>
                 <dd>{{ $photo->event->name }}</dd>
             </dl>
@@ -26,11 +26,11 @@
     @if(count($photo->comments)>0)
         <h2>Commentaire(s)</h2>
         @foreach($photo->comments as $comment)
+                Le {{ $comment->created_at }}</br>
 
-            Le {{ $comment->created_at }}</br>
-            {{ $comment->user_id }} à ecrit : </br>
-            {{ $comment->text }}</br>
-            </br>
+                {{ $comment->user->pseudo }} à ecrit : </br>
+                {{ $comment->text }}</br>
+                </br>
 
         @endforeach
 

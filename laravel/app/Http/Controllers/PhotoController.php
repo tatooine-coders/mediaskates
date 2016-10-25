@@ -17,7 +17,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photos=Photo::query()->get();
+        $photos=Photo::query()->paginate(1);
 
         return view('photos/index', [
             'pageTitle' => 'Liste des photos',
