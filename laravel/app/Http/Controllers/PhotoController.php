@@ -11,21 +11,6 @@ class PhotoController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function index()
-//    {
-//        $photos=Photo::query()->paginate(1);
-//
-//        return view('photos/index', [
-//            'pageTitle' => 'Liste des photos',
-//            'photos'=>$photos
-//        ]);
-//    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id

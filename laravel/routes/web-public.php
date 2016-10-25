@@ -19,7 +19,6 @@ Route::get('/event/{id}', 'EventController@show')->name('event.show');
 /*
  * Photo
  */
-//Route::get('/photos', 'PhotoController@index')->name('photo.index');
 Route::get('/photo/{id}', 'PhotoController@show')->name('photo.show');
 
 /*

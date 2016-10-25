@@ -42,30 +42,14 @@ window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
             <div id="nav">
 
                 <ul id="nav2">
+
                     <li>{{ link_to('/', 'Accueil') }}</li>
                     <li>{{ link_to(route('event.index'), 'Manifestations') }}</li>
-                    {{--<li>{{ link_to(route('photo.index'), 'Photos') }}</li>--}}
                     <li>{{ link_to(route('tag.index'), 'Tags') }}</li>
                     <li>{{ link_to(route('user.index'), 'Photographes') }}</li>
                     <li>{{ link_to(route('advanced_search'), 'Recherche Avancée') }}</li>
                     <li>{{ link_to(route('pages', 'legal'), 'Mentions Légales') }}</li>
                 </ul>
-
-                <div class="login">
-                    @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Connexion</a></li>
-                    <li><a href="{{ url('/register') }}">Inscription</a></li>
-
-                    @else
-                    <li>User {{ Auth::user()->pseudo }}</li>
-                    <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            Logout</a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                    @endif
-                </div>
 
                 <div class="user">
                     <!-- Membre -->
@@ -118,6 +102,7 @@ window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
                         @endrole
                     </ul>
                 </div>
+
                 <!-- Admin -->
                 <div class="admin"> @role(('admin'))
                     <ul class="menu">
@@ -166,6 +151,21 @@ window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
                         </li>
                     </ul>
                     @endrole
+                </div>
+                <div class="login">
+                    @if (Auth::guest())
+                    <a href="{{ url('/login') }}">Connexion</a>
+                    <a href="{{ url('/register') }}">Inscription</a>
+
+                    @else
+                    <li>User {{ Auth::user()->pseudo }}</li>
+                    <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            Logout</a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                    @endif
                 </div>
             </div>
             <div id="reseauxSociaux">
