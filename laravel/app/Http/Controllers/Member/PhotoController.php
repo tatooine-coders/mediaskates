@@ -24,8 +24,8 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         $licenses = \App\License::query()->pluck('name', 'id');
 
         // Creates a random form session number
-        $formSession=md5(time().microtime());
-        Session::set('f_'.$formSession, []);
+        $formSession = md5(time() . microtime());
+        Session::set('f_' . $formSession, []);
 
         return view('member/photos/create', [
             'pageTitle' => 'Nouvelle photo',
@@ -33,7 +33,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             'watermarks' => $watermarks,
             'licenses' => $licenses,
             'event' => $request->get('event'),
-            'formSession'=> $formSession,
+            'formSession' => $formSession,
         ]);
     }
 
@@ -45,45 +45,111 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'files' => 'required|'.ALLOWED_MIMES,
-        ]);
+        // Base rules
+        $rules = [
+            'event_id' => 'required|exists:events,id',
+            'watermark_id' => 'required|exists:watermarks,id',
+            'license_id' => 'required|exists:licenses,id',
+            'formSession' => 'required',
+        ];
 
-        $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
-        $filename = $this->prepareFile($request, $watermark);
+        // Checking for multiupload:
+        $formSession = Session::get('f_' . $request->get('formSession'));
+        if (!empty($formSession)) {
+            $errors = $this->_saveMultiupload($request);
+        } else { // No multi upload
+            // Adding at least one picture so validator fails if none is uploaded
+            $rules['files.0'] = 'required|' . ALLOWED_MIMES;
+            // Adding potential other ones
+            for ($i = 1; $i < count($request->files->get('files')); $i++) {
+                $rules['files.' . $i] = 'required|' . ALLOWED_MIMES;
+            }
+            $this->validate($request, $rules);
+            // Generate and save
+            $errors = $this->_saveFileInputs($request);
+        }
 
-        if ($filename === false) {
-            Session::flash('error', 'Une erreur est survenue lors du traitement de votre image.');
+        if ($errors > 0) {
+            Session::flash('error', 'Une erreur est survenue lors du traitement de certaines images.');
         } else {
-            $data = $request->all();
-            $data['file'] = $filename;
-            $data['user_id'] = Auth()->user()->id;
-            $request->file('file')->move(public_path(ORIGINAL_PICS_FOLDER), $data['file']);
-
-            Photo::create($data);
-
             Session::flash('message', 'Nouvelle photo ajoutée avec succès.');
         }
 
-        return redirect()->route('user.event.show', $data['event_id']);
+        return redirect()->route('user.event.show', $request->get('event_id'));
     }
 
-    public function ajaxUpload(Request $request){
+    protected function _saveMultiupload(Request $request)
+    {
+        dd($request);
+    }
+
+    /**
+     * Creates a random filename
+     *
+     * @param string $ext
+     *
+     * @return string
+     */
+    protected function _createFileName($ext = null)
+    {
+        $basename = md5(microtime());
+        if (!is_null($ext)) {
+            $basename .= '.' . $ext;
+        }
+        return $basename;
+    }
+
+    /**
+     * Saves a list of files submitted in inputs.
+     *
+     * @param Request $request Original page request
+     *
+     * @return int Number of errors encountered
+     */
+    protected function _saveFileInputs(Request $request)
+    {
+        $errors = 0;
+        $imageData = $request->all();
+        unset($imageData['files']);
+        unset($imageData['formSession']);
+        $imageData['user_id'] = Auth()->user()->id;
+
+        // Searching for watermark
+        $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
+
+        // Processing the list
+        $files = $request->file('files');
+        foreach ($files as $k => $file) {
+//            dd($file);//$file);
+            $filename = $this->prepareFile($file, $watermark);
+            if ($filename === false) {
+                $errors++;
+            } else {
+                $imageData['file'] = $filename;
+                $file->move(public_path(ORIGINAL_PICS_FOLDER), $imageData['file']);
+                Photo::create($imageData);
+            }
+        }
+        return $errors;
+    }
+
+    public function ajaxUpload(Request $request)
+    {
         $this->validate($request, [
-            'file' => 'required|'.ALLOWED_MIMES,
+            'file' => 'required|' . ALLOWED_MIMES,
             'formSession' => 'required',
         ]);
 
-        $formSession=Session::get('f_'.$request->get('formSession'));
-        if(!is_array($formSession)){
-            return ['error'=>'Invalid form session'];
+        $formSession = Session::get('f_' . $request->get('formSession'));
+        if (!is_array($formSession)) {
+            return ['error' => 'Invalid form session'];
         }
 
         // Create a thumb
         $image = new \App\Libraries\SimpleImage();
 
         // Define file name: original name or new one.
-        $filename = md5(microtime()) . '.' . $request->file('file')->getClientOriginalExtension();
+        $filename = $this->_createFileName($request->file('file')->getClientOriginalExtension());
         // Define original file
         $original = $request->file('file')->getPathName();
         // Loading the file
@@ -92,16 +158,15 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         // Creating thumbnail
         $image->centerCropFull(THUMB_WIDTH, THUMB_WIDTH);
         if (!$image->save(UPLOAD_TEMP_FOLDER . $filename)) {
-            return ['error'=>'An error occured'];
-        }else{
-            $formSession[$filename]=$original;
-            Session::set('f_'.$request->get('formSession'), $formSession);
+            return ['error' => 'An error occured'];
+        } else {
+            $formSession[$filename] = $original;
+            Session::set('f_' . $request->get('formSession'), $formSession);
             return [
-                'error'=>false,
-                'filename'=>$filename,
-                ];
+                'error' => false,
+                'filename' => $filename,
+            ];
         }
-
     }
 
     /**
@@ -194,19 +259,19 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
     /**
      * Saves the image(s)
      *
-     * @param type $request
+     * @param type $file
      *
      * @return mixed false on fail, new file name on success.
      */
-    protected function prepareFile(Request $request, $watermark, $original = null)
+    protected function prepareFile(\Illuminate\Http\UploadedFile $file = null, $watermark, $original = null)
     {
         // Load the lib
         $image = new \App\Libraries\SimpleImage();
 
         // Define file name: original name or new one.
-        $filename = ($original === null ? time() . '.' . $request->file('file')->getClientOriginalExtension() : $original);
+        $filename = ($original === null ? $this->_createFileName($file->getClientOriginalExtension()) : $original);
         // Define original file: already existing or from form.
-        $original = ($original === null ? $request->file('file')->getPathName() : ORIGINAL_PICS_FOLDER . $original);
+        $original = ($original === null ? $file->getPathName() : ORIGINAL_PICS_FOLDER . $original);
         // Loading the file
         $image->load($original);
 

@@ -46,7 +46,7 @@
                     Si vous ne pouvez pas utiliser le multi upload, veuillez utiliser le formulaire suivant:
                 </p>
                 <div id="fileZone">
-                    {!! Form::file('files[]', ['required'=>true]) !!}
+                    {!! Form::file('files[]') !!}
                     {!! Form::file('files[]') !!}
                     {!! Form::file('files[]') !!}
                     {!! Form::file('files[]') !!}
@@ -74,6 +74,7 @@ setDropListener({
     </div>
     <!-- Additionnal aside -->
     <aside class="w20 menu-second">
+        {!! Form::hidden('formSession', $formSession) !!}
         {!! Form::submit('Enregistrer', ['class'=>'primary']) !!}
     </aside>
     <!-- /Additionnal aside -->
