@@ -15,15 +15,15 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $photos=Photo::query()->get();
-
-        return view('photos/index', [
-            'pageTitle' => 'Liste des photos',
-            'photos'=>$photos
-        ]);
-    }
+//    public function index()
+//    {
+//        $photos=Photo::query()->paginate(1);
+//
+//        return view('photos/index', [
+//            'pageTitle' => 'Liste des photos',
+//            'photos'=>$photos
+//        ]);
+//    }
 
     /**
      * Display the specified resource.

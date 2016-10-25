@@ -38,6 +38,7 @@ class CommentController extends \App\Http\Controllers\Member\MemberController
 
         // Redirection et message
         \Session::flash('message', 'Commentaire ajouté');
+
         return redirect()->route('photo.index');
 
     }

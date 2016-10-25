@@ -225,7 +225,6 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         File::delete(public_path($basePath . '/' . $d['imageName']));
 
         return['message'=>'OK'];
-
     }
 
     /**

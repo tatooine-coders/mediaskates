@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Photo;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -31,10 +32,12 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::findOrFail($id);
+        $photos = Photo::query()->where('event_id', $id)->paginate(1);
 
         return view('events/show', [
             'pageTitle' => $event->name,
             'event' => $event,
+            'photos' => $photos,
         ]);
     }
 }
