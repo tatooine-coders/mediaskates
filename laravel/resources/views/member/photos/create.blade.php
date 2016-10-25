@@ -66,7 +66,8 @@ setDropListener({
 	writeTo: '#dropzone .dropzone-thumbs',
 	sendTo: '{{ route('user.photo.ajax_upload') }}',
 	formSession: '{{ $formSession }}',
-	imageURL: '{{ asset(UPLOAD_TEMP_FOLDER) }}'
+	imageURL: '{{ asset(UPLOAD_TEMP_FOLDER.$formSession.'/') }}',
+    abortURL: '{{route('user.photo.ajax_cancel') }}'
 });
                 </script>
             </div>

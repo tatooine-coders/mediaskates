@@ -19,6 +19,7 @@ Route::group(['prefix'=>'member', 'middleware'=>['role:photograph']], function()
   Route::get('/photo/create', 'Member\PhotoController@create')->name('user.photo.create');
   Route::post('/photo/store', 'Member\PhotoController@store')->name('user.photo.store');
   Route::post('/photo/ajax_upload', 'Member\PhotoController@ajaxUpload')->name('user.photo.ajax_upload');
+  Route::post('/photo/ajax_cancel', 'Member\PhotoController@ajaxCancel')->name('user.photo.ajax_cancel');
   Route::get('/photo/{id}', 'Member\PhotoController@show')->name('user.photo.show');
   Route::get('/photo/{id}/edit', 'Member\PhotoController@edit')->name('user.photo.edit');
   Route::patch('/photo/{id}/update', 'Member\PhotoController@update')->name('user.photo.update');
