@@ -25,14 +25,14 @@
                  <tbody>
                     @foreach($watermarks as $watermark)
                         <tr>
-                            <td>{{{ $watermark->id }}}</td>
-                            <td>{{{ $watermark->name }}}</td>
-                            <td>{{{ $watermark->description }}}</td>
-                            <td>{{{ $watermark->position }}}</td>
-                            <td>{{{ $watermark->margin }}}</td>
-                            <td>{{{ $watermark->file }}}</td>
-                            <td>{{{ $watermark->created_at }}}</td>
-                            <td>{{{ $watermark->updated_at }}}</td>
+                            <td>{{ $watermark->id }}</td>
+                            <td>{{ $watermark->name }}</td>
+                            <td>{{ $watermark->description }}</td>
+                            <td>{{ $watermark->position }}</td>
+                            <td>{{ $watermark->margin }}</td>
+                            <td>{{ $watermark->file }}</td>
+                            <td>{{ $watermark->created_at }}</td>
+                            <td>{{ $watermark->updated_at }}</td>
                             <td class="actions">
                                 <a href="{{ route('admin.watermark.show', $watermark->id) }}" class="btn btn-info primary" title="Afficher"><i class="fa fa-fw fa-eye"></i></a>
                                 <a href="{{ route('admin.watermark.edit', $watermark->id) }}" class="btn btn-info primary" title="Editer"><i class="fa fa-fw fa-pencil"></i></a>
