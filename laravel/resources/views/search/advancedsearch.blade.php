@@ -12,21 +12,26 @@
         <br/>
         Dans : <br/>
         <br/>
-        {!! Form::radio('choice', '1', true) !!}
-        {!! Form::label('discipline_id', 'Discipline') !!}
-        {{--{!! Form::select('discipline_id', $disciplines, null, ['required'=>true, 'placeholder' => 'Selectionnez une catégorie...']) !!}--}}
-        <br/>
-        {!! Form::radio('choice', '2') !!}
-        {!! Form::label('event_id', 'Event') !!}
-        {{--{!! Form::select('event_id', $events, null, ['required'=>true, 'placeholder' => 'Selectionnez un evenement...']) !!}--}}
-        <br/>
-        {!! Form::radio('choice', '3') !!}
-        {!! Form::label('user_id', 'User') !!}
-        <br/>
-        <br/>
-
-        {!! Form::submit('RECHERCHER') !!}
+        <div style="text-align: left; width: 30%; margin: auto">
+            {!! Form::radio('choice', '1', true) !!}
+            {!! Form::label('discipline_id', 'Discipline') !!}
+            {{--{!! Form::select('discipline_id', $disciplines, null, ['required'=>true, 'placeholder' => 'Selectionnez une catégorie...']) !!}--}}
+            <br/>
+            {!! Form::radio('choice', '2') !!}
+            {!! Form::label('event_id', 'Event') !!}
+            {{--{!! Form::select('event_id', $events, null, ['required'=>true, 'placeholder' => 'Selectionnez un evenement...']) !!}--}}
+            <br/>
+            {!! Form::radio('choice', '3') !!}
+            {!! Form::label('user_id', 'User') !!}
+            <br/>
+            <br/>
+        </div>
+        <span class="boutcolor">
+            {!! Form::submit('RECHERCHER') !!}
+        </span>
         {!! Form::close() !!}
+        <br/>
+        <br/>
         <br/>
         <br/>
         @if(isset($results))
@@ -37,7 +42,7 @@
                     @if($results->isEmpty())
                         Pas de resultas
                     @else
-                        <table class="small resultSearch">
+                        <table class="resultSearch">
                             <thead>
                                 <tr>
                                     <th class="id-col">Id</th>
