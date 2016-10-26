@@ -4,7 +4,7 @@ Route::group(['prefix'=>'member', 'middleware'=>['role:member|admin|photograph']
     /*
      * Comments
      */
-    Route::get('/comments', 'Member\CommentController@index')->name('user.comment.index');
+    Route::get('/', 'Member\CommentController@index')->name('user.comment.index');
     Route::post('/comment/store', 'Member\CommentController@store')->name('user.comment.store');
     Route::patch('/comment/{id}/update', 'Member\CommentController@update')->name('user.comment.update');
     Route::delete('/comment/{id}/destroy', 'Member\CommentController@destroy')->name('user.comment.destroy');
