@@ -33,7 +33,6 @@
             <span>{{ link_to('/', config('app.name')) }}</span>
             <span><i class="fa fa-fw fa-home"></i> {{ link_to('/', 'Accueil') }}</span>
             <span><i class="fa fa-fw fa-calendar"></i> {{ link_to(route('event.index'), 'Events') }}</span>
-            <span><i class="fa fa-fw fa-photo"></i> {{ link_to(route('photo.index'), 'Photos') }}</span>
             <span><i class="fa fa-fw fa-users"></i> {{ link_to(route('user.index'), 'Photographs') }}</span>
             <span><i class="fa fa-fw fa-search"></i> {{ link_to(route('advanced_search'), 'Advanced search') }}</span>
         </nav>

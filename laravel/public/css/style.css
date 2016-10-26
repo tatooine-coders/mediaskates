@@ -128,7 +128,7 @@
 }
 
 .user ul li ul li, .admin ul li ul li {
-      font-size: 1em
+    font-size: 1em
 }
 
 .user ul li ul , .admin ul li ul  {
@@ -150,7 +150,7 @@
 }
 
 /* ============================================================================
-                                  menu
+                                  header menu
 =============================================================================*/
 
 #enteteBarre
@@ -176,14 +176,15 @@
 }
 
 h1 {
-    padding-left: 30px;
+    padding-left: 15px;
     font-size: 2em;
-    margin: 0.67em 0;
+    margin: 0.5em;
     color: #e0e0e0
 }
 
 h2 {
-    font-size: 1.2em;
+    margin: 0.2em;
+    font-size: 1.5em;
     color: red
 }
 
@@ -222,10 +223,10 @@ div.bordureB {
     vertical-align: top;
     font-size: 13px;
     padding: 20px 0 0 20px
-    }
+}
 
 #utilisation {
-   width: 400px
+    width: 400px
 }
 
 #mediaskates {
@@ -261,9 +262,9 @@ footer a:active, footer a:hover
 {
     color: white
 }
-/*-----------*/
-/*   Cache   */
-/*-----------*/
+/* ============================================================================
+                               Filtre sombre homepage
+=============================================================================*/
 #mask {
     position: absolute;
     z-index: 2;
@@ -319,9 +320,98 @@ footer a:active, footer a:hover
     text-align: center;
     color: #ff0000;
 }
-/*-----------*/
-/* SlideShow */
-/*-----------*/
+/* ============================================================================
+                               Formaulaire
+=============================================================================*/
+.formulaire {
+    display: inline-block;
+    margin: 15px ;
+    padding: 20px;
+    list-style-type: none;
+    font-size: 1.5em;
+    border-radius: 15px;
+    border: 3px solid #ccc;
+    background-color: #444;
+    color:#000
+}
+
+.form-group {
+    margin-bottom: 10px;
+    color:#ccc
+}
+
+.form-control{
+    color:#f00
+}
+
+
+.formulaire label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 200px;
+    text-align: left;
+
+}
+
+.form-input {
+    display: inline-block;
+    float: left
+}
+
+.help-block {
+    color: red
+}
+
+.pw {
+    line-height: 2.2em
+}
+
+.form-bloc {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.form-body label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 222px;
+    text-align: left;
+    color: #fff
+}
+.form-body input {
+    color: #f00
+}
+/* ============================================================================
+                               Liste Photographes
+=============================================================================*/
+.utils {
+    display: inline-block;
+    list-style-type: none;
+    font-size: 1.5em;
+    border-radius: 15px;
+    border: 3px solid #ccc;
+    background-color: #333;
+    color: #fff;
+}
+
+.utils ul{
+    list-style: none;
+    width: 180px;
+    height: 220px;
+    margin: 0 auto
+}
+
+.avatar {
+    border-radius: 50%;
+    border: 2px solid #000;
+    margin: 5px    
+}
+/* ============================================================================
+                               Slideshow
+=============================================================================*/
+
 #diapo {
     max-width: 100%;
     height: 700px;
