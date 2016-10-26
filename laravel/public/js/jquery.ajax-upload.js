@@ -213,7 +213,7 @@ function droppedFilesHandler(files, config) {
 
 	for (let file of files) {
 		let ext = file.name.split('.').pop();
-		if (['jpg', 'jpeg', 'png', 'gif'].indexOf(ext) !== -1) {
+		if (['jpg', 'jpeg', 'png', 'gif'].indexOf(ext.toLowerCase()) !== -1) {
 			var fd = new FormData();
 			fd.append('file', file);
 			fd.append('formSession', formSession);
