@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
+
     public $fillable = ['file', 'user_id', 'event_id', 'watermark_id', 'license_id'];
 
     public function user()
@@ -22,9 +23,10 @@ class Photo extends Model
         return $this->belongsTo('App\Event');
     }
 
-//    public function tag(){
-//        return $this->hasManyThrough('App\User', 'App\PhotoUserTag');
-//    }
+    public function votes()
+    {
+        return $this->hasMany('App\Vote');
+    }
 
     public function voters()
     {
