@@ -15,7 +15,14 @@ class CommentController extends \App\Http\Controllers\Member\MemberController
      */
     public function index()
     {
-        //
+        //afficher ses comments dans le dashboard
+        $id= auth()->user()->id;
+        $comments = Comment::query()->where('user_id', $id)->get();
+
+        return view('member/users/show', [
+            'pageTitle' => 'Dashboard',
+           'comments' => $comments,
+        ]);
     }
 
     /**
@@ -39,7 +46,7 @@ class CommentController extends \App\Http\Controllers\Member\MemberController
         // Redirection et message
         \Session::flash('message', 'Commentaire ajouté');
 
-        return redirect()->route('photo.index');
+        return redirect()->route('photo.show', $request->photo_id);
 
     }
 
