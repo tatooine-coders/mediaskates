@@ -1,5 +1,5 @@
 <?php
-Route::group(['prefix'=>'member', 'middleware'=>['role:member|admin|photograph']], function(){
+Route::group(['prefix' => 'member', 'middleware' => ['role:member|admin|photograph']], function() {
 
     /*
      * Comments
@@ -34,14 +34,14 @@ Route::group(['prefix'=>'member', 'middleware'=>['role:member|admin|photograph']
     Route::delete('/me/close_account', 'Member\UserController@destroy')->name('user.close_account');
     Route::get('/me/logout', 'Auth\LoginController@logout')->name('user.logout');
 
-     /*
-      * Votes
-      */
-     Route::get('/votes', 'Member\VoteController@index')->name('user.vote.index');
-     Route::get('/vote/create', 'Member\VoteController@create')->name('user.vote.create');
-     Route::post('/vote/store', 'Member\VoteController@store')->name('user.vote.store');
-     Route::get('/vote/{id}', 'Member\VoteController@show')->name('user.vote.show');
-     Route::get('/vote/{id}/edit', 'Member\VoteController@edit')->name('user.vote.edit');
-     Route::patch('/vote/{id}/update', 'Member\VoteController@update')->name('user.vote.update');
-     Route::delete('/vote/{id}/destroy', 'Member\VoteController@destroy')->name('user.vote.destroy');
+    /*
+     * Votes
+     */
+    Route::get('/votes', 'Member\VoteController@index')->name('user.vote.index');
+//    Route::get('/vote/create', 'Member\VoteController@create')->name('user.vote.create');
+    Route::post('/photo/vote', 'Member\VoteController@vote')->name('user.vote.do_vote');
+//    Route::get('/vote/{id}', 'Member\VoteController@show')->name('user.vote.show');
+//    Route::get('/vote/{id}/edit', 'Member\VoteController@edit')->name('user.vote.edit');
+//    Route::patch('/vote/{id}/update', 'Member\VoteController@update')->name('user.vote.update');
+//    Route::delete('/vote/{id}/destroy', 'Member\VoteController@destroy')->name('user.vote.destroy');
 });

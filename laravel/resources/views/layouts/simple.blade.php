@@ -18,6 +18,7 @@
 
         <!-- CSS reset and simple style -->
         <link rel="stylesheet" href="{{ url('css/style.css') }}">
+        <link rel="stylesheet" href="{{ url('css/icons.css') }}">
         <link rel="stylesheet" href="{{ url('css/style2.css') }}">
         <link rel="stylesheet" href="{{ url('css/jeremTemp.css') }}">
 
