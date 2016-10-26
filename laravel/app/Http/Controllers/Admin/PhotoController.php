@@ -3,10 +3,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\License;
 use App\Photo;
-use App\Event;
 use App\Watermark;
+use App\Discipline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
+use App\Libraries\SimpleImage;
 
 class PhotoController extends \App\Http\Controllers\Admin\AdminController
 {
@@ -35,18 +37,22 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
      */
     public function edit($id)
     {
-        $events = Event::query()->pluck('name', 'id');
+        $photo = Photo::findOrFail($id);
+
+        $disciplines = Discipline::query()
+            ->select('id', 'name')
+            ->with('events')
+            ->get()
+            ->toArray();
         $watermarks = Watermark::query()->pluck('name', 'id');
         $licenses = License::query()->pluck('name', 'id');
 
-        $photo = Photo::findOrFail($id);
-
         return view('admin/photos/edit', [
-            'pageTitle' => 'Photo',
-            'events' => $events,
-            'photo' => $photo,
+            'pageTitle' => 'Edition d\'une photo',
+            'disciplines' => $disciplines,
             'watermarks' => $watermarks,
-            'licenses' => $licenses
+            'licenses' => $licenses,
+            'photo' => $photo,
         ]);
     }
 
@@ -69,13 +75,12 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
         $photo = Photo::findOrFail($id);
 
         $doSave = true;
-        $filename = null;
         $data = $request->all();
         if ($request->get('watermark_id') != $photo->watermark_id) {
             // Fetch new watermark in DB
             $watermark = Watermark::findOrFail($request->get('watermark_id'));
             // Re-create the thumbnail
-            $filename = $this->prepareFile($request, $watermark, $photo->file);
+            $filename = $this->prepareFile(public_path(ORIGINAL_PICS_FOLDER . $photo->file), $watermark, $photo->file);
         }
 
         if ($filename === false) {
@@ -111,15 +116,20 @@ class PhotoController extends \App\Http\Controllers\Admin\AdminController
         return redirect()->route('admin.event.show', $photo->event_id);
     }
 
-    protected function prepareFile(Request $request, $watermark, $original = null)
+    /**
+     * Saves the image(s)
+     *
+     * @param string $original Original file path
+     * @param Watermark $watermark Watermark entry
+     * @param string $filename Desired file name
+     *
+     * @return string|bool False on fail, new file name on success.
+     */
+    protected function prepareFile($original, $watermark, $filename)
     {
         // Load the lib
-        $image = new \App\Libraries\SimpleImage();
+        $image = new SimpleImage();
 
-        // Define file name: original name or new one.
-        $filename = ($original === null ? time() . '.' . $request->file('file')->getClientOriginalExtension() : $original);
-        // Define original file: already existing or from form.
-        $original = ($original === null ? $request->file('file')->getPath() : ORIGINAL_PICS_FOLDER . $original);
         // Loading the file
         $image->load($original);
 
