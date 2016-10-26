@@ -18,7 +18,7 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        $photo = Photo::findOrFail($id);
+        $photo = Photo::withCount('votes')->findOrFail($id);
 
         return view('photos/show', [
             'pageTitle' => 'Photo',

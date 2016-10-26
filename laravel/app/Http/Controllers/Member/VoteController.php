@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 use App\Tag;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Vote;
 
 class VoteController extends \App\Http\Controllers\Member\MemberController
 {
@@ -23,20 +24,11 @@ class VoteController extends \App\Http\Controllers\Member\MemberController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function vote(Request $request)
     {
-        //
-    }
+        Vote::create(['user_id'=>Auth()->user()->id, 'photo_id'=>$request->get('photo_id')]);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return redirect(route('photo.show', $request->photo_id));
     }
 
     /**
