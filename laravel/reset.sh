@@ -14,7 +14,7 @@ touch public/images/uploads/.gitkeep
 # Remove originals
 rm -rf public/images/originals
 mkdir public/images/originals
-
+touch public/images/originals/.gitkeep
 
 # Reset DB
 echo "Reseting DB"
