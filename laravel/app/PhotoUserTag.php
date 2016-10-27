@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 class PhotoUserTag extends Model
 {
 
-//    public $fillable=['user_id', 'photo_id'];
+    public $fillable=['user_id', 'photo_id'];
 
     public function user()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function photo()
     {
-        return $this->hasMany('App\Photo');
+        return $this->belongsTo('App\Photo');
     }
 }

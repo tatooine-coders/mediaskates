@@ -11,6 +11,14 @@
             <dl>
                 <img src="{{ asset(UPLOADS_PIC_FOLDER.$photo->file) }}"/>
                 <dt>Event : {{ $photo->event->name }}</dt>
+                @if(count($photo->tags)>0)
+                <dt>(Tags :
+                    @foreach($photo->tags as $tag)
+                        {{ $tag->user->pseudo }},
+                    @endforeach
+                    )
+                </dt>
+                @endif
             </dl>
     </div>
 
@@ -29,7 +37,7 @@
 
     @endif
 
-    {{--affichage ajout commentaire--}}
+    {{--affichage ajout commentaire et tag--}}
     @if(Laratrust::hasRole('member'))
 
             <h2>Ajouter un Commentaire</h2>
@@ -43,6 +51,19 @@
             {{ Form::textarea('text', 'votre commentaire') }}<br/>
 
             {!! Form::submit('Ajouter un commentaire') !!}
+            {!! Form::close() !!}
+
+            <h2>Tags</h2>
+
+            {!! Form::open([
+            'method' => 'POST',
+            'route' => ['user.tag.store']
+            ]) !!}
+
+            {!! Form::select('user_id', $users, null, ['required'=>true, 'placeholder' => 'Name...']) !!}
+            {{ Form::hidden('photo_id', $photo->id) }}
+
+            {!! Form::submit('Tagger') !!}
             {!! Form::close() !!}
     </div>
     @endif
