@@ -391,18 +391,17 @@ footer a:active, footer a:hover
     list-style-type: none;
     font-size: 1.5em;
     border-radius: 15px;
-    border: 3px solid #ccc;
+    border: 1px solid #777;
     background-color: #202020;
     color: #fff;
+    margin-left: 5px
 }
 
 .utils ul {
-
     width: 180px;
-    height: 220px;
+    height: 230px;
     margin: 0 auto;
-    padding: 0
-        
+    padding: 7px 0px 0px 0px       
 }
 .utils li {
     list-style: none;
@@ -411,13 +410,14 @@ footer a:active, footer a:hover
     
 .utils h2 {
     font-size: 1.2em;
-    text-align: center       
+    text-align: center  
+        
     }
 .avatar {
     border-radius: 50%;
-    border: 2px solid #000;
+    border: 2px solid #d00;
     margin-left: 13px;
-    margin-bottom: 10px    
+    margin-bottom: 15px    
 }
 /* ============================================================================
                                Photographe
