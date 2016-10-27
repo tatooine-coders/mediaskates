@@ -15,11 +15,11 @@
                 <li>{{{ $user->facebook }}}</li>
                 <li>{{{ $user->google }}}</li>
                 <li>{{{ $user->twitter }}}</li>
-             
+
                 <br>
-                
+
             </ul>
-        <p>{{{ $user->biography }}}</p>
+            <p>{{{ $user->biography }}}</p>
         </ul>
         <div id="bandoRec"></div>
         <div id="bandoTri"></div>

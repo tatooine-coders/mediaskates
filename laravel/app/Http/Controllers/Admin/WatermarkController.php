@@ -22,14 +22,16 @@ class WatermarkController extends \App\Http\Controllers\Admin\AdminController
 
         if ($request->has('order') &&
             in_array(
-                $request->get('order'), ['name', 'margin', 'position', 'file', 'created_at', 'updated_at']
+                $request->get('order'),
+                ['name', 'margin', 'position', 'file', 'created_at', 'updated_at']
             )) {
             $order = $request->get('order');
         }
 
         if ($request->has('direction') &&
             in_array(
-                $request->get('direction'), ['asc', 'desc']
+                $request->get('direction'),
+                ['asc', 'desc']
             )) {
             $direction = $request->get('direction');
         }

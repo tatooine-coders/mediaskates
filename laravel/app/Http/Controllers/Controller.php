@@ -11,4 +11,20 @@ class Controller extends BaseController
     use AuthorizesRequests,
         DispatchesJobs,
         ValidatesRequests;
+
+    /**
+     * Creates a random filename
+     *
+     * @param string $ext
+     *
+     * @return string
+     */
+    protected function createFileName($ext = null)
+    {
+        $basename = md5(microtime());
+        if (!is_null($ext)) {
+            $basename .= '.' . $ext;
+        }
+        return strtolower($basename);
+    }
 }

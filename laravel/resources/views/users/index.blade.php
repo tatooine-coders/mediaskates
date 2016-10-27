@@ -10,16 +10,15 @@
         {{{ $user->pseudo }}}
     </h2>
 
-
     <ul>
-           
-                <a href="{{('user/'.$user->id)}}">
-                <img class="avatar" src="{{ asset(PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/>
-            </a>
-            <li>Prénom : {{{ $user->first_name }}}</li> 
-            <li>Nom : {{{ $user->last_name }}}</li>
-            <li>Pseudo : {{{ $user->pseudo }}}</li>
+        <a href="{{('user/'.$user->id)}}">
+            <img class="avatar" src="{{ asset(PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/>
+        </a>
+        <li>Prénom : {{{ $user->first_name }}}</li> 
+        <li>Nom : {{{ $user->last_name }}}</li>
+        <li>Pseudo : {{{ $user->pseudo }}}</li>
     </ul>
+
 </div>
 
 @endforeach

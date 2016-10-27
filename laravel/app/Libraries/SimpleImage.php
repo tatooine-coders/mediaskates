@@ -308,12 +308,14 @@ class SimpleImage
      * Watermarks an image
      *
      * @param string $source Watermark image path
-     * @param string $position Position on image (can be top-left, top right, bottom-right, bottom-left, center, center-top, center-bottom)
+     * @param string $position Position on image. Can be
+     *                top-left, top right, bottom-right, bottom-left,
+     *                center, center-top, center-bottom
      * @param integer $margin Margin between the image and the watermark. Useless with the center position.
      *
      * @return void
      */
-    public function waterMark($source, $position = 'bottom-left', $margins=5)
+    public function waterMark($source, $position = 'bottom-left', $margins = 5)
     {
         // Getting the waterMark image:
         $w = new SimpleImage;
@@ -322,16 +324,16 @@ class SimpleImage
         // Getting the watermark position:
         switch ($position) {
             case 'center':
-                $startX=($this->getWidth()-$w->getWidth())/2;
-                $startY=($this->getHeight()-$w->getHeight())/2;
+                $startX = ($this->getWidth() - $w->getWidth()) / 2;
+                $startY = ($this->getHeight() - $w->getHeight()) / 2;
                 break;
             case 'center-top':
-                $startX=($this->getWidth()-$w->getWidth())/2;
+                $startX = ($this->getWidth() - $w->getWidth()) / 2;
                 $startY = $margins;
                 break;
             case 'center-bottom':
-                $startX=($this->getWidth()-$w->getWidth())/2;
-                $startY=$this->getHeight() - $w->getHeight() - $margins;
+                $startX = ($this->getWidth() - $w->getWidth()) / 2;
+                $startY = $this->getHeight() - $w->getHeight() - $margins;
                 break;
             case 'top-left':
                 $startX = $margins;
@@ -453,7 +455,7 @@ class SimpleImage
      */
     public function rotate($angle = 90)
     {
-        $this->currentImage= imagerotate($this->currentImage, $angle, 0);
+        $this->currentImage = imagerotate($this->currentImage, $angle, 0);
     }
 
     /**
