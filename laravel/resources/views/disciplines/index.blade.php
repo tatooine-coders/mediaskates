@@ -3,6 +3,7 @@
 @section('header')
 <section id="slide">
     <div id='mask'>
+        <h1>Mediaskates, votre portail photo 100% roller !</h1>
         <div id="bandoRec"></div>
         <div id="bandoTri"></div>
     </div>

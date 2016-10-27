@@ -5,7 +5,7 @@
     <img class="pavatar" src="{{ asset(PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/>
     <div id="mask">
         <ul>
-             <a href="{{ route('user.index') }}"><h2><i class="fa fa-fw fa-chevron-left"></i>{{   $user->pseudo }}</h2></a>
+            <a href="{{ route('user.index') }}"><h2><i class="fa fa-fw fa-chevron-left"></i>{{   $user->pseudo }}</h2></a>
             <ul>
                 <li>Prénom : {{{ $user->first_name }}}</li>
                 <li>Nom : {{{ $user->last_name }}}</li>
@@ -38,3 +38,11 @@
         </ul>
         <div id="bandoRec"></div>
         <div id="bandoTri"></div>
+
+    </div> 
+    <div id='photoPhoto'>
+        <img src="{{ asset('images/sources/roller.jpg') }}" alt>
+    </div>     
+
+</section>
+@endsection
