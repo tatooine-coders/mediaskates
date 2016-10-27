@@ -5,8 +5,6 @@
 @foreach($users as $user)
 <div class="utils">
     <h2>
-        <!--[{{ link_to('user/'.$user->id, 'Voir')}}]
-         [{{ link_to('user/'.$user->id.'/edit', 'Editer')}}] -->
         {{{ $user->pseudo }}}
     </h2>
 
