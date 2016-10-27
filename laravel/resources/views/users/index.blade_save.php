@@ -3,26 +3,29 @@
 @section('content')
 @if(count($users)>0)
 @foreach($users as $user)
+
 <h2>
     [{{ link_to('user/'.$user->id, 'Voir')}}]
     [{{ link_to('user/'.$user->id.'/edit', 'Editer')}}]
     - {{{ $user->pseudo }}}
 </h2>
-<pre>
-{{{ $user->first_name }}}
-{{{ $user->last_name }}}
-{{{ $user->pseudo }}}
-{{{ $user->email }}}
-{{{ $user->profile_pic }}}
-{{{ $user->active }}}
-{{{ $user->preferences }}}
-{{{ $user->site_web }}}
-{{{ $user->facebook }}}
-{{{ $user->google }}}
-{{{ $user->twitter }}}
-{{{ $user->biography }}}
 
-</pre>
+<div class="utils">
+    <ul>
+        <img class="avatar avatar-tiny" src="{{ asset(PROFILE_PICS_FOLDER . (!empty($user->profile_pic)?$user->profile_pic:DEFAULT_PROFILE_PIC)) }}"/></li>
+        <li>Prénom : {{{ $user->first_name }}}</li> 
+        <li>Nom : {{{ $user->last_name }}}</li>
+        <li>Pseudo : {{{ $user->pseudo }}}</li>
+        <li>Www : {{{ $user->site_web }}}</li>
+        <li>Facebook : {{{ $user->facebook }}}</li>
+        <li>Google : {{{ $user->google }}}</li>
+        <li>Twitter : {{{ $user->twitter }}}</li>
+        
+        <li><div class="">Biographie : <br>{{{ $user->biography }}}
+        </div></li>
+     </ul>
+</div>
+
 @endforeach
 @else
 Pas d'utilisateurs.
