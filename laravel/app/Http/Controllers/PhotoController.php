@@ -20,9 +20,10 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        $photo = Photo::findOrFail($id);
+
+        $photo = Photo::withCount('votes')->findOrFail($id);
         $users = User::query()->pluck('pseudo', 'id');
-//        $tags = PhotoUserTag::query()->where('photo_id', $id)->get();
+//      $tags = PhotoUserTag::query()->where('photo_id', $id)->get();
 
         return view('photos/show', [
             'pageTitle' => 'Photo',

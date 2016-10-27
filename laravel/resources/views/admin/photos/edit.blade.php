@@ -14,8 +14,16 @@
                     <img src="{{ asset(UPLOADS_THUMB_FOLDER.$photo->file) }}" alt="{{ $photo->file }}" />
                 </div>
                 <div class="one-half">
-                    {!! Form::label('id_event', 'Event') !!}
-                    {!! Form::select('event_id', $events) !!}
+                    {!! Form::label('event_id', 'Evènement') !!}
+                    <select name="event_id">
+                        @foreach($disciplines as $d)
+                        <optgroup label="{{ $d['name'] }}">
+                            @foreach($d['events'] as $k=>$e)
+                            <option value="{{ $e['id'] }}" {{ $photo->event_id === $e['id'] ? 'selected="selected"' : '' }}>{{ $e['date_event'] }} - {{ $e['name'] }}</option>
+                            @endforeach
+                        </optgroup>
+                        @endforeach
+                    </select>
 
                     {!! Form::label('id_watermark', 'Watermark') !!}
                     {!! Form::select('watermark_id', $watermarks) !!}

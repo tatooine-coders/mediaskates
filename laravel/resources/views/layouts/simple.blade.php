@@ -18,6 +18,7 @@
 
         <!-- CSS reset and simple style -->
         <link rel="stylesheet" href="{{ url('css/style.css') }}">
+        <link rel="stylesheet" href="{{ url('css/icons.css') }}">
         <link rel="stylesheet" href="{{ url('css/style2.css') }}">
         <link rel="stylesheet" href="{{ url('css/jeremTemp.css') }}">
 
@@ -45,7 +46,7 @@ window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
 
                     <li>{{ link_to('/', 'Accueil') }}</li>
                     <li>{{ link_to(route('event.index'), 'Manifestations') }}</li>
-                    <li>{{ link_to(route('tag.index'), 'Tags') }}</li>
+                    <!--<li>{{ link_to(route('tag.index'), 'Tags') }}</li>-->
                     <li>{{ link_to(route('user.index'), 'Photographes') }}</li>
                     <li>{{ link_to(route('advanced_search'), 'Recherche Avancée') }}</li>
                     <li>{{ link_to(route('pages', 'legal'), 'Mentions Légales') }}</li>
@@ -171,8 +172,8 @@ window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
             <div id="reseauxSociaux">
                 <a href="https://www.facebook.com/mediaskates/"><img src="{{ asset('images/sources/facebook.svg') }}" alt="facebook" title="facebook"/></a>
                 <a href="https://twitter.com/mediaskates"><img src="{{ asset('images/sources/twitter.svg') }}" alt="twitter" title="twitter"/></a>
-                <a href="https://www.instagram.com/mediaskates/"><img src="{{ asset('images/sources/instagram.svg') }}" alt="Portrait" title="wwww.googleplus.com"/></a>
-                <a href="https://www.youtube.com/user/rollerenligne"><img src="{{ asset('images/sources/youtube.svg') }}" alt="youtube" title=""/></a>
+                <a href="https://www.instagram.com/mediaskates/"><img src="{{ asset('images/sources/instagram.svg') }}" alt="Portrait" title="instagram"/></a>
+                <a href="https://www.youtube.com/user/rollerenligne"><img src="{{ asset('images/sources/youtube.svg') }}" alt="youtube" title="Youtube"/></a>
             </div>
         </section>
         <div class="bordure"></div>

@@ -2,6 +2,7 @@
 
 @section('content')
 @if(count($users)>0)
+
     @foreach($users as $user)
         @foreach($user->roles as $u_role)
             @if($u_role->name === 'photograph')

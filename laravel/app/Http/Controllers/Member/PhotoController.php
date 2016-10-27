@@ -1,11 +1,14 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\License;
 use App\Photo;
-use Illuminate\Support\Facades\Session;
+use App\Watermark;
+use App\Discipline;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
+use App\Libraries\SimpleImage;
 
 class PhotoController extends \App\Http\Controllers\Member\MemberController
 {
@@ -17,13 +20,13 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      */
     public function create(Request $request)
     {
-        $disciplines = \App\Discipline::query()
+        $disciplines = Discipline::query()
             ->select('id', 'name')
             ->with('events')
             ->get()
             ->toArray();
-        $watermarks = \App\Watermark::query()->pluck('name', 'id');
-        $licenses = \App\License::query()->pluck('name', 'id');
+        $watermarks = Watermark::query()->pluck('name', 'id');
+        $licenses = License::query()->pluck('name', 'id');
 
         // Creates a random form session number
         $formSession = md5(microtime());
@@ -60,7 +63,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         $sessionName = $request->get('formSession');
         // Checking for multiupload:
         if (count(File::files(UPLOAD_TEMP_FOLDER . $sessionName . '/big/')) > 0) {
-            $errors = $this->_saveMultiupload($request);
+            $errors = $this->saveMultiupload($request);
         } else { // No multi upload
             // Adding at least one picture so validator fails if none is uploaded
             $rules['files.0'] = 'required|' . ALLOWED_MIMES;
@@ -70,7 +73,7 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
             }
             $this->validate($request, $rules);
             // Generate and save
-            $errors = $this->_saveFileInputs($request);
+            $errors = $this->saveFileInputs($request);
         }
 
         if ($errors > 0) {
@@ -80,151 +83,6 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         }
 
         return redirect()->route('user.event.show', $request->get('event_id'));
-    }
-
-    protected function _saveMultiupload(Request $request)
-    {
-        $errors = 0;
-        $imageData = $request->all();
-        unset($imageData['files']);
-        unset($imageData['formSession']);
-        $imageData['user_id'] = Auth()->user()->id;
-
-        // Determine folder
-        $sessionName = $request->get('formSession');
-        $thumbPath = UPLOAD_TEMP_FOLDER . $sessionName;
-        $basePath = UPLOAD_TEMP_FOLDER . $sessionName . '/big';
-        $files = File::files($basePath);
-
-        // Searching for watermark
-        $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
-
-        foreach ($files as $file) {
-            // Get the filename
-            $filename = $this->_prepareFile(public_path($file), $watermark, basename($file));
-            if (!is_null($filename)) {
-                if (!File::move(public_path($file), public_path(UPLOADS_PIC_FOLDER . $filename))) {
-                    $errors++;
-                } else {
-                    $imageData['file'] = $filename;
-                    Photo::create($imageData);
-                    // Delete original pic
-                    File::delete(public_path($thumbPath . '/' . $filename));
-                    File::delete(public_path($basePath . '/' . $filename));
-                }
-            } else {
-                $errors++;
-            }
-        }
-        // Delete temp folders
-        File::deleteDirectory(public_path($basePath));
-        File::deleteDirectory(public_path($thumbPath));
-        return $errors;
-    }
-
-    /**
-     * Creates a random filename
-     *
-     * @param string $ext
-     *
-     * @return string
-     */
-    protected function _createFileName($ext = null)
-    {
-        $basename = md5(microtime());
-        if (!is_null($ext)) {
-            $basename .= '.' . $ext;
-        }
-        return $basename;
-    }
-
-    /**
-     * Saves a list of files submitted in inputs.
-     *
-     * @param Request $request Original page request
-     *
-     * @return int Number of errors encountered
-     */
-    protected function _saveFileInputs(Request $request)
-    {
-        $errors = 0;
-        $imageData = $request->all();
-        unset($imageData['files']);
-        unset($imageData['formSession']);
-        $imageData['user_id'] = Auth()->user()->id;
-
-        // Searching for watermark
-        $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
-
-        // Processing the list
-        $files = $request->file('files');
-        foreach ($files as $k => $file) {
-            $wantedFileName = $this->_createFileName($file->getClientOriginalExtension());
-            $filename = $this->_prepareFile($file->getPathName(), $watermark, $wantedFileName);
-            if ($filename === false) {
-                $errors++;
-            } else {
-                $imageData['file'] = $filename;
-                $file->move(public_path(ORIGINAL_PICS_FOLDER), $imageData['file']);
-                Photo::create($imageData);
-            }
-        }
-        return $errors;
-    }
-
-    public function ajaxUpload(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'required|' . ALLOWED_MIMES,
-            'formSession' => 'required',
-        ]);
-
-        $sessionName = $request->get('formSession');
-
-        $formSession = Session::get('uploads.' . $sessionName);
-        if (empty($formSession)) {
-            return ['error' => 'Invalid form session'];
-        }
-
-        // Create a thumb
-        $image = new \App\Libraries\SimpleImage();
-
-        // Define file name: original name or new one.
-        $filename = $this->_createFileName($request->file('file')->getClientOriginalExtension());
-        // Define original file
-        $basePath = public_path(UPLOAD_TEMP_FOLDER . $sessionName . '/big/');
-        $request->file('file')->move($basePath, $filename);
-
-        // Loading the file
-        $image->load($basePath . $filename);
-
-        // Create thumbnail
-        $image->centerCropFull(THUMB_WIDTH, THUMB_WIDTH);
-        if (!$image->save(UPLOAD_TEMP_FOLDER . $sessionName . '/' . $filename)) {
-            return ['error' => 'An error occured'];
-        } else {
-            return [
-                'error' => false,
-                'filename' => $filename,
-            ];
-        }
-    }
-
-    public function ajaxCancel(Request $request)
-    {
-        $this->validate($request, [
-            'imageName' => 'required',
-            'formSession' => 'required',
-        ]);
-        $d = $request->all();
-
-        $thumbPath = UPLOAD_TEMP_FOLDER . $d['formSession'];
-        $basePath = UPLOAD_TEMP_FOLDER . $d['formSession'] . '/big';
-
-        File::delete(public_path($thumbPath . '/' . $d['imageName']));
-        File::delete(public_path($basePath . '/' . $d['imageName']));
-
-        return['message'=>'OK'];
     }
 
     /**
@@ -237,13 +95,13 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
     {
         $photo = Photo::where('user_id', '=', Auth()->user()->id)->with([])->findOrFail($id);
 
-        $disciplines = \App\Discipline::query()
+        $disciplines = Discipline::query()
             ->select('id', 'name')
             ->with('events')
             ->get()
             ->toArray();
-        $watermarks = \App\Watermark::query()->pluck('name', 'id');
-        $licenses = \App\License::query()->pluck('name', 'id');
+        $watermarks = Watermark::query()->pluck('name', 'id');
+        $licenses = License::query()->pluck('name', 'id');
         return view('member/photos/edit', [
             'pageTitle' => 'Edition d\'une photo',
             'disciplines' => $disciplines,
@@ -272,13 +130,12 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         $photo = Photo::where('user_id', '=', Auth()->user()->id)->findOrFail($id);
 
         $doSave = true;
-        $filename = null;
         $data = $request->all();
         if ($request->get('watermark_id') != $photo->watermark_id) {
             // Fetch new watermark in DB
-            $watermark = \App\Watermark::findOrFail($request->get('watermark_id'));
+            $watermark = Watermark::findOrFail($request->get('watermark_id'));
             // Re-create the thumbnail
-            $filename = $this->_prepareFile($request, $watermark, $photo->file);
+            $filename = $this->prepareFile(public_path(ORIGINAL_PICS_FOLDER . $photo->file), $watermark, $photo->file);
         }
 
         if ($filename === false) {
@@ -314,6 +171,61 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         return redirect()->route('user.event.show', $photo->event_id);
     }
 
+    public function ajaxUpload(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|' . ALLOWED_MIMES,
+            'formSession' => 'required',
+        ]);
+
+        $sessionName = $request->get('formSession');
+
+        $formSession = Session::get('uploads.' . $sessionName);
+        if (empty($formSession)) {
+            return ['error' => 'Invalid form session'];
+        }
+
+        // Create a thumb
+        $image = new SimpleImage();
+
+        // Define file name: original name or new one.
+        $filename = $this->createFileName($request->file('file')->getClientOriginalExtension());
+        // Define original file
+        $basePath = public_path(UPLOAD_TEMP_FOLDER . $sessionName . '/big/');
+        $request->file('file')->move($basePath, $filename);
+
+        // Loading the file
+        $image->load($basePath . $filename);
+
+        // Create thumbnail
+        $image->centerCropFull(THUMB_WIDTH, THUMB_WIDTH);
+        if (!$image->save(UPLOAD_TEMP_FOLDER . $sessionName . '/' . $filename)) {
+            return ['error' => 'An error occured'];
+        } else {
+            return [
+                'error' => false,
+                'filename' => $filename,
+            ];
+        }
+    }
+
+    public function ajaxCancel(Request $request)
+    {
+        $this->validate($request, [
+            'imageName' => 'required',
+            'formSession' => 'required',
+        ]);
+        $d = $request->all();
+
+        $thumbPath = UPLOAD_TEMP_FOLDER . $d['formSession'];
+        $basePath = UPLOAD_TEMP_FOLDER . $d['formSession'] . '/big';
+
+        File::delete(public_path($thumbPath . '/' . $d['imageName']));
+        File::delete(public_path($basePath . '/' . $d['imageName']));
+
+        return['message' => 'OK'];
+    }
+
     /**
      * Saves the image(s)
      *
@@ -323,15 +235,11 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
      *
      * @return string|bool False on fail, new file name on success.
      */
-    protected function _prepareFile($original, $watermark, $filename)
+    protected function prepareFile($original, $watermark, $filename)
     {
         // Load the lib
-        $image = new \App\Libraries\SimpleImage();
+        $image = new SimpleImage();
 
-        // Define file name: original name or new one.
-//        $filename = ($original === null ? $this->_createFileName($file->getClientOriginalExtension()) : $original);
-//        // Define original file: already existing or from form.
-//        $original = ($original === null ? $file->getPathName() : $original));
         // Loading the file
         $image->load($original);
 
@@ -355,5 +263,79 @@ class PhotoController extends \App\Http\Controllers\Member\MemberController
         } else {
             return $filename;
         }
+    }
+
+    protected function saveMultiupload(Request $request)
+    {
+        $errors = 0;
+        $imageData = $request->all();
+        unset($imageData['files']);
+        unset($imageData['formSession']);
+        $imageData['user_id'] = Auth()->user()->id;
+
+        // Determine folder
+        $sessionName = $request->get('formSession');
+        $thumbPath = UPLOAD_TEMP_FOLDER . $sessionName;
+        $basePath = UPLOAD_TEMP_FOLDER . $sessionName . '/big';
+        $files = File::files($basePath);
+
+        // Searching for watermark
+        $watermark = Watermark::findOrFail($request->get('watermark_id'));
+
+        foreach ($files as $file) {
+            // Get the filename
+            $filename = $this->prepareFile(public_path($file), $watermark, basename($file));
+            if (!is_null($filename)) {
+                if (!File::move(public_path($file), public_path(ORIGINAL_PICS_FOLDER . $filename))) {
+                    $errors++;
+                } else {
+                    $imageData['file'] = $filename;
+                    Photo::create($imageData);
+                    // Delete original pic
+                    File::delete(public_path($thumbPath . '/' . $filename));
+                    File::delete(public_path($basePath . '/' . $filename));
+                }
+            } else {
+                $errors++;
+            }
+        }
+        // Delete temp folders
+        File::deleteDirectory(public_path($basePath));
+        File::deleteDirectory(public_path($thumbPath));
+        return $errors;
+    }
+
+    /**
+     * Saves a list of files submitted in inputs.
+     *
+     * @param Request $request Original page request
+     *
+     * @return int Number of errors encountered
+     */
+    protected function saveFileInputs(Request $request)
+    {
+        $errors = 0;
+        $imageData = $request->all();
+        unset($imageData['files']);
+        unset($imageData['formSession']);
+        $imageData['user_id'] = Auth()->user()->id;
+
+        // Searching for watermark
+        $watermark = Watermark::findOrFail($request->get('watermark_id'));
+
+        // Processing the list
+        $files = $request->file('files');
+        foreach ($files as $k => $file) {
+            $wantedFileName = $this->createFileName($file->getClientOriginalExtension());
+            $filename = $this->prepareFile($file->getPathName(), $watermark, $wantedFileName);
+            if ($filename === false) {
+                $errors++;
+            } else {
+                $imageData['file'] = $filename;
+                $file->move(public_path(ORIGINAL_PICS_FOLDER), $imageData['file']);
+                Photo::create($imageData);
+            }
+        }
+        return $errors;
     }
 }
