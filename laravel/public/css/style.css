@@ -1,3 +1,6 @@
+p {
+    font-size: 1.5em
+}
 /* ============================================================================
                                   menu login
 =============================================================================*/
@@ -451,8 +454,9 @@ footer a:active, footer a:hover
 }
 #photog ul p {
     position: absolute;
-    margin-top: 160px;
-    margin-right: 10px
+    margin-top: 170px;
+    margin-right: 10px;
+    font-size: 1em
     /*overflow-y: scroll*/
 }
 
