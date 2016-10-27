@@ -48,7 +48,7 @@
             ]) !!}
 
             {{ Form::hidden('photo_id',  $photo->id  ) }}
-            {{ Form::textarea('text', 'votre commentaire') }}<br/>
+            {{ Form::textarea('text', '') }}<br/>
 
             {!! Form::submit('Ajouter un commentaire') !!}
             {!! Form::close() !!}
