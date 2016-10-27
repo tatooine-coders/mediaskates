@@ -23,6 +23,11 @@ class Photo extends Model
         return $this->belongsTo('App\Event');
     }
 
+    public function tags()
+    {
+        return $this->hasMany('App\PhotoUserTag');
+    }
+
     public function votes()
     {
         return $this->hasMany('App\Vote');

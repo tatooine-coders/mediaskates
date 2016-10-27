@@ -49,10 +49,10 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Photo', 'App\PḧotoUserTag');
     }
 
-//    public function role()
-//    {
-//        return $this->hasManyThrough('App\Role', 'App\RoleUser');
-//    }
+    public function role()
+    {
+        return $this->hasManyThrough('App\Role', 'App\RoleUser');
+    }
 
     public function votes()
     {

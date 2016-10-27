@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\PhotoUserTag;
 use App\Tag;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+
+
 
 class TagController extends \App\Http\Controllers\Member\MemberController
 {
@@ -15,7 +18,14 @@ class TagController extends \App\Http\Controllers\Member\MemberController
      */
     public function index()
     {
-        //
+        //afficher ses tags dans le dashboard
+        $id= auth()->user()->id;
+        $tags = PhotoUserTag::query()->where('user_id', $id)->get();
+
+        return view('member/users/show', [
+            'pageTitle' => 'Dashboard',
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -36,7 +46,13 @@ class TagController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        PhotoUserTag::create($data);
+
+        // Redirection et message
+        Session::flash('message', 'Tag enregistré');
+
+        return redirect()->route('photo.show', $request->photo_id);
     }
 
     /**

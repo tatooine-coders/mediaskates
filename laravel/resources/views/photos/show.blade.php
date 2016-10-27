@@ -11,6 +11,14 @@
             <dl>
                 <img src="{{ asset(UPLOADS_PIC_FOLDER.$photo->file) }}"/>
                 <dt>Event : {{ $photo->event->name }}</dt>
+                @if(count($photo->tags)>0)
+                <dt>(Tags :
+                    @foreach($photo->tags as $tag)
+                        {{ $tag->user->pseudo }},
+                    @endforeach
+                    )
+                </dt>
+                @endif
             </dl>
     </div>
 
@@ -44,6 +52,19 @@
 
         {!! Form::submit('Ajouter un commentaire') !!}
         {!! Form::close() !!}
+        <h2>Tags</h2>
+
+        {!! Form::open([
+            'method' => 'POST',
+            'route' => ['user.tag.store']
+        ]) !!}
+
+        {!! Form::select('user_id', $users, null, ['required'=>true, 'placeholder' => 'Name...']) !!}
+        {{ Form::hidden('photo_id', $photo->id) }}
+
+        {!! Form::submit('Tagger') !!}
+        {!! Form::close() !!}
+
         <div id="votes" style="background-color:#FFF;">
             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
                 <i class="fa fa-fw fa-arrow-circle-o-up fa-2x" style="color:green;cursor:pointer;"></i>

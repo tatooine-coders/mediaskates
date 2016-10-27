@@ -15,7 +15,14 @@ class PhotoUserTagController extends \App\Http\Controllers\Admin\AdminController
      */
     public function index()
     {
-        //
+        $tags = PhotoUserTag::query()
+            ->get();
+
+        return view('admin/tags/index', [
+            'pageTitle' => 'Tags',
+            'tags' => $tags,
+
+        ]);
     }
 
     /**
@@ -81,6 +88,11 @@ class PhotoUserTagController extends \App\Http\Controllers\Admin\AdminController
      */
     public function destroy($id)
     {
-        //
+        $tag = PhotoUserTag::findOrFail($id);
+        $tag->delete();
+
+        Session::flash('message', 'Tag supprimé.');
+
+        return redirect()->route('admin.tag.index');
     }
 }

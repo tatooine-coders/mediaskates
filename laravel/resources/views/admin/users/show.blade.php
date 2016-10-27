@@ -44,7 +44,7 @@
             </dd>
         </dl>
         <h3>Biographie</h3>
-        <p>{{ $user->biography }}</p>
+        <p>{!! nl2br($user->biography) !!}</p>
     </div>
     <aside class="w20 menu-second">
         <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn primary block">
