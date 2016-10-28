@@ -46,11 +46,14 @@ class TagController extends \App\Http\Controllers\Member\MemberController
      */
     public function store(Request $request)
     {
-        $data=$request->all();
-        PhotoUserTag::create($data);
+        $exist = PhotoUserTag::query()->where('user_id', $request->get('user_id'))->where('photo_id', $request->get('photo_id'))->first();
+        if(!$exist) {
+            $data = $request->all();
+            PhotoUserTag::create($data);
+            // Redirection et message
+            Session::flash('message', 'Tag enregistré');
+        }
 
-        // Redirection et message
-        Session::flash('message', 'Tag enregistré');
 
         return redirect()->route('photo.show', $request->photo_id);
     }

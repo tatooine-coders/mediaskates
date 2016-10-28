@@ -69,13 +69,16 @@
         <h2>Votes</h2>
         <div id="votes">
             Nombre de votes : {{ $photo->votes_count }}</br></br>
+            @if(!isset($vote))
             Votez :
             <a href="javascript:void(0);" onclick="$(this).find('form').submit();" class="btn btn-info grave" title="Supprimer">
                 <i class="fa fa-fw fa-arrow-circle-o-up fa-2x" style="color:green;cursor:pointer;"></i>
                 {!! Form::open(['route'=>['user.vote.do_vote', 'photo_id'=> $photo->id], 'method'=>'POST']) !!}
                 {!! Form::close() !!}
             </a>
-
+            @else
+                (Déjà voté!)
+            @endif
 
         </div>
         @endif
