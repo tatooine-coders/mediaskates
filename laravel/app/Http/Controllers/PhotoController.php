@@ -28,7 +28,7 @@ class PhotoController extends Controller
             'pageTitle' => 'Photo',
             'photo' => $photo,
             'users' => $users,
-//            'tags' => $tags,
+
         ]);
     }
 }

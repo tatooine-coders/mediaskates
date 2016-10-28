@@ -26,7 +26,12 @@ class VoteController extends \App\Http\Controllers\Member\MemberController
      */
     public function vote(Request $request)
     {
-        Vote::create(['user_id'=>Auth()->user()->id, 'photo_id'=>$request->get('photo_id')]);
+        $user = auth()->user()->id;
+        $exist = Vote::query()->where('user_id', $user)->where('photo_id', $request->get('photo_id'))->first();
+        if(!$exist) {
+            Vote::create(['user_id' => Auth()->user()->id, 'photo_id' => $request->get('photo_id')]);
+
+        }
 
         return redirect(route('photo.show', $request->photo_id));
     }
