@@ -48,6 +48,9 @@
     padding: 10px;
     text-align: center;
 }
+#votes{
+    background-color: black;
+}
 
 /*view event.index*/
 .centerTab{
@@ -151,3 +154,4 @@
 .dashboardInfos h2{
     color: black;
 }
+
