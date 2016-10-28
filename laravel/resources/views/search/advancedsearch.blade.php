@@ -7,7 +7,7 @@
         'route' => ['search_results']
         ]) !!}
 
-        {!! Form::label('name', 'Rechercher') !!} - {!! Form::text('name', null, ['placeholder'=>'Mots clefs']) !!}<br/>
+        {!! Form::label('name', 'Rechercher') !!} - <span style="color: black"> {!! Form::text('name', null, ['placeholder'=>'Mots clefs']) !!}</span><br/>
         <br/>
         <br/>
         Dans : <br/>
