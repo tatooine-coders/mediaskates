@@ -1,8 +1,6 @@
 @extends('layouts/simple')
 
 @section('content')
-    <h2>{{ $discipline->name }}</h2>
-        {{ $discipline->name }}
         <img src="{{ asset(DISCIPLINES_PIC_FOLDER.$discipline->logo) }}" alt="{{ $discipline->name}}" />
 
 <hr>
