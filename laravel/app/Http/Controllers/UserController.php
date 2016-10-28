@@ -18,7 +18,7 @@ class UserController extends Controller
         $users = User::query()->get();
 
         return view('users/index', [
-            'pageTitle' => 'Liste des utilisateurs',
+            'pageTitle' => 'Liste des photographes',
             'users' => $users
         ]);
     }
