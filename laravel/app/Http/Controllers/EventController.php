@@ -14,12 +14,34 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::query()->get();
+        $order = 'name';
+        $direction = 'asc';
+
+        if ($request->has('order') && in_array(
+                $request->get('order'),
+                ['name', 'date_event']
+            )) {
+            $order = $request->get('order');
+        }
+
+        if ($request->has('direction') && in_array(
+                $request->get('direction'),
+                ['asc', 'desc']
+            )) {
+            $request->get('direction');
+        }
+        $events = Event::query()
+            ->orderBy($order, $direction)
+            ->withCount('photos')
+            ->get();
+
         return view('events/index', [
             'pageTitle' => 'Liste des évènements',
-            'events' => $events
+            'events' => $events,
+            'direction' => $direction,
+            'order' => $order,
         ]);
     }
 
