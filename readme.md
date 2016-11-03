@@ -1,27 +1,44 @@
-# Laravel PHP Framework
+# Mediaskates project
+This project started as a school project to work with PHP/Mysql/Html/CSS etc...
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+It was initially created as a private Bitbucket repository as we tried to create something similar to [MediaSkates](http://mediaskates.com), a platform to share roller-skating pictures.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+We had authorization to create this "remix", and use existing pictures (as logos, etc...).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+As the time on the project ran out, we decided to publish it on GitHub, so here it is.
 
-## Official Documentation
+We used Laravel and Homestead.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+As it was our first project, we may have done things wrong. Come and discuss about it in the issues !
 
-## Contributing
+## Thanks and credits:
+The project has been made by @lecourtv, @Corbiezorq and @mtancoigne:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+   - Idea: @lecourtv
+   - Database design: @lecourtv, @Corbiezorq
+   - VM, bash scripts and laravel setup: @mtancoigne
+   - Models, Controllers and backend views : @Corbiezorq + @mtancoigne
+   - Public HTML/CSS/JS: @lecourtv
 
-## Security Vulnerabilities
+## License:
+This project is licensed under the MIT license, except for the different JS scripts found in `public`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Notes:
+Some files may be missing as the project has been heavily stripped
 
-## License
+## Getting started: the easy way
+You'll need Vagrant and VirtualBox.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+```sh
+vagrant up
+vagrant ssh
+
+# Once you're logged in the vm:
+cd Code
+./setup.sh
+# Accept to download the required libraries (FontAwesome/Knacss)
+# When asked to set the DB up, hit enter to use the default config
+# Done.
+```
+
+Your server will be accessible at [192.168.10.10](http://192.168.10.10)
